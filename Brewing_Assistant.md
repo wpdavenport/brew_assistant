@@ -30,10 +30,14 @@ Codex must treat the following as retrievable brewing memory and should consult 
 8) libraries/templates/
 - grainfather_beerxml_template.xml: Standard schema for Grainfather imports/exports
 
+9) recipes/beer_xml_imports/
+- Location for external BeerXML files to be read/analyzed
+
 ## Output locations (write new artifacts here)
 - New recipe drafts: recipes/in_development/
 - Locked/stable recipes: recipes/locked/
 - New batch logs: batch_logs/YYYY-MM-DD_style.md
+- BeerXML Exports: recipes/beer_xml_exports/
 
 ## Hard rules
 - Never invent values that should come from these files.
