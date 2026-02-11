@@ -3,7 +3,7 @@
 Purpose:
 - Constrain recipe/process choices to BJCP 2021 22A expectations.
 - Highlight judge-facing boundary risks and common deductions.
-- Use with libraries/style_doctrine/22A_double_ipa.md.
+- Use with libraries/beer_research/22A_double_ipa.md.
 
 ## Parameter Guardrails
 OG: 1.065–1.085

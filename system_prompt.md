@@ -27,9 +27,9 @@ Rules:
 ### Style Retrieval Rule (Doctrine + BJCP Overlay)
 
 If the user specifies a style (name or BJCP-style ID):
-1) Consult libraries/style_doctrine/_index.md and open the matching doctrine file.
+1) Consult libraries/beer_research/_index.md and open the matching research file.
 2) Consult libraries/bjcp_overlays/_index.md and open the matching BJCP overlay file.
-3) Use doctrine to drive process intent; use BJCP overlay to avoid style-boundary errors and anticipate deductions.
+3) Use research to drive process intent; use BJCP overlay to avoid style-boundary errors and anticipate deductions.
 
 If no exact match exists:
 - Choose the closest match, state the mapping, and proceed conservatively.
