@@ -16,6 +16,7 @@ These files are authoritative brewing memory for this repo. Consult them before 
 ## Tools / templates (when needed)
 - tools/calculations.md
 - tools/batch_log_template.md
+- recipes/beer_xml_imports/ (external files)
 
 ## Hard rules
 - Never invent values that should come from repo files.
