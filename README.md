@@ -34,6 +34,8 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 
 ## 🛠️ Getting Started
 
+ **💡 Pro Tip:** The easiest way to use this is inside **VS Code**. Install your favorite AI chat extension (Gemini, Claude, or ChatGPT), and it will become your personal brewer assistant.
+
 1.  **Clone this Repo**: This is your brewing brain.
 2.  **Fill in your Profiles**:
     *   Edit `profiles/equipment.yaml` with your system stats.
