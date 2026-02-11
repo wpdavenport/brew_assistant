@@ -3,7 +3,7 @@
 Purpose:
 - Constrain recipe/process choices to BJCP 2021 26D expectations.
 - Highlight judge-facing boundary risks and common deductions.
-- This file is NOT a style doctrine. Use with libraries/style_doctrine/26D_belgian_dark_strong.md.
+- This file is NOT a style doctrine. Use with libraries/beer_research/26D_belgian_dark_strong.md.
 
 ## Parameter Guardrails (use as constraints)
 OG: 1.075–1.110
