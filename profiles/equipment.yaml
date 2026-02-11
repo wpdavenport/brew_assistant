@@ -1,0 +1,45 @@
+# Equipment Profile — Grainfather G40 + GF30 Conical + Glycol
+
+system: "Grainfather G40"
+brew_method: "All-in-one electric, basket (BIAB-style), recirculating"
+
+batch_size_gal: 5.0
+batch_size_l: 19
+
+kettle_volume_gal: 10.6
+boil_off_rate_gal_per_hour: 0.8
+trub_loss_gal: 0.4
+deadspace_gal: 0.1
+
+brewhouse_efficiency_percent: 72
+
+mash:
+  recirculating: true
+  typical_mash_thickness_qt_per_lb: 1.5
+  grain_absorption_gal_per_lb: 0.1
+  mash_loss_gal: 0.15
+
+fermentation:
+  fermenter: "Grainfather GF30 Pro Conical"
+  glycol_chiller: "Grainfather Glycol Chiller"
+  chamber_control: true
+  temp_control_method: "glycol"
+  temp_precision_f: 1
+  temp_range_f: [28, 80]        # conservative practical range with glycol
+  cold_crash_capable: true
+  warm_ramp_capable: true
+  pressure_capable: false
+  max_pressure_psi: 0
+
+water:
+  source: "RO"
+  mineral_content: "Near-zero"
+  prefilters: ["sediment", "activated_charcoal"]
+  postfilters: ["polishing"]
+  chlorine_present: false
+  alkalinity_variable: false
+  full_mineral_control: true
+
+packaging:
+  kegging: true
+  closed_transfer: true
