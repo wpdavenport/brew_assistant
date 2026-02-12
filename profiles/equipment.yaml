@@ -13,11 +13,17 @@ deadspace_gal: 0.1
 
 brewhouse_efficiency_percent: 72
 
+milling:
+  grain_crusher_gap_in: 0.036
+  grain_crusher_gap_mm: 0.91
+  notes: "Set for improved extraction on recirculating basket system; monitor for stuck mash risk with high adjunct or husk-light grists."
+
 mash:
+  method: "full_volume_no_sparge"
   recirculating: true
-  typical_mash_thickness_qt_per_lb: 1.5
   grain_absorption_gal_per_lb: 0.1
   mash_loss_gal: 0.15
+  notes: "Full-volume, no-sparge mash. All water goes in at mash-in. Mash thickness is variable — determined by total pre-boil volume requirement, not a fixed qt/lb ratio. Thinner mashes are typical (often 1.8–2.2 qt/lb depending on grain bill size). Calculate strike volume as: pre-boil volume + grain absorption + mash losses."
 
 fermentation:
   fermenter: "Grainfather GF30 Pro Conical"

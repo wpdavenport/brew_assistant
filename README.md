@@ -16,6 +16,23 @@ Most AI brewing advice is generic. It assumes 5 gallons, 70% efficiency, and tap
 
 It's not just a recipe generator; it's a **process engine** focused on repeatability and BJCP competition quality.
 
+## 🛠️ Getting Started
+
+**💡 Pro Tip:** The easiest way to use this is inside **VS Code**. Install your favorite AI chat extension (Gemini, Claude, or ChatGPT), and it will become your personal brewer assistant.
+
+1.  **Clone this Repo**: This is your brewing brain.
+2.  Can be used with any AI (Gemini, Claude, or ChatGPT). Put this phrase into ta chat "Beer RAG, read system_prompt.md and become my professional assistant compettion brewer!"
+3.  **Fill in your Profiles**:
+    *   Edit `profiles/equipment.yaml` with your system stats.
+    *   Update `profiles/water_profiles.md` with your source water.
+4.  **Activate the Coach**:
+    *   Use the `system_prompt.md` to initialize the AI persona.
+5.  **Brew**:
+    *   *"Design a BJCP 26D Belgian Dark Strong for my system."*
+    *   *"Why did my last IPA finish sweet? Check the logs."*
+    *   *"Create a fermentation schedule for a German Pilsner."*
+
+
 ## 📂 How it Works
 
 The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_index.md` to navigate your brewing reality.
@@ -24,28 +41,13 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 *   **`profiles/equipment.yaml`**: The hard truth about your hardware.
 *   **`profiles/water_profiles.md`**: Your water chemistry targets.
 *   **`libraries/yeast_library.md`**: Your house strains and how they behave.
-*   **`batch_logs/`**: The "Black Box" flight recorder of your past brews.
+*   **`libraries/my_recipes/`**: Your working recipe history and iteration notes.
 
 ### The Workflow
-1.  **Design**: Ask for a recipe. The AI checks your `style_doctrine` and `bjcp_overlays` to build a winner.
+1.  **Design**: Ask for a recipe. The AI checks `libraries/beer_research/` and `libraries/bjcp_overlays/` to build a winner.
 2.  **Plan**: It generates a minute-by-minute brew day checklist tailored to your system.
 3.  **Execute**: It calculates strike temps and salt additions using your specific `tools/calculations.md`.
 4.  **Learn**: After the brew, you log the data. The AI uses this to troubleshoot and improve the next batch.
-
-## 🛠️ Getting Started
-
-**💡 Pro Tip:** The easiest way to use this is inside **VS Code**. Install your favorite AI chat extension (Gemini, Claude, or ChatGPT), and it will become your personal brewer assistant.
-
-1.  **Clone this Repo**: This is your brewing brain.
-2.  **Fill in your Profiles**:
-    *   Edit `profiles/equipment.yaml` with your system stats.
-    *   Update `profiles/water_profiles.md` with your source water.
-3.  **Activate the Coach**:
-    *   Use the `system_prompt.md` to initialize the AI persona.
-4.  **Brew**:
-    *   *"Design a BJCP 26D Belgian Dark Strong for my system."*
-    *   *"Why did my last IPA finish sweet? Check the logs."*
-    *   *"Create a fermentation schedule for a German Pilsner."*
 
 ## 🧠 The "Hard Rules"
 
