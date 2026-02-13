@@ -18,7 +18,7 @@ Codex must treat the following as retrievable brewing memory and should consult 
 - Style doctrine index (maps style IDs to research files)
 
 5) libraries/my_recipes/
-- Working recipe memory: measured outcomes, notes, and iteration history
+- Legacy recipe memory: measured outcomes, notes, and iteration history
 
 ## Secondary (check when applicable)
 6) libraries/beer_research/_index.md
@@ -33,35 +33,39 @@ Codex must treat the following as retrievable brewing memory and should consult 
 9) tools/batch_log_template.md
 - Batch log template for consistent capture
 
-10) libraries/beer_xml_imports/
+10) libraries/templates/grainfather_beerxml_template.xml
+- Standard schema template for Grainfather BeerXML imports/exports
+
+11) recipes/beer_xml_imports/
 - Location for external BeerXML files to be read/analyzed
 
-11) libraries/inventory/
+12) libraries/inventory/
 - Inventory state + recipe consumption maps + brew history for stock-aware recommendations
 
-12) tools/inventory_cli.py
+13) tools/inventory_cli.py
 - Command workflow for stock updates ("I brewed X"), stock-aware style options, and Garbage Beer concepts
 
 ## Output locations (write new artifacts here)
-- New recipe drafts: libraries/my_recipes/
-- Locked/stable recipes: libraries/my_recipes/ (use filename/tag convention)
-- BeerXML Exports: libraries/beer_xml_exports/
+- New recipe drafts: recipes/in_development/
+- Locked/stable recipes: recipes/locked/
+- New batch logs: batch_logs/YYYY-MM-DD_style.md
+- BeerXML Exports: recipes/beer_xml_exports/
 
 ## Hard rules
 - Never invent values that should come from these files.
 - If a file is missing or empty, say so and proceed with explicit assumptions.
 - Prefer house strains and house processes over generic advice.
 
-## Books (optional; books/)
-Reference PDFs covering the four core ingredients plus style-specific brewing.
+## Books (optional reference titles)
+Reference titles covering the four core ingredients plus style-specific brewing.
 
-| Topic | File | Author(s) |
+| Topic | Title | Author(s) |
 |-------|------|-----------|
-| Water | john_palmer_colin_kaminski-water_a_comprehensive_g.pdf | John Palmer, Colin Kaminski |
-| Hops | For_The_Love_of_Hops_-_Stan_Hieronymus.pdf | Stan Hieronymus |
-| Yeast | Yeast_The_Practical_Guide_to_Beer_Fermentation_-_Chris_White__Jamil_Zainasheff.pdf | Chris White, Jamil Zainasheff |
-| Malt | Malt_-_John_Mallett.pdf | John Mallett |
-| Belgian Styles | Brew_Like_a_Monk__Trappist_Abbey_and_Str_-_Stan_Hieronymus.pdf | Stan Hieronymus |
+| Water | Water: A Comprehensive Guide for Brewers | John Palmer, Colin Kaminski |
+| Hops | For the Love of Hops | Stan Hieronymus |
+| Yeast | Yeast: The Practical Guide to Beer Fermentation | Chris White, Jamil Zainasheff |
+| Malt | Malt: A Practical Guide from Field to Brewhouse | John Mallett |
+| Belgian Styles | Brew Like a Monk | Stan Hieronymus |
 
 Consult these when ingredient-specific or style-specific depth is needed beyond house profiles.
 
