@@ -1,144 +1,118 @@
-PATIENT NUMBER 9 - 90 MINUTE CLONE (22A DIPA COMP EXECUTION SHEET)
-Date: __________   Brewer: __________   Competition: __________
+PATIENT NUMBER 9 - BREW DAY SHEET (34A CLONE EXECUTION)
+Date: __________   Brewer: __________   Batch #: __________
 
-ENTRY INTENT
-- Declared Style: 22A Double IPA
-- Sensory target: high hop aroma/flavor, firm but smooth bitterness, low esters, dry finish
-- Risk controls: no oxidation, no harshness, no hop burn, no alcohol heat
-
-RECIPE LOCK (from Patient 9)
-- Fermentables: 16.5 lb Pale Malt, 1.0 lb Amber Malt, 1.25 lb Corn Sugar
-- Hops: Simcoe/Amarillo/Warrior schedule as locked in recipe
-- Yeast in recipe: WLP007
-
-22A MEDAL GATE (CRITICAL)
-- If entering 22A, you need LOW ester profile.
-- Recommended for medals: use Chico/US-05 equivalent instead of WLP007.
-- If using WLP007 anyway: hold fermentation very tight at low end and avoid any early temp overshoot.
+ENTRY DECLARATION
+- Category: BJCP 34A Clone Beer
+- Commercial Example: Dogfish Head 90 Minute IPA
+- Base Style: 22A Double IPA
 
 BATCH TARGETS
 - Into fermenter: 5.0 gal (19.0 L)
 - Total brewing liquor: 9.5 gal (36.0 L)
-- Mash pH (room temp): 5.25-5.35
-- Sulfate/Chloride target: ~225-230 / ~50 ppm
-- Carbonation target: 2.3-2.5 vol CO2
+- OG: 1.088-1.092
+- FG: 1.014-1.018
+- Mash pH: 5.25-5.35 (room-temp sample)
+- Carbonation: 2.3-2.5 vol CO2
 
-WATER + SALTS (for 9.5 gal total liquor)
+WATER + SALTS (ALL TO 9.5 GAL RO)
 [ ] Gypsum (CaSO4): 0.45 oz (12.76 g)
 [ ] Epsom Salt (MgSO4): 0.10 oz (2.83 g)
 [ ] Calcium Chloride (CaCl2): 0.13 oz (3.69 g)
 [ ] Baking Soda: 0.00 oz
 
-PRE-BREW QUALITY CHECK (DAY BEFORE)
-[ ] pH meter calibrated (4.01 and 7.00)
+PRE-BREW QC
+[ ] pH meter calibrated
 [ ] Thermometer validated
-[ ] Scale validated (salt and hop scale)
-[ ] Hop alpha acids verified against package labels
-[ ] Yeast viability and pitch plan confirmed
-[ ] Oxygen, sanitizer, and closed-transfer gear prepared
+[ ] Hop AA% verified
+[ ] Fermenter + transfer gear sanitized
+[ ] CO2 available for purge/closed transfer
 
-MASH + BOIL EXECUTION LOG
-Start time: ________
+MASH LOG (FULL-VOLUME NO-SPARGE)
+[ ] Mash in 9.5 gal total liquor
+Mash rest target: 150 F (65.6 C) for 75 min
+Mash-out target: 168 F (75.6 C) for 10 min
 
-1) WATER + MASH-IN
-[ ] Measure 9.5 gal RO water
-[ ] Add all salts and dissolve fully
-Strike temp target: ______ F / ______ C   Actual: ______ F / ______ C
+Strike temp target: ______ F   Actual: ______ F
 Mash-in time: ______
-
-2) MASH REST
-Target: 150 F (65.6 C) for 75 min
-Actual average temp: ______ F / ______ C
-10-15 min pH sample (cooled): ______
-Acid additions (85% phosphoric, 1 ml steps): ____ + ____ + ____ = ____ ml total
+pH @ 10-15 min (cooled): ______
+Acid additions (85% phosphoric, 1 ml steps): ____ + ____ + ____ = ____ ml
 Final mash pH (cooled): ______
+Mash average temp: ______ F
 
-3) MASH-OUT
-Target: 168 F (75.6 C) for 10 min
-Actual: ______ F / ______ C
-
-4) PRE-BOIL
 Pre-boil volume: ______ gal
 Pre-boil gravity: ______
-Clarity/recirc notes: __________________________________________
 
-5) BOIL (90 MIN)
-Boil start time: ______   Boil end time: ______
+BOIL LOG (90 MIN)
+Boil start: ______   Boil end: ______
 
-HOP ADDITIONS
-[ ] First Wort: 0.75 oz Simcoe + 0.25 oz Warrior
-[ ] 60 min: 0.50 oz Amarillo
-[ ] 40 min: 0.50 oz Amarillo + 0.50 oz Simcoe + 0.25 oz Warrior
-[ ] 20 min: 0.75 oz Amarillo + 0.75 oz Simcoe + 0.25 oz Warrior
-[ ] 10 min: Add 1.25 lb corn sugar
-[ ] 0 min / hop stand at 180 F (82 C) for 20 min:
-    - 1.50 oz Amarillo
-    - 1.50 oz Simcoe
+[ ] FWH: Simcoe 0.75 oz + Warrior 0.25 oz
+[ ] 60 min: Amarillo 0.50 oz
+[ ] 40 min: Amarillo 0.50 oz + Simcoe 0.50 oz + Warrior 0.25 oz
+[ ] 20 min: Amarillo 0.75 oz + Simcoe 0.75 oz + Warrior 0.25 oz
+[ ] 10 min: Corn sugar 1.25 lb
+[ ] 0 min: cool to 180 F, then hop stand 20 min:
+    [ ] Amarillo 1.50 oz
+    [ ] Simcoe 1.50 oz
 
-POST-BOIL LOG
-Whirlpool/hop stand start temp: ______ F
-Whirlpool/hop stand hold temp range: ______ to ______ F
+Hop stand start temp: ______ F
+Hop stand end temp: ______ F
 Post-boil volume: ______ gal
-Original gravity (OG): ______
+OG into fermenter: ______
 
-22A STYLE CHECKPOINT
-- 22A OG guardrail is 1.065-1.085.
-- If OG is above 1.085, write corrective action (dilution/reclassification):
-  _______________________________________________________________
+KNOCKOUT + PITCH
+KO temp target: 65 F   Actual: ______ F
+Oxygenation method/time: ______________________________
+Yeast: WLP007 Dry English Ale
+Pitch time: ______
 
-KO + PITCH
-Knockout temp target: 65 F (18.3 C)
-Actual KO temp: ______
-Oxygenation method/time: _______________________________________
-Yeast pitched: _______________________   Pitch time: _____________
+FERMENTATION CHECKPOINTS
+- Day 0-3: Hold 65 F
+- Day 4-7: Raise/hold 67-68 F
+- Dry hop near terminal (2-4 points from FG), 48-72h
+- Crash to 38 F after dry hop window
 
-FERMENTATION LOG (GLYCOL-CONTROLLED)
-Day 0-3 target: 65 F (18.3 C)
-Day 4-7 target: 67-68 F (19.4-20 C)
-Dry hop near terminal for 48-72 h, then crash to 38 F (3.3 C)
+Day 0 gravity: ______
+Day 4 gravity: ______
+Dry hop in gravity: ______
+Terminal gravity check #1: ______
+Terminal gravity check #2 (24h later): ______
 
-Day | Temp | Gravity | Action | Notes
-----|------|---------|--------|------
-0   | ____ | _______ | Pitch  | ______________________________
-1   | ____ | _______ | Hold   | ______________________________
-2   | ____ | _______ | Hold   | ______________________________
-3   | ____ | _______ | Hold   | ______________________________
-4   | ____ | _______ | Ramp   | ______________________________
-5   | ____ | _______ | DH in? | ______________________________
-6   | ____ | _______ | Hold   | ______________________________
-7   | ____ | _______ | Crash? | ______________________________
-
-DRY HOP DETAILS
-Dry hop start date/time: __________________
-Gravity at dry hop: ______
+DRY HOP
 [ ] Amarillo 1.0 oz
 [ ] Simcoe 1.0 oz
-Dry hop end date/time: ____________________
+Dry hop start: ______
+Dry hop end: ______
 Contact time (hours): ______
 
-TERMINAL + PACKAGING
-Final gravity (FG): ______
-ABV (calc): ______
-Cold crash start: ______   End: ______
-Closed transfer performed: [ ] Yes  [ ] No
-Receiving keg fully purged: [ ] Yes  [ ] No
+PACKAGING
+[ ] Receiving keg fully purged
+[ ] Closed transfer completed
+[ ] No splashing
 Carbonation setpoint: ______ vol CO2
+Final gravity: ______
+Package date: ______
 
-COMP READINESS (SCORESHEET PRECHECK)
-Hop aroma intensity (target high): Low / Med / High / VHigh
-Bitterness quality (target firm+clean): Harsh / Acceptable / Smooth
-Finish (target dry, not sweet): Sweet / Balanced / Dry
-Ester level (target low for 22A): Low / Med / High
-Oxidation signs (target none): None / Mild / Obvious
+CLONE MATCH PRECHECK
+- Commercial sample package date (if known): __________________
+- Side-by-side date: __________________
 
-FINAL DECISION
-[ ] Enter as 22A Double IPA
-[ ] If not 22A-clean, hold for non-competition or alternate category
+Aroma match (1-5): ______
+Bitterness quality match (1-5): ______
+Finish match (1-5): ______
+Malt support match (1-5): ______
+Overall clone fidelity (1-5): ______
 
-POST-BATCH LESSONS (TO MAKE THIS REPEATABLE)
-What moved score up this batch:
-- _______________________________________________________________
-- _______________________________________________________________
-What to change next batch:
-- _______________________________________________________________
-- _______________________________________________________________
+GO / NO-GO FOR ENTRY
+[ ] No oxidation
+[ ] No harsh bitterness
+[ ] No obvious diacetyl
+[ ] Form declaration exact (beer + brewery + base style)
+Decision: GO / NO-GO
+
+POST-BATCH LESSONS
+What worked:
+- _______________________________________________
+- _______________________________________________
+What to change:
+- _______________________________________________
+- _______________________________________________
