@@ -49,6 +49,14 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 3.  **Execute**: It calculates strike temps and salt additions using your specific `tools/calculations.md`.
 4.  **Learn**: After the brew, you log the data. The AI uses this to troubleshoot and improve the next batch.
 
+### Recipe and log paths
+- New recipe drafts: `recipes/in_development/`
+- Locked/stable recipes: `recipes/locked/`
+- New batch logs: `batch_logs/YYYY-MM-DD_style.md`
+- BeerXML imports: `recipes/beer_xml_imports/`
+- BeerXML exports: `recipes/beer_xml_exports/`
+- Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
+
 ## 📦 Inventory Workflow (Phase 1/2/3)
 
 Inventory files live in `libraries/inventory/` and are driven by `tools/inventory_cli.py`.
