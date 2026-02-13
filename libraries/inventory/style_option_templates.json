@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "templates": [
+    {
+      "id": "west_coast_ipa",
+      "style_key": "west_coast_ipa",
+      "style_name": "American IPA",
+      "bjcp": "21A",
+      "requirements": [
+        {"item_ids": ["pale_malt_us"], "amount": 5600, "unit": "g", "label": "base malt"},
+        {"item_ids": ["simcoe", "amarillo", "warrior"], "amount": 85, "unit": "g", "label": "American hops"},
+        {"item_ids": ["chico_pack", "wlp007_pack"], "amount": 2, "unit": "count", "label": "ale yeast"}
+      ],
+      "name_prefixes": ["Coastline", "Terminal", "Steel", "Signal", "Breaker"],
+      "name_suffixes": ["Rider", "Vector", "Current", "Engine", "Draft"]
+    },
+    {
+      "id": "double_ipa",
+      "style_key": "double_ipa_22A",
+      "style_name": "Double IPA",
+      "bjcp": "22A",
+      "requirements": [
+        {"item_ids": ["pale_malt_us"], "amount": 6800, "unit": "g", "label": "base malt"},
+        {"item_ids": ["corn_sugar_dextrose"], "amount": 450, "unit": "g", "label": "sugar for dryness"},
+        {"item_ids": ["simcoe", "amarillo", "warrior"], "amount": 120, "unit": "g", "label": "American hops"},
+        {"item_ids": ["chico_pack", "wlp007_pack"], "amount": 2, "unit": "count", "label": "ale yeast"}
+      ],
+      "name_prefixes": ["Hopline", "Overdrive", "Voltage", "Longhaul", "Afterburn"],
+      "name_suffixes": ["Ninety", "Summit", "Drift", "Throttle", "Pulse"]
+    },
+    {
+      "id": "belgian_dark_strong",
+      "style_key": "belgian_dark_strong_26D",
+      "style_name": "Belgian Dark Strong Ale",
+      "bjcp": "26D",
+      "requirements": [
+        {"item_ids": ["pale_malt_us"], "amount": 7200, "unit": "g", "label": "base malt"},
+        {"item_ids": ["dark_candi_sugar"], "amount": 450, "unit": "g", "label": "dark candi sugar"},
+        {"item_ids": ["hallertauer", "styrian_goldings"], "amount": 40, "unit": "g", "label": "continental hops"},
+        {"item_ids": ["wlp540_pack"], "amount": 2, "unit": "count", "label": "Belgian yeast"}
+      ],
+      "name_prefixes": ["Abbey", "Midnight", "Cathedral", "Velvet", "Monk"],
+      "name_suffixes": ["Reserve", "Nocturne", "Rapture", "Velour", "Crown"]
+    },
+    {
+      "id": "american_amber",
+      "style_key": "american_amber_19A",
+      "style_name": "American Amber Ale",
+      "bjcp": "19A",
+      "requirements": [
+        {"item_ids": ["pale_malt_us"], "amount": 4500, "unit": "g", "label": "base malt"},
+        {"item_ids": ["amber_malt_tf", "caramunich_ii", "caramunich_iii"], "amount": 300, "unit": "g", "label": "specialty malt"},
+        {"item_ids": ["amarillo", "simcoe", "warrior"], "amount": 45, "unit": "g", "label": "hops"},
+        {"item_ids": ["chico_pack", "wlp007_pack"], "amount": 1, "unit": "count", "label": "ale yeast"}
+      ],
+      "name_prefixes": ["Copper", "Foundry", "Rust", "Beacon", "Smokestack"],
+      "name_suffixes": ["Run", "Signal", "Standard", "Line", "Shift"]
+    },
+    {
+      "id": "experimental_hoppy_ale",
+      "style_key": "experimental_hoppy_ale_34C",
+      "style_name": "Experimental Hoppy Ale",
+      "bjcp": "34C",
+      "requirements": [
+        {"item_ids": ["pale_malt_us"], "amount": 5000, "unit": "g", "label": "base malt"},
+        {"item_ids": ["simcoe", "amarillo", "warrior", "hallertauer", "styrian_goldings"], "amount": 70, "unit": "g", "label": "mixed hops"},
+        {"item_ids": ["chico_pack", "wlp007_pack", "wlp540_pack"], "amount": 1, "unit": "count", "label": "yeast"}
+      ],
+      "name_prefixes": ["Wildcard", "Backlot", "Offgrid", "Scrapyard", "Nightline"],
+      "name_suffixes": ["Project", "Batch", "Prototype", "Signal", "Theory"]
+    }
+  ]
+}

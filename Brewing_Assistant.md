@@ -36,6 +36,12 @@ Codex must treat the following as retrievable brewing memory and should consult 
 10) libraries/beer_xml_imports/
 - Location for external BeerXML files to be read/analyzed
 
+11) libraries/inventory/
+- Inventory state + recipe consumption maps + brew history for stock-aware recommendations
+
+12) tools/inventory_cli.py
+- Command workflow for stock updates ("I brewed X"), stock-aware style options, and Garbage Beer concepts
+
 ## Output locations (write new artifacts here)
 - New recipe drafts: libraries/my_recipes/
 - Locked/stable recipes: libraries/my_recipes/ (use filename/tag convention)

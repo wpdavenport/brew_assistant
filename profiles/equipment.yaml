@@ -12,6 +12,9 @@ trub_loss_gal: 0.4
 deadspace_gal: 0.1
 
 brewhouse_efficiency_percent: 72
+# CONSTRAINT: This efficiency is specific to full_volume_no_sparge on this system.
+# All grain bill calculations MUST use this value. Do NOT assume 70%, 75%, or 80%.
+# If mash method changes, efficiency must be re-measured and updated here.
 
 milling:
   grain_crusher_gap_in: 0.036
@@ -20,6 +23,7 @@ milling:
 
 mash:
   method: "full_volume_no_sparge"
+  efficiency_note: "Efficiency of is measured, from brewhouse_efficiency_percent, for this method on this system. Batch sparging or fly sparging would yield different efficiency — re-measure if method changes."
   recirculating: true
   grain_absorption_gal_per_lb: 0.1
   mash_loss_gal: 0.15

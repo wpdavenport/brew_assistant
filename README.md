@@ -49,6 +49,31 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 3.  **Execute**: It calculates strike temps and salt additions using your specific `tools/calculations.md`.
 4.  **Learn**: After the brew, you log the data. The AI uses this to troubleshoot and improve the next batch.
 
+## 📦 Inventory Workflow (Phase 1/2/3)
+
+Inventory files live in `libraries/inventory/` and are driven by `tools/inventory_cli.py`.
+
+### Phase 1
+When you brew, decrement inventory:
+
+`python3 tools/inventory_cli.py phrase "i brewed patient number 9"`
+
+### Phase 2
+Get stock-aware options for beers you have not brewed before:
+
+`python3 tools/inventory_cli.py phrase "create a beer i haven't made before with the ingredients i have"`
+
+### Phase 3
+Generate experimental "Garbage Beer" concepts from leftovers:
+
+`python3 tools/inventory_cli.py phrase "garbage beer"`
+
+Useful commands:
+- `python3 tools/inventory_cli.py stock`
+- `python3 tools/inventory_cli.py restock --item pale_malt_us --amount 5000 --unit g`
+- `python3 tools/inventory_cli.py options --count 5`
+- `python3 tools/inventory_cli.py garbage --count 3`
+
 ## 🧠 The "Hard Rules"
 
 To keep the AI honest, we enforce these rules:
