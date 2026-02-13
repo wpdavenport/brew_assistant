@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "recipes": [
+    {
+      "id": "patient_number_9",
+      "display_name": "Patient Number 9 (90 Minute Clone - Competition Lock)",
+      "style_key": "clone_34A_dfh90",
+      "aliases": ["patient number 9", "patient 9", "pn9"],
+      "consumption": [
+        {"item_id": "pale_malt_us", "amount": 6803.88555, "unit": "g"},
+        {"item_id": "amber_malt_tf", "amount": 453.59237, "unit": "g"},
+        {"item_id": "corn_sugar_dextrose", "amount": 566.9904625, "unit": "g"},
+        {"item_id": "rice_hulls", "amount": 226.796185, "unit": "g", "optional": true},
+        {"item_id": "simcoe", "amount": 127.5728540625, "unit": "g"},
+        {"item_id": "amarillo", "amount": 120.48547328125, "unit": "g"},
+        {"item_id": "warrior", "amount": 21.26214234375, "unit": "g"},
+        {"item_id": "wlp007_pack", "amount": 2.0, "unit": "count"},
+        {"item_id": "gypsum", "amount": 12.75728540625, "unit": "g"},
+        {"item_id": "epsom_salt", "amount": 2.8349523125, "unit": "g"},
+        {"item_id": "calcium_chloride", "amount": 3.68543800625, "unit": "g"},
+        {"item_id": "phosphoric_85", "amount": 6.0, "unit": "ml", "optional": true}
+      ],
+      "notes": "Assumes 2 packs WLP007 per batch."
+    },
+    {
+      "id": "manhattan_belgian_dark_strong_ale",
+      "display_name": "Manhattan Belgian Dark Strong Ale",
+      "style_key": "belgian_dark_strong_26D",
+      "aliases": ["manhattan belgian dark strong", "manhattan bdsa"],
+      "consumption": [
+        {"item_id": "pale_malt_us", "amount": 7711.07029, "unit": "g"},
+        {"item_id": "caramunich_ii", "amount": 311.844754375, "unit": "g"},
+        {"item_id": "caramunich_iii", "amount": 311.844754375, "unit": "g"},
+        {"item_id": "dark_candi_sugar", "amount": 453.59237, "unit": "g"},
+        {"item_id": "hallertauer", "amount": 43.94176084375, "unit": "g"},
+        {"item_id": "styrian_goldings", "amount": 43.94176084375, "unit": "g"},
+        {"item_id": "wlp540_pack", "amount": 2.0, "unit": "count"},
+        {"item_id": "gypsum", "amount": 0.992233309375, "unit": "g"},
+        {"item_id": "calcium_chloride", "amount": 3.203496113125, "unit": "g"},
+        {"item_id": "phosphoric_85", "amount": 4.0, "unit": "ml"}
+      ]
+    }
+  ]
+}

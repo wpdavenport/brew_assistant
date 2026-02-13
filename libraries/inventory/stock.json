@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "notes": "Template inventory. Replace on_hand values with your real stock.",
+  "items": [
+    {
+      "id": "pale_malt_us",
+      "name": "Pale Malt (2 Row) US",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["base_malt", "american"]
+    },
+    {
+      "id": "amber_malt_tf",
+      "name": "Thomas Fawcett Amber Malt",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["specialty_malt", "toasty"]
+    },
+    {
+      "id": "corn_sugar_dextrose",
+      "name": "Corn Sugar (Dextrose)",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["sugar", "drying"]
+    },
+    {
+      "id": "rice_hulls",
+      "name": "Rice Hulls",
+      "category": "adjunct",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["lautering"]
+    },
+    {
+      "id": "caramunich_ii",
+      "name": "Caramunich II",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["specialty_malt", "caramel"]
+    },
+    {
+      "id": "caramunich_iii",
+      "name": "Caramunich III",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["specialty_malt", "caramel"]
+    },
+    {
+      "id": "dark_candi_sugar",
+      "name": "Dark Candi Sugar",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["sugar", "belgian"]
+    },
+    {
+      "id": "simcoe",
+      "name": "Simcoe",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["american", "resin", "citrus"]
+    },
+    {
+      "id": "amarillo",
+      "name": "Amarillo",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["american", "orange", "floral"]
+    },
+    {
+      "id": "warrior",
+      "name": "Warrior",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["american", "bittering"]
+    },
+    {
+      "id": "hallertauer",
+      "name": "Hallertauer",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["noble", "floral", "spicy"]
+    },
+    {
+      "id": "styrian_goldings",
+      "name": "Styrian Goldings",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["european", "earthy", "spicy"]
+    },
+    {
+      "id": "wlp007_pack",
+      "name": "WLP007 Dry English Ale",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 0.0,
+      "tags": ["english", "high_attenuation"]
+    },
+    {
+      "id": "chico_pack",
+      "name": "Chico (US-05 equivalent)",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 0.0,
+      "tags": ["american", "clean"]
+    },
+    {
+      "id": "wlp540_pack",
+      "name": "WLP540 Abbey IV",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 0.0,
+      "tags": ["belgian", "ester"]
+    },
+    {
+      "id": "gypsum",
+      "name": "Calcium Sulphate (Gypsum)",
+      "category": "water_agent",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["water"]
+    },
+    {
+      "id": "epsom_salt",
+      "name": "Magnesium Sulphate (Epsom Salt)",
+      "category": "water_agent",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["water"]
+    },
+    {
+      "id": "calcium_chloride",
+      "name": "Calcium Chloride",
+      "category": "water_agent",
+      "unit": "g",
+      "on_hand": 0.0,
+      "tags": ["water"]
+    },
+    {
+      "id": "phosphoric_85",
+      "name": "Phosphoric Acid 85%",
+      "category": "water_agent",
+      "unit": "ml",
+      "on_hand": 0.0,
+      "tags": ["water", "ph_adjustment"]
+    }
+  ]
+}

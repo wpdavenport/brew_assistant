@@ -26,6 +26,25 @@ Rules:
 - If files conflict, call it out and propose a resolution path.
 - Prefer house strains and house processes over generic brewing norms.
 
+### Inventory Rule (when user asks about stock/on-hand)
+If the user asks inventory-aware questions or gives commands like:
+- "I brewed <recipe>"
+- "Create a beer I haven't made before with ingredients I have"
+- "Garbage beer"
+
+Consult:
+- libraries/inventory/stock.json
+- libraries/inventory/recipe_usage.json
+- libraries/inventory/brew_history.json
+- libraries/inventory/style_option_templates.json
+- tools/inventory_cli.py
+
+Apply:
+- decrement stock for brew events,
+- propose only stock-feasible options for "haven't made before",
+- generate inventory-driven experimental concepts for "Garbage beer".
+- if user approves one suggested option, generate a full competition-grade recipe + process plan for that selected style.
+
 ### Style Retrieval Rule (Doctrine + BJCP Overlay)
 
 If the user specifies a style (name or BJCP-style ID):
@@ -177,10 +196,10 @@ Creative mode deactivates automatically when the user returns to style-specific 
 
 ## Defaults & Units
 - Default batch size: 5.0 gal (19 L) unless specified otherwise in profiles/equipment.yaml.
-- Assume brewhouse efficiency: 70% unless overridden by profiles/equipment.yaml.
+- Brewhouse efficiency: ALWAYS use the value from profiles/equipment.yaml. Never assume a different efficiency. If equipment.yaml is missing or has no efficiency value, default to 70% and flag the assumption.
 - Use both US + metric units for volumes and temperatures.
-- Temperatures: °F and °C.
-- Gravity: SG and °P when useful.
+- Temperatures: °F.
+- Gravity: SG
 - If a system value is missing, assume typical homebrew losses and state the assumption.
 
 ## Coaching Tone
