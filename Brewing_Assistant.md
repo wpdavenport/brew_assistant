@@ -55,6 +55,7 @@ Codex must treat the following as retrievable brewing memory and should consult 
 - Never invent values that should come from these files.
 - If a file is missing or empty, say so and proceed with explicit assumptions.
 - Prefer house strains and house processes over generic advice.
+- Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
 
 ## Books (optional reference titles)
 Reference titles covering the four core ingredients plus style-specific brewing.
