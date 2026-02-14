@@ -17,8 +17,8 @@ Codex must treat the following as retrievable brewing memory and should consult 
 4) libraries/_index.md
 - Style doctrine index (maps style IDs to research files)
 
-5) libraries/my_recipes/
-- Legacy recipe memory: measured outcomes, notes, and iteration history
+5) recipes/
+- Recipe memory: measured outcomes, notes, and iteration history
 
 ## Secondary (check when applicable)
 6) libraries/beer_research/_index.md
@@ -46,8 +46,8 @@ Codex must treat the following as retrievable brewing memory and should consult 
 - Command workflow for stock updates ("I brewed X"), stock-aware style options, and Garbage Beer concepts
 
 ## Output locations (write new artifacts here)
-- New recipe drafts: recipes/in_development/
-- Locked/stable recipes: recipes/locked/
+- New recipe drafts: recipes/
+- Locked/stable recipes: recipes/ (use filename/tag convention)
 - New batch logs: batch_logs/YYYY-MM-DD_style.md
 - BeerXML Exports: recipes/beer_xml_exports/
 
@@ -74,4 +74,4 @@ Consult these when ingredient-specific or style-specific depth is needed beyond 
 Cross-reference with house files:
 - Water book ↔ profiles/water_profiles.md
 - Yeast book ↔ libraries/yeast_library.md
-- Hops / Malt / Belgian Styles books ↔ libraries/beer_research/, libraries/my_recipes/
+- Hops / Malt / Belgian Styles books ↔ libraries/beer_research/, recipes/

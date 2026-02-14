@@ -11,9 +11,7 @@ These files are authoritative brewing memory for this repo. Consult them before 
 5) libraries/bjcp_overlays/_index.md
    - If a style is specified, open the matching BJCP overlay file
 6) Brewing_Assistant.md
-7) recipes/in_development/
-8) recipes/locked/
-9) libraries/my_recipes/ (legacy recipe memory)
+7) recipes/
 
 ## Tools / templates (when needed)
 - tools/calculations.md
@@ -30,17 +28,10 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - tools/inventory_cli.py
 
 ## Output locations (write new artifacts here)
-- New recipe drafts: recipes/in_development/
-- Locked/stable recipes: recipes/locked/
+- New recipe drafts: recipes/
+- Locked/stable recipes: recipes/ (use filename/tag convention)
 - New batch logs: batch_logs/YYYY-MM-DD_style.md
 - BeerXML Exports: recipes/beer_xml_exports/
-
-## Inventory workflow (when relevant)
-- libraries/inventory/stock.json
-- libraries/inventory/recipe_usage.json
-- libraries/inventory/brew_history.json
-- libraries/inventory/style_option_templates.json
-- tools/inventory_cli.py
 
 ## Hard rules
 - Never invent values that should come from repo files.

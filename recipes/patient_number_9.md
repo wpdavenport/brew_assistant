@@ -27,17 +27,13 @@ Refined 90 Minute clone tuned for competition execution. This is a clone-first r
 ### Boil / Whirlpool
 - 0.75 oz Simcoe (12.9%) - First Wort
 - 0.25 oz Warrior (14.2%) - First Wort
-
 - 0.50 oz Amarillo (7.1%) - 60 min
-
 - 0.50 oz Amarillo (7.1%) - 40 min
 - 0.50 oz Simcoe (12.9%) - 40 min
 - 0.25 oz Warrior (14.2%) - 40 min
-
 - 0.75 oz Amarillo (7.1%) - 20 min
 - 0.75 oz Simcoe (12.9%) - 20 min
 - 0.25 oz Warrior (14.2%) - 20 min
-
 - 1.50 oz Amarillo (7.1%) - 0 min at 180 F for 20 min
 - 1.50 oz Simcoe (12.9%) - 0 min at 180 F for 20 min
 

@@ -19,7 +19,7 @@ Before answering any non-trivial brewing question, consult the repo’s authorit
 3) libraries/yeast_library.md
 4) profiles/water_profiles.md
 5) Brewing_Assistant.md
-6) libraries/my_recipes/ (if relevant)
+6) recipes/ (if relevant)
 
 Rules:
 - Never fabricate repo data. If it’s not present, say so and proceed with explicit assumptions.
