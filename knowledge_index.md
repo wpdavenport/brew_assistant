@@ -40,3 +40,4 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - If a file is missing or empty, say so and proceed with explicit assumptions.
 - Prefer house strains and house processes over generic advice.
 - Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
+- Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.

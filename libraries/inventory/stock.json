@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "notes": "Template inventory. Replace on_hand values with your real stock.",
+  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown.",
   "items": [
     {
       "id": "pale_malt_us",
-      "name": "Pale Malt (2 Row) US",
+      "name": "Avangard 2-row",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 18597.28717,
       "tags": ["base_malt", "american"]
     },
     {
@@ -15,8 +15,96 @@
       "name": "Thomas Fawcett Amber Malt",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 1814.36948,
       "tags": ["specialty_malt", "toasty"]
+    },
+    {
+      "id": "honey_malt_briess",
+      "name": "Briess American Honey Malt",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 453.59237,
+      "tags": ["specialty_malt", "honey"]
+    },
+    {
+      "id": "cara_40",
+      "name": "Cara 40",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 453.59237,
+      "tags": ["specialty_malt", "caramel"]
+    },
+    {
+      "id": "pale_chocolate_tf",
+      "name": "Thomas Fawcett Pale Chocolate",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 255.145708,
+      "tags": ["specialty_malt", "roast"]
+    },
+    {
+      "id": "english_extra_dark_crystal",
+      "name": "English Extra Dark Crystal",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 198.446662,
+      "tags": ["specialty_malt", "crystal"]
+    },
+    {
+      "id": "flaked_barley",
+      "name": "Flaked Barley",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 226.796185,
+      "tags": ["adjunct_grain"]
+    },
+    {
+      "id": "caramunich_ii",
+      "name": "Caramunich II",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 14.174762,
+      "tags": ["specialty_malt", "caramel"]
+    },
+    {
+      "id": "caramunich_iii",
+      "name": "Caramunich III",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 14.174762,
+      "tags": ["specialty_malt", "caramel"]
+    },
+    {
+      "id": "belgian_debittered_black_malt",
+      "name": "Belgian Debittered Black Malt",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 184.2719,
+      "tags": ["specialty_malt", "roast"]
+    },
+    {
+      "id": "special_b",
+      "name": "Special B",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 354.369039,
+      "tags": ["specialty_malt", "belgian"]
+    },
+    {
+      "id": "roasted_barley",
+      "name": "Roasted Barley",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 226.796185,
+      "tags": ["specialty_malt", "roast"]
+    },
+    {
+      "id": "carafa_iii",
+      "name": "Carafa 3",
+      "category": "fermentable",
+      "unit": "g",
+      "on_hand": 226.796185,
+      "tags": ["specialty_malt", "dehusked_roast"]
     },
     {
       "id": "corn_sugar_dextrose",
@@ -35,22 +123,6 @@
       "tags": ["lautering"]
     },
     {
-      "id": "caramunich_ii",
-      "name": "Caramunich II",
-      "category": "fermentable",
-      "unit": "g",
-      "on_hand": 0.0,
-      "tags": ["specialty_malt", "caramel"]
-    },
-    {
-      "id": "caramunich_iii",
-      "name": "Caramunich III",
-      "category": "fermentable",
-      "unit": "g",
-      "on_hand": 0.0,
-      "tags": ["specialty_malt", "caramel"]
-    },
-    {
       "id": "dark_candi_sugar",
       "name": "Dark Candi Sugar",
       "category": "fermentable",
@@ -59,11 +131,21 @@
       "tags": ["sugar", "belgian"]
     },
     {
+      "id": "northdown",
+      "name": "Northdown",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 600.0,
+      "alpha_acid_pct": 7.3,
+      "tags": ["uk", "earthy", "spicy"]
+    },
+    {
       "id": "simcoe",
       "name": "Simcoe",
       "category": "hop",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 396.893324,
+      "alpha_acid_pct": 12.9,
       "tags": ["american", "resin", "citrus"]
     },
     {
@@ -71,24 +153,128 @@
       "name": "Amarillo",
       "category": "hop",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 326.019516,
+      "alpha_acid_pct": 7.22,
+      "lot_alpha_acid_pct": [7.1, 7.5],
       "tags": ["american", "orange", "floral"]
+    },
+    {
+      "id": "saaz",
+      "name": "Saaz",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 109.145664,
+      "alpha_acid_pct": null,
+      "lot_alpha_acid_pct": [2.2],
+      "tags": ["noble", "czech", "spicy"]
+    },
+    {
+      "id": "citra",
+      "name": "Citra",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 85.048569,
+      "alpha_acid_pct": 12.6,
+      "tags": ["american", "citrus", "tropical"]
     },
     {
       "id": "warrior",
       "name": "Warrior",
       "category": "hop",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 70.873808,
+      "alpha_acid_pct": 14.2,
       "tags": ["american", "bittering"]
     },
     {
-      "id": "hallertauer",
-      "name": "Hallertauer",
+      "id": "ctz",
+      "name": "CTZ",
       "category": "hop",
       "unit": "g",
-      "on_hand": 0.0,
-      "tags": ["noble", "floral", "spicy"]
+      "on_hand": 56.699046,
+      "alpha_acid_pct": 16.2,
+      "tags": ["american", "dank", "bittering"]
+    },
+    {
+      "id": "hallertauer",
+      "name": "Hallertau Mittelfruh",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 56.699046,
+      "alpha_acid_pct": 2.8,
+      "tags": ["noble", "german", "floral", "spicy"]
+    },
+    {
+      "id": "centennial",
+      "name": "Centennial",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 34.019428,
+      "alpha_acid_pct": 10.4,
+      "tags": ["american", "citrus", "floral"]
+    },
+    {
+      "id": "target",
+      "name": "Target",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 28.349523,
+      "alpha_acid_pct": 11.6,
+      "tags": ["uk", "bittering"]
+    },
+    {
+      "id": "galaxy",
+      "name": "Galaxy",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 28.349523,
+      "alpha_acid_pct": 13.3,
+      "tags": ["australian", "tropical"]
+    },
+    {
+      "id": "cascade_cryo",
+      "name": "Cascade Cryo",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 28.349523,
+      "alpha_acid_pct": 11.9,
+      "tags": ["american", "cryo", "citrus"]
+    },
+    {
+      "id": "centennial_cryo",
+      "name": "Centennial Cryo",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 28.349523,
+      "alpha_acid_pct": 18.5,
+      "tags": ["american", "cryo", "citrus"]
+    },
+    {
+      "id": "chinook",
+      "name": "Chinook",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 22.112628,
+      "alpha_acid_pct": 14.4,
+      "tags": ["american", "pine", "resin"]
+    },
+    {
+      "id": "uk_target",
+      "name": "UK Target",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 14.174762,
+      "alpha_acid_pct": 10.3,
+      "tags": ["uk", "bittering"]
+    },
+    {
+      "id": "crystal_hop",
+      "name": "Crystal",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 12.757285,
+      "alpha_acid_pct": 3.6,
+      "tags": ["american", "spicy", "floral"]
     },
     {
       "id": "styrian_goldings",
@@ -99,6 +285,33 @@
       "tags": ["european", "earthy", "spicy"]
     },
     {
+      "id": "verdant_ipa_pack",
+      "name": "Lallemand Verdant IPA",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 1.0,
+      "pack_size_g": 11,
+      "tags": ["english", "hazy", "dry_yeast"]
+    },
+    {
+      "id": "safale_s04_pack",
+      "name": "Fermentis SafAle S-04",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 3.0,
+      "expires": "2027-02",
+      "tags": ["english", "dry_yeast"]
+    },
+    {
+      "id": "chico_pack",
+      "name": "Fermentis SafAle US-05",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 3.0,
+      "expires": "2027-02-20",
+      "tags": ["american", "clean", "dry_yeast", "chico_equivalent"]
+    },
+    {
       "id": "wlp007_pack",
       "name": "WLP007 Dry English Ale",
       "category": "yeast",
@@ -107,20 +320,52 @@
       "tags": ["english", "high_attenuation"]
     },
     {
-      "id": "chico_pack",
-      "name": "Chico (US-05 equivalent)",
-      "category": "yeast",
-      "unit": "count",
-      "on_hand": 0.0,
-      "tags": ["american", "clean"]
-    },
-    {
       "id": "wlp540_pack",
       "name": "WLP540 Abbey IV",
       "category": "yeast",
       "unit": "count",
       "on_hand": 0.0,
       "tags": ["belgian", "ester"]
+    },
+    {
+      "id": "yeast_nutrient_hard_seltzer",
+      "name": "Yeast Nutrient (Hard Seltzer)",
+      "category": "fermentation_aid",
+      "unit": "count",
+      "on_hand": 0.0,
+      "tags": ["nutrient", "quantity_unknown"]
+    },
+    {
+      "id": "fermaid_o",
+      "name": "Fermaid-O",
+      "category": "fermentation_aid",
+      "unit": "g",
+      "on_hand": 170.097139,
+      "tags": ["nutrient"]
+    },
+    {
+      "id": "biofine_clear",
+      "name": "Biofine Clear",
+      "category": "fermentation_aid",
+      "unit": "ml",
+      "on_hand": 0.0,
+      "tags": ["fining", "quantity_unknown"]
+    },
+    {
+      "id": "whirlfloc_tablet",
+      "name": "Whirlfloc",
+      "category": "kettle_addition",
+      "unit": "count",
+      "on_hand": 12.0,
+      "tags": ["clarifier"]
+    },
+    {
+      "id": "campden_tablet",
+      "name": "Campden Tablets",
+      "category": "water_agent",
+      "unit": "count",
+      "on_hand": 0.0,
+      "tags": ["water", "quantity_unknown"]
     },
     {
       "id": "gypsum",
@@ -153,6 +398,22 @@
       "unit": "ml",
       "on_hand": 0.0,
       "tags": ["water", "ph_adjustment"]
+    },
+    {
+      "id": "carbonation_tablet",
+      "name": "Carbonation Tablets",
+      "category": "packaging",
+      "unit": "count",
+      "on_hand": 0.0,
+      "tags": ["packaging", "quantity_unknown"]
+    },
+    {
+      "id": "cocoa_nibs",
+      "name": "Cocoa Nibs",
+      "category": "adjunct",
+      "unit": "g",
+      "on_hand": 56.699046,
+      "tags": ["flavor_adjunct"]
     }
   ]
 }

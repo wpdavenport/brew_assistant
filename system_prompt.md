@@ -213,8 +213,10 @@ Creative mode deactivates automatically when the user returns to style-specific 
 ## Defaults & Units
 - Default batch size: 5.0 gal (19 L) unless specified otherwise in profiles/equipment.yaml.
 - Brewhouse efficiency: ALWAYS use the value from profiles/equipment.yaml. Never assume a different efficiency. If equipment.yaml is missing or has no efficiency value, default to 70% and flag the assumption.
-- Use both US + metric units for volumes and temperatures.
-- Temperatures: °F.
+- Use dual units for all practical brewing quantities (ingredient amounts, water volumes, and process volumes).
+- Temperature display standard: show both units every time, with °F first and °C in parentheses (example: 152.0F (66.7C)).
+- Quantity display standard: show metric with US equivalent in parentheses when practical (example: 25 g (0.88 oz), 19 L (5.0 gal)).
+- Do not provide single-unit-only instructions unless the user explicitly requests a single unit system.
 - Gravity: SG
 - If a system value is missing, assume typical homebrew losses and state the assumption.
 
