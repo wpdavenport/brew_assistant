@@ -23,10 +23,10 @@
   .subtitle { font-size: 9pt; color: #444; font-style: italic; }
 
   /* ── Info grid ── */
-  .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px 16px; margin-bottom: 4px; font-size: 8.5pt; }
-  .info-grid .field { display: flex; gap: 3px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 16px; margin-bottom: 10px; font-size: 8.5pt; }
+  .info-grid .field { display: flex; gap: 6px; align-items: flex-end; min-height: 22px; }
   .info-grid .label { font-weight: 600; white-space: nowrap; }
-  .info-grid .blank { border-bottom: 1px solid #999; flex: 1; min-width: 70px; }
+  .info-grid .blank { border-bottom: 1px solid #777; flex: 1; min-width: 140px; min-height: 16px; display: inline-block; }
 
   /* ── Tables ── */
   table { width: 100%; border-collapse: collapse; margin-bottom: 5px; font-size: 8.5pt; }
@@ -46,6 +46,7 @@
   .actual-col { width: 60px; }
   .checkbox { display: inline-block; width: 10px; height: 10px; border: 1.5px solid #333; vertical-align: middle; }
   .blank-sm { border-bottom: 1px solid #999; display: inline-block; min-width: 45px; }
+  .blank-md { border-bottom: 1px solid #999; display: inline-block; min-width: 80px; }
   .blank-lg { border-bottom: 1px solid #999; display: inline-block; min-width: 100px; }
 
   /* ── Alerts & notes ── */
@@ -87,7 +88,7 @@
     .section-note { font-size: 7pt; }
     .alert-box { font-size: 7.5pt; padding: 2px 5px; margin: 3px 0; break-inside: avoid; }
     .alert-box .alert-title { font-size: 7pt; }
-    .info-grid { font-size: 8pt; gap: 1px 12px; }
+    .info-grid { font-size: 8pt; gap: 6px 12px; margin-bottom: 8px; }
     .step-list li { font-size: 8pt; padding: 1px 0 1px 16px; }
     .step-list li::before { width: 9px; height: 9px; top: 3px; }
     .checkbox { width: 9px; height: 9px; }
@@ -161,12 +162,11 @@
 <h2>Grain Bill</h2>
 <table>
   <tr><th>Grain</th><th class="right">Wt</th><th class="right">%</th><th>Notes</th></tr>
-  <tr><td>US 2-Row</td><td class="right">14.00 lb</td><td class="right">85</td><td>Clean American base</td></tr>
-  <tr><td>Munich 10L</td><td class="right">1.50 lb</td><td class="right">9</td><td>Malt depth, bread</td></tr>
-  <tr><td>Crystal 60L</td><td class="right">0.50 lb</td><td class="right">3</td><td>Caramel/honey (clone)</td></tr>
-  <tr><td>Carapils</td><td class="right">0.50 lb</td><td class="right">3</td><td>Head retention</td></tr>
-  <tr class="highlight-row"><td class="bold">Corn Sugar (10 min)</td><td class="right bold">1.25 lb</td><td class="right">&mdash;</td><td>Dryness &amp; ABV</td></tr>
-  <tr style="border-top:2px solid #555;"><td class="bold">Total Grain</td><td class="right bold">16.50 lb</td><td></td><td></td></tr>
+  <tr><td>Pale Malt</td><td class="right">15.00 lb (6.80 kg)</td><td class="right">94</td><td>Clean base for layered hopping</td></tr>
+  <tr><td>Thomas Fawcett Amber Malt</td><td class="right">1.00 lb (0.45 kg)</td><td class="right">6</td><td>Toasty English depth</td></tr>
+  <tr><td>Rice Hulls (optional)</td><td class="right">0.50 lb (0.23 kg)</td><td class="right">&mdash;</td><td>Lauter insurance only</td></tr>
+  <tr class="highlight-row"><td class="bold">Corn Sugar (10 min)</td><td class="right bold">1.25 lb (0.57 kg)</td><td class="right">&mdash;</td><td>Dryness &amp; ABV</td></tr>
+  <tr style="border-top:2px solid #555;"><td class="bold">Total Grain</td><td class="right bold">16.00 lb (7.26 kg)</td><td></td><td></td></tr>
 </table>
 </div>
 <div>
@@ -189,13 +189,12 @@
 <h2>Hop Schedule &mdash; Continuous Hopping Simulation</h2>
 <table>
   <tr><th>Timing</th><th>Variety</th><th class="right">Amt</th><th>AA%</th><th>Purpose</th><th class="check-col">&check;</th></tr>
-  <tr class="highlight-row"><td class="bold">FWH</td><td>Simcoe (~13%)</td><td class="right">0.75 oz</td><td><span class="blank-sm"></span></td><td>Smooth bittering foundation</td><td class="center"><span class="checkbox"></span></td></tr>
-  <tr class="highlight-row"><td class="bold">FWH</td><td>Warrior (~16%)</td><td class="right">0.25 oz</td><td><span class="blank-sm"></span></td><td>Clean alpha backbone</td><td class="center"><span class="checkbox"></span></td></tr>
-  <tr><td>60 min</td><td>Amarillo (~9%)</td><td class="right">0.50 oz</td><td><span class="blank-sm"></span></td><td>Bittering layer</td><td class="center"><span class="checkbox"></span></td></tr>
+  <tr class="highlight-row"><td class="bold">FWH</td><td>Simcoe (12.9%)</td><td class="right">0.75 oz</td><td><span class="blank-sm"></span></td><td>Smooth bittering foundation</td><td class="center"><span class="checkbox"></span></td></tr>
+  <tr class="highlight-row"><td class="bold">FWH</td><td>Warrior (14.2%)</td><td class="right">0.25 oz</td><td><span class="blank-sm"></span></td><td>Clean alpha backbone</td><td class="center"><span class="checkbox"></span></td></tr>
+  <tr><td>60 min</td><td>Amarillo (7.1%)</td><td class="right">0.50 oz</td><td><span class="blank-sm"></span></td><td>Bittering layer</td><td class="center"><span class="checkbox"></span></td></tr>
   <tr><td>40 min</td><td>Amarillo + Simcoe + Warrior</td><td class="right">1.25 oz</td><td></td><td>0.50 + 0.50 + 0.25 &mdash; mid-boil bridge</td><td class="center"><span class="checkbox"></span></td></tr>
   <tr><td>20 min</td><td>Amarillo + Simcoe + Warrior</td><td class="right">1.75 oz</td><td></td><td>0.75 + 0.75 + 0.25 &mdash; late flavor/aroma</td><td class="center"><span class="checkbox"></span></td></tr>
-  <tr class="highlight-row"><td class="bold">10 min</td><td colspan="2" class="bold">Whirlfloc (1 tab) + Yeast Nutrient</td><td></td><td>Clarity &amp; ferm health</td><td class="center"><span class="checkbox"></span></td></tr>
-  <tr class="highlight-row"><td class="bold">10 min</td><td colspan="2" class="bold">Corn Sugar &mdash; 1.25 lb</td><td></td><td>Dissolve in hot wort first</td><td class="center"><span class="checkbox"></span></td></tr>
+  <tr class="highlight-row"><td class="bold">10 min</td><td colspan="2" class="bold">Corn Sugar &mdash; 1.25 lb (0.57 kg)</td><td></td><td>Dissolve in hot wort first</td><td class="center"><span class="checkbox"></span></td></tr>
   <tr><td class="bold">WP 180&deg;F</td><td>Amarillo + Simcoe</td><td class="right">3.00 oz</td><td></td><td>1.50 + 1.50 &mdash; 20 min stand</td><td class="center"><span class="checkbox"></span></td></tr>
   <tr><td class="bold">Dry Hop</td><td>Amarillo + Simcoe</td><td class="right">2.00 oz</td><td></td><td>1.0 + 1.0 &mdash; near terminal, 48&ndash;72h</td><td class="center"><span class="checkbox"></span></td></tr>
   <tr style="background:#e8e8e8;"><td class="bold" colspan="2">TOTAL</td><td class="right bold" colspan="2">10.0 oz boil/WP + 2.0 oz dry = 12.0 oz</td><td colspan="2"></td></tr>
@@ -288,6 +287,17 @@
   <div><strong>Gravity:</strong> <span class="blank-sm"></span></div>
   <div><strong>Time to boil:</strong> <span class="blank-sm"></span></div>
 </div>
+<p class="small" style="margin-bottom:4px;"><strong>Pre-boil targets:</strong> Volume 7.2&ndash;7.6 gal (27.3&ndash;28.8 L), Gravity 1.058&ndash;1.062 (temp-corrected).</p>
+
+<h3>Volume and Gravity Control</h3>
+<table>
+  <tr><th>Checkpoint</th><th>Target</th><th class="actual-col">Actual</th><th>Notes</th></tr>
+  <tr><td class="bold">Pre-boil Volume</td><td>7.2&ndash;7.6 gal (27.3&ndash;28.8 L)</td><td></td><td>Adjust with top-up water before boil if needed</td></tr>
+  <tr><td class="bold">Pre-boil Gravity</td><td>1.058&ndash;1.062</td><td></td><td>Temp-corrected sample</td></tr>
+  <tr><td class="bold">Post-boil Volume (pre-chill)</td><td>5.9&ndash;6.3 gal (22.3&ndash;23.8 L)</td><td></td><td>Record at flameout</td></tr>
+  <tr><td class="bold">Post-boil Gravity (pre-chill)</td><td>1.078&ndash;1.084</td><td></td><td>Temp-corrected sample</td></tr>
+  <tr><td class="bold">Actual Boil-off Rate</td><td>~1.2&ndash;1.6 gal/hr</td><td></td><td>(Pre-boil vol - Post-boil vol) / 1.5 hr</td></tr>
+</table>
 
 <h2>3. Boil (90 Minutes)</h2>
 <table>
@@ -319,7 +329,7 @@
   </tr>
   <tr class="highlight-row">
     <td><span class="blank-sm"></span></td><td class="bold">10</td>
-    <td class="bold">Whirlfloc + Nutrient + 1.25 lb Corn Sugar</td>
+    <td class="bold">1.25 lb (0.57 kg) Corn Sugar</td>
     <td class="center"><span class="checkbox"></span></td><td class="small critical">Dissolve sugar in hot wort first</td>
   </tr>
   <tr class="highlight-row">
@@ -346,6 +356,11 @@
   <div><strong>Wort Temp:</strong> Tgt 64&deg;F &nbsp; Act: <span class="blank-sm"></span></div>
   <div><strong>OG:</strong> Tgt 1.088&ndash;1.092 &nbsp; Act: <span class="blank-sm"></span></div>
   <div><strong>Into fermenter:</strong> <span class="blank-sm"></span> gal</div>
+</div>
+<div class="three-col" style="font-size:8.5pt; margin-bottom:4px;">
+  <div><strong>Post-boil vol (pre-chill):</strong> <span class="blank-sm"></span> gal</div>
+  <div><strong>Post-boil SG (pre-chill):</strong> <span class="blank-sm"></span></div>
+  <div><strong>Boil-off rate:</strong> <span class="blank-sm"></span> gal/hr</div>
 </div>
 
 <h2>5. Pitch</h2>
@@ -443,6 +458,13 @@
   </tr>
 </table>
 
+<h3>Terminal and VDK Record</h3>
+<table>
+  <tr><th>Checkpoint</th><th>Target</th><th class="actual-col">Actual</th><th>Date/Time</th><th>Notes</th></tr>
+  <tr><td class="bold">Terminal FG Confirmed</td><td>1.014&ndash;1.018, stable 48 hr</td><td></td><td></td><td>Required before crash/package</td></tr>
+  <tr class="highlight-row"><td class="bold">Forced VDK Result</td><td class="bold">PASS required</td><td>Pass / Fail</td><td></td><td>Initials: <span class="blank-sm"></span></td></tr>
+</table>
+
 <div class="two-col">
 <div>
 <h3>Dry Hop Tracking</h3>
@@ -472,6 +494,11 @@
   <div><strong>Pkg date:</strong> <span class="blank-lg"></span></div>
   <div><strong>FG at pkg:</strong> <span class="blank-sm"></span></div>
   <div><strong>PSI set:</strong> <span class="blank-sm"></span></div>
+</div>
+<div class="three-col" style="font-size:8.5pt; margin-top:3px;">
+  <div><strong>Beer temp at carb:</strong> <span class="blank-sm"></span> &deg;F</div>
+  <div><strong>VDK pass date:</strong> <span class="blank-md"></span></div>
+  <div><strong>Drop-off / ship date:</strong> <span class="blank-md"></span></div>
 </div>
 
 <h2>Conditioning Timeline</h2>
@@ -518,7 +545,8 @@
   <tr><td>ABV</td><td>8.8&ndash;9.5%</td><td></td><td></td><td></td></tr>
   <tr><td>Apparent Attenuation</td><td>80&ndash;84%</td><td></td><td></td><td></td></tr>
   <tr><td>Pre-Boil Volume / Gravity</td><td><span class="blank-sm"></span> / <span class="blank-sm"></span></td><td></td><td></td><td></td></tr>
-  <tr><td>Post-Boil Volume</td><td><span class="blank-sm"></span></td><td></td><td></td><td></td></tr>
+  <tr><td>Post-Boil Volume / Gravity</td><td><span class="blank-sm"></span> / <span class="blank-sm"></span></td><td></td><td></td><td></td></tr>
+  <tr><td>Boil-off Rate</td><td><span class="blank-sm"></span> gal/hr</td><td></td><td></td><td></td></tr>
   <tr><td>Into Fermenter</td><td>5.5 gal</td><td></td><td></td><td></td></tr>
   <tr><td>Mash pH</td><td>5.30</td><td></td><td></td><td></td></tr>
   <tr><td>Efficiency</td><td>72%</td><td></td><td></td><td></td></tr>

@@ -43,6 +43,12 @@ Target ions:
 - Cl ~50 ppm
 - HCO3 ~0 ppm
 
+## Fermentables (Recipe Lock)
+- [ ] Pale Malt: 15.0 lb (6.80 kg)
+- [ ] Thomas Fawcett Amber Malt: 1.0 lb (0.45 kg)
+- [ ] Corn Sugar (late boil): 1.25 lb (0.57 kg)
+- [ ] Rice Hulls (optional): 0.5 lb (0.23 kg)
+
 ## Mash + Boil Log
 ### Mash
 - Target rest: 150 F (65.6 C) for 75 min

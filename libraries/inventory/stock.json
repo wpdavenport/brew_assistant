@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown.",
+  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity.",
   "items": [
     {
       "id": "pale_malt_us",
@@ -372,7 +372,7 @@
       "name": "Calcium Sulphate (Gypsum)",
       "category": "water_agent",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 322.36,
       "tags": ["water"]
     },
     {
@@ -380,7 +380,7 @@
       "name": "Magnesium Sulphate (Epsom Salt)",
       "category": "water_agent",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 113.398092,
       "tags": ["water"]
     },
     {
@@ -388,8 +388,16 @@
       "name": "Calcium Chloride",
       "category": "water_agent",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 130.974797,
       "tags": ["water"]
+    },
+    {
+      "id": "baking_soda",
+      "name": "Sodium Bicarbonate (Baking Soda)",
+      "category": "water_agent",
+      "unit": "g",
+      "on_hand": 1000000.0,
+      "tags": ["water", "alkalinity", "ph_adjustment", "unlimited_supply"]
     },
     {
       "id": "phosphoric_85",

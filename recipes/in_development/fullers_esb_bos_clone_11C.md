@@ -34,19 +34,18 @@ Target profile (ppm):
 - Ca 110
 - Mg 5
 - Na 15
-- Cl 70
+- Cl 80
 - SO4 150
 - HCO3 40
 
 Starting liquor guideline for ~29 L (7.66 gal) total water:
 - Gypsum: 8.0 g (0.28 oz)
-- Calcium chloride: 4.0 g (0.14 oz)
+- Calcium chloride: 4.5 g (0.16 oz)
 - Epsom salt: 1.0 g (0.04 oz)
 - Acid adjust to mash pH 5.30
 
 ## Mash Program (G40 full-volume)
-- 148.1F (64.5C) for 35 min
-- 152.6F (67.0C) for 30 min
+- 151.0F (66.1C) for 60 min
 - 168.0F (75.6C) mash out for 10 min
 
 ## Boil
@@ -55,9 +54,10 @@ Starting liquor guideline for ~29 L (7.66 gal) total water:
 - Add Whirlfloc at 10 min
 
 ## Fermentation Schedule (GF30 + glycol)
-- Day 0-2: 64.4F (18.0C)
-- Day 3-5: ramp to 67.1F (19.5C)
-- Day 6-8: hold 68.0F (20.0C) for diacetyl cleanup
+- Day 0-3: 64.4F (18.0C)
+- Day 4-6: ramp to 67.1F (19.5C) and gently rouse yeast once on Day 4
+- Day 7-9: hold 68.0F (20.0C) for diacetyl cleanup
+- Day 8-9: forced diacetyl test before crash decision
 - Crash to 35-37F (2-3C) for 48-72 h after stable FG and clean sensory check
 
 ## Packaging

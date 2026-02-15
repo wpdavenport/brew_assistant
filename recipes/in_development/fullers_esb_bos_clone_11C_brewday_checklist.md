@@ -30,10 +30,10 @@ Use with `recipes/in_development/fullers_esb_bos_clone_11C.md`
 
 ## Water and salts (RO build)
 - Total liquor: ~29 L (7.66 gal)
-- Target profile (ppm): Ca 110, Mg 5, Na 15, Cl 70, SO4 150, HCO3 40
+- Target profile (ppm): Ca 110, Mg 5, Na 15, Cl 80, SO4 150, HCO3 40
 - Starting guideline:
   - Gypsum 8.0 g (0.28 oz)
-  - Calcium chloride 4.0 g (0.14 oz)
+  - Calcium chloride 4.5 g (0.16 oz)
   - Epsom 1.0 g (0.04 oz)
 
 ## Timeline (brew day)
@@ -50,16 +50,13 @@ Use with `recipes/in_development/fullers_esb_bos_clone_11C.md`
 - Dough in and verify mash temp.
 
 ### T-85 min
-- Start mash timer: 148.1F (64.5C) for 35 min.
+- Start mash timer: 151.0F (66.1C) for 60 min.
 - Recirculation on.
 
-### T-50 min
-- Raise to 152.6F (67.0C), hold 30 min.
-
-### T-20 min
+### T-25 min
 - Raise to mash out: 168.0F (75.6C), hold 10 min.
 
-### T-10 min
+### T-15 min
 - Lift basket, drain thoroughly.
 - Start heating to boil.
 
@@ -77,16 +74,25 @@ Use with `recipes/in_development/fullers_esb_bos_clone_11C.md`
 - Pitch yeast.
 
 ## Fermentation schedule (GF30 + glycol)
-- Day 0-2: 64.4F (18.0C)
-- Day 3-5: ramp to 67.1F (19.5C)
-- Day 6-8: hold 68.0F (20.0C) for cleanup
+- Day 0-3: 64.4F (18.0C)
+- Day 4-6: ramp to 67.1F (19.5C) and gently rouse yeast once on Day 4
+- Day 7-9: hold 68.0F (20.0C) for cleanup
+- Day 8-9: forced diacetyl test before crash decision
 - Crash: 35-37F (2-3C) for 48-72 hr after stable FG and clean sensory
 
 ## Critical QC checkpoints
 - Mash pH at 10-15 min: 5.30 room-temp.
-- Pre-boil gravity on target (adjust boil length if needed).
+- Pre-boil volume target: 6.3-6.8 gal (23.8-25.7 L).
+- Pre-boil gravity target: 1.043-1.046 (temp-corrected; adjust with top-up water or boil length as needed).
+- Post-boil volume (pre-chill) target: 5.2-5.5 gal (19.7-20.8 L).
+- Post-boil gravity (pre-chill) target: 1.055-1.058 (temp-corrected).
+- Into-fermenter volume and wort temp at pitch recorded.
 - Post-boil OG near 1.057.
-- Before crash: no butter/butterscotch (diacetyl check).
+- Actual boil-off rate recorded for future water planning.
+- Fermentation SG checkpoints logged (Day 3, Day 7, terminal FG with stable 48 hr).
+- Before crash: pass forced diacetyl test and confirm no butter/butterscotch.
+- Forced VDK result logged with date and initials.
+- Packaging log complete: package date, FG at package, CO2 setting (PSI + temp), competition date.
 - Packaging: closed transfer only.
 
 ## Traps to avoid
