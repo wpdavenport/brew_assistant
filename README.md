@@ -22,6 +22,19 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 
 1.  **Clone this Repo**: This is your brewing brain.
 2.  Can be used with any AI (Gemini, Claude, or ChatGPT). Put this phrase into ta chat "Beer RAG, read system_prompt.md and become my professional assistant compettion brewer!"
+for Genimi add this:
+Load and confirm these files before answering:
+- profiles/equipment.yaml
+- profiles/water_profiles.md
+- libraries/yeast_library.md
+- libraries/inventory/stock.json 
+3. If I do not have the stock for a recipe, create a shopping list
+
+Return:
+1) CONTEXT_READY
+2) I'm am ready to be your professional brewing assistant
+Then answer my brewing question.
+
 3.  **Fill in your Profiles**:
     *   Edit `profiles/equipment.yaml` with your system stats.
     *   Update `profiles/water_profiles.md` with your source water.
