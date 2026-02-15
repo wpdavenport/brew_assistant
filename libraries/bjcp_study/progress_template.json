@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "mode_active": false,
+  "started_utc": "",
+  "last_updated_utc": "",
+  "sessions": [],
+  "stats": {
+    "questions_answered": 0,
+    "correct": 0,
+    "accuracy_pct": 0.0,
+    "by_topic": {
+      "exam_structure": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+      "ingredients": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+      "process": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+      "off_flavors": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+      "styles_core": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+      "styles_comparison": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+      "judging_process": {"answered": 0, "correct": 0, "accuracy_pct": 0.0}
+    }
+  },
+  "readiness": {
+    "status": "not_ready",
+    "weak_topics": [],
+    "recommended_next": "Start with: bjcp teach exam_structure"
+  }
+}

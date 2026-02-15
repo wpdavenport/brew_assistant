@@ -27,6 +27,13 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - libraries/inventory/style_option_templates.json
 - tools/inventory_cli.py
 
+## BJCP study mode (when explicitly enabled)
+- libraries/bjcp_study/_index.md
+- libraries/bjcp_study/curriculum.md
+- libraries/bjcp_study/rubrics.md
+- libraries/bjcp_study/question_bank.json
+- libraries/bjcp_study/progress_template.json
+
 ## Output locations (write new artifacts here)
 - New recipe drafts: recipes/
 - Locked/stable recipes: recipes/ (use filename/tag convention)
@@ -39,3 +46,4 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - Prefer house strains and house processes over generic advice.
 - Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
 - Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.
+- BJCP mode is opt-in only and must be explicitly entered/exited by user command.

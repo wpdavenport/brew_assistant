@@ -45,6 +45,21 @@ Codex must treat the following as retrievable brewing memory and should consult 
 13) tools/inventory_cli.py
 - Command workflow for stock updates ("I brewed X"), stock-aware style options, and Garbage Beer concepts
 
+14) libraries/bjcp_study/_index.md
+- BJCP study mode retrieval map (teaching + testing mode assets)
+
+15) libraries/bjcp_study/curriculum.md
+- Topic sequence for BJCP online exam preparation
+
+16) libraries/bjcp_study/rubrics.md
+- Scoring bands, readiness criteria, and remediation rules
+
+17) libraries/bjcp_study/question_bank.json
+- Tagged quiz and mock questions for BJCP study mode
+
+18) libraries/bjcp_study/progress_template.json
+- Suggested structure for tracking study performance and weak tags
+
 ## Output locations (write new artifacts here)
 - New recipe drafts: recipes/
 - Locked/stable recipes: recipes/ (use filename/tag convention)
@@ -57,6 +72,19 @@ Codex must treat the following as retrievable brewing memory and should consult 
 - Prefer house strains and house processes over generic advice.
 - Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
 - Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.
+
+## BJCP study mode contract (opt-in)
+- Default state is brewing assistant mode.
+- Enter study mode only on explicit command: `enter bjcp mode`.
+- Exit study mode only on explicit command: `exit bjcp mode`.
+- While study mode is active, prioritize teaching/testing for the BJCP online entrance exam.
+- In study mode, use these commands when requested:
+  - `bjcp teach <topic>`
+  - `bjcp quiz <topic> <count>`
+  - `bjcp mock <count>`
+  - `bjcp review missed`
+  - `bjcp status`
+- When study mode is active, avoid unsolicited recipe/process generation unless the user explicitly asks to switch context.
 
 ## Books (optional reference titles)
 Reference titles covering the four core ingredients plus style-specific brewing.
