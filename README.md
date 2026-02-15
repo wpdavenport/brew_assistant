@@ -95,6 +95,29 @@ Useful commands:
 - `python3 tools/inventory_cli.py options --count 5`
 - `python3 tools/inventory_cli.py garbage --count 3`
 
+## 🎓 BJCP Study Mode (Opt-In)
+
+This mode is for learning and testing BJCP knowledge for the online entrance exam.
+It is not enabled by default.
+
+### Enter / Exit
+- Enter: `enter bjcp mode`
+- Exit: `exit bjcp mode`
+
+### Commands in Study Mode
+- `bjcp teach <topic>`
+- `bjcp quiz <topic> <count>`
+- `bjcp mock <count>`
+- `bjcp review missed`
+- `bjcp status`
+
+### Study Assets
+- `libraries/bjcp_study/_index.md`
+- `libraries/bjcp_study/curriculum.md`
+- `libraries/bjcp_study/rubrics.md`
+- `libraries/bjcp_study/question_bank.json`
+- `libraries/bjcp_study/progress_template.json`
+
 ## 🧠 The "Hard Rules"
 
 To keep the AI honest, we enforce these rules:

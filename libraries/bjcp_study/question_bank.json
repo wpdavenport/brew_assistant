@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "notes": "Starter bank for BJCP study mode. Extend over time.",
+  "questions": [
+    {
+      "id": "bjcp_q_001",
+      "topic": "off_flavors",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Which off-flavor is most commonly described as butter or butterscotch?",
+      "choices": ["DMS", "Diacetyl", "Acetaldehyde", "Oxidation"],
+      "answer": "Diacetyl",
+      "explanation": "Diacetyl is classically perceived as butter/butterscotch and is tied to fermentation cleanup issues."
+    },
+    {
+      "id": "bjcp_q_002",
+      "topic": "off_flavors",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Green apple aroma in beer most often points to:",
+      "choices": ["Acetaldehyde", "Diacetyl", "Phenolic chlorophenols", "Autolysis"],
+      "answer": "Acetaldehyde",
+      "explanation": "Acetaldehyde is associated with green apple and may indicate immature beer or stressed fermentation."
+    },
+    {
+      "id": "bjcp_q_003",
+      "topic": "ingredients",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "In brewing water, sulfate generally accentuates:",
+      "choices": ["Malt roundness", "Perceived bitterness and dryness", "Sweetness", "Ester intensity"],
+      "answer": "Perceived bitterness and dryness",
+      "explanation": "Sulfate sharpens hop bitterness and can make finish seem drier."
+    },
+    {
+      "id": "bjcp_q_004",
+      "topic": "ingredients",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "In brewing water, chloride generally supports:",
+      "choices": ["Malt fullness", "Harsh bitterness", "Phenolic character", "DMS formation"],
+      "answer": "Malt fullness",
+      "explanation": "Chloride tends to round palate texture and support malt impression."
+    },
+    {
+      "id": "bjcp_q_005",
+      "topic": "process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A long, vigorous boil is a key control for reducing:",
+      "choices": ["Diacetyl", "DMS", "Acetaldehyde", "Fusel alcohols"],
+      "answer": "DMS",
+      "explanation": "DMS precursor volatilization relies on adequate boil vigor and steam-off."
+    },
+    {
+      "id": "bjcp_q_006",
+      "topic": "process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which action most directly reduces oxidation risk at packaging?",
+      "choices": [
+        "Longer whirlpool",
+        "Warm fermentation",
+        "Closed transfer to purged package",
+        "Higher mash pH"
+      ],
+      "answer": "Closed transfer to purged package",
+      "explanation": "Minimizing oxygen pickup after fermentation is the strongest packaging stability control."
+    },
+    {
+      "id": "bjcp_q_007",
+      "topic": "styles_comparison",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "If a beer has modern intense tropical dry-hop character, it most risks drifting out of classic 11C Strong Bitter toward:",
+      "choices": ["British Brown Ale", "American IPA-like expression", "Schwarzbier", "Vienna Lager"],
+      "answer": "American IPA-like expression",
+      "explanation": "Classic 11C expects English balance, not heavy modern dry-hop saturation."
+    },
+    {
+      "id": "bjcp_q_008",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Best judging practice is to evaluate beer in what order first?",
+      "choices": ["Flavor first, then aroma", "Aroma, appearance, flavor, mouthfeel, overall", "Mouthfeel only", "Overall first"],
+      "answer": "Aroma, appearance, flavor, mouthfeel, overall",
+      "explanation": "That sequence aligns with standard BJCP score sheet flow."
+    },
+    {
+      "id": "bjcp_q_009",
+      "topic": "off_flavors",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A puckering, drying finish is most associated with:",
+      "choices": ["Astringency", "Ester overproduction", "Sulfur compounds", "Low carbonation"],
+      "answer": "Astringency",
+      "explanation": "Astringency is a tactile drying/puckering sensation often tied to tannins or process imbalance."
+    },
+    {
+      "id": "bjcp_q_010",
+      "topic": "exam_structure",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "What is the purpose of the BJCP online entrance exam?",
+      "choices": [
+        "Award Master rank directly",
+        "Qualify candidates for further BJCP judging progression",
+        "Replace all practical judging",
+        "Certify breweries"
+      ],
+      "answer": "Qualify candidates for further BJCP judging progression",
+      "explanation": "It is a gateway exam used in BJCP judge development, not a final rank by itself."
+    },
+    {
+      "id": "bjcp_q_011",
+      "topic": "styles_core",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "For style accuracy, the strongest priority is:",
+      "choices": [
+        "Maximum recipe novelty",
+        "Matching style-defining sensory balance",
+        "Highest ABV possible",
+        "Most expensive ingredients"
+      ],
+      "answer": "Matching style-defining sensory balance",
+      "explanation": "Judges reward beers that clearly express the declared style."
+    },
+    {
+      "id": "bjcp_q_012",
+      "topic": "off_flavors",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "Medicinal/plastic notes are often linked to:",
+      "choices": ["Chlorophenols", "DMS", "Diacetyl", "Ethyl acetate only"],
+      "answer": "Chlorophenols",
+      "explanation": "Chlorophenols can present as medicinal, bandage-like, or plastic-like faults."
+    }
+  ]
+}
