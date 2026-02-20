@@ -78,7 +78,7 @@
       </MASH_STEPS>
     </MASH>
 
-    <NOTES>Template BeerXML recipe for Grainfather import/export workflows.</NOTES>
+    <NOTES>Template BeerXML recipe for Grainfather import/export workflows. Track yeast generation per batch (G0 fresh pack, G1+ repitch) and record source batch when repitched.</NOTES>
     <TASTE_NOTES></TASTE_NOTES>
     <TASTE_RATING>0.0</TASTE_RATING>
     <OG>1.050</OG>

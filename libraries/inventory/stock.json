@@ -111,7 +111,7 @@
       "name": "Corn Sugar (Dextrose)",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 2267.96185,
       "tags": ["sugar", "drying"]
     },
     {
@@ -320,6 +320,16 @@
       "tags": ["english", "high_attenuation"]
     },
     {
+      "id": "wlp007_gen1_slurry",
+      "name": "WLP007 Harvested Slurry (Gen 1)",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 1.0,
+      "generation": 1,
+      "storage": "fridge",
+      "tags": ["english", "high_attenuation", "repitch", "slurry", "generation_1"]
+    },
+    {
       "id": "wlp540_pack",
       "name": "WLP540 Abbey IV",
       "category": "yeast",
@@ -342,6 +352,22 @@
       "unit": "g",
       "on_hand": 170.097139,
       "tags": ["nutrient"]
+    },
+    {
+      "id": "zinc_buddy",
+      "name": "Zinc Buddy",
+      "category": "fermentation_aid",
+      "unit": "g",
+      "on_hand": 85.048569,
+      "tags": ["nutrient", "zinc", "yeast_health"]
+    },
+    {
+      "id": "propper_starter_can",
+      "name": "Omega Propper Starter",
+      "category": "fermentation_aid",
+      "unit": "count",
+      "on_hand": 2.0,
+      "tags": ["starter_wort", "yeast_starter"]
     },
     {
       "id": "biofine_clear",

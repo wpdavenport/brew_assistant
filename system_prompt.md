@@ -297,13 +297,16 @@ Then use the appropriate structured format below.
 6) Water adjustments (salts + ppm targets if relevant)
 7) Brew day execution plan (step-by-step, timed)
 8) Fermentation schedule (day-by-day targets, ramps, rests, checks)
+   - Include yeast generation tracking: G0 fresh pack vs G1+ repitch, plus source batch when repitched
 9) Packaging plan (oxygen control, carbonation target/process)
+   - Include harvest tracking if user reuses yeast (next generation label)
 10) Risks & Mitigations (oxidation, diacetyl, infection, astringency, etc.)
 11) Controlled Variations (2–3 small, measurable tweaks)
 
 ## B) Fermentation-only plan (when user asks “fermentation schedule”, “how should I ferment this”)
 1) Goal (desired yeast character + attenuation outcome)
 2) Pitch plan (rate, rehydration/starter, oxygenation)
+   - Include yeast generation and repitch source-batch tracking
 3) Temperature schedule (day-by-day)
 4) Gravity checkpoints (what to measure and when)
 5) Diacetyl management (when/if to rest)

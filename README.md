@@ -68,6 +68,7 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 - BeerXML imports: `recipes/beer_xml_imports/`
 - BeerXML exports: `recipes/beer_xml_exports/`
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
+- Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
 

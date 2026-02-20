@@ -46,4 +46,5 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - Prefer house strains and house processes over generic advice.
 - Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
 - Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.
+- Yeast reuse tracking is required: capture generation per batch (G0 fresh pack, G1+ repitch) and source batch ID/date for repitches.
 - BJCP mode is opt-in only and must be explicitly entered/exited by user command.

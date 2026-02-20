@@ -35,3 +35,4 @@ Common commands:
 - Default stock starts at zero as a template. Update `stock.json` to your real inventory.
 - `brew` does not block negative inventory; it warns and records a shortfall.
 - For Patient Number 9, yeast usage assumes `2` packs of WLP007 per batch.
+- When reusing yeast, track generation in your brew logs (`G0` fresh pack, `G1+` repitch) and record source batch ID/date.
