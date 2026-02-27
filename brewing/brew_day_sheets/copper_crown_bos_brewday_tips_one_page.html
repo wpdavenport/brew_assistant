@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Copper Crown ESB - BOS Brew Day Tips (One Page)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #111;
+    padding: 0.42in;
+    font-size: 9pt;
+    line-height: 1.24;
+    background: #fff;
+  }
+  h1 {
+    font-size: 15pt;
+    border-bottom: 2px solid #111;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+  }
+  h2 {
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid #666;
+    margin-top: 7px;
+    margin-bottom: 3px;
+    padding-bottom: 1px;
+  }
+  .subtitle { font-size: 8pt; color: #444; margin-bottom: 4px; }
+  .targets {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 5px;
+    font-size: 8pt;
+  }
+  .targets th, .targets td {
+    border: 1px solid #aaa;
+    padding: 2px 4px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .targets th {
+    background: #ececec;
+    font-size: 7.2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 12px;
+  }
+  .card { border: 1px solid #bbb; padding: 4px 5px; }
+  .line { margin-bottom: 2px; font-size: 8pt; }
+  .tag { font-weight: 700; }
+  .ok { color: #0b6; font-weight: 700; }
+  .risk { color: #b00; font-weight: 700; }
+  .footer {
+    margin-top: 7px;
+    border: 1px solid #999;
+    padding: 4px 6px;
+    font-size: 7.8pt;
+  }
+  .check { display: inline-block; width: 8px; height: 8px; border: 1.2px solid #333; margin-right: 4px; }
+  @page { size: letter; margin: 0.33in; }
+  @media print {
+    body { padding: 0; font-size: 8.3pt; }
+    h1 { font-size: 13.5pt; }
+    h2 { font-size: 8.8pt; margin-top: 6px; }
+    .line, .targets { font-size: 7.5pt; }
+    .targets th { font-size: 6.8pt; }
+    .footer { font-size: 7.2pt; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Copper Crown ESB - BOS Day-of-Brew Tips</h1>
+<div class="subtitle">Use with copper_crown_brew_day_sheet.html. Goal: classic 11C balance, clean fermentation, no oxygen faults.</div>
+
+<table class="targets">
+  <tr>
+    <th>Critical Targets</th>
+    <th>Numbers</th>
+    <th>Fast Decision Rule</th>
+  </tr>
+  <tr>
+    <td>Pre-boil</td>
+    <td>7.2-7.4 gal (27.3-28.0 L), 1.042-1.044</td>
+    <td>If low gravity: extend boil. If high gravity: top up hot RO and re-check.</td>
+  </tr>
+  <tr>
+    <td>Post-boil (pre-chill)</td>
+    <td>5.4-5.6 gal (20.4-21.2 L), 1.056-1.058</td>
+    <td>Do not chase volume and gravity blindly; protect both together.</td>
+  </tr>
+  <tr>
+    <td>Into fermenter</td>
+    <td>~5.0 gal (19.0 L), OG 1.057, pitch 64.4 F (18.0 C)</td>
+    <td>Single oxygen dose at pitch only (60-90 sec).</td>
+  </tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h2>Mash In</h2>
+    <div class="line"><span class="tag ok">Do:</span> Dough in slowly and stir aggressively for the first 2-3 min to kill dry pockets.</div>
+    <div class="line"><span class="tag ok">Do:</span> Keep recirculation steady, not blasting the bed.</div>
+    <div class="line"><span class="tag ok">Do:</span> pH check at 10-15 min on a room-temp sample. Target 5.30.</div>
+    <div class="line"><span class="tag risk">Trap:</span> Thin mash + hot pH reading can trick you into over-correcting.</div>
+  </div>
+
+  <div class="card">
+    <h2>Sparging / Runoff</h2>
+    <div class="line"><span class="tag">System note:</span> This recipe is full-volume, no-sparge on G40.</div>
+    <div class="line"><span class="tag ok">Do:</span> Drain basket 8-12 min. Light press only if needed for flow, no hard squeezing.</div>
+    <div class="line"><span class="tag ok">Do:</span> Keep 0.3-0.5 gal (1.1-1.9 L) hot RO ready for controlled top-up.</div>
+    <div class="line"><span class="tag risk">Trap:</span> Over-extracting the bed can sharpen bitterness/harshness.</div>
+  </div>
+
+  <div class="card">
+    <h2>Rests</h2>
+    <div class="line"><span class="tag">Main rest:</span> 151.0 F (66.1 C) for 60 min.</div>
+    <div class="line"><span class="tag">Mash out:</span> 168.0 F (75.6 C) for 10 min.</div>
+    <div class="line"><span class="tag ok">Do:</span> Hold stable temp more tightly than +/-1 F if possible.</div>
+    <div class="line"><span class="tag risk">Trap:</span> Long drift above target pushes sweeter finish for this strain.</div>
+  </div>
+
+  <div class="card">
+    <h2>Boil</h2>
+    <div class="line"><span class="tag ok">Do:</span> Vigorous, clean 60 min boil (not violent). Track boil-off rate.</div>
+    <div class="line"><span class="tag ok">Do:</span> At 10 min, dissolve invert sugar in hot wort before full return.</div>
+    <div class="line"><span class="tag ok">Do:</span> Keep hop timing exact; this style is about bitter precision, not hop saturation.</div>
+    <div class="line"><span class="tag risk">Trap:</span> Late-addition drift or extra whirlpool time can unbalance style expression.</div>
+  </div>
+
+  <div class="card">
+    <h2>Whirlpool / Flameout</h2>
+    <div class="line"><span class="tag">At 0:</span> Flameout, add Northdown, steep 10 min.</div>
+    <div class="line"><span class="tag ok">Do:</span> Gentle movement only; avoid whipping in air while hot.</div>
+    <div class="line"><span class="tag ok">Do:</span> Respect the 10 min window. Longer can add rough edge.</div>
+    <div class="line"><span class="tag risk">Trap:</span> Extended hot-side stand can blur bitterness quality.</div>
+  </div>
+
+  <div class="card">
+    <h2>Transfer and Pitch</h2>
+    <div class="line"><span class="tag ok">Do:</span> Chill fast to 64.4 F (18.0 C), then transfer clear wort only.</div>
+    <div class="line"><span class="tag ok">Do:</span> Oxygenate once (60-90 sec), pitch decanted starter slurry, then stop oxygen.</div>
+    <div class="line"><span class="tag ok">Do:</span> Record yeast generation (G0/G1+) and source batch if repitched.</div>
+    <div class="line"><span class="tag risk">Trap:</span> Any post-pitch oxygen pickup will dull this beer quickly.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="line"><span class="tag">Fermentation gates:</span> D4 ramp + gentle rouse, forced VDK pass before crash, FG stable 48 hr before package.</div>
+  <div class="line"><span class="check"></span>No crash or package until VDK is clean and terminal gravity is stable.</div>
+  <div class="line"><span class="check"></span>Closed transfer and low-oxygen packaging are non-negotiable for BOS quality.</div>
+</div>
+
+</body>
+</html>

@@ -1,4 +1,97 @@
 {
   "schema_version": 1,
-  "events": []
+  "events": [
+    {
+      "timestamp_utc": "2026-02-27T12:29:04.395223+00:00",
+      "type": "brew",
+      "recipe_id": "patient_number_9",
+      "recipe_name": "Patient Number 9 (90 Minute Clone - Competition Lock)",
+      "style_key": "clone_34A_dfh90",
+      "batches": 1.0,
+      "include_optional": false,
+      "deltas": [
+        {
+          "item_id": "pale_malt_us",
+          "name": "Avangard 2-row",
+          "delta": -7030.681735,
+          "unit": "g"
+        },
+        {
+          "item_id": "amber_malt_tf",
+          "name": "Thomas Fawcett Amber Malt",
+          "delta": -453.59237,
+          "unit": "g"
+        },
+        {
+          "item_id": "corn_sugar_dextrose",
+          "name": "Corn Sugar (Dextrose)",
+          "delta": -566.9904625,
+          "unit": "g"
+        },
+        {
+          "item_id": "simcoe",
+          "name": "Simcoe",
+          "delta": -127.5728540625,
+          "unit": "g"
+        },
+        {
+          "item_id": "amarillo",
+          "name": "Amarillo",
+          "delta": -120.48547328125,
+          "unit": "g"
+        },
+        {
+          "item_id": "warrior",
+          "name": "Warrior",
+          "delta": -28.349523125,
+          "unit": "g"
+        },
+        {
+          "item_id": "wlp007_gen1_slurry",
+          "name": "WLP007 Harvested Slurry (Gen 1)",
+          "delta": -1.0,
+          "unit": "count"
+        },
+        {
+          "item_id": "gypsum",
+          "name": "Calcium Sulphate (Gypsum)",
+          "delta": -13.89126633125,
+          "unit": "g"
+        },
+        {
+          "item_id": "epsom_salt",
+          "name": "Magnesium Sulphate (Epsom Salt)",
+          "delta": -3.11844754375,
+          "unit": "g"
+        },
+        {
+          "item_id": "calcium_chloride",
+          "name": "Calcium Chloride",
+          "delta": -3.9689332375,
+          "unit": "g"
+        },
+        {
+          "item_id": "whirlfloc_tablet",
+          "name": "Whirlfloc",
+          "delta": -1.0,
+          "unit": "count"
+        },
+        {
+          "item_id": "zinc_buddy",
+          "name": "Zinc Buddy",
+          "delta": -2.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "timestamp_utc": "2026-02-27T12:31:01.581679+00:00",
+      "type": "restock",
+      "item_id": "phosphoric_85",
+      "item_name": "Phosphoric Acid 85%",
+      "delta": -5.0,
+      "unit": "ml",
+      "note": "PN9 actual usage: 5 ml phosphoric_85; no rice_hulls used"
+    }
+  ]
 }

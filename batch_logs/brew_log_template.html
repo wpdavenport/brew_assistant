@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Brew Log Template - [RECIPE_NAME]</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #222; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.35; }
+    h1 { border-bottom: 2px solid #222; padding-bottom: 6px; margin-bottom: 8px; }
+    h2 { margin-top: 22px; border-left: 5px solid #222; padding-left: 8px; background: #f4f4f4; }
+    .page-banner {
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin: 2px 0 8px 0;
+      padding: 4px 6px;
+      border: 1px solid #cfcfcf;
+      background: #f7f7f7;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; font-size: 0.92rem; }
+    th, td { border: 1px solid #cfcfcf; padding: 6px; text-align: left; vertical-align: top; }
+    th { background: #efefef; }
+    .meta { margin-bottom: 16px; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 10px; }
+    .meta-row-right { justify-content: flex-end; }
+    .meta-item { display: inline-flex; align-items: flex-end; gap: 6px; }
+    .summary-strip { margin-top: 2px; margin-bottom: 8px; }
+    .summary-strip th, .summary-strip td { text-align: center; }
+    .line { display: inline-block; border-bottom: 1px solid #888; min-width: 180px; height: 1em; vertical-align: baseline; }
+    .check { display: inline-block; width: 12px; height: 12px; border: 1px solid #222; margin-right: 6px; }
+    ul { margin: 6px 0 6px 20px; }
+    .page-break { display: none; }
+    .page-3 table { font-size: 0.88rem; }
+    .tight-list div { margin-bottom: 2px; }
+    .packaging-checks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 14px;
+      row-gap: 2px;
+      margin-bottom: 8px;
+    }
+    .packaging-checks div { margin-bottom: 0; }
+    .check-table td, .check-table th { font-size: 1rem; }
+    .ingredient-table td, .ingredient-table th { font-size: 1rem; }
+    .ingredient-table .amt { white-space: nowrap; }
+    .ingredient-group-row td { background: #f2f2f2; font-weight: 700; }
+    .check-cell { width: 48px; text-align: center; }
+    .salt-across td, .salt-across th { text-align: center; font-size: 1rem; }
+    .starter-table td, .starter-table th { font-size: 0.98rem; }
+    .starter-table .value-cell { min-width: 110px; white-space: nowrap; }
+    .starter-table .notes-cell { min-width: 220px; }
+    .kettle-checklist td, .kettle-checklist th { font-size: 0.92rem; }
+    .packaging-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+    .packaging-grid table { margin-top: 0; margin-bottom: 8px; }
+    .packaging-table td, .packaging-table th { font-size: 0.9rem; }
+    .tips-box {
+      border: 1px solid #cfcfcf;
+      background: #f8f8f8;
+      padding: 8px 10px;
+      margin: 8px 0 10px 0;
+      font-size: 0.98rem;
+      line-height: 1.3;
+    }
+    @media print {
+      body { font-size: 11px; padding: 8px; }
+      h2 { page-break-after: avoid; }
+      table { page-break-inside: avoid; }
+      .page-break { display: block; page-break-after: always; break-after: page; }
+      .check-table td, .check-table th { font-size: 10px; }
+      .ingredient-table td, .ingredient-table th { font-size: 10px; }
+      .salt-across td, .salt-across th { font-size: 10px; }
+      .starter-table td, .starter-table th { font-size: 9.5px; }
+      .page-banner { font-size: 10px; margin: 2px 0 6px 0; padding: 3px 5px; }
+      .tips-box { font-size: 9.5px; padding: 6px 8px; margin: 6px 0 8px 0; }
+      .page-1 { font-size: 10px; line-height: 1.2; }
+      .page-1 h2 { margin-top: 12px; }
+      .page-1 table { font-size: 9.5px; margin-bottom: 8px; }
+      .meta { margin-bottom: 12px; }
+      .meta-row { margin-bottom: 8px; gap: 18px; }
+      .meta-item .line { min-width: 170px; }
+      .summary-strip th, .summary-strip td { font-size: 10px; padding: 4px; }
+      .page-1 .check { width: 10px; height: 10px; }
+      .page-2 { font-size: 10px; line-height: 1.2; }
+      .page-2 h2 { margin-top: 12px; }
+      .page-2 p { margin: 3px 0; }
+      .page-2 table { margin-bottom: 7px; }
+      .page-2 .starter-table { margin-top: 4px; margin-bottom: 4px; }
+      .page-2 .starter-table td,
+      .page-2 .starter-table th {
+        font-size: 8.8px;
+        padding: 3px 4px;
+        line-height: 1.15;
+      }
+      .page-2 .kettle-checklist td, .page-2 .kettle-checklist th {
+        font-size: 9px;
+        padding: 3px 4px;
+        line-height: 1.15;
+      }
+      .page-3 { font-size: 10px; line-height: 1.2; }
+      .page-3 h2 { margin-top: 14px; }
+      .page-3 table { font-size: 10px; margin-bottom: 8px; }
+      .page-3 p { margin: 4px 0; }
+      .page-3 .check { width: 10px; height: 10px; }
+      .packaging-grid { gap: 6px; }
+      .packaging-table td, .packaging-table th { font-size: 9px; padding: 3px 4px; line-height: 1.15; }
+      .packaging-checks { column-gap: 10px; row-gap: 1px; margin-bottom: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page page-1">
+  <h1>Brew Log: [RECIPE_NAME] - [BJCP_STYLE]</h1>
+  <div class="page-banner">Page 1: Brew Recipe Setup</div>
+  <table class="summary-strip">
+    <tr><th>OG</th><th>FG</th><th>ABV</th><th>Estimated IBU</th></tr>
+    <tr><td>[OG_TARGET]</td><td>[FG_TARGET]</td><td>[ABV_TARGET]</td><td>[IBU_TARGET]</td></tr>
+  </table>
+  <div class="meta">
+    <div class="meta-row meta-row-right">
+      <span class="meta-item">Date: <span class="line" style="min-width: 260px;"></span></span>
+    </div>
+  </div>
+
+  <h2>Pre-Brew Checklist</h2>
+  <table class="check-table">
+    <tr><th>Item</th><th class="check-cell">Check</th><th>Item</th><th class="check-cell">Check</th></tr>
+    <tr><td>pH meter calibrated (4.01 / 7.00)</td><td class="check-cell"><span class="check"></span></td><td>Thermometer checked</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Hop AA% verified from labels</td><td class="check-cell"><span class="check"></span></td><td>Salt and hop scales verified</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Fermenter and transfer line sanitized</td><td class="check-cell"><span class="check"></span></td><td>CO2 ready for purge / transfer</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Starter cold-crashed and decanted</td><td class="check-cell"><span class="check"></span></td><td>Whirlfloc staged for 10 min</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td></td><td class="check-cell"></td><td>Invert Sugar No.2 staged for 10 min</td><td class="check-cell"><span class="check"></span></td></tr>
+  </table>
+
+  <h2>Ingredient Staging Checklist</h2>
+  <table class="ingredient-table">
+    <tr><th>Ingredient</th><th>Amount</th><th class="check-cell">Staged</th></tr>
+    <tr><td>[Fermentable 1]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Fermentable 2]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Fermentable 3]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Fermentable 4]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Fermentable 5 / Sugar]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+
+    <tr><td>[Hop 1] ([AA%] AA)</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Hop 2] ([AA%] AA)</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Hop 3] ([AA%] AA)</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Hop 4] ([AA%] AA)</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+
+    <tr class="ingredient-group-row"><td>Kettle Additions</td><td></td><td class="check-cell"></td></tr>
+    <tr><td>[Kettle addition 1]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Kettle addition 2]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+
+    <tr class="ingredient-group-row"><td>Water Salts</td><td></td><td class="check-cell"></td></tr>
+    <tr><td>[Salt 1]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Salt 2]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>[Salt 3]</td><td class="amt">[Amount]</td><td class="check-cell"><span class="check"></span></td></tr>
+  </table>
+
+  <h2>G40 Fill Target: Fill to a total of [TOTAL_LIQUOR_GAL] gal ([TOTAL_LIQUOR_L] L) brewing liquor before mash-in.</h2>
+
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="page page-2">
+  <div class="page-banner">Page 2: Mash</div>
+
+  <h2>Mash + Boil Log</h2>
+  <p><strong>Total brewing liquor:</strong> [TOTAL_LIQUOR_GAL] gal ([TOTAL_LIQUOR_L] L)</p>
+  <p>Target mash rest: [MASH_TEMP_F] F ([MASH_TEMP_C] C) for [MASH_MIN] min. Mash-out: [MASHOUT_TEMP_F] F ([MASHOUT_TEMP_C] C) for [MASHOUT_MIN] min.</p>
+  <table>
+    <tr><th>Checkpoint</th><th>Target</th><th>Actual</th><th>Notes</th></tr>
+    <tr><td>Strike temp</td><td>______</td><td>______</td><td></td></tr>
+    <tr><td>Mash-in time</td><td>______</td><td>______</td><td></td></tr>
+    <tr><td>10-15 min pH (cooled)</td><td>[MASH_PH_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Acid additions</td><td>as needed</td><td>______ ml total</td><td></td></tr>
+    <tr><td>Mash average temp</td><td>[MASH_TEMP_F] F</td><td>______</td><td></td></tr>
+    <tr><td>Mash-out temp</td><td>[MASHOUT_TEMP_F] F</td><td>______</td><td></td></tr>
+    <tr><td>Pre-boil volume</td><td>[PREBOIL_VOL_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Pre-boil gravity</td><td>[PREBOIL_SG_TARGET]</td><td>______</td><td></td></tr>
+  </table>
+  <p><strong>Measured mash pH (room-temp sample at 10-15 min):</strong> <span class="line"></span></p>
+
+  <h2>Kettle Additions Checklist</h2>
+  <table class="kettle-checklist">
+    <tr><th>Check</th><th>Time</th><th>Kettle Addition</th><th>AA%</th><th>Amount</th></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>[T1]</td><td>[Addition 1]</td><td>[AA%/n.a.]</td><td class="amt">[Amount]</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>[T2]</td><td>[Addition 2]</td><td>[AA%/n.a.]</td><td class="amt">[Amount]</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>[T3]</td><td>[Addition 3]</td><td>[AA%/n.a.]</td><td class="amt">[Amount]</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>[T4]</td><td>[Addition 4]</td><td>[AA%/n.a.]</td><td class="amt">[Amount]</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>[T5]</td><td>[Addition 5]</td><td>[AA%/n.a.]</td><td class="amt">[Amount]</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>[T6]</td><td>[Addition 6]</td><td>[AA%/n.a.]</td><td class="amt">[Amount]</td></tr>
+  </table>
+
+  <table>
+    <tr><th>Checkpoint</th><th>Target</th><th>Actual</th><th>Notes</th></tr>
+    <tr><td>Boil vigor / power setting</td><td>Rolling, stable</td><td>______</td><td></td></tr>
+    <tr><td>Boil-off observed (60 min)</td><td>[BOILOFF_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Post-boil volume (pre-chill)</td><td>[POSTBOIL_VOL_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Post-boil gravity (pre-chill)</td><td>[POSTBOIL_SG_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Whirlpool / steep start temp</td><td>[WHIRLPOOL_TEMP_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Flameout steep duration</td><td>[WHIRLPOOL_TIME_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Into fermenter volume</td><td>[FERMENTER_VOL_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>OG into fermenter</td><td>[OG_TARGET]</td><td>______</td><td></td></tr>
+  </table>
+
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="page page-3">
+  <h1>Brew Log: [RECIPE_NAME] - [BJCP_STYLE]</h1>
+  <div class="page-banner">Page 3: Fermentation</div>
+
+  <h2>Starter Build Log</h2>
+  <table class="starter-table">
+    <tr><th>Starter build item</th><th>Target / Plan</th><th class="notes-cell">Notes</th><th class="value-cell">Actual</th></tr>
+    <tr><td>Yeast for starter</td><td>[YEAST]</td><td></td><td></td></tr>
+    <tr><td>Starter wort source</td><td>[STARTER_SOURCE]</td><td></td><td>______</td></tr>
+    <tr><td>Starter volume built</td><td>[STARTER_VOL_TARGET]</td><td></td><td>______</td></tr>
+    <tr><td>Zinc Buddy in starter (optional)</td><td>[ZINC_TARGET]</td><td></td><td>______</td></tr>
+    <tr><td>Starter start date/time</td><td>Track exact timestamp</td><td></td><td>______</td></tr>
+    <tr><td>Starter end date/time</td><td>Track exact timestamp</td><td></td><td>______</td></tr>
+    <tr><td>Starter duration</td><td>[STARTER_DURATION_TARGET]</td><td></td><td>______</td></tr>
+  </table>
+
+  <h2>Fermentation Log</h2>
+  <p><strong>Pitch timestamp:</strong> [PITCH_TIMESTAMP]</p>
+  <h3>Pitch Log</h3>
+  <table class="starter-table">
+    <tr><th>Pitch item</th><th>Checklist / Target</th><th class="value-cell">Actual</th><th>Notes</th></tr>
+    <tr><td>Decant complete (cold crash implied)</td><td>Required before pitch</td><td><span class="check"></span></td><td></td></tr>
+    <tr><td>Wort temp at pitch</td><td>[PITCH_TEMP_TARGET]</td><td>______</td><td></td></tr>
+    <tr><td>Pitch date/time</td><td>Track exact timestamp</td><td>______</td><td></td></tr>
+    <tr><td>Yeast generation pitched</td><td>G0 fresh or G1+ repitch</td><td>______</td><td>Source batch ID/date</td></tr>
+  </table>
+  <p>[FERMENTATION_SCHEDULE_SUMMARY]</p>
+  <table>
+    <tr><th>Date/Time</th><th>Day</th><th>Temp</th><th>Gravity</th><th>Action</th><th>Notes</th></tr>
+    <tr><td>[DATE/TIME 1]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 2]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 3]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 4]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 5]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 6]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 7]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 8]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 9]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td>[DATE/TIME 10]</td><td>[DAY]</td><td>[SETPOINT]</td><td>______</td><td>[ACTION]</td><td></td></tr>
+    <tr><td colspan="2"><strong>Final gravity (FG) checkpoint</strong></td><td>Target FG</td><td>[FG_TARGET]</td><td>Record stable FG before crash/package</td><td></td></tr>
+  </table>
+
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="page page-4">
+  <div class="page-banner">Page 4: Packaging + Competition Gate</div>
+
+  <h2>Packaging + Competition Gate</h2>
+  <div class="tight-list packaging-checks">
+    <div><span class="check"></span>Receiving keg fully purged</div>
+    <div><span class="check"></span>Closed transfer completed</div>
+    <div><span class="check"></span>No cold-side splashing</div>
+    <div><span class="check"></span>Yeast generation recorded in batch notes</div>
+  </div>
+  <div class="packaging-grid">
+    <table class="packaging-table">
+      <tr><th>Checkpoint</th><th>Target</th><th>Actual</th></tr>
+      <tr><td>Forced VDK result</td><td>Pass required</td><td>______</td></tr>
+      <tr><td>FG stable 48 hr</td><td>Required</td><td>______</td></tr>
+      <tr><td>Final gravity</td><td>[FG_TARGET]</td><td>______</td></tr>
+      <tr><td>Crash temp</td><td>[CRASH_TEMP_TARGET]</td><td>______</td></tr>
+    </table>
+    <table class="packaging-table">
+      <tr><th>Checkpoint</th><th>Target</th><th>Actual</th></tr>
+      <tr><td>Yeast generation pitched</td><td>G0 fresh / G1+ repitch</td><td>______</td></tr>
+      <tr><td>Harvested for next batch</td><td>Yes / No (Next label G__)</td><td>______</td></tr>
+      <tr><td>Carbonation</td><td>[CARB_TARGET]</td><td>______</td></tr>
+      <tr><td>Package date</td><td>Track date</td><td>______</td></tr>
+    </table>
+  </div>
+  <p><strong>Packaging notes:</strong> <span class="line" style="min-width: 520px;"></span></p>
+
+  <h2>Competition Go/No-Go</h2>
+  <div><span class="check"></span>No oxidation notes</div>
+  <div><span class="check"></span>No harsh mineral bite</div>
+  <div><span class="check"></span>Forced VDK test passes</div>
+  <div><span class="check"></span>Style balance is bitter-forward but smooth</div>
+  <div><span class="check"></span>Entry form declaration matches [BJCP_STYLE] intent</div>
+
+  <p><strong>Decision:</strong> <span class="line"></span></p>
+  </section>
+</body>
+</html>

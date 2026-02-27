@@ -27,13 +27,14 @@ Competition: ______________
 - [ ] Fermenter and transfer line fully cleaned/sanitized
 - [ ] CO2 available for purging and closed transfer
 
-## Water (RO, Full Volume No-Sparge)
-Total liquor: 9.5 gal (36.0 L)
+## Water (RO, Hybrid No-Sparge + Pre-Boil Top-Up)
+Total liquor: 10.4 gal (39.4 L)
+Mash-in water: 9.5 gal (36.0 L) + pre-boil top-up reserve: 0.9 gal (3.4 L)
 
 Salt additions:
-- [ ] Gypsum (CaSO4): 0.45 oz (12.76 g)
-- [ ] Epsom Salt (MgSO4): 0.10 oz (2.83 g)
-- [ ] Calcium Chloride (CaCl2): 0.13 oz (3.69 g)
+- [ ] Gypsum (CaSO4): 0.49 oz (13.95 g)
+- [ ] Epsom Salt (MgSO4): 0.11 oz (3.09 g)
+- [ ] Calcium Chloride (CaCl2): 0.14 oz (4.04 g)
 - [ ] Baking Soda: 0.00 oz
 
 Target ions:
@@ -62,16 +63,16 @@ Target ions:
 | Acid additions (85% phosphoric) | 1 ml increments | ______ ml total | |
 | Mash average temp | 150 F | ______ | |
 | Mash-out temp | 168 F | ______ | |
-| Pre-boil volume | ______ | ______ | |
-| Pre-boil gravity | ______ | ______ | |
+| Pre-boil volume | 8.5-8.7 gal | ______ | |
+| Pre-boil gravity | 1.056-1.059 | ______ | |
 
 ### Boil (90 min)
-- [ ] FWH: Simcoe 0.75 oz + Warrior 0.25 oz
-- [ ] 60 min: Amarillo 0.50 oz
-- [ ] 40 min: Amarillo 0.50 oz + Simcoe 0.50 oz + Warrior 0.25 oz
-- [ ] 20 min: Amarillo 0.75 oz + Simcoe 0.75 oz + Warrior 0.25 oz
+- [ ] FWH: Simcoe (12.9% AA) 0.75 oz + Warrior (14.2% AA) 0.25 oz
+- [ ] 60 min: Amarillo (7.1% AA) 0.50 oz
+- [ ] 40 min: Amarillo (7.1% AA) 0.50 oz + Simcoe (12.9% AA) 0.50 oz + Warrior (14.2% AA) 0.25 oz
+- [ ] 20 min: Amarillo (7.1% AA) 0.75 oz + Simcoe (12.9% AA) 0.75 oz + Warrior (14.2% AA) 0.25 oz
 - [ ] 10 min: Corn Sugar 1.25 lb
-- [ ] 0 min / 180 F hop stand 20 min: Amarillo 1.50 oz + Simcoe 1.50 oz
+- [ ] 0 min / 180 F hop stand 20 min: Amarillo (7.1% AA) 1.50 oz + Simcoe (12.9% AA) 1.50 oz
 
 | Checkpoint | Target | Actual | Notes |
 |---|---|---|---|
@@ -79,11 +80,13 @@ Target ions:
 | Boil end time | ______ | ______ | |
 | Hop stand start temp | 180 F | ______ | |
 | Hop stand hold time | 20 min | ______ | |
-| Post-boil volume | ______ | ______ | |
+| Post-boil volume | 5.9-6.1 gal (pre-chill) | ______ | |
 | OG into fermenter | 1.088-1.092 | ______ | |
 
 ## Fermentation Log
 Yeast: WLP007 Dry English Ale
+Yeast generation pitched (G0 fresh / G1+ repitch): ______
+Source batch for slurry (if repitch): ______
 
 Schedule:
 - Days 0-3: hold 65 F
@@ -104,8 +107,8 @@ Schedule:
 | 8 | ______ | ______ | Crash start? | |
 
 Dry hop details:
-- [ ] Amarillo 1.0 oz
-- [ ] Simcoe 1.0 oz
+- [ ] Amarillo (7.1% AA) 1.0 oz
+- [ ] Simcoe (12.9% AA) 1.0 oz
 - Start: ____________________
 - End: ______________________
 - Contact time (hours): ______
@@ -114,11 +117,14 @@ Dry hop details:
 - [ ] Receiving keg fully purged
 - [ ] Closed transfer completed
 - [ ] No cold-side splashing
+- [ ] Yeast generation recorded in batch notes
 
 | Packaging checkpoint | Target | Actual | Notes |
 |---|---|---|---|
 | Cold crash temp | 38 F | ______ | |
 | Final gravity | 1.014-1.018 | ______ | |
+| Yeast generation pitched | G0 fresh or G1+ repitch | ______ | Source batch ID/date |
+| Harvested for next batch | Yes/No | ______ | Next label (G__): ______ |
 | Carbonation | 2.3-2.5 vol CO2 | ______ | |
 | Package date | ______ | ______ | |
 

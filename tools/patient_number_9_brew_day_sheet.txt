@@ -45,10 +45,16 @@ Pre-boil gravity: ______
 BOIL LOG (90 MIN)
 Boil start: ______   Boil end: ______
 
-[ ] FWH: Simcoe 0.75 oz + Warrior 0.25 oz
-[ ] 60 min: Amarillo 0.50 oz
-[ ] 40 min: Amarillo 0.50 oz + Simcoe 0.50 oz + Warrior 0.25 oz
-[ ] 20 min: Amarillo 0.75 oz + Simcoe 0.75 oz + Warrior 0.25 oz
+[ ] FWH: Simcoe 0.75 oz
+[ ] FWH: Warrior 0.25 oz
+[ ] 60 min: Warrior 0.25 oz
+[ ] 45 min: Amarillo 0.50 oz
+[ ] 40 min: Amarillo 0.50 oz
+[ ] 40 min: Simcoe 0.50 oz
+[ ] 40 min: Warrior 0.25 oz
+[ ] 20 min: Amarillo 0.75 oz
+[ ] 20 min: Simcoe 0.75 oz
+[ ] 20 min: Warrior 0.25 oz
 [ ] 10 min: Corn sugar 1.25 lb
 [ ] 0 min: cool to 180 F, then hop stand 20 min:
     [ ] Amarillo 1.50 oz

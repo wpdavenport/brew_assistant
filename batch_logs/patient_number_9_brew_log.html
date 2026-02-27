@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Number 9 - 34A Brew Log</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #222; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.35; }
+    h1 { border-bottom: 2px solid #222; padding-bottom: 6px; margin-bottom: 8px; }
+    h2 { margin-top: 22px; border-left: 5px solid #222; padding-left: 8px; background: #f4f4f4; }
+    .page-banner {
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin: 2px 0 8px 0;
+      padding: 4px 6px;
+      border: 1px solid #cfcfcf;
+      background: #f7f7f7;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; font-size: 0.92rem; }
+    th, td { border: 1px solid #cfcfcf; padding: 6px; text-align: left; vertical-align: top; }
+    th { background: #efefef; }
+    .meta { margin-bottom: 16px; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 10px; }
+    .meta-row-right { justify-content: flex-end; }
+    .meta-item { display: inline-flex; align-items: flex-end; gap: 6px; }
+    .summary-strip { margin-top: 2px; margin-bottom: 8px; }
+    .summary-strip th, .summary-strip td { text-align: center; }
+    .line { display: inline-block; border-bottom: 1px solid #888; min-width: 180px; height: 1em; vertical-align: baseline; }
+    .check { display: inline-block; width: 12px; height: 12px; border: 1px solid #222; margin-right: 6px; }
+    ul { margin: 6px 0 6px 20px; }
+    .page-break { display: none; }
+    .page-3 table { font-size: 0.88rem; }
+    .tight-list div { margin-bottom: 2px; }
+    .packaging-checks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 14px;
+      row-gap: 2px;
+      margin-bottom: 8px;
+    }
+    .packaging-checks div { margin-bottom: 0; }
+    .check-table td, .check-table th { font-size: 1rem; }
+    .ingredient-table td, .ingredient-table th { font-size: 1rem; }
+    .ingredient-table .amt { white-space: nowrap; }
+    .ingredient-group-row td { background: #f2f2f2; font-weight: 700; }
+    .check-cell { width: 48px; text-align: center; }
+    .salt-across td, .salt-across th { text-align: center; font-size: 1rem; }
+    .starter-table td, .starter-table th { font-size: 0.98rem; }
+    .starter-table .value-cell { min-width: 110px; white-space: nowrap; }
+    .starter-table .notes-cell { min-width: 220px; }
+    .kettle-checklist td, .kettle-checklist th { font-size: 0.92rem; }
+    .packaging-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+    .packaging-grid table { margin-top: 0; margin-bottom: 8px; }
+    .packaging-table td, .packaging-table th { font-size: 0.9rem; }
+    .tips-box {
+      border: 1px solid #cfcfcf;
+      background: #f8f8f8;
+      padding: 8px 10px;
+      margin: 8px 0 10px 0;
+      font-size: 0.98rem;
+      line-height: 1.3;
+    }
+    @media print {
+      body { font-size: 11px; padding: 8px; }
+      h2 { page-break-after: avoid; }
+      table { page-break-inside: avoid; }
+      .page-break { display: block; page-break-after: always; break-after: page; }
+      .check-table td, .check-table th { font-size: 10px; }
+      .ingredient-table td, .ingredient-table th { font-size: 10px; }
+      .salt-across td, .salt-across th { font-size: 10px; }
+      .starter-table td, .starter-table th { font-size: 9.5px; }
+      .page-banner { font-size: 10px; margin: 2px 0 6px 0; padding: 3px 5px; }
+      .tips-box { font-size: 9.5px; padding: 6px 8px; margin: 6px 0 8px 0; }
+      .page-1 { font-size: 10px; line-height: 1.2; }
+      .page-1 h2 { margin-top: 12px; }
+      .page-1 table { font-size: 9.5px; margin-bottom: 8px; }
+      .meta { margin-bottom: 12px; }
+      .meta-row { margin-bottom: 8px; gap: 18px; }
+      .meta-item .line { min-width: 170px; }
+      .summary-strip th, .summary-strip td { font-size: 10px; padding: 4px; }
+      .page-1 .check { width: 10px; height: 10px; }
+      .page-2 { font-size: 10px; line-height: 1.2; }
+      .page-2 h2 { margin-top: 12px; }
+      .page-2 p { margin: 3px 0; }
+      .page-2 table { margin-bottom: 7px; }
+      .page-2 .starter-table { margin-top: 4px; margin-bottom: 4px; }
+      .page-2 .starter-table td,
+      .page-2 .starter-table th {
+        font-size: 8.8px;
+        padding: 3px 4px;
+        line-height: 1.15;
+      }
+      .page-2 .kettle-checklist td, .page-2 .kettle-checklist th {
+        font-size: 9px;
+        padding: 3px 4px;
+        line-height: 1.15;
+      }
+      .page-3 { font-size: 10px; line-height: 1.2; }
+      .page-3 h2 { margin-top: 14px; }
+      .page-3 table { font-size: 10px; margin-bottom: 8px; }
+      .page-3 p { margin: 4px 0; }
+      .page-3 .check { width: 10px; height: 10px; }
+      .packaging-grid { gap: 6px; }
+      .packaging-table td, .packaging-table th { font-size: 9px; padding: 3px 4px; line-height: 1.15; }
+      .packaging-checks { column-gap: 10px; row-gap: 1px; margin-bottom: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page page-1">
+  <h1>Brew Log: Patient Number 9 - 34A Clone Beer (DFH 90 Minute IPA)</h1>
+  <div class="page-banner">Page 1: Brew Recipe Setup</div>
+  <table class="summary-strip">
+    <tr><th>OG</th><th>FG</th><th>ABV</th><th>Estimated IBU</th></tr>
+    <tr><td>1.088-1.092</td><td>1.014-1.018</td><td>8.8-9.5%</td><td>~90</td></tr>
+  </table>
+  <div class="meta">
+    <div class="meta-row meta-row-right">
+      <span class="meta-item">Date: <span class="line" style="min-width: 260px;"></span></span>
+    </div>
+  </div>
+
+  <h2>Pre-Brew Checklist</h2>
+  <table class="check-table">
+    <tr><th>Item</th><th class="check-cell">Check</th><th>Item</th><th class="check-cell">Check</th></tr>
+    <tr><td>pH meter calibrated (4.01 / 7.00)</td><td class="check-cell"><span class="check"></span></td><td>Thermometer checked</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Hop AA% verified from labels</td><td class="check-cell"><span class="check"></span></td><td>Salt and hop scales verified</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Fermenter and transfer line sanitized</td><td class="check-cell"><span class="check"></span></td><td>CO2 ready for purge / transfer</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Starter cold-crashed and decanted</td><td class="check-cell"><span class="check"></span></td><td>Whirlfloc staged for 10 min</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td></td><td class="check-cell"></td><td>Corn sugar staged for 10 min</td><td class="check-cell"><span class="check"></span></td></tr>
+  </table>
+
+  <h2>Ingredient Staging Checklist</h2>
+  <table class="ingredient-table">
+    <tr><th>Ingredient</th><th>Amount</th><th class="check-cell">Staged</th></tr>
+    <tr><td>Pale Malt</td><td class="amt">15.0 lb (6804 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Thomas Fawcett Amber Malt</td><td class="amt">1.0 lb (454 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Corn Sugar (Dextrose)</td><td class="amt">1.25 lb (567 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Rice Hulls (optional)</td><td class="amt">0.5 lb (227 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Dry Hop Blend (Amarillo + Simcoe)</td><td class="amt">2.0 oz (57 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+
+    <tr><td>Simcoe (12.9% AA)</td><td class="amt">3.5 oz (99 g) total kettle/whirlpool</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Warrior (14.2% AA)</td><td class="amt">0.75 oz (21 g) total kettle</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Amarillo (7.1% AA)</td><td class="amt">3.25 oz (92 g) total kettle/whirlpool</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Amarillo + Simcoe Dry Hop</td><td class="amt">1.0 oz + 1.0 oz (28 g + 28 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+
+    <tr class="ingredient-group-row"><td>Kettle Additions</td><td></td><td class="check-cell"></td></tr>
+    <tr><td>Whirlfloc</td><td class="amt">1 tablet (10 min)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Corn Sugar late-boil addition</td><td class="amt">1.25 lb (567 g) at 10 min</td><td class="check-cell"><span class="check"></span></td></tr>
+
+    <tr class="ingredient-group-row"><td>Water Salts</td><td></td><td class="check-cell"></td></tr>
+    <tr><td>Gypsum (CaSO4)</td><td class="amt">0.49 oz (13.95 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Epsom Salt (MgSO4)</td><td class="amt">0.11 oz (3.09 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+    <tr><td>Calcium Chloride (CaCl2)</td><td class="amt">0.14 oz (4.04 g)</td><td class="check-cell"><span class="check"></span></td></tr>
+  </table>
+
+  <h2>G40 Fill Target: Total liquor 10.4 gal (39.4 L). Mash in with 9.5 gal (36.0 L) and reserve 0.9 gal (3.4 L) hot RO for pre-boil top-up.</h2>
+
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="page page-2">
+  <div class="page-banner">Page 2: Mash</div>
+
+  <h2>Mash + Boil Log</h2>
+  <p><strong>Total brewing liquor:</strong> 10.4 gal (39.4 L); mash in with 9.5 gal (36.0 L) and hold 0.9 gal (3.4 L) for pre-boil correction.</p>
+  <p>Target mash rest: 150.0 F (65.6 C) for 75 min. Mash-out: 168.0 F (75.6 C) for 10 min.</p>
+  <table>
+    <tr><th>Checkpoint</th><th>Target</th><th>Actual</th><th>Notes</th></tr>
+    <tr><td>Strike temp</td><td>______</td><td>______</td><td></td></tr>
+    <tr><td>Mash-in time</td><td>______</td><td>______</td><td></td></tr>
+    <tr><td>10-15 min pH (cooled)</td><td>5.25-5.35</td><td>______</td><td></td></tr>
+    <tr><td>Acid additions</td><td>as needed</td><td>______ ml total</td><td></td></tr>
+    <tr><td>Mash average temp</td><td>150.0 F</td><td>______</td><td></td></tr>
+    <tr><td>Mash-out temp</td><td>168.0 F</td><td>______</td><td></td></tr>
+    <tr><td>Pre-boil volume</td><td>8.5-8.7 gal</td><td>______</td><td></td></tr>
+    <tr><td>Pre-boil gravity</td><td>1.056-1.059</td><td>______</td><td></td></tr>
+  </table>
+  <p><strong>Measured mash pH (room-temp sample at 10-15 min):</strong> <span class="line"></span></p>
+
+  <h2>Kettle Additions Checklist</h2>
+  <table class="kettle-checklist">
+    <tr><th>Check</th><th>Time</th><th>Kettle Addition</th><th>AA%</th><th>Amount</th></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>First Wort</td><td>Simcoe + Warrior</td><td>12.9% / 14.2%</td><td class="amt">0.75 oz + 0.25 oz</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>60 min</td><td>Amarillo</td><td>7.1%</td><td class="amt">0.50 oz</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>40 min</td><td>Amarillo + Simcoe + Warrior</td><td>7.1% / 12.9% / 14.2%</td><td class="amt">0.50 + 0.50 + 0.25 oz</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>20 min</td><td>Amarillo + Simcoe + Warrior</td><td>7.1% / 12.9% / 14.2%</td><td class="amt">0.75 + 0.75 + 0.25 oz</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>10 min</td><td>Corn Sugar + Whirlfloc</td><td>n/a</td><td class="amt">1.25 lb + 1 tablet</td></tr>
+    <tr><td class="check-cell"><span class="check"></span></td><td>0 min (180 F x 20 min)</td><td>Amarillo + Simcoe</td><td>7.1% / 12.9%</td><td class="amt">1.50 oz + 1.50 oz</td></tr>
+  </table>
+
+  <table>
+    <tr><th>Checkpoint</th><th>Target</th><th>Actual</th><th>Notes</th></tr>
+    <tr><td>Boil vigor / power setting</td><td>Rolling, stable</td><td>______</td><td></td></tr>
+    <tr><td>Boil-off observed (90 min)</td><td>~2.5-2.8 gal</td><td>______</td><td></td></tr>
+    <tr><td>Post-boil volume (pre-chill)</td><td>5.9-6.1 gal</td><td>______</td><td></td></tr>
+    <tr><td>Post-boil gravity (pre-chill)</td><td>1.081-1.084</td><td>______</td><td></td></tr>
+    <tr><td>Whirlpool / steep start temp</td><td>180.0 F (82.2 C)</td><td>______</td><td></td></tr>
+    <tr><td>Flameout steep duration</td><td>20 min</td><td>______</td><td></td></tr>
+    <tr><td>Into fermenter volume</td><td>~5.5 gal</td><td>______</td><td></td></tr>
+    <tr><td>OG into fermenter</td><td>1.088-1.092</td><td>______</td><td></td></tr>
+  </table>
+
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="page page-3">
+  <h1>Brew Log: Patient Number 9 - 34A Clone Beer (DFH 90 Minute IPA)</h1>
+  <div class="page-banner">Page 3: Fermentation</div>
+
+  <h2>Starter Build Log</h2>
+  <table class="starter-table">
+    <tr><th>Starter build item</th><th>Target / Plan</th><th class="notes-cell">Notes</th><th class="value-cell">Actual</th></tr>
+    <tr><td>Yeast for starter</td><td>WLP007 Dry English Ale</td><td></td><td></td></tr>
+    <tr><td>Starter wort source</td><td>Record actual method used</td><td></td><td>______</td></tr>
+    <tr><td>Starter volume built</td><td>~1.5-2.0 L stirred</td><td></td><td>______</td></tr>
+    <tr><td>Starter start date/time</td><td>Track exact timestamp</td><td></td><td>______</td></tr>
+    <tr><td>Starter end date/time</td><td>Track exact timestamp</td><td></td><td>______</td></tr>
+    <tr><td>Starter duration</td><td>24-36 hr stir + 12-24 hr crash</td><td></td><td>______</td></tr>
+  </table>
+
+  <h2>Fermentation Log</h2>
+  <p><strong>Pitch timestamp:</strong> <span class="line"></span></p>
+  <h3>Pitch Log</h3>
+  <table class="starter-table">
+    <tr><th>Pitch item</th><th>Checklist / Target</th><th class="value-cell">Actual</th><th>Notes</th></tr>
+    <tr><td>Decant complete (cold crash implied)</td><td>Required before pitch</td><td><span class="check"></span></td><td></td></tr>
+    <tr><td>Wort temp at pitch</td><td>64.0 F (18.0 C)</td><td>______</td><td></td></tr>
+    <tr><td>Pitch date/time</td><td>Track exact timestamp</td><td>______</td><td></td></tr>
+    <tr><td>Yeast generation pitched</td><td>G0 fresh or G1+ repitch</td><td>______</td><td>Source batch ID/date</td></tr>
+  </table>
+  <p>Days 0-3 hold 65.0 F. Days 4-7 hold 67-68 F. Add dry hops when gravity is within 2-4 points of terminal and hold 48-72 hr. Cold crash to 38.0 F after dry hop window and gravity stabilization.</p>
+  <table>
+    <tr><th>Date/Time</th><th>Day</th><th>Temp</th><th>Gravity</th><th>Action</th><th>Notes</th></tr>
+    <tr><td>______</td><td>0</td><td>65.0 F</td><td>______</td><td>Pitch + hold</td><td></td></tr>
+    <tr><td>______</td><td>1</td><td>65.0 F</td><td>______</td><td>Hold</td><td></td></tr>
+    <tr><td>______</td><td>2</td><td>65.0 F</td><td>______</td><td>Hold</td><td></td></tr>
+    <tr><td>______</td><td>3</td><td>65.0 F</td><td>______</td><td>Hold</td><td></td></tr>
+    <tr><td>______</td><td>4</td><td>67.0 F</td><td>______</td><td>Ramp + hold</td><td></td></tr>
+    <tr><td>______</td><td>5</td><td>67-68 F</td><td>______</td><td>Dry hop in?</td><td></td></tr>
+    <tr><td>______</td><td>6</td><td>67-68 F</td><td>______</td><td>Hold</td><td></td></tr>
+    <tr><td>______</td><td>7</td><td>67-68 F</td><td>______</td><td>Terminal check</td><td></td></tr>
+    <tr><td>______</td><td>8</td><td>67-68 F</td><td>______</td><td>Dry hop out / crash gate</td><td></td></tr>
+    <tr><td>______</td><td>9</td><td>38.0 F</td><td>______</td><td>Crash hold</td><td></td></tr>
+    <tr><td colspan="2"><strong>Final gravity (FG) checkpoint</strong></td><td>Target FG</td><td>1.014-1.018</td><td>Record stable FG before crash/package</td><td></td></tr>
+  </table>
+
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="page page-4">
+  <div class="page-banner">Page 4: Packaging + Competition Gate</div>
+
+  <h2>Packaging + Competition Gate</h2>
+  <div class="tight-list packaging-checks">
+    <div><span class="check"></span>Receiving keg fully purged</div>
+    <div><span class="check"></span>Closed transfer completed</div>
+    <div><span class="check"></span>No cold-side splashing</div>
+    <div><span class="check"></span>Yeast generation recorded in batch notes</div>
+  </div>
+  <div class="packaging-grid">
+    <table class="packaging-table">
+      <tr><th>Checkpoint</th><th>Target</th><th>Actual</th></tr>
+      <tr><td>Forced VDK result</td><td>Pass required</td><td>______</td></tr>
+      <tr><td>FG stable 48 hr</td><td>Required</td><td>______</td></tr>
+      <tr><td>Final gravity</td><td>1.014-1.018</td><td>______</td></tr>
+      <tr><td>Crash temp</td><td>38.0 F</td><td>______</td></tr>
+    </table>
+    <table class="packaging-table">
+      <tr><th>Checkpoint</th><th>Target</th><th>Actual</th></tr>
+      <tr><td>Yeast generation pitched</td><td>G0 fresh / G1+ repitch</td><td>______</td></tr>
+      <tr><td>Harvested for next batch</td><td>Yes / No (Next label G__)</td><td>______</td></tr>
+      <tr><td>Carbonation</td><td>2.3-2.5 vol CO2</td><td>______</td></tr>
+      <tr><td>Package date</td><td>Track date</td><td>______</td></tr>
+    </table>
+  </div>
+  <p><strong>Packaging notes:</strong> <span class="line" style="min-width: 520px;"></span></p>
+
+  <h2>Competition Go/No-Go</h2>
+  <div><span class="check"></span>No oxidation notes</div>
+  <div><span class="check"></span>No harsh mineral bite</div>
+  <div><span class="check"></span>Forced VDK test passes</div>
+  <div><span class="check"></span>Style alignment with 34A clone intent</div>
+  <div><span class="check"></span>Entry declaration matches Dogfish Head 90 Minute IPA</div>
+
+  <p><strong>Decision:</strong> <span class="line"></span></p>
+  </section>
+</body>
+</html>
