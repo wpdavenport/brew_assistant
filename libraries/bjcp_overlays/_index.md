@@ -7,3 +7,4 @@ Filenames use BJCP 2021 categories for organization.
 - 11C — Strong Bitter (English Pale Ale / ESB) → bjcp_11C_2021_overlay.md
 - 22A — Double IPA → bjcp_22A_2021_overlay.md
 - 26D — Belgian Dark Strong Ale → bjcp_26D_2021_overlay.md
+- 3C — Czech Premium Pale Lager → bjcp_3C_2021_overlay.md

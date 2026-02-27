@@ -61,6 +61,36 @@ Apply:
 - generate inventory-driven experimental concepts for "Garbage beer".
 - if user approves one suggested option, generate a full competition-grade recipe + process plan for that selected style.
 
+### Brew Day Sheet Yeast/Pitch Guardrail (MANDATORY)
+When creating or updating a printable brew-day sheet (`brewing/brew_day_sheets/*.html`):
+
+Consult all of:
+- `libraries/inventory/stock.json` (actual yeast on hand, generation, form, quantity)
+- `recipes/*.md` target OG / batch size / fermentation intent
+- `profiles/equipment.yaml` (actual batch volume context)
+- `libraries/yeast_library.md` (strain behavior and handling)
+
+Rules:
+- Do not use a fixed default starter plan (example: always "2.0 L starter").
+- The Yeast and Pitch Plan must explicitly match inventory reality:
+  - available yeast source (fresh pack vs harvested slurry),
+  - planned generation (`G0` for fresh, `G1+` for repitch),
+  - pitch method (direct slurry pitch, vitality starter, or full starter),
+  - starter size only when actually required by the recipe gravity/volume and yeast state.
+- If inventory and recipe requirements conflict (insufficient yeast, wrong strain, stale slurry), flag it and add a clear shopping/action note instead of silently assuming availability.
+- Record source batch ID/date for repitch plans when known.
+- Fermentation log date/time must be brew-date anchored.
+  - Do not leave unresolved placeholders like `YYYY-MM-DD HH:MM`.
+  - Use explicit planned dates (absolute calendar dates when brew date is known, otherwise D+0..D+N plus blank time fields).
+- Water-acid phrasing must be unambiguous.
+  - If phosphoric acid is listed on a brew-day sheet, state that it is added after mash-in (typically 10-15 min after mash-in) and only after measured mash pH check (incremental correction), not as a pre-acidified liquor step.
+
+Hop AA sync guardrail:
+- Treat `libraries/inventory/stock.json` as source-of-truth for hop alpha-acid values in recipe/log/printable-HTML/XML artifacts.
+- If an artifact AA value conflicts with stock, call out the conflict and resolve by updating stock first (if lot changed) and then resyncing artifacts.
+- Accept lot-specific values listed in `lot_alpha_acid_pct` as valid for that hop.
+- For hop-AA-related updates, require running `python3 tools/validate_hop_aa_sync.py` and confirm `AA_SYNC_OK`.
+
 ### BJCP Study Mode (Opt-In, Default OFF)
 Purpose:
 - Teach and test BJCP knowledge for online entrance exam prep without changing default brewing-assistant behavior.

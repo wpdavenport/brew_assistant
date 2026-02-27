@@ -18,6 +18,7 @@ These files are authoritative brewing memory for this repo. Consult them before 
 ## Tools / templates (when needed)
 - tools/calculations.md
 - tools/batch_log_template.md
+- batch_logs/brew_log_template.html
 - libraries/templates/grainfather_beerxml_template.xml
 - recipes/beer_xml_imports/
 - recipes/beer_xml_exports/
@@ -40,12 +41,20 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - New recipe drafts: recipes/in_development/
 - Locked/stable recipes: recipes/locked/
 - New batch logs: batch_logs/YYYY-MM-DD_style.md
+- Printable brew-day sheets: brewing/brew_day_sheets/
+- Printable brew logs: batch_logs/
+- Completed brew reports/results: batch_logs/
 - BeerXML Exports: recipes/beer_xml_exports/
 
 ## Hard rules
 - Never invent values that should come from repo files.
 - If a file is missing or empty, say so and proceed with explicit assumptions.
 - Prefer house strains and house processes over generic advice.
+- `libraries/inventory/stock.json` is the source-of-truth for hop alpha acid values; if a recipe/log/printable-HTML/XML value differs, update stock first (if needed), then resync artifacts.
+- After any hop AA edit, run `python3 tools/validate_hop_aa_sync.py` and do not finalize changes unless output is `AA_SYNC_OK`.
 - Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
 - Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.
+- Yeast reuse tracking is required: capture generation per batch (G0 fresh pack, G1+ repitch) and source batch ID/date for repitches.
+- Brew-day-sheet yeast/pitch reconciliation is required: for `brewing/brew_day_sheets/*.html`, derive yeast plan from `libraries/inventory/stock.json` + recipe OG/volume (and yeast behavior), not from a fixed default starter assumption.
 - BJCP mode is opt-in only and must be explicitly entered/exited by user command.
+- Printable brew-log guardrail: for new HTML brew logs, start from `batch_logs/brew_log_template.html` and preserve core sections unless the user explicitly overrides.

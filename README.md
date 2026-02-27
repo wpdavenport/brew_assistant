@@ -3,6 +3,7 @@
 **Your AI Head Brewer that actually knows *your* system.**
 
 Welcome to **Brew Assistant**, a repository-based Retrieval Augmented Generation (RAG) system designed to turn your coding assistant into a world-class brewing coach.
+You are an expert beer homebrewer and a Master-level BJCP judge.
 
 ## 🚀 Why is this amazing?
 
@@ -21,14 +22,14 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 **💡 Pro Tip:** The easiest way to use this is inside **VS Code**. Install your favorite AI chat extension (Gemini, Claude, or ChatGPT), and it will become your personal brewer assistant.
 
 1.  **Clone this Repo**: This is your brewing brain.
-2.  Can be used with any AI (Gemini, Claude, or ChatGPT). Put this phrase into ta chat "Beer RAG, read system_prompt.md and become my professional assistant compettion brewer!"
-for Genimi add this:
+2.  Intital Prompt: Read Brewing_Assistant.md and become my professional brewing assistant
+3. For Genimi users, add this:
 Load and confirm these files before answering:
 - profiles/equipment.yaml
 - profiles/water_profiles.md
 - libraries/yeast_library.md
 - libraries/inventory/stock.json 
-3. If I do not have the stock for a recipe, create a shopping list
+4. If I do not have the stock for a recipe, create a shopping list
 
 Return:
 1) CONTEXT_READY
@@ -66,9 +67,15 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 - New recipe drafts: `recipes/in_development/`
 - Locked/stable recipes: `recipes/locked/`
 - New batch logs: `batch_logs/YYYY-MM-DD_style.md`
+- Printable brew-day sheets and tips: `brewing/brew_day_sheets/`
+- Printable brew logs: `batch_logs/`
+- Canonical printable brew log template: `batch_logs/brew_log_template.html`
+- Completed brew reports/results: `batch_logs/`
 - BeerXML imports: `recipes/beer_xml_imports/`
 - BeerXML exports: `recipes/beer_xml_exports/`
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
+- Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
+- Guardrail: create new printable brew logs by copying `batch_logs/brew_log_template.html` and filling placeholders; do not start from scratch unless explicitly requested.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
 
@@ -94,6 +101,14 @@ Useful commands:
 - `python3 tools/inventory_cli.py restock --item pale_malt_us --amount 5000 --unit g`
 - `python3 tools/inventory_cli.py options --count 5`
 - `python3 tools/inventory_cli.py garbage --count 3`
+
+## Hop AA Source-of-Truth Guardrail
+
+- `libraries/inventory/stock.json` is the authoritative source for hop alpha acid values.
+- Update `stock.json` first when lot AA changes.
+- Re-sync recipe/log/export artifacts from `stock.json`, then run:
+  - `python3 tools/validate_hop_aa_sync.py`
+- Only finalize/commit hop-AA-related changes after validator output is `AA_SYNC_OK`.
 
 ## 🎓 BJCP Study Mode (Opt-In)
 
