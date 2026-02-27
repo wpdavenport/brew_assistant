@@ -7,7 +7,8 @@ batch_size_gal: 5.0
 batch_size_l: 19
 
 kettle_volume_gal: 10.6
-boil_off_rate_gal_per_hour: 0.8
+boil_off_rate_gal_per_hour: 1.76
+# Calibrated from two 60 min, lid-off, automation-mode water boils on G40.
 trub_loss_gal: 0.4
 deadspace_gal: 0.1
 

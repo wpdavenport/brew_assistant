@@ -8,3 +8,4 @@ Filenames use BJCP 2021 categories for organization.
 - 22A — Double IPA → bjcp_22A_2021_overlay.md
 - 34A — Clone Beer → bjcp_34A_2021_overlay.md
 - 26D — Belgian Dark Strong Ale → bjcp_26D_2021_overlay.md
+- 3C — Czech Premium Pale Lager → bjcp_3C_2021_overlay.md

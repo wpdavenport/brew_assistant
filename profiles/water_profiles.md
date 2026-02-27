@@ -2,6 +2,12 @@
 
 System: Reverse Osmosis
 
+## Salts On Hand
+- Gypsum (CaSO4·2H2O)
+- Calcium Chloride (CaCl2·2H2O)
+- Epsom Salt (MgSO4·7H2O)
+- Chalk (CaCO3) — note: poor solubility in room-temp water; pre-dissolve with CO2 or acid for accurate dosing
+
 <!-- # House Target Profiles (remove this or expand)
 
 ## West Coast IPA
