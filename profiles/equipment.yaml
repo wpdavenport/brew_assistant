@@ -36,11 +36,14 @@ fermentation:
   chamber_control: true
   temp_control_method: "glycol"
   temp_precision_f: 1
-  temp_range_f: [28, 80]        # conservative practical range with glycol
+  temp_range_f: [42, 80]        # user-validated operating range; avoid setpoints below 42F due to freezing/stratification risk
+  cold_crash_floor_f: 42
+  cold_crash_floor_c: 5.6
   cold_crash_capable: true
   warm_ramp_capable: true
   pressure_capable: false
   max_pressure_psi: 0
+  notes: "GF30 performance is unreliable below 42F (5.6C); lower setpoints can cause partial freezing and uneven tank temperatures."
 
 water:
   source: "RO"
