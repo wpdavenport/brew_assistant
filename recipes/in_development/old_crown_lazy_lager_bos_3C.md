@@ -61,6 +61,7 @@ If brewing now without buying hops:
 
 Notes:
 - This fallback preserves noble late-hop character, but bittering is less style-authentic than all-Saaz.
+- This path is brewable with current stock, but not the preferred BOS path.
 - Recalculate IBUs in your software with actual lot AA before brew day and adjust bittering if needed.
 
 ## YEAST AND PITCHING
@@ -78,6 +79,7 @@ Starter / prep guardrails:
 - Dry yeast option: 2 rehydrated packs minimum; 3 packs for conservative competition pitch.
 - Vitality starter: use when yeast age/viability is uncertain (especially for repitches older than ~7 days).
 - Avoid using ale strains for this recipe if the target is true 3C medal profile.
+- Log yeast generation every batch (G0 fresh pack, G1+ repitch) and source batch/date for any repitch.
 
 ## WATER (RO BUILD, SOFT + ROUNDED BITTERNESS)
 Target profile (ppm):
@@ -88,19 +90,19 @@ Target profile (ppm):
 - SO4 50-60
 - HCO3 0-30
 
-For total brewing liquor ~8.6 gal (32.6 L), starting from RO:
-- Gypsum (CaSO4): 0.07 oz (2.1 g)
-- Calcium Chloride (CaCl2): 0.13 oz (3.6 g)
-- Epsom Salt (MgSO4): 0.06 oz (1.7 g)
+For total brewing liquor ~9.5 gal (36.0 L), starting from RO:
+- Gypsum (CaSO4): 0.08 oz (2.3 g)
+- Calcium Chloride (CaCl2): 0.14 oz (4.0 g)
+- Epsom Salt (MgSO4): 0.07 oz (1.9 g)
 
 Water note:
 - Keep sulfate restrained; if bitterness reads sharp, reduce sulfate first before changing hop schedule.
 
 ## VOLUME PLAN (G40 CALIBRATED)
-Using equipment profile boil-off 1.76 gal/hr:
+Using equipment profile boil-off 1.76 gal/hr with 90 min boil:
 - Post-boil target (pre-chill): ~5.7 gal (21.6 L)
-- Pre-boil target: ~7.5 gal (28.4 L)
-- Total liquor target: ~8.6 gal (32.6 L)
+- Pre-boil target: ~8.3 gal (31.6 L)
+- Total liquor target: ~9.5 gal (36.0 L)
 
 ## MASH PROGRAM (COMPETITION BIAS)
 Hochkurz-style step mash (recommended on G40 for malt complexity + attenuation control):
@@ -117,18 +119,19 @@ Optional German technique:
 - This is optional; do not add complexity if repeatability is your priority.
 
 ## BOIL
-- Duration: 60 min
+- Duration: 90 min
+- Start hop timing when 60 min remain in the boil; keep all hop additions at their listed times.
 - Add hops exactly on the selected schedule (BOS or stock-fallback).
 - No sugar additions.
 - Whirlpool charge at 170.0F (76.7C), hold 15 min.
 
 ## FERMENTATION SCHEDULE
-1. Chill to 48.0-50.0F (8.9-10.0C), oxygenate once at pitch.
-2. Hold 50.0F (10.0C) for days 0-6.
-3. When gravity is within ~6 points of terminal, raise to 58.0-60.0F (14.4-15.6C) for 2-3 days (VDK cleanup).
-4. Verify stable FG and clean forced VDK.
-5. Crash to 34.0F (1.1C), hold 48-72 hr.
-6. Lager cold at 34.0-36.0F (1.1-2.2C) for 3-5 weeks before competition service.
+1. Chill to 48.0-50.0F (8.9-10.0C), oxygenate once at pitch to ~8-10 ppm dissolved O2.
+2. Hold 50.0F (10.0C) through active primary until ~50-60% apparent attenuation (about SG 1.028-1.032 for this recipe), not by fixed day count.
+3. Raise to 58.0-60.0F (14.4-15.6C) and hold until terminal gravity is reached and stable for 2 days.
+4. Run warm forced VDK check; if any butter/butterscotch remains, hold warm and re-check in 24 hr.
+5. Crash to 34.0F (1.1C) after clean VDK, hold 48-72 hr.
+6. Lager at 34.0-36.0F (1.1-2.2C) for 4-6 weeks before competition service.
 
 ## PACKAGING + COMPETITION GATE
 - Closed transfer only.

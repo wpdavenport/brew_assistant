@@ -86,7 +86,7 @@ Salt additions for 10.4 gal total liquor:
 2. Hold 65 F for days 0-3.
 3. Raise to 67-68 F for days 4-7 or until terminal gravity.
 4. Add dry hops near terminal gravity, hold 48-72 hours at 67-68 F.
-5. Cold crash to 38 F immediately after dry hop contact window.
+5. Cold crash to 42 F immediately after dry hop contact window (aligned to validated GF30 floor).
 
 ## PACKAGING + CLONE SCORING CHECKPOINTS
 - Closed transfer only to fully purged keg.
@@ -94,6 +94,13 @@ Salt additions for 10.4 gal total liquor:
 - Carbonation target: medium (about 2.3-2.5 vols CO2).
 - Validate against fresh commercial sample side-by-side before entry submission.
 - Entry form must include exact commercial target + brewery + base style.
+
+## POST-PACKAGING CLONE CALIBRATION
+- Side-by-side with fresh Dogfish Head 90 Minute IPA is mandatory before any next recipe change.
+- Compare bitterness quality first: smooth-firm vs sharp/angular.
+- Compare finish second: clone should not read too dry, too lean, or too sweet.
+- Compare hop impression third: layered resin/citrus/floral kettle-hop profile, not modern dry-hop saturation.
+- Compare fermentation profile last: keep ester/alcohol expression below the threshold where it reads more English than the commercial target.
 
 ## CRITICAL RISKS TO AVOID
 - Harshness from excess sulfate or high mash pH.
