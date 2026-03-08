@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CASES_PATH = ROOT / "tools" / "prompt_harness_cases.json"
 SYSTEM_PROMPT_PATH = ROOT / "system_prompt.md"
 BREWING_ASSISTANT_PATH = ROOT / "Brewing_Assistant.md"
+RESPONSES_DIR = ROOT / "tools" / "prompt_harness_responses"
 
 
 def load_cases() -> dict:
@@ -141,6 +142,39 @@ def cmd_eval(args: argparse.Namespace) -> int:
     return 0 if passed else 2
 
 
+def cmd_eval_all(args: argparse.Namespace) -> int:
+    cases = load_cases()["cases"]
+    responses_dir = Path(args.responses_dir)
+    overall_pass = True
+
+    for case in cases:
+        response_path = responses_dir / f"{case['id']}.txt"
+        if not response_path.exists():
+            print(f"CASE: {case['id']} - {case['title']}")
+            print(f"RESPONSE: {response_path}")
+            print("RESULT: FAIL")
+            print("FAILURES:")
+            print("- missing response file")
+            overall_pass = False
+            continue
+
+        response_text = response_path.read_text()
+        passed, failures = evaluate_case(case, response_text)
+        print(f"CASE: {case['id']} - {case['title']}")
+        print(f"RESPONSE: {response_path}")
+        print(f"RESULT: {'PASS' if passed else 'FAIL'}")
+        if failures:
+            print("FAILURES:")
+            for failure in failures:
+                print(f"- {failure}")
+            overall_pass = False
+        else:
+            print("All checks passed.")
+        print("")
+
+    return 0 if overall_pass else 2
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Prompt governance harness")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -159,6 +193,14 @@ def build_parser() -> argparse.ArgumentParser:
     eval_case.add_argument("case_id")
     eval_case.add_argument("response_file")
     eval_case.set_defaults(func=cmd_eval)
+
+    eval_all = sub.add_parser("eval-all", help="Evaluate all checked-in golden responses")
+    eval_all.add_argument(
+        "--responses-dir",
+        default=str(RESPONSES_DIR),
+        help="Directory containing one response file per case id",
+    )
+    eval_all.set_defaults(func=cmd_eval_all)
 
     return parser
 

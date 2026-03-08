@@ -15,6 +15,7 @@ It is designed to catch drift in:
 - render the current master prompt bundle from `system_prompt.md` + `Brewing_Assistant.md`
 - list canned evaluation scenarios
 - evaluate a saved assistant response against brewing-specific guardrail checks
+- run the full checked-in regression suite against golden responses
 
 This harness does **not** call a model by itself. It evaluates responses you already generated.
 
@@ -50,6 +51,10 @@ Evaluate a saved response:
 
 `python3 tools/prompt_harness.py eval refractometer_uncertain_fg /path/to/response.txt`
 
+Run the whole checked-in suite:
+
+`python3 tools/prompt_harness.py eval-all`
+
 ## What a good response file looks like
 
 A plain text assistant response is enough. Example:
@@ -67,6 +72,26 @@ Run these after prompt changes:
 - `refractometer_uncertain_fg`
 - `live_batch_single_intervention`
 - `brew_sheet_operational_clarity`
+
+## CI workflow
+
+The repo includes `.github/workflows/prompt-harness.yml`.
+
+It runs automatically on push and pull request when prompt-governance files change and evaluates the checked-in golden responses with:
+
+`python3 tools/prompt_harness.py eval-all`
+
+This means you do not have to remember to run the suite manually every time. If a prompt change causes a regression, the workflow will fail.
+
+## Updating the golden responses
+
+If you intentionally change prompt behavior:
+
+1. Regenerate the response you want to treat as the new expected behavior.
+2. Update the matching file under `tools/prompt_harness_responses/`.
+3. Re-run:
+   - `python3 tools/prompt_harness.py eval-all`
+4. Commit the prompt change and the updated golden response together.
 
 ## Limitations
 
