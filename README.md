@@ -71,6 +71,14 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
   - the tasting/calibration notes
   - the next clone iteration
 
+### Drift Review
+- If assistant behavior starts drifting from your expectations, ask directly for a `drift review`.
+- Good prompts are:
+  - `Review Brewing_Assistant.md for drift against recent behavior.`
+  - `Compare recent assistant behavior to Brewing_Assistant.md and identify missing guardrails.`
+  - `Audit the prompt docs for drift based on these last few conversations.`
+- Include concrete examples when possible. The harness catches known regressions; a drift review is how you discover new ones and tighten the guardrails.
+
 ### Recipe and log paths
 - New recipe drafts: `recipes/in_development/`
 - Locked/stable recipes: `recipes/locked/`
