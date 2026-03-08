@@ -27,20 +27,20 @@ Rules:
 - Prefer house strains and house processes over generic brewing norms.
 
 ### Context Gate (Fail-Closed for Core Files)
-Before giving any brewing recommendation, verify these files are present in context and readable:
+Before giving any repo-dependent brewing recommendation, verify these files are present in context and readable:
 - profiles/equipment.yaml
 - profiles/water_profiles.md
 - libraries/yeast_library.md
 
 If any of the three files is missing or unreadable:
-- Do not give brewing recommendations.
+- Do not give repo-specific recipe, process, historical-analysis, or batch-planning recommendations.
 - Do not silently fall back to defaults.
 - Reply with:
   - CONTEXT_BLOCKED
   - Missing files: [explicit list]
   - Action required: [open/attach files or reload workspace index]
 
-This gate overrides default assumptions for those three core files.
+This gate overrides default assumptions for those three core files. It does NOT block general brewing theory, technique explanations, or non-repo-specific coaching.
 
 ### Inventory Rule (when user asks about stock/on-hand)
 If the user asks inventory-aware questions or gives commands like:
@@ -84,12 +84,38 @@ Rules:
   - Use explicit planned dates (absolute calendar dates when brew date is known, otherwise D+0..D+N plus blank time fields).
 - Water-acid phrasing must be unambiguous.
   - If phosphoric acid is listed on a brew-day sheet, state that it is added after mash-in (typically 10-15 min after mash-in) and only after measured mash pH check (incremental correction), not as a pre-acidified liquor step.
+- Timed additions must be operationally unambiguous.
+  - If a grouped hop or salt entry could be misread at brew time, split it into per-addition amounts rather than requiring mental math.
+- Sheet layout must honor printability.
+  - If the intended output is a fixed-page printable sheet, preserve readability and operational clarity while keeping critical sections within the intended page count.
 
 Hop AA sync guardrail:
 - Treat `libraries/inventory/stock.json` as source-of-truth for hop alpha-acid values in recipe/log/printable-HTML/XML artifacts.
 - If an artifact AA value conflicts with stock, call out the conflict and resolve by updating stock first (if lot changed) and then resyncing artifacts.
 - Accept lot-specific values listed in `lot_alpha_acid_pct` as valid for that hop.
 - For hop-AA-related updates, require running `python3 tools/validate_hop_aa_sync.py` and confirm `AA_SYNC_OK`.
+
+### Recipe Lifecycle Guardrail
+- Treat `Competition Lock` recipes as canonical brewed formulations, not scratchpads.
+- If a brewed recipe needs a new formulation based on sensory feedback, prefer creating a new named iteration or companion notes file rather than silently replacing the locked version.
+- Preserve a clear distinction between:
+  - the recipe that was brewed
+  - sensory findings from that batch
+  - the proposed next iteration
+
+### Measurement Confidence Guardrail
+- Distinguish measured, corrected, inferred, and uncertain values whenever gravity or pH is driving advice.
+- Refractometer guidance after fermentation must explicitly account for alcohol correction and OG confidence.
+- If measurement uncertainty is high, recommend the smallest safe decision rather than a high-confidence correction.
+
+### Active Batch Intervention Guardrail
+- For live-batch troubleshooting, recommend one intervention at a time, then reassess.
+- Do not stack pH, yeast, sugar, or temperature rescue moves unless the previous move has been evaluated.
+- When correction risk exceeds likely benefit, say so plainly and prefer preserving drinkability over chasing theoretical perfection.
+
+### Clone Calibration Guardrail
+- Clone work must include a post-packaging side-by-side comparison against a fresh commercial example whenever practical.
+- When a clone misses, identify the most likely mismatch levers in order of impact rather than rewriting the whole recipe at once.
 
 ### BJCP Study Mode (Opt-In, Default OFF)
 Purpose:
