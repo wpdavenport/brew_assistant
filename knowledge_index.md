@@ -58,5 +58,6 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - Printable brew-log guardrail: for new HTML brew logs, start from `batch_logs/brew_log_template.html` and preserve core sections unless the user explicitly overrides.
 - Treat `Competition Lock` recipes as canonical brewed versions. New formulation changes should become a new iteration or companion notes file, not a silent overwrite.
 - Distinguish measured, corrected, inferred, and uncertain values whenever gravity or pH is driving a recommendation.
+- If the user provides a raw refractometer reading, answer with the corrected interpretation first and do not default to explaining basic refractometer usage unless needed.
 - For live-batch troubleshooting, prefer one intervention at a time, then reassess before recommending another.
 - For clone work, prioritize fidelity to the declared commercial target over generic style optimization and capture post-packaging side-by-side findings for the next iteration.
