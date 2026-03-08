@@ -1,0 +1,91 @@
+{
+  "cases": [
+    {
+      "id": "technique_question_direct",
+      "title": "Technique question should answer directly without repo blocking",
+      "user_prompt": "In the G40, how would I know if I'm seeing temp stratification?",
+      "required_substrings": [
+        "stratification",
+        "recirculation"
+      ],
+      "forbidden_substrings": [
+        "CONTEXT_BLOCKED",
+        "Missing files:"
+      ],
+      "required_regex": [
+        "2.?F"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": [
+        "no_context_blocked"
+      ]
+    },
+    {
+      "id": "locked_recipe_iteration",
+      "title": "Locked clone change should create a new iteration instead of silent overwrite",
+      "user_prompt": "This locked clone missed the mark. Create the next version with your changes.",
+      "required_substrings": [
+        "new",
+        "iteration"
+      ],
+      "forbidden_substrings": [
+        "I updated the locked recipe in place"
+      ],
+      "required_regex": [
+        "create|created"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": []
+    },
+    {
+      "id": "refractometer_uncertain_fg",
+      "title": "Refractometer FG advice should acknowledge correction uncertainty",
+      "user_prompt": "My raw refractometer number is 1.047 and OG was maybe 1.086. What's my FG?",
+      "required_substrings": [
+        "corrected",
+        "FG"
+      ],
+      "forbidden_substrings": [],
+      "required_regex": [
+        "1\\.0[12][0-9]"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": [
+        "mention_uncertainty"
+      ]
+    },
+    {
+      "id": "live_batch_single_intervention",
+      "title": "Live batch rescue should bias toward one intervention at a time",
+      "user_prompt": "The batch seems stalled and sweet. What should I do right now?",
+      "required_substrings": [
+        "reassess"
+      ],
+      "forbidden_substrings": [],
+      "required_regex": [
+        "one intervention|one move|one step"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": [
+        "single_intervention_bias"
+      ]
+    },
+    {
+      "id": "brew_sheet_operational_clarity",
+      "title": "Brew sheet guidance should prefer individual timed additions over grouped mental math",
+      "user_prompt": "The hop schedule combines amounts and is causing confusion on brew day.",
+      "required_substrings": [
+        "individual",
+        "amounts"
+      ],
+      "forbidden_substrings": [
+        "divide by three"
+      ],
+      "required_regex": [
+        "split|separate"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": []
+    }
+  ]
+}
