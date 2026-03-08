@@ -1,0 +1,3 @@
+Split the grouped hop rows into separate timed additions with individual amounts.
+
+That removes mental math on brew day and makes the sheet operationally clear instead of forcing you to infer the per-hop weights.

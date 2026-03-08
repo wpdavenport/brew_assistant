@@ -42,6 +42,7 @@ Use the prompt harness to regression-test brewing-assistant guardrails after pro
 - `python3 tools/prompt_harness.py list-cases`
 - `python3 tools/prompt_harness.py show-case technique_question_direct`
 - `python3 tools/prompt_harness.py eval refractometer_uncertain_fg /path/to/response.txt`
+- `python3 tools/prompt_harness.py eval-all`
 
 Reference:
 - `tools/prompt_harness_README.md`

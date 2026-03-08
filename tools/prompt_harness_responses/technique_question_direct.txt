@@ -1,0 +1,3 @@
+You are likely seeing stratification if the controller says the mash is at target but the top of the grain bed or return wort stays more than about 2 F off for several minutes.
+
+Use moderate recirculation, compare the controller reading to a probe reading near the top of the mash, and look for a persistent gap rather than a brief swing.

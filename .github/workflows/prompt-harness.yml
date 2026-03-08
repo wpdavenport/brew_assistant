@@ -1,0 +1,39 @@
+name: Prompt Harness
+
+on:
+  push:
+    paths:
+      - "Brewing_Assistant.md"
+      - "system_prompt.md"
+      - "knowledge_index.md"
+      - "README.md"
+      - "tools/prompt_harness.py"
+      - "tools/prompt_harness_cases.json"
+      - "tools/prompt_harness_responses/**"
+      - ".github/workflows/prompt-harness.yml"
+  pull_request:
+    paths:
+      - "Brewing_Assistant.md"
+      - "system_prompt.md"
+      - "knowledge_index.md"
+      - "README.md"
+      - "tools/prompt_harness.py"
+      - "tools/prompt_harness_cases.json"
+      - "tools/prompt_harness_responses/**"
+      - ".github/workflows/prompt-harness.yml"
+
+jobs:
+  prompt-harness:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run prompt harness
+        run: python3 tools/prompt_harness.py eval-all
