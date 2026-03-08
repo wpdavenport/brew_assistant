@@ -33,3 +33,15 @@ Use `inventory_cli.py` for inventory-aware workflows:
 - `python3 tools/inventory_cli.py phrase "i brewed patient number 9"`
 - `python3 tools/inventory_cli.py phrase "create a beer i haven't made before with the ingredients i have"`
 - `python3 tools/inventory_cli.py phrase "garbage beer"`
+
+## Prompt Harness
+
+Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:
+
+- `python3 tools/prompt_harness.py render-prompt`
+- `python3 tools/prompt_harness.py list-cases`
+- `python3 tools/prompt_harness.py show-case technique_question_direct`
+- `python3 tools/prompt_harness.py eval refractometer_uncertain_fg /path/to/response.txt`
+
+Reference:
+- `tools/prompt_harness_README.md`
