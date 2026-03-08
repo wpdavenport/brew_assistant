@@ -1,0 +1,3 @@
+East Kent Goldings is not currently listed in stock, so I would flag that explicitly before finalizing the recipe.
+
+Treat it as an assumed ingredient or a shopping-required item, and rebalance to the actual lot once you have the real alpha acid data.

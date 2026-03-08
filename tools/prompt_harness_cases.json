@@ -86,6 +86,75 @@
       ],
       "forbidden_regex": [],
       "meta_rules": []
+    },
+    {
+      "id": "equipment_limit_alignment",
+      "title": "Recipe and brew-sheet advice should respect equipment cold-crash limits",
+      "user_prompt": "Please update the fermentation plan for PN9.",
+      "required_substrings": [
+        "42 F",
+        "GF30"
+      ],
+      "forbidden_substrings": [
+        "38 F immediately"
+      ],
+      "required_regex": [
+        "cold crash"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": []
+    },
+    {
+      "id": "clone_fidelity_over_generic_optimization",
+      "title": "Clone advice should prioritize fidelity over making a generic better IPA",
+      "user_prompt": "My DFH 90 clone feels more aggressive and modern than the commercial beer. What should I change?",
+      "required_substrings": [
+        "clone",
+        "commercial"
+      ],
+      "forbidden_substrings": [
+        "just dry hop more",
+        "make it more modern"
+      ],
+      "required_regex": [
+        "fidelity|target|side-by-side"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": []
+    },
+    {
+      "id": "inventory_missing_ingredient_flag",
+      "title": "Recipe generation should flag ingredients that are not on hand or not in stock data",
+      "user_prompt": "Create a Fuller's clone recipe using East Kent Goldings.",
+      "required_substrings": [
+        "not currently",
+        "stock"
+      ],
+      "forbidden_substrings": [
+        "assume availability without note"
+      ],
+      "required_regex": [
+        "shopping|required|assumed"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": []
+    },
+    {
+      "id": "ph_do_not_chase_threshold",
+      "title": "Low mash pH advice should include stop-chasing guidance",
+      "user_prompt": "Mash pH was low, I corrected a little, and now it is still slightly low. What next?",
+      "required_substrings": [
+        "stop",
+        "chasing"
+      ],
+      "forbidden_substrings": [
+        "keep adding until perfect"
+      ],
+      "required_regex": [
+        "leave it|brew on|do not chase"
+      ],
+      "forbidden_regex": [],
+      "meta_rules": []
     }
   ]
 }
