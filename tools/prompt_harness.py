@@ -49,13 +49,14 @@ def render_master_prompt() -> str:
 def evaluate_case(case: dict, response_text: str) -> tuple[bool, list[str]]:
     failures: list[str] = []
     normalized = response_text
+    normalized_lower = response_text.lower()
 
     for needle in case.get("required_substrings", []):
-        if needle not in normalized:
+        if needle.lower() not in normalized_lower:
             failures.append(f"missing required substring: {needle!r}")
 
     for needle in case.get("forbidden_substrings", []):
-        if needle in normalized:
+        if needle.lower() in normalized_lower:
             failures.append(f"found forbidden substring: {needle!r}")
 
     for pattern in case.get("required_regex", []):

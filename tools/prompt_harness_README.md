@@ -83,6 +83,14 @@ It runs automatically on push and pull request when prompt-governance files chan
 
 This means you do not have to remember to run the suite manually every time. If a prompt change causes a regression, the workflow will fail.
 
+## Local shortcuts
+
+The repo root also includes a `Makefile`:
+
+- `make prompt-test`
+- `make prompt-cases`
+- `make prompt-bundle`
+
 ## Updating the golden responses
 
 If you intentionally change prompt behavior:
@@ -92,6 +100,19 @@ If you intentionally change prompt behavior:
 3. Re-run:
    - `python3 tools/prompt_harness.py eval-all`
 4. Commit the prompt change and the updated golden response together.
+
+## Expanded brewing-specific regression coverage
+
+The suite now includes checks for:
+- direct technique answers vs incorrect context blocking
+- locked recipe iteration discipline
+- refractometer uncertainty language
+- one-intervention-at-a-time rescue guidance
+- operational clarity in brew-day sheets
+- equipment limit alignment
+- clone fidelity over generic optimization
+- missing inventory ingredient flagging
+- pH stop-chasing behavior
 
 ## Limitations
 
