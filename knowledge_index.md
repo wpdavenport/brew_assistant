@@ -52,9 +52,13 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - Prefer house strains and house processes over generic advice.
 - `libraries/inventory/stock.json` is the source-of-truth for hop alpha acid values; if a recipe/log/printable-HTML/XML value differs, update stock first (if needed), then resync artifacts.
 - After any hop AA edit, run `python3 tools/validate_hop_aa_sync.py` and do not finalize changes unless output is `AA_SYNC_OK`.
-- Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults.
+- Fail-closed core context gate: if profiles/equipment.yaml, profiles/water_profiles.md, or libraries/yeast_library.md are missing/unreadable, stop and request those files instead of using defaults for any repo-dependent recipe, process, historical-analysis, or batch-planning recommendation.
 - Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.
 - Yeast reuse tracking is required: capture generation per batch (G0 fresh pack, G1+ repitch) and source batch ID/date for repitches.
 - Brew-day-sheet yeast/pitch reconciliation is required: for `brewing/brew_day_sheets/*.html`, derive yeast plan from `libraries/inventory/stock.json` + recipe OG/volume (and yeast behavior), not from a fixed default starter assumption.
 - BJCP mode is opt-in only and must be explicitly entered/exited by user command.
 - Printable brew-log guardrail: for new HTML brew logs, start from `batch_logs/brew_log_template.html` and preserve core sections unless the user explicitly overrides.
+- Treat `Competition Lock` recipes as canonical brewed versions. New formulation changes should become a new iteration or companion notes file, not a silent overwrite.
+- Distinguish measured, corrected, inferred, and uncertain values whenever gravity or pH is driving a recommendation.
+- For live-batch troubleshooting, prefer one intervention at a time, then reassess before recommending another.
+- For clone work, prioritize fidelity to the declared commercial target over generic style optimization and capture post-packaging side-by-side findings for the next iteration.

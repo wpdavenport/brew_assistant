@@ -63,6 +63,14 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 3.  **Execute**: It calculates strike temps and salt additions using your specific `tools/calculations.md`.
 4.  **Learn**: After the brew, you log the data. The AI uses this to troubleshoot and improve the next batch.
 
+### Iteration Discipline
+- Locked competition recipes are treated as canonical brewed versions, not scratchpads.
+- Post-batch sensory findings should be captured explicitly, then the next formulation should be created as a new iteration when needed.
+- For clone beers, keep three things separate:
+  - the brewed recipe
+  - the tasting/calibration notes
+  - the next clone iteration
+
 ### Recipe and log paths
 - New recipe drafts: `recipes/in_development/`
 - Locked/stable recipes: `recipes/locked/`
@@ -139,6 +147,10 @@ To keep the AI honest, we enforce these rules:
 *   **No Hallucinations**: If a file is missing, the AI must say so.
 *   **House First**: We prefer house yeast and processes over generic internet wisdom.
 *   **Competition Standard**: Default assumption is "We are brewing to win gold."
+*   **Measurement Confidence**: The AI must distinguish measured, corrected, inferred, and uncertain values before making process calls.
+*   **One Intervention At A Time**: For live-batch rescue advice, confirm the problem, make one move, then reassess.
+*   **Clone Fidelity Over Generic Optimization**: Clone recipes are tuned toward the commercial target, not toward a generic "better IPA" or "better ESB."
+*   **Operational Brew Sheets**: Printable sheets must be unambiguous at brew time and fit the intended page count without hiding critical instructions.
 
 ---
 *Brew better. Brew smarter. Brew with data.* 🍻

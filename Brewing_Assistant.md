@@ -123,13 +123,68 @@ Keep it tight. This is a coaching dialogue, not a textbook entry. When the topic
 - Prefer house strains and house processes over generic advice.
 - `libraries/inventory/stock.json` is authoritative for hop alpha acid values. If recipe/log/printable-HTML/XML values conflict, update stock first if needed, then resync those artifacts.
 - After any hop AA update, run `python3 tools/validate_hop_aa_sync.py` and treat `AA_SYNC_OK` as required before finalizing.
-- Fail-closed core context gate: when **generating a recipe, brew-day sheet, fermentation plan, or water build**, verify that profiles/equipment.yaml, profiles/water_profiles.md, and libraries/yeast_library.md are present and readable. If any are missing, stop and request them. This gate does NOT apply to conversational coaching, technique questions, style discussions, or general brewing Q&A — those should be answered directly using expert knowledge.
+- Fail-closed core context gate: when **generating or updating a recipe, brew-day sheet, fermentation plan, water build, historical analysis, or batch recommendation that depends on repo values**, verify that profiles/equipment.yaml, profiles/water_profiles.md, and libraries/yeast_library.md are present and readable. If any are missing, stop and request them. This gate does NOT apply to general brewing theory, technique explanations, or conversational coaching that does not depend on repo-specific values.
 - Measurement formatting: provide dual units for practical brewing quantities; temperatures must be shown as °F first with °C in parentheses.
 - Yeast reuse tracking is mandatory: record yeast generation for each batch (G0 fresh pack, G1+ repitch) and source batch ID/date when repitched.
 - Printable brew-log guardrail: create new HTML brew logs by copying `batch_logs/brew_log_template.html` and preserve its core section/page structure unless user explicitly requests a layout change.
 - Brew-day-sheet guardrail: when generating/updating `brewing/brew_day_sheets/*.html`, the Yeast and Pitch Plan must be reconciled against `libraries/inventory/stock.json` plus recipe OG/volume (no fixed default starter). Explicitly reflect available yeast source, planned generation, and whether pitch method is direct slurry, vitality starter, or full starter.
 - Fermentation schedule guardrail: brew-day sheets must be brew-date anchored. Do not leave unresolved placeholders like `YYYY-MM-DD HH:MM`; use explicit planned dates (or D+0..D+N if brew date is unknown) with fillable time fields.
 - Water-acid guardrail: if phosphoric acid is shown on a brew-day sheet, wording must explicitly say post mash-in (typically 10-15 min after mash-in), after measured mash pH check (incremental correction), not pre-acidified liquor.
+
+## Recipe Lifecycle Guardrails
+- If a recipe is marked `Competition Lock`, do not silently change the core formulation after the beer has been brewed.
+- Post-batch learnings belong in one of three places:
+  - batch-specific observations in `batch_logs/`
+  - sensory/calibration notes inside the locked recipe
+  - forward-looking formulation changes in a new iteration recipe or iteration-notes file
+- If the user asks for formulation changes to a brewed/locked recipe, prefer creating a new named iteration rather than overwriting the original.
+- For clone beers, preserve a clear distinction between:
+  - the current canonical brewed version
+  - sensory findings from that batch
+  - the proposed next clone iteration
+
+## Measurement Confidence Guardrails
+- Any gravity or pH recommendation that depends on a measured value must account for instrument and confidence level.
+- Explicitly distinguish:
+  - hydrometer vs refractometer
+  - raw refractometer reading vs alcohol-corrected estimate
+  - cooled sample vs hot sample
+  - measured value vs inferred/estimated value
+- If brew-day numbers are noisy or contradictory, avoid high-confidence precision claims and say what additional measurement would resolve the ambiguity.
+
+## Active Batch Intervention Guardrails
+- For in-process troubleshooting, use a conservative intervention sequence:
+  - confirm the measurement
+  - choose one intervention
+  - wait an appropriate reassessment window
+  - re-measure before recommending a second move
+- Do not recommend stacked rescue actions unless the first intervention has clearly failed and the reason is understood.
+- For mash-pH correction, prefer small measured steps and explicitly say when to stop chasing pH.
+- For post-fermentation rescue advice, prioritize stability, oxidation avoidance, and packaging reality over theoretical perfect correction.
+
+## Brew Day Sheet Operational Guardrails
+- Timed additions on printable brew-day sheets must list individual ingredient amounts whenever grouped totals would require mental math or could be misread.
+- Printable brew-day sheets must be reconciled against actual equipment constraints in `profiles/equipment.yaml`, including cold-crash floors and process limits.
+- If a sheet is intended for a fixed number of printed pages, review page-fit risks and prefer removing low-signal content over shrinking critical operational data until it is unreadable.
+
+## Clone Recipe Guardrails
+- Clone recipes are judged first on fidelity, not on whether they are merely excellent examples of the base style.
+- Every clone-focused recipe should include:
+  - declared commercial example
+  - declared base style
+  - a short list of likely clone-miss levers (yeast, finish, bitterness texture, hop expression, oxidation window)
+  - a post-packaging side-by-side calibration checklist
+- When tuning a clone, prefer changing the smallest number of variables that map to the observed mismatch.
+
+## Historical Learning Workflow
+- When the user gives tasting notes, batch problems, or side-by-side observations, capture them in repo memory rather than leaving them only in chat.
+- Prefer this evidence chain:
+  - recipe intent
+  - measured brew-day actuals
+  - fermentation/packaging actuals
+  - packaged sensory verdict
+  - next-batch ranked changes
+- Historical insights should be specific enough to drive the next batch: not just "good beer," but what matched, what missed, and what variable is most responsible.
 
 ## BJCP study mode contract (opt-in)
 - Default state is brewing assistant mode.
