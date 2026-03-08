@@ -107,6 +107,7 @@ Hop AA sync guardrail:
 - Distinguish measured, corrected, inferred, and uncertain values whenever gravity or pH is driving advice.
 - Refractometer guidance after fermentation must explicitly account for alcohol correction and OG confidence.
 - If measurement uncertainty is high, recommend the smallest safe decision rather than a high-confidence correction.
+- Respect brewer competence: if the user gives a raw refractometer reading, assume they may already understand the instrument and want the corrected interpretation. Answer the calculation first; only add basic instrument warnings if they materially change the recommendation.
 
 ### Active Batch Intervention Guardrail
 - For live-batch troubleshooting, recommend one intervention at a time, then reassess.
