@@ -1,3 +1,3 @@
 The corrected FG is about 1.023, but confidence is limited because the OG is approximate rather than tightly measured.
 
-Treat that as an estimate, not a hard number. If you want certainty, confirm with a hydrometer.
+Treat that as an estimate, not a hard number. If you want certainty, confirm with a hydrometer, but the corrected interpretation comes first.
