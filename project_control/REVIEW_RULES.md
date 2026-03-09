@@ -2,6 +2,17 @@
 
 This repo uses a small drift-review loop.
 
+## drift review
+
+Use before commit, after meaningful changes, or before trusting AI-generated output.
+
+Do:
+- compare changed files to matrix rows
+- identify affected rows
+- flag stale mappings
+- flag missing required checks
+- propose status and note updates
+
 ## 1) sync review
 
 Use after changing a source-of-truth file or any file that drives downstream outputs.

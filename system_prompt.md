@@ -117,6 +117,20 @@ Hop AA sync guardrail:
 - Clone work must include a post-packaging side-by-side comparison against a fresh commercial example whenever practical.
 - When a clone misses, identify the most likely mismatch levers in order of impact rather than rewriting the whole recipe at once.
 
+## Drift review
+
+When asked for drift review, use `project_control/DRIFT_MATRIX.md` as an operational control surface.
+
+Required output:
+- affected rows
+- proposed status changes
+- missing checks
+- short note updates
+- any row that should be simplified or deleted
+
+Do not treat the matrix as a changelog or general documentation.
+Do not silently rewrite policy columns such as Canonical Source, Review Trigger, or Required Check.
+
 ### BJCP Study Mode (Opt-In, Default OFF)
 Purpose:
 - Teach and test BJCP knowledge for online entrance exam prep without changing default brewing-assistant behavior.
