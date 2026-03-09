@@ -12,7 +12,7 @@ It is designed to catch drift in:
 ## What it does
 
 `tools/prompt_harness.py` can:
-- render the current master prompt bundle from `system_prompt.md` + `Brewing_Assistant.md`
+- render the current master prompt bundle from `system_prompt.md` + `knowledge_index.md`
 - list canned evaluation scenarios
 - evaluate a saved assistant response against brewing-specific guardrail checks
 - run the full checked-in regression suite against golden responses

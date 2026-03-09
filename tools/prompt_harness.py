@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CASES_PATH = ROOT / "tools" / "prompt_harness_cases.json"
 SYSTEM_PROMPT_PATH = ROOT / "system_prompt.md"
-BREWING_ASSISTANT_PATH = ROOT / "Brewing_Assistant.md"
+KNOWLEDGE_INDEX_PATH = ROOT / "knowledge_index.md"
 RESPONSES_DIR = ROOT / "tools" / "prompt_harness_responses"
 
 
@@ -39,8 +39,8 @@ def render_master_prompt() -> str:
         "## system_prompt.md",
         SYSTEM_PROMPT_PATH.read_text().rstrip(),
         "",
-        "## Brewing_Assistant.md",
-        BREWING_ASSISTANT_PATH.read_text().rstrip(),
+        "## knowledge_index.md",
+        KNOWLEDGE_INDEX_PATH.read_text().rstrip(),
         "",
     ]
     return "\n".join(sections)

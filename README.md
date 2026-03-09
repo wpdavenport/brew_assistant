@@ -22,7 +22,7 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 **💡 Pro Tip:** The easiest way to use this is inside **VS Code**. Install your favorite AI chat extension (Gemini, Claude, or ChatGPT), and it will become your personal brewer assistant.
 
 1.  **Clone this Repo**: This is your brewing brain.
-2.  Intital Prompt: Read Brewing_Assistant.md and become my professional brewing assistant
+2.  Initial Prompt: Read `system_prompt.md` first, then use `knowledge_index.md` as the repo map.
 3. For Genimi users, add this:
 Load and confirm these files before answering:
 - profiles/equipment.yaml
@@ -40,7 +40,8 @@ Then answer my brewing question.
     *   Edit `profiles/equipment.yaml` with your system stats.
     *   Update `profiles/water_profiles.md` with your source water.
 4.  **Activate the Coach**:
-    *   Use the `system_prompt.md` to initialize the AI persona.
+    *   Use `system_prompt.md` to initialize the AI behavior contract.
+    *   Use `knowledge_index.md` to navigate the repo and find authoritative files.
 5.  **Brew**:
     *   *"Design a BJCP 26D Belgian Dark Strong for my system."*
     *   *"Why did my last IPA finish sweet? Check the logs."*
@@ -74,8 +75,8 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 ### Drift Review
 - If assistant behavior starts drifting from your expectations, ask directly for a `drift review`.
 - Good prompts are:
-  - `Review Brewing_Assistant.md for drift against recent behavior.`
-  - `Compare recent assistant behavior to Brewing_Assistant.md and identify missing guardrails.`
+  - `Review system_prompt.md for drift against recent behavior.`
+  - `Compare recent assistant behavior to system_prompt.md and knowledge_index.md and identify missing guardrails.`
   - `Audit the prompt docs for drift based on these last few conversations.`
 - Include concrete examples when possible. The harness catches known regressions; a drift review is how you discover new ones and tighten the guardrails.
 
