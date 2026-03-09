@@ -37,17 +37,17 @@ Note: East Kent Goldings is not currently listed in `libraries/inventory/stock.j
 - Whirlfloc: 1 tablet at 10 min
 
 ## YEAST
-- Wyeast 1968 London ESB Ale (or WLP002)
+- Wyeast 1968 London ESB Ale (G1 repitch from fridge slurry) or WLP002 equivalent
 - Target pitch: ~200B cells for 5.0 gal (19.0 L) at OG 1.057
 - Track generation every batch: `G0` = fresh pack, `G1+` = repitch.
 - Record repitch source batch ID/date.
 
 ## STARTER PLAN (D-2 TO D-1)
-- 1 x Wyeast 1968 smack pack
-- 2 cans Omega Propper Starter
+- Preferred plan: direct pitch healthy `G1` Wyeast 1968 slurry from cold storage
+- If slurry age/health is uncertain: build a small vitality starter instead of assuming a fresh pack
 - Optional Zinc Buddy: label dose only
-- Build ~1.5-2.0 L stirred starter
-- Run ~18-24 hr, cold crash 12-24 hr, decant and pitch slurry on brew day
+- Direct pitch target: enough fresh slurry to reach ~200B cells
+- Vitality starter fallback: ~1.0 L, 18-24 hr, then decant and pitch active slurry on brew day
 
 ## WATER PROFILE (RO SOURCE)
 Total brewing liquor for this recipe: 8.45 gal (32.0 L)
@@ -85,7 +85,7 @@ Salt additions for 8.45 gal total liquor:
 2. Day 3-4: let rise to 67.0-68.0 F (19.4-20.0 C).
 3. Day 5-7: hold 68.0 F (20.0 C), gently rouse yeast once if gravity movement slows.
 4. Day 7-9: verify stable terminal gravity and perform forced VDK check before crash decision.
-5. Crash to 35-37 F (2-3 C) for 48-72 hr only after stable terminal gravity and clean VDK.
+5. Crash to 42 F (5.6 C) for 48-72 hr only after stable terminal gravity and clean VDK.
 
 ## PACKAGING + COMPETITION CHECKPOINTS
 - Closed transfer only.

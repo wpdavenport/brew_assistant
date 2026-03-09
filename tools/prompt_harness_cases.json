@@ -39,13 +39,17 @@
     },
     {
       "id": "refractometer_uncertain_fg",
-      "title": "Refractometer FG advice should acknowledge correction uncertainty",
+      "title": "Refractometer FG advice should answer the conversion first and acknowledge uncertainty without a basic lecture",
       "user_prompt": "My raw refractometer number is 1.047 and OG was maybe 1.086. What's my FG?",
       "required_substrings": [
         "corrected",
         "FG"
       ],
-      "forbidden_substrings": [],
+      "forbidden_substrings": [
+        "refractometer is not your true FG",
+        "you need an alcohol correction",
+        "post-fermentation refractometer reading is not"
+      ],
       "required_regex": [
         "1\\.0[12][0-9]"
       ],
