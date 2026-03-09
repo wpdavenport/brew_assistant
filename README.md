@@ -80,6 +80,18 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
   - `Audit the prompt docs for drift based on these last few conversations.`
 - Include concrete examples when possible. The harness catches known regressions; a drift review is how you discover new ones and tighten the guardrails.
 
+## AI-assisted workflow
+
+Start with:
+- `system_prompt.md`
+- `knowledge_index.md`
+
+Project control files:
+- `project_control/REVIEW_RULES.md`
+- `project_control/DRIFT_MATRIX.md`
+
+Use `drift review` before trusting meaningful changes.
+
 ### Recipe and log paths
 - New recipe drafts: `recipes/in_development/`
 - Locked/stable recipes: `recipes/locked/`
