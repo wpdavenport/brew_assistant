@@ -3,20 +3,20 @@ name: Prompt Harness
 on:
   push:
     paths:
-      - "Brewing_Assistant.md"
       - "system_prompt.md"
       - "knowledge_index.md"
       - "README.md"
+      - "project_control/**"
       - "tools/prompt_harness.py"
       - "tools/prompt_harness_cases.json"
       - "tools/prompt_harness_responses/**"
       - ".github/workflows/prompt-harness.yml"
   pull_request:
     paths:
-      - "Brewing_Assistant.md"
       - "system_prompt.md"
       - "knowledge_index.md"
       - "README.md"
+      - "project_control/**"
       - "tools/prompt_harness.py"
       - "tools/prompt_harness_cases.json"
       - "tools/prompt_harness_responses/**"
