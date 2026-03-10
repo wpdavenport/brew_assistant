@@ -4,6 +4,7 @@
 - Style: Belgian Dark Strong Ale (BJCP 26D)
 - Goal: Cherry and dark-fruit expression with clean attenuation
 - Last noted result: "Amazing cherry smell and flavor"
+- Side-by-side target: Westvleteren 12 clone fidelity, not just generic 26D quality
 
 ## Fermentables
 - 17.0 lb Pale Malt
@@ -49,6 +50,50 @@
 - Raising to 75F on Day 3 likely prevented a stall and supported ester profile
 - The 30/70 sugar split supported attenuation
 - Kettle phosphoric addition likely smoothed bitterness and improved break
+- Side-by-side with Westvleteren 12 showed strong clone proximity before final calibration changes
+
+## Post-Packaging Clone Calibration
+- Commercial comparison: Westvleteren 12
+- Packaged sensory finding: overall beer was nearly a dead ringer side-by-side once the sample was adjusted with 3 drops of lactic acid per 12 oz pour
+- Aroma: cherry notes were prominent on both beers
+- Appearance: Westvleteren 12 presented slightly darker and cloudier; Manhattan was a bit cleaner and more polished
+- Mouthfeel: close match
+- Flavor: lactic-acid-adjusted Manhattan matched closely in core flavor
+- Palate shape:
+  - Westvleteren 12 hit earlier and faster on the palate
+  - Westvleteren 12 finished with a slight bitterness plus tartness
+  - Manhattan presented more uniformly across the palate
+
+## Proposed Next Iteration Spec (Not Yet Locked)
+- Keep unchanged:
+  - WLP540 / Rochefort-family yeast direction
+  - cherry / dark-fruit fermentation profile
+  - 30/70 candi sugar split
+  - 60 min bittering structure
+- Proposed formulation and process changes:
+  - Fermentables:
+    - reduce CaraMunich II from 11.0 oz to 8.0 oz
+    - increase CaraMunich III from 11.0 oz to 14.0 oz
+    - keep total crystal weight unchanged; aim is slightly deeper color, not more caramel weight
+  - Kettle pH / finish shaping:
+    - stop using a blind fixed acid dose as the final target
+    - measure end-of-boil pH and target 5.05-5.10 at room-temp sample
+    - keep the acid move process-side rather than dosing packaged beer
+  - Clarity / presentation:
+    - reduce Whirlfloc from 1 tab to 1/2 tab at 10 min
+    - keep cold conditioning at 42F (5.6C) but avoid extended polish-conditioning beyond what is needed for clean transfer
+  - Finish definition:
+    - target packaged carbonation at 3.0-3.1 vol CO2 to sharpen the front-palate hit and support the slight bitter-tart finish
+- Hold unless retest says otherwise:
+  - do not increase bittering hops yet
+  - do not broaden the specialty malt bill
+  - do not use packaged-beer lactic dosing as the production solution
+
+## Ranked Change Candidates
+1. End-of-boil pH target and packaged-beer pH logging
+2. Slight color shift via CaraMunich II / III rebalance
+3. Less polished presentation via reduced kettle fining
+4. Higher clone-appropriate carbonation before any bitterness rewrite
 
 ## System Calibration Update (G40)
 - Current equipment baseline in `profiles/equipment.yaml`: `boil_off_rate_gal_per_hour: 1.76`
