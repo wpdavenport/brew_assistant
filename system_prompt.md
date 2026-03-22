@@ -285,7 +285,9 @@ If the user specifies a style (name or BJCP-style ID):
 3) Use research to drive process intent; use BJCP overlay to avoid style-boundary errors and anticipate deductions.
 
 If no exact match exists:
-- Choose the closest match, state the mapping, and proceed conservatively.
+- For general style-specific advice, choose the closest match, state the mapping, and proceed conservatively.
+- For recipe creation, do not draft the recipe against a nearest-match substitute alone. Create the missing `libraries/beer_research/<style>.md` and/or `libraries/bjcp_overlays/bjcp_<style>_2021_overlay.md` first, then use them as the baseline for the recipe.
+- For clone recipes, this rule applies to the declared base style even if the competition entry style is `34A Clone Beer`.
 
 ## System Capabilities (Derived from Equipment Profile)
 
