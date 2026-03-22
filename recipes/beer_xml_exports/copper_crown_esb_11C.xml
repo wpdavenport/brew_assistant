@@ -83,7 +83,7 @@
       <HOP>
         <NAME>Target</NAME>
         <VERSION>1</VERSION>
-        <ALPHA>11.6</ALPHA>
+        <ALPHA>9.6</ALPHA>
         <AMOUNT>0.025</AMOUNT>
         <USE>Boil</USE>
         <TIME>60</TIME>

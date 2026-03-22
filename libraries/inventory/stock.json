@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g).",
+  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients.",
   "items": [
     {
       "id": "pale_malt_us",
@@ -29,7 +29,7 @@
       "name": "Maris Otter",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 0,
+      "on_hand": 4100,
       "tags": [
         "base_malt",
         "english"
@@ -40,7 +40,7 @@
       "name": "English Medium Crystal (Thomas Fawcett)",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 173.59237,
+      "on_hand": 283.59237,
       "tags": [
         "specialty_malt",
         "crystal",
@@ -254,7 +254,7 @@
       "category": "hop",
       "unit": "g",
       "on_hand": 205.534043,
-      "alpha_acid_pct": 7.22,
+      "alpha_acid_pct": 7.1,
       "lot_alpha_acid_pct": [
         7.1,
         7.5
@@ -351,11 +351,26 @@
       "name": "Target",
       "category": "hop",
       "unit": "g",
-      "on_hand": 3.349523,
-      "alpha_acid_pct": 11.6,
+      "on_hand": 28.349523,
+      "alpha_acid_pct": 9.6,
       "tags": [
         "uk",
         "bittering"
+      ]
+    },
+    {
+      "id": "east_kent_goldings",
+      "name": "East Kent Goldings",
+      "category": "hop",
+      "unit": "g",
+      "on_hand": 45,
+      "alpha_acid_pct": 6.1,
+      "tags": [
+        "uk",
+        "english",
+        "floral",
+        "marmalade",
+        "aa_assumed"
       ]
     },
     {

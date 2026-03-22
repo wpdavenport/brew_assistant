@@ -31,7 +31,7 @@ Competition-calibrated Fuller's ESB-style clone targeting classic 11C balance: l
 ## HOPS (TARGET: 37 IBU)
 
 ### Boil / Whirlpool
-- 0.88 oz (25 g) Target (11.6% AA) - 60 min
+- 0.88 oz (25 g) Target (9.6% AA) - 60 min
 - 0.63 oz (18 g) Northdown (7.3% AA) - 20 min
 - 0.53 oz (15 g) UK Challenger (7.0% AA) - 10 min
 - 0.42 oz (12 g) Northdown (7.3% AA) - flameout, 10 min steep

@@ -24,14 +24,14 @@ Competition-calibrated Fuller's ESB clone iteration targeting a more authentic h
 - 0.35 lb (0.16 kg) Invert Sugar No.2 (add at 10 min left in boil)
 
 ## HOPS (TARGET: ~37 IBU)
-Note: East Kent Goldings is not currently listed in `libraries/inventory/stock.json`; recipe below assumes a typical lot at ~5.0% AA. Rebalance late-addition weights if your EKG lot differs materially.
+Note: East Kent Goldings is now listed in `libraries/inventory/stock.json` at 6.1% AA. Rebalance late-addition weights if a future lot differs materially.
 
 ### Boil / Whirlpool
-- 0.88 oz (25 g) Target (11.6% AA) - 60 min
+- 0.88 oz (25 g) Target (9.6% AA) - 60 min
 - 0.35 oz (10 g) Northdown (7.3% AA) - 20 min
-- 0.53 oz (15 g) East Kent Goldings (~5.0% AA assumed) - 20 min
-- 0.53 oz (15 g) East Kent Goldings (~5.0% AA assumed) - 10 min
-- 0.53 oz (15 g) East Kent Goldings (~5.0% AA assumed) - flameout, 10 min steep
+- 0.53 oz (15 g) East Kent Goldings (6.1% AA) - 20 min
+- 0.53 oz (15 g) East Kent Goldings (6.1% AA) - 10 min
+- 0.53 oz (15 g) East Kent Goldings (6.1% AA) - flameout, 10 min steep
 
 ### Kettle Additions
 - Whirlfloc: 1 tablet at 10 min
