@@ -102,6 +102,46 @@ Salt additions for 10.4 gal total liquor:
 - Compare hop impression third: layered resin/citrus/floral kettle-hop profile, not modern dry-hop saturation.
 - Compare fermentation profile last: keep ester/alcohol expression below the threshold where it reads more English than the commercial target.
 
+## FINAL SIDE-BY-SIDE NOTES
+- Appearance:
+  - PN9 is noticeably darker than fresh Dogfish Head 90 Minute IPA
+  - PN9 reads more amber while the commercial beer reads more golden
+- Aroma:
+  - Dogfish Head 90 Minute is brighter
+  - PN9 reads darker and deeper in aroma
+- Flavor:
+  - PN9 shows more upfront hop bitterness
+  - mid-palate through finish shows a harsher hop bitterness and lingering bitterness that is not present in the commercial beer
+  - water profile appears broadly close; primary miss reads more like darker-malt plus hop-composition harshness than a fully wrong water profile
+- Mouthfeel:
+  - spot on
+- Carbonation:
+  - perfect
+
+## PN9 V2 ADJUSTMENT PLAN (NOT YET LOCKED)
+- Keep unchanged:
+  - overall body and carbonation target
+  - yeast direction
+  - core Simcoe / Amarillo hop direction
+- Reduce color and darker flavor impression:
+  - cut Thomas Fawcett Amber Malt from 1.0 lb to 0.5-0.75 lb
+  - aim for a more golden result while keeping a light clone-appropriate malt depth
+- Reduce Warrior harshness:
+  - keep 0.25 oz Warrior at First Wort
+  - keep 0.25 oz Warrior at 60 min only if needed after retest
+  - remove Warrior at 40 min
+  - remove Warrior at 20 min
+  - replace lost mid-boil shaping with Simcoe and/or Amarillo rather than more Warrior
+- Water:
+  - keep current profile broadly intact for the next pass
+  - optional second-step test only if bitterness still reads hard after hop changes: reduce gypsum by 1-2 g across total liquor
+
+## RANKED NEXT-BATCH CHANGES
+1. Reduce Thomas Fawcett Amber Malt to lighten color and dark-malt expression
+2. Remove 40 min and 20 min Warrior additions
+3. Rebalance mid-boil hop shaping with Simcoe / Amarillo
+4. Only then consider a small gypsum reduction if bitterness still reads too hard
+
 ## CRITICAL RISKS TO AVOID
 - Harshness from excess sulfate or high mash pH.
 - Oxidation during dry hop/packaging.

@@ -8,6 +8,11 @@ Competition-calibrated Fuller's ESB-style clone targeting classic 11C balance: l
 - Declared Commercial Example: Fuller's ESB
 - Declared Base Style: 11C Strong Bitter
 
+## COMPETITION TRACKING
+- Competition: Spirit Of Free Beer
+- Entry status: entered
+- Results date: by 12:00 PM on April 13, 2026
+
 ## TARGET PARAMETERS
 - OG: 1.057
 - FG: 1.013

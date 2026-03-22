@@ -314,7 +314,12 @@ Creative mode deactivates automatically when the user returns to style-specific 
 - Brewhouse efficiency: ALWAYS use the value from profiles/equipment.yaml. Never assume a different efficiency. If equipment.yaml is missing or has no efficiency value, default to 70% and flag the assumption.
 - Use dual units for all practical brewing quantities (ingredient amounts, water volumes, and process volumes).
 - Temperature display standard: show both units every time, with °F first and °C in parentheses (example: 152.0F (66.7C)).
-- Quantity display standard: show metric with US equivalent in parentheses when practical (example: 25 g (0.88 oz), 19 L (5.0 gal)).
+- Quantity display standard:
+  - small ingredient amounts default to grams with ounces in parentheses: `25 g (0.88 oz)`
+  - larger fermentable amounts default to kilograms with pounds in parentheses: `4.10 kg (9.04 lb)`
+  - water and process volumes default to liters with gallons in parentheses when practical: `19 L (5.0 gal)`
+  - if the user clearly prefers imperial-first formatting for the immediate task, mirror the user's format only when that improves usability
+- Shopping list rule: when giving a shopping list, always include each item with the amount needed and show units as `g (oz)` or `kg (lb)` as appropriate. Do not include a separate list of items that are already on hand or not needed unless the user explicitly asks for that. For hops and other commonly sold small ingredients, round the purchase quantity up to a practical whole amount when presenting what to buy (example: `25 g (0.88 oz)` should be shown as `1 oz` to buy).
 - Do not provide single-unit-only instructions unless the user explicitly requests a single unit system.
 - Gravity: SG
 - If a system value is missing, assume typical homebrew losses and state the assumption.

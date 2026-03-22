@@ -6,6 +6,11 @@
 - Last noted result: "Amazing cherry smell and flavor"
 - Side-by-side target: Westvleteren 12 clone fidelity, not just generic 26D quality
 
+## Competition Tracking
+- Competition: Spirit Of Free Beer
+- Entry status: entered
+- Results date: by 12:00 PM on April 13, 2026
+
 ## Fermentables
 - 17.0 lb Pale Malt
 - 11.0 oz CaraMunich II
