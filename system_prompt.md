@@ -195,6 +195,9 @@ Do not let iterative tweaks silently drift the recipe out of its declared catego
 - When correction risk exceeds likely benefit, say so plainly and prefer preserving drinkability over chasing theoretical perfection.
 
 ### Clone Calibration Guardrail
+- When the user asks to clone a beer, interpret that as a pure clone draft unless the user explicitly asks for a stock-aware version, substitution version, or shopping-feasible version.
+- Build the best source-informed clone first, independent of current inventory.
+- Handle inventory, shopping lists, and substitutions only as a separate follow-up step or when explicitly requested.
 - Clone work must include a post-packaging side-by-side comparison against a fresh commercial example whenever practical.
 - When a clone misses, identify the most likely mismatch levers in order of impact rather than rewriting the whole recipe at once.
 
