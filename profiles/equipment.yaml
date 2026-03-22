@@ -3,6 +3,12 @@
 system: "Grainfather G40"
 brew_method: "All-in-one electric, basket (BIAB-style), recirculating"
 
+# Verification status — required before the AI will run recipe-specific math.
+# Set verified: true once you have confirmed all values below match your actual system.
+# Update verified_date any time you recalibrate a measured value (boil-off, efficiency, etc.).
+verified: true
+verified_date: "2026-01-15"
+
 batch_size_gal: 5.0
 batch_size_l: 19
 
