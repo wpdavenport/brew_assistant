@@ -1,34 +1,25 @@
-# Brewing HTML Artifacts
+# Brewing Artifacts
 
-This folder contains printable/export HTML brew-day artifacts:
-- `brew_day_sheets/` for brew-day execution sheets and tips pages
+## Brew Day Sheets (`brew_day_sheets/`)
 
-Use this folder for all new `.html` brew-day artifacts.
+The brew day sheet is the single canonical artifact for each batch. It serves as both the pre-brew execution guide and the brew day record.
 
-## Standard Brew Log Template (Guardrail)
+**Reference example:** `brew_day_sheets/copper_crown_brew_day_sheet.html`
 
-- Canonical template: `../batch_logs/brew_log_template.html`
-- Start every new printable brew log from this file.
-- Replace all bracketed placeholders (example: `[RECIPE_NAME]`, `[OG_TARGET]`) when generating a recipe-specific log.
-- Preserve section/page structure unless explicitly requested otherwise:
-  - Page 1: Brew setup + ingredient staging
-  - Page 2: Mash + boil execution
-  - Page 3: Starter + fermentation tracking
-  - Page 4: Packaging + competition gate
-- Keep required competition controls in every generated log:
-  - hop AA values
-  - pre/post-boil gravity + volume checkpoints
-  - yeast generation tracking (`G0`/`G1+`)
-  - forced VDK gate before crash/packaging
+### What a brew day sheet contains
+- Page 1: Recipe targets — grain bill, water chemistry, hop schedule, yeast and pitch plan
+- Page 2: Brew day execution — pre-brew QC, mash checklist, boil additions, transfer and pitch
+- Page 3: Fermentation log, packaging gate, brew notes
 
-## Brew Day Sheet Yeast/Pitch Guardrail
+### Naming convention
+- **Undated** `<slug>_brew_day_sheet.html` — competition-locked recipe, no brew date committed yet
+- **Dated** `<slug>_brew_day_sheet_<YYYY-MM-DD>.html` — brew date committed; this is both the live sheet and the permanent record
 
-When creating or updating `brew_day_sheets/*.html`:
-- Reconcile yeast plan against `libraries/inventory/stock.json` and recipe OG/volume.
-- Do not use a fixed starter default for all recipes.
-- Explicitly set:
-  - yeast source (fresh pack vs harvested slurry),
-  - planned generation (`G0` vs `G1+`),
-  - pitch method (direct slurry / vitality starter / full starter),
-  - starter size only when actually required.
-- If stock does not support the required pitch, add an action note/shopping requirement instead of assuming availability.
+When a brew date is set, rename the undated file immediately using `git mv`. If the brew date is known when the sheet is first generated, name it with the date from the start. Dated files are never renamed after the fact.
+
+### Guardrails (enforced by system prompt)
+- Yeast plan must match `libraries/inventory/stock.json` reality
+- Hop AA values must be synced with `stock.json` (`AA_SYNC_OK` required)
+- Fermentation dates must be anchored to actual brew date — no unresolved `YYYY-MM-DD` placeholders
+- Timed additions must be per-addition amounts, not grouped
+- Water-acid additions must specify timing (post-mash-in, after pH check)
