@@ -47,4 +47,5 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - Never invent values that should come from repo files.
 - If a file is missing or empty, say so and proceed with explicit assumptions.
 - If a style is specified, open both the matching research file and BJCP overlay before giving style-specific advice.
+- If a recipe is being created and the matching style research file or BJCP overlay does not exist, create the missing file(s) first and use them as the recipe baseline instead of relying only on a nearest-style substitute.
 - Use `libraries/inventory/stock.json` as the source-of-truth for hop alpha acid values when retrieving or reconciling recipe data.
