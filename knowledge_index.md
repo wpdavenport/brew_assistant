@@ -35,8 +35,8 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - libraries/bjcp_study/progress_template.json
 
 ## Output locations (write new artifacts here)
-- New recipe drafts: recipes/in_development/
-- Locked/stable recipes: recipes/locked/
+- New recipe drafts: recipes/
+- Locked/stable recipes: recipes/ (use filename/tag convention)
 - New batch logs: batch_logs/YYYY-MM-DD_style.md
 - Printable brew-day sheets: brewing/brew_day_sheets/
 - Printable brew logs: batch_logs/

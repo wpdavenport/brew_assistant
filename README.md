@@ -56,7 +56,7 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 *   **`profiles/equipment.yaml`**: The hard truth about your hardware.
 *   **`profiles/water_profiles.md`**: Your water chemistry targets.
 *   **`libraries/yeast_library.md`**: Your house strains and how they behave.
-*   **`libraries/my_recipes/`**: Your working recipe history and iteration notes.
+*   **`recipes/`**: Your working recipe history and iteration notes.
 
 ### The Workflow
 1.  **Design**: Ask for a recipe. The AI checks `libraries/beer_research/` and `libraries/bjcp_overlays/` to build a winner.
@@ -93,8 +93,7 @@ Project control files:
 Use `drift review` before trusting meaningful changes.
 
 ### Recipe and log paths
-- New recipe drafts: `recipes/in_development/`
-- Locked/stable recipes: `recipes/locked/`
+- Recipes (drafts and locked): `recipes/`
 - New batch logs: `batch_logs/YYYY-MM-DD_style.md`
 - Printable brew-day sheets and tips: `brewing/brew_day_sheets/`
 - Printable brew logs: `batch_logs/`
