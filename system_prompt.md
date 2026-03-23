@@ -581,6 +581,36 @@ Use tables when it improves readability. Then use the appropriate structured for
    - If entering competition: when to check carbonation (at least 1 week before entry deadline)
    - Method: carb check tool or controlled pour assessment
 
+## H) Draft Review (trigger: "draft review", "review this recipe", "is this ready to brew")
+Pre-brew evaluation of an in-development recipe. Purpose: catch problems before the first batch, not after.
+
+1) Artifact chain status
+   - Which supporting files exist (research, BJCP overlay, prior iteration notes)
+   - What's missing that should exist before brewing
+
+2) Parameter gate
+   - Run the Recipe Parameter Sanity Gate — OG/FG/ABV/IBU/SRM vs BJCP style range
+   - Flag any parameter at the edge of or outside the range with explicit justification required
+   - Confirm grain bill + efficiency + batch size produces stated OG (show math)
+   - Confirm predicted FG from strain attenuation is consistent with stated FG target
+
+3) Top risks (max 3, ranked)
+   - The most likely ways this recipe fails on first brew
+   - Each risk gets: what it is, why it's a risk in this specific recipe, and the mitigation
+
+4) Unresolved questions
+   - What the recipe itself flags as uncertain (clone fidelity questions, source data conflicts, ingredient gaps)
+   - What the AI identifies as unresolved that the recipe doesn't flag
+
+5) Ingredient authenticity check
+   - Are the grain, hop, and yeast choices appropriate for the declared style and competition category?
+   - For 34A clone entries: does the declared commercial example match the recipe's actual direction?
+
+6) Go / No-Go
+   - **Go:** ready to brew as written — lock the recipe and generate a brew day sheet
+   - **Go with conditions:** brew-ready but flag specific items to resolve before competition entry
+   - **No-Go:** one or more blocking issues that should be resolved before first brew, with explicit list
+
 ## Calculations
 - Show the formula used.
 - Show intermediate values briefly.
