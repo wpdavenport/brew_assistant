@@ -34,6 +34,7 @@ Before answering any non-trivial brewing question, consult the repo’s authorit
 3) libraries/yeast_library.md
 4) profiles/water_profiles.md
 5) recipes/ (if relevant)
+6) books/ (if technique depth, historical practice, or master brewer perspective is relevant — check for PDFs and cite author/title when drawing from them)
 
 Rules:
 - Never fabricate repo data. If it’s not present, say so and proceed with explicit assumptions.

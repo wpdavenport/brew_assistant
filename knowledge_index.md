@@ -12,10 +12,11 @@ These files are authoritative brewing memory for this repo. Consult them before 
    - If a style is specified, open the matching BJCP overlay file
 6) recipes/
 
+## Reference library (when technique depth is needed)
+- books/ — brewing reference texts (local only, not committed). Check for PDFs when asked about technique, history, or master brewer perspective. If present, treat as authoritative source material. Cite the author and title when drawing from them.
+
 ## Tools / templates (when needed)
 - tools/calculations.md
-- tools/batch_log_template.md
-- batch_logs/brew_log_template.html
 - libraries/templates/grainfather_beerxml_template.xml
 - recipes/beer_xml_imports/
 - recipes/beer_xml_exports/
@@ -36,11 +37,8 @@ These files are authoritative brewing memory for this repo. Consult them before 
 
 ## Output locations (write new artifacts here)
 - New recipe drafts: recipes/
-- Locked/stable recipes: recipes/ (use filename/tag convention)
-- New batch logs: batch_logs/YYYY-MM-DD_style.md
-- Printable brew-day sheets: brewing/brew_day_sheets/
-- Printable brew logs: batch_logs/
-- Completed brew reports/results: batch_logs/
+- Locked/stable recipes: recipes/locked/
+- Brew day sheets: brewing/brew_day_sheets/ (naming: <slug>_brew_day_sheet.html or <slug>_brew_day_sheet_<YYYY-MM-DD>.html)
 - BeerXML Exports: recipes/beer_xml_exports/
 
 ## Retrieval rules
