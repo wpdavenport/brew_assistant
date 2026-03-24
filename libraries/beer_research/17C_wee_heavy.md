@@ -1,84 +1,160 @@
 # Wee Heavy (BJCP 17C) — Style Doctrine
 
 ## Core Philosophy
-- Wee Heavy is a malt-driven strong ale built on depth, richness, and structure, not on novelty.
-- The beer should feel full and luxurious, but never sticky, burnt, or shapeless.
-- Hop character stays in the background; bitterness exists to hold the malt together.
-- Fermentation should be clean enough to let malt lead, with only restrained ester support.
+- Build a malt-led, high-gravity Scottish ale that feels rich, layered, and deliberate without turning sticky, muddy, or burnt.
+- Wee Heavy should read as deep caramelized malt first, with restrained hop character and only a faint roast accent if present at all.
+- Strength should feel warming and substantial, but never hot, sharp, or solvent-like.
+- The finish can lean rich and sweet, but it must remain controlled and drinkable.
 
-## Grain Philosophy
-- Start with a high-quality pale ale base malt; this is the foundation of the beer.
-- Build depth with toasted and kilned malts before reaching for large amounts of crystal.
-- Use caramel malts to support toffee and dark sugar notes, not to create syrupy sweetness.
-- Use dark grains only as precision tools for color and a faint bitter edge.
+## Medal-Oriented Identity (What Judges Reward)
+- Dense malt depth with clear toffee, toasted bread, dark sugar, and caramelized-malt expression.
+- Full body and richness without cloying syrup or under-attenuated slop.
+- Restrained bitterness that prevents the beer from collapsing under its own sweetness.
+- Low, supportive ester profile with smooth alcohol presentation.
+- A coherent malt arc from aroma through finish, not a random stack of specialty malts.
 
-Preferred structure:
-- 70-85% pale ale malt
-- 5-12% Munich or similar rich kilned malt
-- 2-8% toasted/kilned character malts such as amber, biscuit, or brown
-- 4-8% total crystal/caramel, biased toward layered restraint rather than heavy stacking
-- 0-2% dark color-correction malt
+## Parameter Doctrine (Competition-Safe Center)
+- OG target: 1.078-1.092
+- FG target: 1.020-1.028
+- ABV target: 7.2-8.8%
+- IBU target: 22-30
+- SRM target: 16-22
+- Apparent attenuation target: 68-74%
+
+These center points stay clearly inside 17C while preserving the style's rich identity.
+
+## Grain Doctrine
+Base:
+- 80-90% high-quality pale malt.
+- Pale ale malt is preferred when authenticity and depth matter; a lightly toasty base expression is welcome.
+
+Caramel strategy:
+- Use layered crystal with restraint and purpose.
+- Total crystal often lands around 6-10%, but avoid the muddy "all caramel, no structure" result.
+- Favor toffee, burnt sugar, and dark caramel over candy-like sweetness.
+
+Depth tools:
+- Build richness with well-chosen kilned and toasted malts before reaching for a large crystal stack.
+- Amber, biscuit, brown, Munich, or careful kettle concentration can all add depth, but each must earn its place.
+- A tiny amount of roast or very dark malt may be used for color correction and a faint bitter edge.
 
 Avoid:
-- Peated malt unless the target beer explicitly requires it
-- Heavy roast that reads porter-like
-- Overloaded crystal that causes cloying finish
-- Thin grists that depend on boil mythology instead of solid malt architecture
+- Peated malt unless the target beer explicitly requires it.
+- Heavy chocolate/coffee roast.
+- Overloaded crystal that causes cloying finish.
+- Excessive dextrin loading.
+- Thin grists that depend on long-boil mythology instead of solid malt architecture.
+- Modern specialty-malt sprawl without a clear historical or sensory purpose.
 
-## Process Doctrine
-- Long boils are acceptable if they deepen the beer without introducing harshness.
-- Kettle caramelization is optional, not a substitute for good grist design.
-- Mash for body and richness, but do not force the beer into under-attenuated sweetness.
-- Oxygen exposure after fermentation is especially damaging because it muddies already-complex malt.
+## Hop Doctrine
+Bittering:
+- Most bitterness should come from a single early addition.
+- Keep hop flavor low and hop aroma very low to none.
 
-## Fermentation Doctrine
-Yeast:
-- Clean ale strains are preferred when clone fidelity or precision matters.
-- More characterful English strains can work, but only if they do not dominate the beer.
+Variety:
+- Clean, integrated bittering matters more than showcasing hop identity.
+- English or classic neutral bittering varieties can work if the result stays restrained and supportive.
 
-Pitching and oxygen:
-- Strong ale gravity requires healthy pitch rates and good oxygenation.
+Practical template (5 gal / 19 L):
+- 85-100% of IBUs from the first bittering charge.
+- No meaningful late-hop load unless you are cloning a specific commercial variant that clearly carries it.
+
+Avoid:
+- Layered late hops.
+- Modern citrus/pine expression.
+- Dry hop of any consequence.
+
+## Yeast Doctrine
+Profile:
+- Use a clean-to-subtly fruity strain that supports malt without turning estery-heavy.
+- Clean ale strains are often the safest choice when clone fidelity or precision matters.
+- English strains can work well if controlled tightly and kept subordinate to the malt.
+
+Fermentation control:
+- Pitch healthy and cool.
+- Start around 62-64 F (16.7-17.8 C) for expressive English strains.
+- Allow a modest rise to 66-68 F (18.9-20.0 C) for cleanup.
+
+Attenuation guardrail:
+- Do not chase a dry finish; the style needs fullness.
+- But if FG rises above the high 1.020s and sweetness dominates, process or grist is too heavy.
 - Do not underpitch to chase esters; the risk of rough alcohol and stalled attenuation is too high.
 
-Temperature:
-- Start cool for the chosen strain.
-- Allow a modest rise during active fermentation.
-- Give the beer time to finish and clean up before crashing.
+## Water Doctrine
+Goal:
+- Round, malt-supportive water with enough bitterness support to prevent syrup.
+- Water should not read sharp, Burtonized, or aggressively mineral.
 
-## Water Philosophy
-- Balanced, malt-supportive water is preferred.
-- Chloride can support fullness, but do not push the profile into flabby sweetness.
-- Sulfate should remain restrained; bitterness should be firm, not sharp.
-- Starting from RO is ideal because the profile can be shaped recipe-by-recipe.
+Starting target ranges (RO build-up):
+- Ca: 50-90 ppm
+- Mg: 5-10 ppm
+- Na: 10-35 ppm
+- SO4: 40-80 ppm
+- Cl: 50-90 ppm
+- HCO3: 50-120 ppm
 
-## Flavor Targets
-Aroma:
-- Rich malt, toffee, bread crust, dark sugar, restrained esters
-- No obvious hop aroma
-- No heavy roast
+pH:
+- Mash pH: 5.35-5.45 at room-temp reading.
+- Keep finished bitterness smooth; extreme acid correction is rarely the right tool here.
 
-Flavor:
-- Layered malt depth with toffee, toast, caramelized bread, and optional light dark-fruit nuance
-- Smooth bitterness, low hop flavor
-- Finish rich but not sticky
+Avoid:
+- Very high sulfate.
+- Overly chloride-heavy water that turns a rich beer flabby.
+- Treating water as a generic style preset instead of shaping it to the specific recipe.
 
-Mouthfeel:
-- Medium-full to full
-- Soft, smooth, and warming without harsh alcohol
+## Mash and Brewhouse Doctrine
+Mash:
+- Single infusion at 153-155 F (67.2-68.3 C) is a safe default.
+- Lower mash temp can help avoid syrup if the grist is heavy, but do not turn the beer dry.
 
+Boil:
+- A longer boil can help build depth and subtle kettle caramelization.
+- Concentration can be helpful, but do not rely on long-boil mythology to replace proper grist design.
+
+Lauter/sparge:
+- Keep runoff clean and avoid extracting tannin from a high-gravity wort.
+
+Historical adaptation rule:
+- Modern equipment may improve control, repeatability, and temperature precision, but the sensory result should still feel like an authentic Wee Heavy rather than a modernized strong amber ale.
+- Adapt mechanics to the system, not the target profile to the equipment.
+
+## Clarification and Stability Doctrine
+- The beer should pour clear in competition unless the commercial target clearly suggests otherwise.
+- Yeast cleanup and conditioning matter because sweetness amplifies flaws.
+- Oxidation rapidly turns rich malt into stale, papery heaviness.
+
+## Packaging and Service Doctrine
 Carbonation:
-- Low to medium
+- 1.8-2.2 vols CO2 is a safe range.
+- Keep carbonation supportive, not lively enough to thin the body.
 
-## Common Non-Professional Errors
-- Confusing color with roast and adding too much dark malt
-- Overusing crystal and finishing cloying
-- Underbittering the beer so it drinks like sugary wort
-- Fermenting too warm and creating hot alcohol
-- Over-drying the finish and stripping away the style's signature richness
+Service:
+- 50-55 F (10-12.8 C) reveals the malt profile best.
+- Over-chilling suppresses the depth that judges expect.
 
-## Competition Deduction Risks
-- Porter/stout drift from roast intensity
-- Thin or overly dry finish
-- Syrupy, under-attenuated sweetness
-- Modern hop flavor or aroma
-- Hot alcohol or fermentation roughness
+Timeline:
+- Wee Heavy often benefits from some conditioning, but do not confuse age with improvement if oxidation creeps in.
+
+## Competition Strategy (Execution Over Maximalism)
+- Judges reward definition and control, not just "big malt."
+- Richness must remain structured.
+- The best entries feel expensive and deliberate, not sugary and loud.
+
+## Frequent Non-Professional Errors
+- Confusing color with roast and adding too much dark malt.
+- Too much crystal making the finish sticky.
+- Over-roast drifting toward porter/stout.
+- Under-bittered sweetness that collapses on the palate.
+- Hot alcohol from rushed or warm fermentation.
+- Late-hop character that reads out of style.
+- Over-drying the finish and stripping away the style's signature richness.
+- Oxidation turning richness into dull heaviness.
+
+## Diagnostic Tasting Grid (Fast Self-Scoring)
+Use this before deciding to enter:
+- Aroma: deep malt, toffee, toast, dark sugar, low fault risk
+- Flavor: rich but controlled, bitterness present enough to hold structure
+- Mouthfeel: full and smooth, not sticky or hot
+- Finish: lingering malt depth, not harsh roast and not syrup
+
+If richness reads clumsy instead of integrated, refine the recipe before entering.
