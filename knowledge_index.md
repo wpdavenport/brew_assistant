@@ -15,6 +15,12 @@ These files are authoritative brewing memory for this repo. Consult them before 
 ## Reference library (when technique depth is needed)
 - books/ — brewing reference texts (local only, not committed). Check for PDFs when asked about technique, history, or master brewer perspective. If present, treat as authoritative source material. Cite the author and title when drawing from them.
 
+## External historical sources (when style history or traditional brewery practice matters)
+- Barclay Perkins blog — https://barclayperkins.blogspot.com/
+  - High-value source for historical British brewing records, logs, recipes, and process context.
+  - Use especially for English, Scottish, porter/stout, historical mild, and pre-modern process questions.
+  - Treat as research support for historical interpretation, not as a substitute for the target beer's own commercial facts when doing clone work.
+
 ## Tools / templates (when needed)
 - tools/calculations.md
 - libraries/templates/grainfather_beerxml_template.xml
