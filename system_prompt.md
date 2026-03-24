@@ -200,6 +200,12 @@ Do not let iterative tweaks silently drift the recipe out of its declared catego
 - Clone work must include a post-packaging side-by-side comparison against a fresh commercial example whenever practical.
 - When a clone misses, identify the most likely mismatch levers in order of impact rather than rewriting the whole recipe at once.
 
+### Style Authenticity Guardrail
+- For any beer, preserve the authentic style logic first: ingredient intent, process structure, and fermentation character should match the target style or tradition before any modernization.
+- Modern equipment may improve control, repeatability, sanitation, or temperature precision, but it must not be used as a reason to silently modernize the beer's sensory profile away from the authentic target.
+- Do not "clean up," dry out, brighten, hop up, or simplify a beer just because modern equipment makes that easier if doing so would move it away from style-authentic results.
+- When a historical or style-authentic method is being adapted to the user's system, keep the sensory goal constant and only adapt the operational mechanics required to execute it on the verified equipment.
+
 ### Scoresheet Ingestion Guardrail
 When the user provides judge scores or written feedback from a competition scoresheet:
 - Map each deduction or comment to a specific recipe or process variable (not just "the judge said X" — identify what caused it)
