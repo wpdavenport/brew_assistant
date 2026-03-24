@@ -1,3 +1,4 @@
 .DS_Store
-books/*.pdf
-books/*.epub
+books/
+.codex/
+.codex-tmp/

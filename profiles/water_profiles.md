@@ -2,6 +2,11 @@
 
 System: Reverse Osmosis
 
+## Water Profile Policy
+- This file defines source water and salts on hand, not fixed style targets.
+- Every recipe must declare its own unique target water profile based on that beer's sensory and stylistic goals.
+- Do not assume reusable house targets such as "IPA," "Pilsner," or "Hazy" profiles across recipes.
+
 ## Salts On Hand
 - Gypsum (CaSO4·2H2O)
 - Calcium Chloride (CaCl2·2H2O)
