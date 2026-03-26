@@ -166,6 +166,25 @@ def cmd_brew(args: argparse.Namespace) -> int:
             }
         )
 
+    harvest_item_id = getattr(args, "harvest_item", "")
+    harvest_amount = float(getattr(args, "harvest_amount", 0.0) or 0.0)
+    harvest_unit = getattr(args, "harvest_unit", "")
+    if harvest_item_id and harvest_amount > 0 and harvest_unit:
+        if harvest_item_id not in by_id:
+            raise ValueError(f"Harvest item id '{harvest_item_id}' not found in stock.json")
+        harvest_item = by_id[harvest_item_id]
+        harvest_qty = convert(harvest_amount, harvest_unit, harvest_item["unit"])
+        before = float(harvest_item.get("on_hand", 0.0))
+        harvest_item["on_hand"] = round(before + harvest_qty, 6)
+        deltas.append(
+            {
+                "item_id": harvest_item_id,
+                "name": harvest_item["name"],
+                "delta": harvest_qty,
+                "unit": harvest_item["unit"],
+            }
+        )
+
     append_history_event(
         history,
         {
@@ -176,6 +195,9 @@ def cmd_brew(args: argparse.Namespace) -> int:
             "style_key": recipe.get("style_key"),
             "batches": batches,
             "include_optional": bool(args.include_optional),
+            "harvest_item": harvest_item_id,
+            "harvest_amount": harvest_amount,
+            "harvest_unit": harvest_unit,
             "deltas": deltas,
         },
     )
@@ -390,6 +412,9 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--recipe", required=True, help="Recipe id/name/alias")
     b.add_argument("--batches", type=float, default=1.0, help="Batch multiplier")
     b.add_argument("--include-optional", action="store_true", help="Include optional recipe items")
+    b.add_argument("--harvest-item", default="", help="Optional inventory item id to add after brew")
+    b.add_argument("--harvest-amount", type=float, default=0.0, help="Amount of harvested item to add")
+    b.add_argument("--harvest-unit", default="", help="Unit for harvested item amount")
 
     r = sub.add_parser("restock", help="Add inventory to stock")
     r.add_argument("--item", required=True, help="Item id or exact item name")

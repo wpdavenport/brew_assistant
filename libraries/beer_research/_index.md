@@ -8,4 +8,6 @@ Filenames use BJCP-style IDs for organization only. Contents are not BJCP specs.
 - 17C — Wee Heavy → 17C_wee_heavy.md
 - 22A — Double IPA → 22A_double_ipa.md
 - 26D — Belgian Dark Strong Ale → 26D_belgian_dark_strong.md
+- 34B — Mixed-Style Beer → 34B_mixed_style_beer.md
 - 3C — Czech Premium Pale Lager → 3C_czech_premium_pale_lager.md
+- 9C — Baltic Porter → 9C_baltic_porter.md
