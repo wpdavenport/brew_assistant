@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Davenporter - 9C Baltic Porter Brew Day Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Helvetica, Arial, sans-serif; font-size: 10pt; line-height: 1.3; color: #1a1a1a; padding: 0.5in; }
+  h1 { font-size: 16pt; font-weight: 700; border-bottom: 2px solid #111; padding-bottom: 3px; margin-bottom: 4px; }
+  h2 { font-size: 10.5pt; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #666; margin-top: 10px; margin-bottom: 4px; padding-bottom: 1px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 8.6pt; }
+  th { background: #ececec; text-align: left; padding: 3px 4px; border: 1px solid #999; font-size: 7.6pt; text-transform: uppercase; }
+  td { padding: 3px 4px; border: 1px solid #bbb; vertical-align: top; }
+  .header-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+  .subtitle { font-size: 9pt; color: #444; font-style: italic; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 16px; margin: 6px 0 10px; font-size: 8.5pt; }
+  .field { display: flex; gap: 6px; align-items: flex-end; min-height: 22px; }
+  .label { font-weight: 700; white-space: nowrap; }
+  .blank { border-bottom: 1px solid #777; flex: 1; min-height: 16px; display: inline-block; }
+  .checkbox { display: inline-block; width: 10px; height: 10px; border: 1.3px solid #333; }
+  .check-col { width: 26px; text-align: center; }
+  .right { text-align: right; }
+  .bold { font-weight: 700; }
+  .small { font-size: 7.6pt; color: #555; }
+  .alert-box { border: 1.5px solid #8a1f11; padding: 5px 7px; margin: 5px 0; font-size: 8pt; }
+  .alert-box .title { font-weight: 700; text-transform: uppercase; color: #8a1f11; }
+  .alert-box.info { border-color: #555; }
+  .alert-box.info .title { color: #555; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+  ul { padding-left: 16px; margin-bottom: 4px; }
+  li { margin-bottom: 2px; }
+  @page { margin: 0.45in 0.5in; size: letter; }
+</style>
+</head>
+<body>
+
+<div class="header-row">
+  <h1>Davenporter</h1>
+  <span class="subtitle">BJCP 9C Baltic Porter</span>
+</div>
+
+<div class="info-grid">
+  <div class="field"><span class="label">Date:</span><span class="blank"></span></div>
+  <div class="field"><span class="label">Brewer:</span><span class="blank"></span></div>
+  <div class="field"><span class="label">Batch #:</span><span class="blank"></span></div>
+  <div class="field"><span class="label">System:</span><span>Historical source recipe; current system is Grainfather G40</span></div>
+  <div class="field"><span class="label">Target Batch:</span><span>7.0 gal historical interpretation</span></div>
+  <div class="field"><span class="label">Yeast:</span><span>Jasper Yeast JY219 German Lager 1</span></div>
+</div>
+
+<div class="alert-box">
+  <div class="title">Historical Recipe Warning</div>
+  This sheet preserves the original winning recipe and the original 10.0 gal liquor statement. On the current verified G40 no-sparge profile, 7.0 gal into fermenter would normally require about 11.47 gal total liquor. Use this as an archival/reference brew sheet unless volumes are recalibrated to the current system before brew day.
+</div>
+
+<div class="alert-box info">
+  <div class="title">Inventory / Yeast Reality</div>
+  Current repo inventory does not show Lublinski hops or Jasper JY219 on hand. If brewing this now, confirm ingredient sourcing and size the lager pitch to the actual fresh package date and cell count rather than assuming a default starter.
+</div>
+
+<h2>Target Window</h2>
+<table>
+  <tr><th>Parameter</th><th>Historical / Projected</th><th>Actual</th><th>Notes</th></tr>
+  <tr><td class="bold">OG</td><td>1.084 measured</td><td></td><td>Historical source batch value</td></tr>
+  <tr><td class="bold">FG</td><td>1.022 measured</td><td></td><td>Historical source batch value</td></tr>
+  <tr><td class="bold">ABV</td><td>~8.1%</td><td></td><td>Calculated from measured gravities</td></tr>
+  <tr><td class="bold">IBU</td><td>~24</td><td></td><td>Tinseth estimate at 7.0 gal</td></tr>
+  <tr><td class="bold">SRM</td><td>~29</td><td></td><td>Dark end of 9C, still in range</td></tr>
+  <tr><td class="bold">Carbonation</td><td>2.2-2.4 vols</td><td></td><td>Competition-safe Baltic Porter range</td></tr>
+ </table>
+
+<div class="two-col">
+  <div>
+    <h2>Grain Bill</h2>
+    <table>
+      <tr><th>Grain</th><th class="right">Amount</th><th class="check-col">&check;</th></tr>
+      <tr><td>Munich Malt</td><td class="right">12.00 lb (5.44 kg)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Weyermann Pilsner Malt</td><td class="right">7.00 lb (3.18 kg)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Special B</td><td class="right">0.50 lb (0.23 kg)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Cara 60</td><td class="right">0.50 lb (0.23 kg)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Carafa Special III</td><td class="right">0.38 lb (0.17 kg)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>TF Chocolate Malt</td><td class="right">0.25 lb (0.11 kg)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+    </table>
+  </div>
+
+  <div>
+    <h2>Water And Minerals</h2>
+    <p style="margin-bottom:4px; font-size:8.5pt;"><strong>Original source:</strong> 10.0 gal total water</p>
+    <table>
+      <tr><th>Salt</th><th class="right">Amount</th><th class="check-col">&check;</th></tr>
+      <tr><td>Gypsum</td><td class="right">0.161 oz (4.56 g)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Baking Soda</td><td class="right">0.297 oz (8.42 g)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Calcium Chloride</td><td class="right">0.195 oz (5.53 g)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+      <tr><td>Epsom Salt</td><td class="right">0.073 oz (2.07 g)</td><td class="check-col"><span class="checkbox"></span></td></tr>
+    </table>
+    <table>
+      <tr><th>Ion</th><th>Ca</th><th>Mg</th><th>Na</th><th>Cl</th><th>SO4</th><th>HCO3</th></tr>
+      <tr><td class="bold">ppm</td><td>68</td><td>5</td><td>61</td><td>70</td><td>89</td><td>161</td></tr>
+    </table>
+  </div>
+</div>
+
+<h2>Hop Schedule</h2>
+<table>
+  <tr><th>Timing</th><th>Variety</th><th class="right">Amount</th><th>AA%</th><th class="check-col">&check;</th></tr>
+  <tr><td>60 min</td><td>Lublinski</td><td class="right">3.00 oz (85 g)</td><td>3.5</td><td class="check-col"><span class="checkbox"></span></td></tr>
+  <tr><td>15 min</td><td>Lublinski</td><td class="right">1.00 oz (28 g)</td><td>3.5</td><td class="check-col"><span class="checkbox"></span></td></tr>
+  <tr><td>10 min</td><td>Whirlfloc</td><td class="right">1 tablet</td><td>-</td><td class="check-col"><span class="checkbox"></span></td></tr>
+</table>
+
+<h2>Historical Mash And Boil</h2>
+<table>
+  <tr><th>Step</th><th>Historical Value</th><th>Actual</th></tr>
+  <tr><td>Mash</td><td>150.0F for 60 min</td><td></td></tr>
+  <tr><td>Boil</td><td>90 min</td><td></td></tr>
+</table>
+
+<h2>Yeast And Pitch Planning</h2>
+<table>
+  <tr><td class="bold" style="width:140px;">Source Yeast</td><td>Jasper Yeast JY219 German Lager 1</td></tr>
+  <tr><td class="bold">Pitch Requirement</td><td>High-gravity lager pitch. Target enough healthy yeast for a 7.0 gal batch at ~1.075 OG.</td></tr>
+  <tr><td class="bold">Current Repo State</td><td>Not shown in inventory; acquire fresh culture and size starter or pack count to actual package date.</td></tr>
+  <tr><td class="bold">Oxygen</td><td>One thorough oxygen dose at pitch; consider whether wort strength warrants a second staged oxygenation only if it fits your normal lager practice.</td></tr>
+  <tr><td class="bold">Control Point</td><td>Do not underpitch this beer. Big lager underpitching is the fastest path to sweet finish and rough alcohol.</td></tr>
+</table>
+
+<h2>Fermentation Skeleton</h2>
+<ul>
+  <li>48.0F for 1 day</li>
+  <li>49.0F for 1 day</li>
+  <li>50.0F for 4 days</li>
+  <li>Resume upward staircase ramp through the remaining mid-50s steps</li>
+  <li>60.0F for 14 days</li>
+</ul>
+
+<h2>Historical Brew Notes</h2>
+<table>
+  <tr><th>Checkpoint</th><th>Recorded Value</th><th>Actual</th></tr>
+  <tr><td>Oxygen additions</td><td>Day 1 and Day 6</td><td></td></tr>
+  <tr><td>Mash-out volume</td><td>8.25 gal</td><td></td></tr>
+  <tr><td>Pre-boil gravity</td><td>1.069</td><td></td></tr>
+</table>
+
+<h2>Brew Notes</h2>
+<table>
+  <tr><th>Checkpoint</th><th>Target / Observation</th><th>Actual</th></tr>
+  <tr><td>Mash pH</td><td>Dark-grist range, roughly 5.35-5.50 room-temp</td><td></td></tr>
+  <tr><td>Pre-boil Volume</td><td>Log actual; original liquor figure is not current-G40 calibrated</td><td></td></tr>
+  <tr><td>Pre-boil Gravity</td><td>Log actual</td><td></td></tr>
+  <tr><td>Post-boil Volume</td><td>Log actual</td><td></td></tr>
+  <tr><td>OG Into Fermenter</td><td>1.084 measured historical value</td><td></td></tr>
+  <tr><td>FG</td><td>1.022 measured historical value</td><td></td></tr>
+  <tr><td>Packaged Impression</td><td>Smooth dark lager richness, low roast, clean finish</td><td></td></tr>
+</table>
+
+</body>
+</html>

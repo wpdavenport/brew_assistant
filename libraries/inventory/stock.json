@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients.",
+  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients. User-stated inventory correction applied 2026-03-24: Maris Otter = 10 lb on hand, English medium crystal = 3 lb on hand, and Wyeast 1968 Gen 1 slurry saved from Copper Crown is on hand.",
   "items": [
     {
       "id": "pale_malt_us",
@@ -18,7 +18,7 @@
       "name": "Thomas Fawcett Amber Malt",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 1200.77711,
+      "on_hand": 1927.767573,
       "tags": [
         "specialty_malt",
         "toasty"
@@ -29,7 +29,7 @@
       "name": "Maris Otter",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 4100,
+      "on_hand": 4535.9237,
       "tags": [
         "base_malt",
         "english"
@@ -40,7 +40,7 @@
       "name": "English Medium Crystal (Thomas Fawcett)",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 283.59237,
+      "on_hand": 1360.77711,
       "tags": [
         "specialty_malt",
         "crystal",
@@ -85,7 +85,7 @@
       "name": "Thomas Fawcett Pale Chocolate",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 255.145708,
+      "on_hand": 1.0,
       "tags": [
         "specialty_malt",
         "roast"
@@ -194,7 +194,7 @@
       "name": "Rice Hulls",
       "category": "adjunct",
       "unit": "g",
-      "on_hand": 0.0,
+      "on_hand": 9.071847,
       "tags": [
         "lautering"
       ]
@@ -215,7 +215,7 @@
       "name": "Invert Sugar No.2",
       "category": "fermentable",
       "unit": "g",
-      "on_hand": 293.59237,
+      "on_hand": 453.59237,
       "tags": [
         "sugar",
         "invert",
@@ -363,7 +363,7 @@
       "name": "East Kent Goldings",
       "category": "hop",
       "unit": "g",
-      "on_hand": 45,
+      "on_hand": 56.699046,
       "alpha_acid_pct": 6.1,
       "tags": [
         "uk",
@@ -441,7 +441,7 @@
       "name": "UK Challenger",
       "category": "hop",
       "unit": "g",
-      "on_hand": 13.349523,
+      "on_hand": 0.0,
       "alpha_acid_pct": 7.0,
       "tags": [
         "uk",
@@ -519,11 +519,29 @@
       "name": "Wyeast 1968 London ESB Ale",
       "category": "yeast",
       "unit": "count",
-      "on_hand": 0,
+      "on_hand": 1,
       "tags": [
         "english",
         "liquid_yeast",
         "esb_strain"
+      ]
+    },
+    {
+      "id": "wyeast_1968_gen1_slurry",
+      "name": "Wyeast 1968 London ESB Ale Harvested Slurry (Gen 1)",
+      "category": "yeast",
+      "unit": "count",
+      "on_hand": 1.0,
+      "generation": 1,
+      "storage": "fridge",
+      "source_batch": "Copper Crown ESB",
+      "tags": [
+        "english",
+        "liquid_yeast",
+        "esb_strain",
+        "repitch",
+        "slurry",
+        "generation_1"
       ]
     },
     {
@@ -624,7 +642,7 @@
       "name": "Whirlfloc",
       "category": "kettle_addition",
       "unit": "count",
-      "on_hand": 10.0,
+      "on_hand": 9.0,
       "tags": [
         "clarifier"
       ]
