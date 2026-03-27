@@ -29,11 +29,18 @@ This is not documented as a direct clone.
 - Munich II: 0.50 lb (0.23 kg)
 
 ## HOPS
-Use fresh Saaz only, target lot AA ~3.5-4.5%.
+Current lot guidance:
+- Fresh Saaz on hand: 2024 crop, 2.8% AA
+- Older Saaz on hand: 2.2% AA lot
 
-- First Wort: Saaz 1.40 oz (40 g)
-- 20 min: Saaz 1.10 oz (31 g)
-- Whirlpool at 170.0F (76.7C) for 10 min: Saaz 0.80 oz (23 g)
+Recommended current-lot schedule:
+- First Wort: Saaz 2.00 oz (57 g) at 2.8% AA
+- 20 min: Saaz 1.80 oz (51 g) at 2.8% AA
+- Whirlpool at 170.0F (76.7C) for 10 min: Saaz 0.80 oz (23 g) at 2.8% AA
+
+Optional inventory-preservation note:
+- If you want to preserve the fresher 2.8% lot for later additions, older Saaz is acceptable in the first wort slot only.
+- A practical split-lot version is: 2.60 oz (74 g) old 2.2% Saaz at first wort, 1.80 oz (51 g) fresh 2.8% Saaz at 20 min, and 0.80 oz (23 g) fresh 2.8% Saaz at whirlpool.
 
 ### Kettle Additions
 - Whirlfloc: 1 tablet at 15 min
@@ -107,12 +114,14 @@ Competition-safe Hochkurz:
 ## WHY THIS VERSION SHOULD WIN
 - Water no longer fights the style.
 - All-Saaz identity stays intact, but bitterness should read smoother.
+- The current 2.8% Saaz lot is workable; it just requires more weight than the earlier placeholder draft assumed.
 - Mash is easier to repeat and less dependent on old process quirks.
 - Czech lager fermentation remains authentic, but the cleanup gate is clearer.
 - The beer should now read like a polished Czech pils, not a hard mineral trial.
 
 ## CRITICAL RISKS TO AVOID
-- Using old low-AA Saaz and compensating with excess hop weight.
+- Burning through the freshest Saaz without deciding where freshness matters most.
+- Using old low-AA Saaz for late additions where it will dull noble top-note expression.
 - Reintroducing a sulfate-heavy water profile.
 - Underpitching or guessing at Jasper cell count.
 - Packaging before VDK and lager maturation are fully complete.

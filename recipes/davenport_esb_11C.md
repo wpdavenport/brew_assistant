@@ -39,7 +39,7 @@ Note: Rebalance all additions to actual lot AA before brew day.
 ### Boil / Whirlpool
 - 0.70 oz (20 g) Target (9.6% AA) - 60 min
 - 0.30 oz (9 g) Northdown (7.3% AA) - 20 min
-- 0.30 oz (9 g) Challenger (7.9% AA) - 20 min
+- 0.30 oz (9 g) Challenger (7.75% AA assumed midpoint from 6.5-9.0% bag range) - 20 min
 - 0.35 oz (10 g) East Kent Goldings (6.1% AA) - 10 min
 - 0.35 oz (10 g) East Kent Goldings (6.1% AA) - flameout, 10 min steep
 
