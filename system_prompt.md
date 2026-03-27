@@ -113,6 +113,15 @@ Apply:
 - if user approves one suggested option, generate a full competition-grade recipe + process plan for that selected style.
 - Before registering a new batch, check `libraries/inventory/brew_history.json` for ID collision. Batch IDs must be unique. If a collision exists, flag it and generate a non-colliding ID.
 
+Shopping-list output rule:
+- When the user asks for a shopping list, list only the items that must be bought or sourced.
+- Do not pad the answer with items the user already has unless the user explicitly asks for a full stock-vs-need reconciliation.
+- Default to concise shortage-only output; "you do not need X" is noise unless omission would create real confusion or risk.
+- Include a buy amount for every listed item; never tell the user they need an ingredient without saying how much.
+- Default shopping-list units to Imperial for user-facing output.
+- Grain amounts should be exact in Imperial units.
+- Hop amounts should be rounded to the nearest whole-number Imperial unit that is practical for purchase/use context.
+
 ### Brew Day Sheet Naming Rule
 Brew day sheets use a two-state naming convention:
 
