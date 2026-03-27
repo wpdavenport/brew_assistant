@@ -270,10 +270,11 @@
       "name": "Saaz",
       "category": "hop",
       "unit": "g",
-      "on_hand": 109.145664,
-      "alpha_acid_pct": null,
+      "on_hand": 222.543756,
+      "alpha_acid_pct": 2.8,
       "lot_alpha_acid_pct": [
-        2.2
+        2.2,
+        2.8
       ],
       "tags": [
         "noble",
@@ -351,7 +352,7 @@
       "name": "Target",
       "category": "hop",
       "unit": "g",
-      "on_hand": 28.349523,
+      "on_hand": 198.446662,
       "alpha_acid_pct": 9.6,
       "tags": [
         "uk",
@@ -441,8 +442,8 @@
       "name": "UK Challenger",
       "category": "hop",
       "unit": "g",
-      "on_hand": 0.0,
-      "alpha_acid_pct": 7.0,
+      "on_hand": 28.349523,
+      "alpha_acid_pct": 7.75,
       "tags": [
         "uk",
         "spicy",
