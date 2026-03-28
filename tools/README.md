@@ -70,6 +70,13 @@ Use `yield_report.py` to review packaged yield history against your keg target:
 - `python3 tools/yield_report.py --target-gal 5.0`
 - `make yield-report`
 
+Use `batch_state_summary.py` to see what is prepared, brewed but not packaged, and how packaged yield is trending:
+
+- `python3 tools/batch_state_summary.py`
+- `python3 tools/batch_state_summary.py --recipe davenport_esb`
+- `python3 tools/batch_state_summary.py --target-gal 5.0`
+- `make batch-state`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:
