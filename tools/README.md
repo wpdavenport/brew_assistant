@@ -34,6 +34,12 @@ Use `inventory_cli.py` for inventory-aware workflows:
 - `python3 tools/inventory_cli.py phrase "create a beer i haven't made before with the ingredients i have"`
 - `python3 tools/inventory_cli.py phrase "garbage beer"`
 
+Use `prepare_brew.py` to activate a real brew date and update live trust scope:
+
+- `python3 tools/prepare_brew.py --recipe old_crown_lazy_lager --date 2026-04-15 --dry-run`
+- `python3 tools/prepare_brew.py --recipe old_crown_lazy_lager --date 2026-04-15 --run-trust-check`
+- `make prepare-brew RECIPE=old_crown_lazy_lager DATE=2026-04-15`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:
