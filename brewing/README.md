@@ -22,4 +22,5 @@ When a brew date is set, rename the undated file immediately using `git mv`. If 
 - Hop AA values must be synced with `stock.json` (`AA_SYNC_OK` required)
 - Fermentation dates must be anchored to actual brew date — no unresolved `YYYY-MM-DD` placeholders
 - Timed additions must be per-addition amounts, not grouped
+- In printable brew-day logs, each timed action gets its own line item even when multiple additions happen at the same minute mark
 - Water-acid additions must specify timing (post-mash-in, after pH check)
