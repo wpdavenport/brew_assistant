@@ -15,7 +15,7 @@
     <IBU>37.0</IBU>
     <EST_ABV>5.8</EST_ABV>
     <EST_COLOR>11.0</EST_COLOR>
-    <NOTES>BJCP 11C Strong Bitter target, Fuller's ESB clone direction, full-volume no-sparge on G40. Simple grist calibrated toward the 2018 Fuller's parti-gyle brew sheet: pale + crystal + trace chocolate. Current hop lots: Target 9.6%, Northdown 7.3%, Challenger 7.75% assumed midpoint from 6.5-9.0% bag range, EKG 6.1%. Fermentation schedule: Day 0-2 hold 65.0-66.0 F (18.3-18.9 C), Day 3-4 rise to 67.0-68.0 F (19.4-20.0 C) with one deliberate rouse on Day 3 or 4 while active, Day 5-7 hold 68.0 F (20.0 C) through terminal gravity, Day 7-9 verify stable FG and forced VDK pass, then crash 48-72 hr at 42.0 F (5.6 C). Closed transfer only. Carbonate to 1.9-2.1 vols CO2.</NOTES>
+    <NOTES>BJCP 11C Strong Bitter target, Fuller's ESB clone direction, full-volume no-sparge on G40. Simple grist calibrated toward the 2018 Fuller's parti-gyle brew sheet: pale + crystal + trace chocolate. Current hop lots: Target 9.6%, Northdown 7.3%, Challenger 7.75% assumed midpoint from 6.5-9.0% bag range, EKG 6.1%. Fermentation schedule: Day 0-2 hold 65.0 F (18.3 C), Day 3 raise to 67.0 F (19.4 C) with one deliberate rouse while active, Day 4-9 hold 68.0 F (20.0 C) through terminal gravity and forced VDK pass, then crash 48-72 hr at 42.0 F (5.6 C). Closed transfer only. Carbonate to 1.9-2.1 vols CO2.</NOTES>
     <IBU_METHOD>Tinseth</IBU_METHOD>
     <STYLE>
       <NAME>Strong Bitter</NAME>
@@ -196,7 +196,7 @@
     <CARBONATION_TEMP>12.0</CARBONATION_TEMP>
     <FERMENTATION_STAGES>3</FERMENTATION_STAGES>
     <PRIMARY_AGE>2.0</PRIMARY_AGE>
-    <PRIMARY_TEMP>18.6</PRIMARY_TEMP>
+    <PRIMARY_TEMP>18.3</PRIMARY_TEMP>
     <SECONDARY_AGE>5.0</SECONDARY_AGE>
     <SECONDARY_TEMP>20.0</SECONDARY_TEMP>
     <TERTIARY_AGE>3.0</TERTIARY_AGE>

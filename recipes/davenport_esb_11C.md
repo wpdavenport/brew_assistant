@@ -97,12 +97,11 @@ Salt additions for 8.45 gal total liquor:
 12. Chill to 65.0 F (18.3 C), transfer clear wort, oxygenate once (60-90 sec), pitch decanted starter slurry.
 
 ## FERMENTATION SCHEDULE
-1. Day 0-2: hold 65.0-66.0 F (18.3-18.9 C).
-2. Day 3-4: let rise to 67.0-68.0 F (19.4-20.0 C).
-3. Day 3 or 4: rouse yeast once deliberately while there is still meaningful fermentation activity; do not wait for a full stall signal from 1968.
-4. Day 5-7: hold 68.0 F (20.0 C) through terminal gravity.
-5. Day 7-9: verify stable terminal gravity and perform forced VDK check before crash decision.
-6. Crash to 42 F (5.6 C) for 48-72 hr only after stable terminal gravity and clean VDK.
+1. Day 0-2: hold 65.0 F (18.3 C).
+2. Day 3: raise to 67.0 F (19.4 C).
+3. Day 3: rouse yeast once deliberately while there is still meaningful fermentation activity; do not wait for a full stall signal from 1968.
+4. Day 4-9: hold 68.0 F (20.0 C) through terminal gravity, VDK check, and crash decision.
+5. Crash to 42.0 F (5.6 C) for 48-72 hr only after stable terminal gravity and clean VDK.
 
 ## PACKAGING + COMPETITION CHECKPOINTS
 - Closed transfer only.
