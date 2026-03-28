@@ -111,7 +111,7 @@ def build_hop_aliases(stock: dict) -> tuple[dict[str, list[float]], dict[str, st
         "challenger": "challenger_uk",
         "uk challenger": "challenger_uk",
         "target": "target",
-        "uk target": "uk_target",
+        "uk target": "target",
         "hallertau mittelfruh": "hallertauer",
         "hallertau mittelfruh hop": "hallertauer",
         "hallertau mittelfruh pelleted": "hallertauer",
