@@ -92,6 +92,113 @@
       "delta": -5.0,
       "unit": "ml",
       "note": "PN9 actual usage: 5 ml phosphoric_85; no rice_hulls used"
+    },
+    {
+      "timestamp_utc": "2026-03-28T22:23:50.062038+00:00",
+      "type": "brew",
+      "recipe_id": "davenport_esb",
+      "recipe_name": "Davenport ESB (Fuller's Clone - Brew-Sheet-Calibrated Iteration)",
+      "style_key": "strong_bitter_11C_fullers_clone",
+      "batches": 1.0,
+      "include_optional": true,
+      "harvest_item": "",
+      "harvest_amount": 0.0,
+      "harvest_unit": "",
+      "brew_date": "2026-03-28",
+      "brew_sheet": "brewing/brew_day_sheets/davenport_esb_brew_day_sheet_2026-03-28.html",
+      "note": "Actual brew on 2026-03-28. Used 1 Propper Starter can, 2 mL Zinc Buddy in vitality starter, and 5 mL phosphoric by prior batch calibration.",
+      "deltas": [
+        {
+          "item_id": "maris_otter",
+          "name": "Maris Otter",
+          "delta": -4408.9178364,
+          "unit": "g"
+        },
+        {
+          "item_id": "english_medium_crystal_tf",
+          "name": "English Medium Crystal (Thomas Fawcett)",
+          "delta": -344.7302012,
+          "unit": "g"
+        },
+        {
+          "item_id": "english_chocolate_simpsons",
+          "name": "Simpsons English Chocolate Malt",
+          "delta": -9.0718474,
+          "unit": "g"
+        },
+        {
+          "item_id": "target",
+          "name": "Target",
+          "delta": -20.0,
+          "unit": "g"
+        },
+        {
+          "item_id": "northdown",
+          "name": "Northdown",
+          "delta": -9.0,
+          "unit": "g"
+        },
+        {
+          "item_id": "challenger_uk",
+          "name": "UK Challenger",
+          "delta": -9.0,
+          "unit": "g"
+        },
+        {
+          "item_id": "east_kent_goldings",
+          "name": "East Kent Goldings",
+          "delta": -20.0,
+          "unit": "g"
+        },
+        {
+          "item_id": "wyeast_1968_gen1_slurry",
+          "name": "Wyeast 1968 London ESB Ale Harvested Slurry (Gen 1)",
+          "delta": -1.0,
+          "unit": "count"
+        },
+        {
+          "item_id": "gypsum",
+          "name": "Calcium Sulphate (Gypsum)",
+          "delta": -5.0,
+          "unit": "g"
+        },
+        {
+          "item_id": "calcium_chloride",
+          "name": "Calcium Chloride",
+          "delta": -6.1,
+          "unit": "g"
+        },
+        {
+          "item_id": "epsom_salt",
+          "name": "Magnesium Sulphate (Epsom Salt)",
+          "delta": -1.1,
+          "unit": "g"
+        },
+        {
+          "item_id": "whirlfloc_tablet",
+          "name": "Whirlfloc",
+          "delta": -1.0,
+          "unit": "count"
+        },
+        {
+          "item_id": "propper_starter_can",
+          "name": "Omega Propper Starter",
+          "delta": -1.0,
+          "unit": "count"
+        },
+        {
+          "item_id": "zinc_buddy",
+          "name": "Zinc Buddy",
+          "delta": -2.0,
+          "unit": "g"
+        },
+        {
+          "item_id": "phosphoric_85",
+          "name": "Phosphoric Acid 85%",
+          "delta": -5.0,
+          "unit": "ml"
+        }
+      ]
     }
   ]
 }
