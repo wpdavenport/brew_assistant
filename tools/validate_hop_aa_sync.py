@@ -22,6 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 STOCK_FILE = ROOT / "libraries" / "inventory" / "stock.json"
+ACTIVE_ARTIFACTS_FILE = ROOT / "project_control" / "ACTIVE_ARTIFACTS.json"
 
 SCAN_ROOTS = [
     ROOT / "recipes",
@@ -129,6 +130,18 @@ def load_stock_hops() -> tuple[dict[str, list[float]], dict[str, str]]:
     return build_hop_aliases(stock)
 
 
+def load_active_hop_files() -> list[Path] | None:
+    if not ACTIVE_ARTIFACTS_FILE.exists():
+        return None
+    payload = json.loads(ACTIVE_ARTIFACTS_FILE.read_text(encoding="utf-8"))
+    files = []
+    for rel_path in payload.get("hop_aa_active_files", []):
+        path = ROOT / rel_path
+        if path.exists():
+            files.append(path)
+    return sorted(set(files))
+
+
 def format_allowed(values: list[float]) -> str:
     return ", ".join(f"{v:g}" for v in values)
 
@@ -226,7 +239,7 @@ def find_target_files() -> list[Path]:
 def main() -> int:
     hop_allowed_aa, alias_to_hop_id = load_stock_hops()
     errors: set[str] = set()
-    target_files = find_target_files()
+    target_files = load_active_hop_files() or find_target_files()
     if not target_files:
         print("AA_SYNC_FAILED")
         print("- No target files found to validate.")
