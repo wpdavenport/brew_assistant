@@ -1,0 +1,144 @@
+The next step up from repo-RAG is usually repo-aware workflow orchestration.
+
+Repo-RAG answers:
+	•	what files matter
+	•	what docs say
+	•	where relevant context lives
+
+The next level starts doing things like:
+	•	mapping change impact
+	•	enforcing guardrails
+	•	tracking drift
+	•	proposing review scope
+	•	validating whether a change is actually safe
+
+A practical maturity ladder looks like this:
+
+1. Repo-RAG
+
+The AI can read the repo and retrieve useful context.
+
+Good for:
+	•	orientation
+	•	file lookup
+	•	summarization
+	•	answering “where is X?”
+
+Weak at:
+	•	consistency over time
+	•	change control
+	•	trust
+
+2. Repo-RAG plus control docs
+
+This is where you are heading.
+
+Add:
+	•	system_prompt.md
+	•	knowledge_index.md
+	•	drift matrix
+	•	review rules
+	•	validator scripts
+
+Now the AI is not just retrieving context. It is working inside a defined operating model.
+
+3. Change-aware repo assistant
+
+This is the next real step up.
+
+The AI understands:
+	•	what changed
+	•	what else is impacted
+	•	what checks should run
+	•	what docs/tests/prompts may now be stale
+
+This is where things like:
+	•	drift review
+	•	sync review
+	•	lock review
+	•	dependency mapping
+start to matter.
+
+4. Repo control plane
+
+This is a bigger jump.
+
+Now the repo has:
+	•	explicit policy
+	•	validation gates
+	•	change classification
+	•	review state
+	•	maybe structured metadata about modules, ownership, and release readiness
+
+At this level the AI can do things like:
+	•	classify the type of change
+	•	determine required review depth
+	•	enforce local guardrails
+	•	update state artifacts
+	•	produce release/risk summaries
+
+5. Local agentic development system
+
+This is where the AI becomes more like a bounded operator inside your repo.
+
+It can:
+	•	plan changes
+	•	execute against local rules
+	•	run validators
+	•	compare results to policy
+	•	stop when confidence is low
+	•	ask for human judgment only at key boundaries
+
+But it is still constrained by:
+	•	local files
+	•	explicit rules
+	•	deterministic checks
+
+That is the “next step up” in a serious sense.
+
+In plain language
+
+Repo-RAG helps the AI know your project.
+
+The next step helps the AI work responsibly inside your project.
+
+That is the difference.
+
+For a small team, the practical next step is
+
+Not “full agent.”
+
+It is:
+
+Repo-RAG + drift-aware control system + local validators
+
+That gives you:
+	•	better consistency
+	•	better review
+	•	less hidden drift
+	•	better AI behavior under change
+
+Without jumping into a huge autonomous setup.
+
+If I were naming the levels simply
+	•	Repo-RAG
+	•	Repo-RAG with guardrails
+	•	Change-aware repo assistant
+	•	Repo control plane
+	•	Bounded local software agent
+
+For you specifically
+
+Your next step up is probably:
+
+change-aware repo assistant
+
+Built from:
+	•	repo rag
+	•	system_prompt.md
+	•	knowledge_index.md
+	•	project_control/DRIFT_MATRIX.md
+	•	project_control/REVIEW_RULES.md
+	•	validator scripts
+
+That is the sweet spot before things get unnecessarily complex.

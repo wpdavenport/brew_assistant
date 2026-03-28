@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients. User-stated inventory correction applied 2026-03-24: Maris Otter = 10 lb on hand, English medium crystal = 3 lb on hand, and Wyeast 1968 Gen 1 slurry saved from Copper Crown is on hand.",
+  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients. User-stated inventory correction applied 2026-03-24: Maris Otter = 10 lb on hand, English medium crystal = 3 lb on hand, and Wyeast 1968 Gen 1 slurry saved from Copper Crown is on hand. Non-consumable starter equipment added 2026-03-28: stir plate and 2 L flask.",
   "items": [
     {
       "id": "pale_malt_us",
@@ -636,6 +636,30 @@
       "tags": [
         "fining",
         "quantity_unknown"
+      ]
+    },
+    {
+      "id": "stir_plate",
+      "name": "Stir Plate",
+      "category": "equipment",
+      "unit": "count",
+      "on_hand": 1,
+      "tags": [
+        "starter",
+        "yeast_health",
+        "non_consumable"
+      ]
+    },
+    {
+      "id": "erlenmeyer_flask_2l",
+      "name": "2 L Flask",
+      "category": "equipment",
+      "unit": "count",
+      "on_hand": 1,
+      "tags": [
+        "starter",
+        "yeast_health",
+        "non_consumable"
       ]
     },
     {
