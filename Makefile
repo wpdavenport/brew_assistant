@@ -22,6 +22,9 @@ aa-sync:
 prepare-brew:
 	python3 tools/prepare_brew.py --recipe "$(RECIPE)" --date "$(DATE)" --run-trust-check
 
+batch-lifecycle:
+	python3 tools/batch_lifecycle.py --recipe "$(RECIPE)" $(if $(DATE),--date "$(DATE)",) $(if $(RUN_TRUST_CHECK),--run-trust-check,) $(if $(FG),--fg "$(FG)",) $(if $(PACKAGED_VOLUME),--packaged-volume "$(PACKAGED_VOLUME)",) $(if $(PACKAGE_DATE),--package-date "$(PACKAGE_DATE)",) $(if $(HARVEST_YEAST),--harvest-yeast "$(HARVEST_YEAST)",)
+
 register-brew:
 	python3 tools/register_brew.py --recipe "$(RECIPE)" --date "$(DATE)"
 

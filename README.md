@@ -115,6 +115,7 @@ Control-plane commands:
 - `make recipe-sync`
 - `make beerxml-sync`
 - `make prepare-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
+- `make batch-lifecycle RECIPE=<recipe_slug> [DATE=<YYYY-MM-DD>]`
 - `make register-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make register-package RECIPE=<recipe_slug> BREW_DATE=<YYYY-MM-DD> PACKAGE_DATE=<YYYY-MM-DD> FG=<1.013> PACKAGED_VOLUME=<5.00>`
 - `make yield-report`
@@ -131,6 +132,7 @@ Control-plane commands:
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
 - Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
 - Guardrail: do not create a separate batch log for a new brew when a dated brew-day sheet exists. Put actual brew data into the dated brew-day sheet and use `brew_history.json` only for minimal event/index metadata.
+- Lifecycle convenience: `batch-lifecycle` decides whether a recipe should be prepared, brew-registered, or package-registered based on repo state and the arguments you provide.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
 
