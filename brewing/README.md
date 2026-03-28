@@ -4,6 +4,8 @@
 
 The brew day sheet is the single canonical artifact for each batch. It serves as both the pre-brew execution guide and the brew day record.
 
+Do not create a second batch log for a new brew when a dated brew day sheet exists. Separate `batch_logs/` files are legacy historical artifacts only.
+
 **Reference example:** `brew_day_sheets/copper_crown_brew_day_sheet.html`
 
 ### What a brew day sheet contains
