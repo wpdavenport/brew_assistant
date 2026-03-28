@@ -34,6 +34,9 @@ register-package:
 yield-report:
 	python3 tools/yield_report.py
 
+batch-state:
+	python3 tools/batch_state_summary.py
+
 trust-check:
 	python3 tools/drift_review.py --passed-check "python3 tools/drift_review.py"
 	python3 tools/prompt_harness.py eval-all
