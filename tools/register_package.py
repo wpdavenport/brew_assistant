@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RECIPES_DIR = ROOT / "recipes"
 SHEETS_DIR = ROOT / "brewing" / "brew_day_sheets"
 RECIPE_USAGE_FILE = ROOT / "libraries" / "inventory" / "recipe_usage.json"
+STOCK_FILE = ROOT / "libraries" / "inventory" / "stock.json"
 
 
 def normalize_token(text: str) -> str:
@@ -93,6 +94,99 @@ def valid_date(date_text: str) -> str:
     return date_text
 
 
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_json(path: Path, payload: dict) -> None:
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def strip_generation_suffix(item_id: str) -> str:
+    item_id = re.sub(r"_gen\d+_slurry$", "", item_id)
+    item_id = re.sub(r"_pack$", "", item_id)
+    return item_id
+
+
+def strip_generation_name(name: str) -> str:
+    name = re.sub(r"\s+Harvested Slurry \(Gen \d+\)$", "", name)
+    return re.sub(r"\s+\(Pack\)$", "", name)
+
+
+def consumed_yeast_ids(entry: dict) -> set[str]:
+    ids: set[str] = set()
+    for row in entry.get("consumption", []):
+        item_id = row.get("item_id", "")
+        if "_slurry" in item_id or item_id.endswith("_pack"):
+            ids.add(item_id)
+    return ids
+
+
+def resolve_source_yeast_item(stock: dict, yeast_token: str, entry: dict) -> dict:
+    token_n = normalize_token(yeast_token)
+    candidates = []
+    consumed_ids = consumed_yeast_ids(entry)
+    for item in stock.get("items", []):
+        if item.get("category") != "yeast":
+            continue
+        haystacks = [normalize_token(item.get("id", "")), normalize_token(item.get("name", ""))]
+        if not any(token_n in hay for hay in haystacks):
+            continue
+        score = (
+            1 if item.get("id") in consumed_ids else 0,
+            1 if token_n in haystacks else 0,
+            1 if any(hay.startswith(token_n) for hay in haystacks) else 0,
+            -len(item.get("id", "")),
+        )
+        candidates.append((score, item))
+    if not candidates:
+        raise ValueError(f"Could not resolve harvested yeast source from token: {yeast_token}")
+    candidates.sort(key=lambda row: row[0], reverse=True)
+    return candidates[0][1]
+
+
+def infer_generation(source_item: dict) -> int:
+    generation = source_item.get("generation")
+    if isinstance(generation, int):
+        return generation + 1
+    return 1
+
+
+def build_harvest_item(source_item: dict, entry: dict, generation: int) -> dict:
+    base_id = strip_generation_suffix(source_item["id"])
+    base_name = strip_generation_name(source_item["name"])
+    tags = []
+    for tag in source_item.get("tags", []):
+        if tag == "slurry" or tag.startswith("generation_"):
+            continue
+        tags.append(tag)
+    for required in ["repitch", "slurry", f"generation_{generation}"]:
+        if required not in tags:
+            tags.append(required)
+    return {
+        "id": f"{base_id}_gen{generation}_slurry",
+        "name": f"{base_name} Harvested Slurry (Gen {generation})",
+        "category": "yeast",
+        "unit": "count",
+        "on_hand": 0.0,
+        "generation": generation,
+        "storage": "fridge",
+        "source_batch": entry["display_name"],
+        "tags": tags,
+    }
+
+
+def resolve_or_create_harvest_item(stock: dict, yeast_token: str, generation: int, entry: dict) -> tuple[str, bool]:
+    source_item = resolve_source_yeast_item(stock, yeast_token, entry)
+    resolved_generation = generation or infer_generation(source_item)
+    candidate = build_harvest_item(source_item, entry, resolved_generation)
+    existing_ids = {item["id"] for item in stock.get("items", [])}
+    if candidate["id"] in existing_ids:
+        return candidate["id"], False
+    stock.setdefault("items", []).append(candidate)
+    return candidate["id"], True
+
+
 def run_inventory_package(entry: dict, brew_date: str, package_date: str, brew_sheet_rel: str, fg: float, packaged_volume: float, packaged_volume_unit: str, co2_vols: str, harvest_item: str, harvest_amount: float, harvest_unit: str, note: str) -> int:
     cmd = [
         sys.executable,
@@ -137,6 +231,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--harvest-item", default="", help="Optional inventory item id to add after packaging")
     parser.add_argument("--harvest-amount", type=float, default=0.0, help="Amount of harvested item to add")
     parser.add_argument("--harvest-unit", default="", help="Unit for harvested item amount")
+    parser.add_argument("--harvest-yeast", default="", help="Yeast token to resolve/create harvested slurry item automatically")
+    parser.add_argument("--harvest-generation", type=int, default=0, help="Harvested slurry generation; default infers next generation")
+    parser.add_argument("--harvest-count", type=float, default=1.0, help="Harvested slurry amount in count units when using --harvest-yeast")
     parser.add_argument("--note", default="", help="Optional note stored on the package event")
     parser.add_argument("--dry-run", action="store_true", help="Resolve and print actions without mutating inventory")
     return parser
@@ -152,6 +249,18 @@ def main() -> int:
     entry = recipe_usage_entry(recipe_path)
     recipe_rel = recipe_path.relative_to(ROOT).as_posix()
     brew_sheet_rel = brew_sheet_path.relative_to(ROOT).as_posix()
+    stock = load_json(STOCK_FILE)
+
+    harvest_item = args.harvest_item
+    harvest_amount = args.harvest_amount
+    harvest_unit = args.harvest_unit
+    created_harvest_item = False
+    if args.harvest_yeast:
+        if harvest_item:
+            raise ValueError("Use either --harvest-item or --harvest-yeast, not both")
+        harvest_item, created_harvest_item = resolve_or_create_harvest_item(stock, args.harvest_yeast, args.harvest_generation, entry)
+        harvest_amount = args.harvest_count
+        harvest_unit = "count"
 
     print("REGISTER PACKAGE")
     print(f"recipe: {recipe_rel}")
@@ -163,13 +272,18 @@ def main() -> int:
     print(f"packaged volume: {args.packaged_volume:.2f} {args.packaged_volume_unit}")
     if args.co2_vols:
         print(f"co2 vols: {args.co2_vols}")
-    if args.harvest_item and args.harvest_amount > 0 and args.harvest_unit:
-        print(f"harvest: {args.harvest_item} +{args.harvest_amount} {args.harvest_unit}")
+    if harvest_item and harvest_amount > 0 and harvest_unit:
+        print(f"harvest: {harvest_item} +{harvest_amount} {harvest_unit}")
+        if created_harvest_item:
+            print("harvest item action: create new stock item")
     if args.note:
         print(f"note: {args.note}")
 
     if args.dry_run:
         return 0
+
+    if created_harvest_item:
+        save_json(STOCK_FILE, stock)
 
     return run_inventory_package(
         entry,
@@ -180,9 +294,9 @@ def main() -> int:
         args.packaged_volume,
         args.packaged_volume_unit,
         args.co2_vols,
-        args.harvest_item,
-        args.harvest_amount,
-        args.harvest_unit,
+        harvest_item,
+        harvest_amount,
+        harvest_unit,
         args.note,
     )
 

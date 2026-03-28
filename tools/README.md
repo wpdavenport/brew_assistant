@@ -31,6 +31,8 @@ Use `inventory_cli.py` for inventory-aware workflows:
 
 - `python3 tools/inventory_cli.py stock`
 - `python3 tools/inventory_cli.py phrase "i brewed patient number 9"`
+- `python3 tools/inventory_cli.py phrase "i packaged davenport esb brewed 2026-03-28 on 2026-04-10 at 4.55 gal fg 1.013"`
+- `python3 tools/inventory_cli.py phrase "i packaged davenport esb brewed 2026-03-28 on 2026-04-10 at 4.55 gal fg 1.013 harvested 1968 gen 2"`
 - `python3 tools/inventory_cli.py phrase "create a beer i haven't made before with the ingredients i have"`
 - `python3 tools/inventory_cli.py phrase "garbage beer"`
 
@@ -50,7 +52,15 @@ Use `register_package.py` after packaging to capture FG, packaged yield, and opt
 
 - `python3 tools/register_package.py --recipe davenport_esb --brew-date 2026-03-28 --package-date 2026-04-10 --fg 1.013 --packaged-volume 4.55 --dry-run`
 - `python3 tools/register_package.py --recipe davenport_esb --brew-date 2026-03-28 --package-date 2026-04-10 --fg 1.013 --packaged-volume 4.55 --harvest-item wyeast_1968_gen2_slurry --harvest-amount 1 --harvest-unit count`
+- `python3 tools/register_package.py --recipe davenport_esb --brew-date 2026-03-28 --package-date 2026-04-10 --fg 1.013 --packaged-volume 4.55 --harvest-yeast 1968`
 - `make register-package RECIPE=davenport_esb BREW_DATE=2026-03-28 PACKAGE_DATE=2026-04-10 FG=1.013 PACKAGED_VOLUME=4.55`
+
+Use `yield_report.py` to review packaged yield history against your keg target:
+
+- `python3 tools/yield_report.py`
+- `python3 tools/yield_report.py --recipe davenport_esb`
+- `python3 tools/yield_report.py --target-gal 5.0`
+- `make yield-report`
 
 ## Prompt Harness
 

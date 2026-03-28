@@ -28,6 +28,9 @@ register-brew:
 register-package:
 	python3 tools/register_package.py --recipe "$(RECIPE)" --brew-date "$(BREW_DATE)" --package-date "$(PACKAGE_DATE)" --fg "$(FG)" --packaged-volume "$(PACKAGED_VOLUME)"
 
+yield-report:
+	python3 tools/yield_report.py
+
 trust-check:
 	python3 tools/drift_review.py --passed-check "python3 tools/drift_review.py"
 	python3 tools/prompt_harness.py eval-all

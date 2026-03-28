@@ -19,6 +19,7 @@ import json
 import math
 import random
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -453,15 +454,52 @@ def cmd_garbage(args: argparse.Namespace) -> int:
 
 def cmd_phrase(args: argparse.Namespace) -> int:
     phrase_n = normalize(args.text)
-    if phrase_n.startswith("i brewed "):
-        recipe_name = phrase_n.replace("i brewed ", "", 1).strip()
-        return cmd_brew(
-            argparse.Namespace(
-                recipe=recipe_name,
-                batches=1.0,
-                include_optional=False,
-            )
-        )
+    raw = args.text.strip()
+
+    brewed_match = re.fullmatch(r"i brewed (.+?)(?: on (\d{4}-\d{2}-\d{2}))?", raw, flags=re.IGNORECASE)
+    if brewed_match:
+        recipe_name = brewed_match.group(1).strip()
+        brew_date = brewed_match.group(2) or ""
+        cmd = [sys.executable, "tools/register_brew.py", "--recipe", recipe_name]
+        if brew_date:
+            cmd.extend(["--date", brew_date])
+        return subprocess.run(cmd, cwd=ROOT).returncode
+
+    packaged_match = re.fullmatch(
+        r"i packaged (.+?) brewed (\d{4}-\d{2}-\d{2}) on (\d{4}-\d{2}-\d{2}) at ([0-9.]+) (gal|l) fg ([0-9.]+)(?: harvested (.+?)(?: gen (\d+))?)?",
+        raw,
+        flags=re.IGNORECASE,
+    )
+    if packaged_match:
+        recipe_name = packaged_match.group(1).strip()
+        brew_date = packaged_match.group(2)
+        package_date = packaged_match.group(3)
+        packaged_volume = packaged_match.group(4)
+        packaged_unit = packaged_match.group(5).lower()
+        fg = packaged_match.group(6)
+        harvest_yeast = (packaged_match.group(7) or "").strip()
+        harvest_generation = packaged_match.group(8) or ""
+        cmd = [
+            sys.executable,
+            "tools/register_package.py",
+            "--recipe",
+            recipe_name,
+            "--brew-date",
+            brew_date,
+            "--package-date",
+            package_date,
+            "--packaged-volume",
+            packaged_volume,
+            "--packaged-volume-unit",
+            packaged_unit,
+            "--fg",
+            fg,
+        ]
+        if harvest_yeast:
+            cmd.extend(["--harvest-yeast", harvest_yeast])
+            if harvest_generation:
+                cmd.extend(["--harvest-generation", harvest_generation])
+        return subprocess.run(cmd, cwd=ROOT).returncode
 
     if "create a beer" in phrase_n and "haven t made before" in phrase_n:
         return cmd_options(argparse.Namespace(count=5, exclude_brewed=True))
@@ -470,7 +508,9 @@ def cmd_phrase(args: argparse.Namespace) -> int:
         return cmd_garbage(argparse.Namespace(count=3))
 
     print("Phrase not recognized. Try:")
-    print('- "i brewed patient number 9"')
+    print('- "i brewed davenport esb on 2026-03-28"')
+    print('- "i packaged davenport esb brewed 2026-03-28 on 2026-04-10 at 4.55 gal fg 1.013"')
+    print('- "i packaged davenport esb brewed 2026-03-28 on 2026-04-10 at 4.55 gal fg 1.013 harvested 1968 gen 2"')
     print("- \"create a beer i haven't made before with the ingredients i have\"")
     print('- "garbage beer"')
     return 1
