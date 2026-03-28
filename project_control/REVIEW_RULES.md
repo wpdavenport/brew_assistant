@@ -12,6 +12,7 @@ Do:
 - flag stale mappings
 - flag missing required checks
 - propose status and note updates
+- prefer running `python3 tools/drift_review.py` instead of doing this from memory
 
 ## 1) sync review
 
@@ -43,6 +44,7 @@ Do:
 - flag anything touched with no matching row update
 - mark rows `Stale` if the matrix is no longer telling the truth
 - list missing checks before calling work done
+- use `python3 tools/drift_review.py` as the default first pass
 
 ## 3) lock review
 
