@@ -40,6 +40,18 @@ Use `prepare_brew.py` to activate a real brew date and update live trust scope:
 - `python3 tools/prepare_brew.py --recipe old_crown_lazy_lager --date 2026-04-15 --run-trust-check`
 - `make prepare-brew RECIPE=old_crown_lazy_lager DATE=2026-04-15`
 
+Use `register_brew.py` after the batch is actually brewed to decrement inventory and append the brew event:
+
+- `python3 tools/register_brew.py --recipe davenport_esb --date 2026-03-28 --dry-run`
+- `python3 tools/register_brew.py --recipe davenport_esb --date 2026-03-28`
+- `make register-brew RECIPE=davenport_esb DATE=2026-03-28`
+
+Use `register_package.py` after packaging to capture FG, packaged yield, and optional harvested yeast:
+
+- `python3 tools/register_package.py --recipe davenport_esb --brew-date 2026-03-28 --package-date 2026-04-10 --fg 1.013 --packaged-volume 4.55 --dry-run`
+- `python3 tools/register_package.py --recipe davenport_esb --brew-date 2026-03-28 --package-date 2026-04-10 --fg 1.013 --packaged-volume 4.55 --harvest-item wyeast_1968_gen2_slurry --harvest-amount 1 --harvest-unit count`
+- `make register-package RECIPE=davenport_esb BREW_DATE=2026-03-28 PACKAGE_DATE=2026-04-10 FG=1.013 PACKAGED_VOLUME=4.55`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:
