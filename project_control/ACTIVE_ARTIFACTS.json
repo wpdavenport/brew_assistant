@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "notes": "Active artifacts are the files validators should treat as live trust targets. Historical and archived artifacts preserve as-brewed truth and are not forced to sync to current inventory or lot data.",
+  "active_pairs": [
+    {
+      "recipe": "recipes/davenport_esb_11C.md",
+      "brew_sheet": "brewing/brew_day_sheets/davenport_esb_brew_day_sheet_2026-03-28.html",
+      "beerxml": "recipes/beer_xml_exports/davenport_esb_11C.xml"
+    },
+    {
+      "recipe": "recipes/old_crown_lazy_lager_3C.md",
+      "brew_sheet": "brewing/brew_day_sheets/old_crown_lazy_lager_brew_day_sheet.html"
+    }
+  ],
+  "hop_aa_active_files": [
+    "recipes/davenport_esb_11C.md",
+    "brewing/brew_day_sheets/davenport_esb_brew_day_sheet_2026-03-28.html",
+    "recipes/beer_xml_exports/davenport_esb_11C.xml",
+    "recipes/old_crown_lazy_lager_3C.md",
+    "brewing/brew_day_sheets/old_crown_lazy_lager_brew_day_sheet.html"
+  ]
+}

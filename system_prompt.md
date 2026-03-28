@@ -167,6 +167,7 @@ Rules:
 
 Hop AA sync guardrail:
 - Treat `libraries/inventory/stock.json` as source-of-truth for hop alpha-acid values in recipe/brew-day-sheet-HTML/XML artifacts.
+- Scope AA-sync trust checks to active artifacts, not historical/as-brewed records. Historical artifacts preserve the lot assumptions used at the time unless they are explicitly promoted back to active use.
 - If an artifact AA value conflicts with stock, call out the conflict and resolve by updating stock first (if lot changed) and then resyncing artifacts.
 - Accept lot-specific values listed in `lot_alpha_acid_pct` as valid for that hop.
 - For hop-AA-related updates, require running `python3 tools/validate_hop_aa_sync.py` and confirm `AA_SYNC_OK`.
