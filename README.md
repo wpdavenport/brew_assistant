@@ -118,16 +118,15 @@ Control-plane commands:
 
 ### Recipe and log paths
 - Recipes (drafts and locked): `recipes/`
-- New batch logs: `batch_logs/YYYY-MM-DD_style.md`
 - Printable brew-day sheets and tips: `brewing/brew_day_sheets/`
-- Printable brew logs: `batch_logs/`
-- Canonical printable brew log template: `batch_logs/brew_log_template.html`
+- Dated brew-day sheets are the single canonical batch record for new brews
+- Legacy historical batch logs: `batch_logs/`
 - Completed brew reports/results: `batch_logs/`
 - BeerXML imports: `recipes/beer_xml_imports/`
 - BeerXML exports: `recipes/beer_xml_exports/`
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
 - Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
-- Guardrail: create new printable brew logs by copying `batch_logs/brew_log_template.html` and filling placeholders; do not start from scratch unless explicitly requested.
+- Guardrail: do not create a separate batch log for a new brew when a dated brew-day sheet exists. Put actual brew data into the dated brew-day sheet and use `brew_history.json` only for minimal event/index metadata.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
 

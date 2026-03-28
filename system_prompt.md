@@ -127,6 +127,7 @@ Brew day sheets use a two-state naming convention:
 
 - **Undated** `<slug>_brew_day_sheet.html` — recipe is competition-locked but no brew date committed yet. This is the planning state.
 - **Dated** `<slug>_brew_day_sheet_<YYYY-MM-DD>.html` — brew date is committed. This file is both the live brew day sheet and the permanent batch record. No rename ever needed after the fact.
+- When a dated brew day sheet exists, it is the only canonical batch-execution record for that brew. Do not create a separate new batch log that duplicates the same execution data.
 
 **Trigger:** When the user says "I'm going to brew X", "scheduling a brew for X", or provides a brew date:
 - If an undated sheet exists, provide the `git mv` command to rename it with the brew date: `git mv brewing/brew_day_sheets/<slug>_brew_day_sheet.html brewing/brew_day_sheets/<slug>_brew_day_sheet_<YYYY-MM-DD>.html`
