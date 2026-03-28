@@ -22,6 +22,12 @@ aa-sync:
 prepare-brew:
 	python3 tools/prepare_brew.py --recipe "$(RECIPE)" --date "$(DATE)" --run-trust-check
 
+register-brew:
+	python3 tools/register_brew.py --recipe "$(RECIPE)" --date "$(DATE)"
+
+register-package:
+	python3 tools/register_package.py --recipe "$(RECIPE)" --brew-date "$(BREW_DATE)" --package-date "$(PACKAGE_DATE)" --fg "$(FG)" --packaged-volume "$(PACKAGED_VOLUME)"
+
 trust-check:
 	python3 tools/drift_review.py --passed-check "python3 tools/drift_review.py"
 	python3 tools/prompt_harness.py eval-all

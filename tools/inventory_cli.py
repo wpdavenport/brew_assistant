@@ -30,6 +30,7 @@ STOCK_FILE = INV_DIR / "stock.json"
 RECIPE_USAGE_FILE = INV_DIR / "recipe_usage.json"
 BREW_HISTORY_FILE = INV_DIR / "brew_history.json"
 TEMPLATES_FILE = INV_DIR / "style_option_templates.json"
+ZERO_TOLERANCE = 1e-6
 
 
 WEIGHT_FACTORS_TO_G = {
@@ -120,6 +121,12 @@ def append_history_event(history: Dict[str, Any], event: Dict[str, Any]) -> None
     history.setdefault("events", []).append(event)
 
 
+def clamp_zero(value: float) -> float:
+    if abs(value) < ZERO_TOLERANCE:
+        return 0.0
+    return value
+
+
 def cmd_brew(args: argparse.Namespace) -> int:
     stock = load_json(STOCK_FILE)
     usage = load_json(RECIPE_USAGE_FILE)
@@ -145,10 +152,10 @@ def cmd_brew(args: argparse.Namespace) -> int:
         qty = float(line["amount"]) * batches
         qty_in_item_unit = convert(qty, line["unit"], item["unit"])
         before = float(item.get("on_hand", 0.0))
-        after = before - qty_in_item_unit
+        after = clamp_zero(before - qty_in_item_unit)
         item["on_hand"] = round(after, 6)
 
-        if after < 0:
+        if after < -ZERO_TOLERANCE:
             shortages.append(
                 {
                     "item_id": item_id,
@@ -175,7 +182,7 @@ def cmd_brew(args: argparse.Namespace) -> int:
         harvest_item = by_id[harvest_item_id]
         harvest_qty = convert(harvest_amount, harvest_unit, harvest_item["unit"])
         before = float(harvest_item.get("on_hand", 0.0))
-        harvest_item["on_hand"] = round(before + harvest_qty, 6)
+        harvest_item["on_hand"] = round(clamp_zero(before + harvest_qty), 6)
         deltas.append(
             {
                 "item_id": harvest_item_id,
@@ -198,6 +205,9 @@ def cmd_brew(args: argparse.Namespace) -> int:
             "harvest_item": harvest_item_id,
             "harvest_amount": harvest_amount,
             "harvest_unit": harvest_unit,
+            "brew_date": getattr(args, "brew_date", ""),
+            "brew_sheet": getattr(args, "brew_sheet", ""),
+            "note": getattr(args, "note", ""),
             "deltas": deltas,
         },
     )
@@ -231,7 +241,7 @@ def cmd_restock(args: argparse.Namespace) -> int:
     history = load_json(BREW_HISTORY_FILE)
     item = resolve_item(stock, args.item)
     qty = convert(float(args.amount), args.unit, item["unit"])
-    item["on_hand"] = round(float(item.get("on_hand", 0.0)) + qty, 6)
+    item["on_hand"] = round(clamp_zero(float(item.get("on_hand", 0.0)) + qty), 6)
 
     append_history_event(
         history,
@@ -248,6 +258,70 @@ def cmd_restock(args: argparse.Namespace) -> int:
     save_json(STOCK_FILE, stock)
     save_json(BREW_HISTORY_FILE, history)
     print(f"Restocked {item['name']}: +{qty:.2f} {item['unit']}. New on_hand={item['on_hand']:.2f}")
+    return 0
+
+
+def cmd_package(args: argparse.Namespace) -> int:
+    stock = load_json(STOCK_FILE)
+    history = load_json(BREW_HISTORY_FILE)
+    by_id, _ = item_indexes(stock)
+
+    packaged_volume = float(args.packaged_volume)
+    fg = float(args.fg)
+    if packaged_volume <= 0:
+        raise ValueError("packaged_volume must be > 0")
+    if fg <= 0:
+        raise ValueError("fg must be > 0")
+
+    harvest_item_id = getattr(args, "harvest_item", "")
+    harvest_amount = float(getattr(args, "harvest_amount", 0.0) or 0.0)
+    harvest_unit = getattr(args, "harvest_unit", "")
+    deltas = []
+    if harvest_item_id and harvest_amount > 0 and harvest_unit:
+        if harvest_item_id not in by_id:
+            raise ValueError(f"Harvest item id '{harvest_item_id}' not found in stock.json")
+        harvest_item = by_id[harvest_item_id]
+        harvest_qty = convert(harvest_amount, harvest_unit, harvest_item["unit"])
+        before = float(harvest_item.get("on_hand", 0.0))
+        harvest_item["on_hand"] = round(clamp_zero(before + harvest_qty), 6)
+        deltas.append(
+            {
+                "item_id": harvest_item_id,
+                "name": harvest_item["name"],
+                "delta": harvest_qty,
+                "unit": harvest_item["unit"],
+            }
+        )
+
+    event = {
+        "timestamp_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "type": "package",
+        "recipe_id": args.recipe_id,
+        "recipe_name": args.recipe_name,
+        "brew_date": args.brew_date,
+        "package_date": args.package_date,
+        "brew_sheet": args.brew_sheet,
+        "fg": fg,
+        "packaged_volume": packaged_volume,
+        "packaged_volume_unit": args.packaged_volume_unit,
+        "co2_vols": args.co2_vols,
+        "harvest_item": harvest_item_id,
+        "harvest_amount": harvest_amount,
+        "harvest_unit": harvest_unit,
+        "note": args.note or "",
+        "deltas": deltas,
+    }
+    append_history_event(history, event)
+    save_json(STOCK_FILE, stock)
+    save_json(BREW_HISTORY_FILE, history)
+
+    print(f"Package event: {args.recipe_name}")
+    print(f"  FG: {fg:.3f}")
+    print(f"  Packaged volume: {packaged_volume:.2f} {args.packaged_volume_unit}")
+    if args.co2_vols:
+        print(f"  CO2 vols: {args.co2_vols}")
+    for row in deltas:
+        print(f"  {row['name']}: +{row['delta']:.2f} {row['unit']}")
     return 0
 
 
@@ -415,6 +489,9 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--harvest-item", default="", help="Optional inventory item id to add after brew")
     b.add_argument("--harvest-amount", type=float, default=0.0, help="Amount of harvested item to add")
     b.add_argument("--harvest-unit", default="", help="Unit for harvested item amount")
+    b.add_argument("--brew-date", default="", help="Optional brew date in YYYY-MM-DD")
+    b.add_argument("--brew-sheet", default="", help="Optional dated brew-day sheet path")
+    b.add_argument("--note", default="", help="Optional note stored on the brew event")
 
     r = sub.add_parser("restock", help="Add inventory to stock")
     r.add_argument("--item", required=True, help="Item id or exact item name")
@@ -431,6 +508,21 @@ def build_parser() -> argparse.ArgumentParser:
 
     ph = sub.add_parser("phrase", help="Run phrase-based commands")
     ph.add_argument("text", help="Natural language phrase")
+
+    pk = sub.add_parser("package", help="Record packaging and optional harvested yeast")
+    pk.add_argument("--recipe-id", required=True, help="Recipe usage id")
+    pk.add_argument("--recipe-name", required=True, help="Human-readable recipe name")
+    pk.add_argument("--brew-date", required=True, help="Brew date in YYYY-MM-DD")
+    pk.add_argument("--package-date", required=True, help="Package date in YYYY-MM-DD")
+    pk.add_argument("--brew-sheet", required=True, help="Dated brew-day sheet path")
+    pk.add_argument("--fg", required=True, type=float, help="Final gravity at packaging")
+    pk.add_argument("--packaged-volume", required=True, type=float, help="Packaged volume")
+    pk.add_argument("--packaged-volume-unit", default="gal", help="Unit for packaged volume")
+    pk.add_argument("--co2-vols", default="", help="Optional carbonation level in vols CO2")
+    pk.add_argument("--harvest-item", default="", help="Optional inventory item id to add after packaging")
+    pk.add_argument("--harvest-amount", type=float, default=0.0, help="Amount of harvested item to add")
+    pk.add_argument("--harvest-unit", default="", help="Unit for harvested item amount")
+    pk.add_argument("--note", default="", help="Optional note stored on the package event")
     return p
 
 
@@ -451,6 +543,8 @@ def main() -> int:
             return cmd_garbage(args)
         if args.cmd == "phrase":
             return cmd_phrase(args)
+        if args.cmd == "package":
+            return cmd_package(args)
     except Exception as exc:  # pragma: no cover
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
