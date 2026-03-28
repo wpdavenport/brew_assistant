@@ -16,6 +16,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+IGNORED_CHANGED_FILES = {"brew.log"}
 
 
 @dataclass(frozen=True)
@@ -28,6 +29,15 @@ class DriftArea:
 
 
 AREAS: tuple[DriftArea, ...] = (
+    DriftArea(
+        name="Onboarding and session boot",
+        patterns=("README.md", "system_prompt.md", "knowledge_index.md"),
+        proposed_status="Watch",
+        required_checks=(
+            "verify README startup path still matches prompt/index contract",
+        ),
+        note="Fresh-chat reliability depends on README boot instructions matching the repo contract.",
+    ),
     DriftArea(
         name="Core brewing context",
         patterns=(
@@ -163,6 +173,8 @@ def get_changed_files() -> list[str]:
         else:
             candidate = payload.strip()
         if candidate.endswith("/"):
+            continue
+        if candidate in IGNORED_CHANGED_FILES:
             continue
         changed.append(candidate)
     return changed

@@ -19,33 +19,50 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 
 ## 🛠️ Getting Started
 
-**💡 Pro Tip:** The easiest way to use this is inside **VS Code**. Install your favorite AI chat extension (Gemini, Claude, or ChatGPT), and it will become your personal brewer assistant.
+**💡 Pro Tip:** The easiest way to use this is inside **VS Code** with your preferred AI chat client. The important part is not the model vendor; it is starting the session with the repo contract loaded in the right order.
 
-1.  **Clone this Repo**: This is your brewing brain.
-2.  Initial Prompt: Read `system_prompt.md` first, then use `knowledge_index.md` as the repo map.
-3. For Genimi users, add this:
-Load and confirm these files before answering:
-- profiles/equipment.yaml
-- profiles/water_profiles.md
-- libraries/yeast_library.md
-- libraries/inventory/stock.json 
-4. If I do not have the stock for a recipe, create a shopping list
+### Recommended onboarding for every new chat
 
-Return:
-1) CONTEXT_READY
-2) I'm am ready to be your professional brewing assistant
-Then answer my brewing question.
+Use this exact startup instruction:
 
-3.  **Fill in your Profiles**:
-    *   Edit `profiles/equipment.yaml` with your system stats.
-    *   Update `profiles/water_profiles.md` with your source water.
-4.  **Activate the Coach**:
-    *   Use `system_prompt.md` to initialize the AI behavior contract.
-    *   Use `knowledge_index.md` to navigate the repo and find authoritative files.
-5.  **Brew**:
-    *   *"Design a BJCP 26D Belgian Dark Strong for my system."*
-    *   *"Why did my last IPA finish sweet? Check the logs."*
-    *   *"Create a fermentation schedule for a German Pilsner."*
+`Read system_prompt.md first, then use knowledge_index.md as the repo map.`
+
+Then make sure the assistant confirms these core files are loaded before giving repo-specific advice:
+- `profiles/equipment.yaml`
+- `profiles/water_profiles.md`
+- `libraries/yeast_library.md`
+- `libraries/inventory/stock.json`
+
+Expected startup behavior:
+- `CONTEXT_READY` if the core files are readable
+- explicit mention of any missing files if context is blocked
+- repo-specific brewing advice only after context is confirmed
+
+### First-time setup
+
+1. **Clone this repo**
+2. **Fill in your profiles**
+   - Edit `profiles/equipment.yaml` with your verified system stats
+   - Update `profiles/water_profiles.md` with your source water and salts context
+   - Keep `libraries/yeast_library.md` current for house strains and handling notes
+3. **Start the assistant with the repo contract**
+   - `system_prompt.md` is the behavior contract
+   - `knowledge_index.md` is the retrieval map
+4. **Ask brewing questions inside the repo workflow**
+   - *"Design a BJCP 26D Belgian Dark Strong for my system."*
+   - *"Why did my last IPA finish sweet? Check the logs."*
+   - *"Create a fermentation schedule for a German Pilsner."*
+
+### Fresh-chat rule
+
+For a new user or a new chat, the system works the same way **only if the startup instruction above is used**.
+
+This repo is not designed around generic chat behavior. It is designed around:
+- loading `system_prompt.md`
+- using `knowledge_index.md`
+- confirming the core context files
+
+If that boot sequence is skipped, responses may still be useful, but they are not operating inside the repo control model.
 
 
 ## 📂 How it Works
@@ -91,6 +108,13 @@ Project control files:
 - `project_control/DRIFT_MATRIX.md`
 
 Use `drift review` before trusting meaningful changes.
+
+Control-plane commands:
+- `make drift-review`
+- `make aa-sync`
+- `make recipe-sync`
+- `make beerxml-sync`
+- `make trust-check`
 
 ### Recipe and log paths
 - Recipes (drafts and locked): `recipes/`
