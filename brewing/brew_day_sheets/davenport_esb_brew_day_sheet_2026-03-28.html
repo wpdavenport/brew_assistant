@@ -220,8 +220,8 @@
     <li>Record source batch/date as Copper Crown ESB on brew-day notes.</li>
   </ul>
   <div class="three-col" style="margin-bottom:4px; font-size:8.5pt;">
-    <div><strong>Source batch/date:</strong> Copper Crown ESB / <span class="blank-md"></span></div>
-    <div><strong>Starter start:</strong> <span class="blank-md"></span></div>
+    <div><strong>Source batch/date:</strong> Copper Crown ESB / 2026-03-12 harvest</div>
+    <div><strong>Starter start:</strong> 2026-03-28 9:30 AM</div>
     <div><strong>Pitch volume (mL):</strong> <span class="blank-md"></span></div>
   </div>
 
@@ -237,8 +237,7 @@
   <table class="mash-check-table">
     <tr><th>Step</th><th>Target</th><th>Duration</th><th class="actual-col">Actual</th><th>Notes</th><th class="check-col">&check;</th></tr>
     <tr><td class="bold">Saccharification</td><td>151.0F (66.1C)</td><td>60 min</td><td></td><td></td><td class="center"><span class="checkbox"></span></td></tr>
-    <tr><td class="bold">Mash Average Temp</td><td>151.0F (66.1C)</td><td>60 min window</td><td></td><td></td><td class="center"><span class="checkbox"></span></td></tr>
-    <tr class="highlight-row"><td class="bold">pH Check</td><td>5.30</td><td>10-15 min</td><td></td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">pH Check</td><td>5.30</td><td>10-15 min</td><td>meter suspect</td><td>Ignored ~4.5 reading; added 5.0 mL phosphoric by prior batch calibration</td><td class="center"><span class="checkbox"></span></td></tr>
     <tr><td class="bold">Mash Out</td><td>168.0F (75.6C)</td><td>10 min</td><td></td><td></td><td class="center"><span class="checkbox"></span></td></tr>
     <tr><td class="bold">Drain Basket</td><td>-</td><td>8-12 min</td><td></td><td>Avoid aggressive squeezing</td><td class="center"><span class="checkbox"></span></td></tr>
   </table>
@@ -246,12 +245,14 @@
   <h3>Volume and Gravity Control</h3>
   <table>
     <tr><th>Checkpoint</th><th>Target</th><th class="actual-col">Actual</th><th>Notes</th></tr>
-    <tr><td class="bold">Boil start time</td><td>Record timestamp</td><td></td><td>Use local time</td></tr>
-    <tr><td class="bold">Pre-boil Volume</td><td>7.2-7.4 gal (27.3-28.0 L)</td><td></td><td></td></tr>
-    <tr><td class="bold">Pre-boil Gravity</td><td>1.042-1.044</td><td></td><td>Temp-corrected sample</td></tr>
-    <tr><td class="bold">Post-boil Volume</td><td>5.4-5.6 gal (20.4-21.2 L)</td><td></td><td>Record at flameout</td></tr>
-    <tr><td class="bold">Post-boil Gravity</td><td>1.056-1.058</td><td></td><td>Temp-corrected sample</td></tr>
-    <tr><td class="bold">Actual Boil-off Rate</td><td>~1.7-1.8 gal/hr</td><td></td><td>(Pre-boil vol - Post-boil vol) / boil hours</td></tr>
+    <tr><td class="bold">Boil start time</td><td>Record timestamp</td><td>12:28 PM</td><td>Use local time</td></tr>
+    <tr><td class="bold">Pre-boil Volume</td><td>7.2-7.4 gal (27.3-28.0 L)</td><td>7.15 gal</td><td></td></tr>
+    <tr><td class="bold">Pre-boil Gravity</td><td>1.042-1.044</td><td>1.044</td><td>Temp-corrected sample</td></tr>
+    <tr><td class="bold">Boil end time</td><td>Record timestamp</td><td>1:28 PM</td><td>60 min total boil</td></tr>
+    <tr><td class="bold">Post-boil Volume</td><td>5.4-5.6 gal (20.4-21.2 L)</td><td>5.4 gal</td><td>Record at flameout</td></tr>
+    <tr><td class="bold">Post-boil Gravity</td><td>1.056-1.058</td><td>1.058</td><td>Temp-corrected sample</td></tr>
+    <tr><td class="bold">Actual Boil-off Rate</td><td>~1.7-1.8 gal/hr</td><td>1.75 gal/hr</td><td>(7.15 - 5.4) / 1 hr</td></tr>
+    <tr><td class="bold">Into Fermentor Volume</td><td>~5.0 gal (19.0 L)</td><td>18.0 L</td><td>4.76 gal into fermentor</td></tr>
   </table>
 
   <h2>3. Boil Hop Additions (60 Minutes)</h2>
@@ -269,10 +270,10 @@
   <h2>4. Chill, Transfer, and Pitch</h2>
   <table>
     <tr><th>Pitch item</th><th>Checklist / Target</th><th>Actual</th><th>Notes</th></tr>
-    <tr><td>Wort temp at pitch</td><td>65.0F (18.3C)</td><td><span class="blank-md"></span>F</td><td></td></tr>
+    <tr><td>Wort temp at pitch</td><td>65.0F (18.3C)</td><td><span class="blank-md"></span>F</td><td>Pitch planned after overnight starter crash/decant</td></tr>
     <tr><td>Pitch date/time</td><td>Track exact timestamp</td><td><span class="blank-md"></span></td><td></td></tr>
     <tr><td>Oxygen at pitch</td><td>60-90 sec</td><td><span class="blank-md"></span> sec</td><td></td></tr>
-    <tr><td>Yeast generation pitched</td><td>G0 fresh or G1+ repitch</td><td><span class="blank-md"></span></td><td>Source batch ID/date</td></tr>
+    <tr><td>Yeast generation pitched</td><td>G0 fresh or G1+ repitch</td><td>G1</td><td>Copper Crown ESB / harvested 2026-03-12</td></tr>
   </table>
 </section>
 
