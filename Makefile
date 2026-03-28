@@ -19,6 +19,9 @@ beerxml-sync:
 aa-sync:
 	python3 tools/validate_hop_aa_sync.py
 
+prepare-brew:
+	python3 tools/prepare_brew.py --recipe "$(RECIPE)" --date "$(DATE)" --run-trust-check
+
 trust-check:
 	python3 tools/drift_review.py --passed-check "python3 tools/drift_review.py"
 	python3 tools/prompt_harness.py eval-all

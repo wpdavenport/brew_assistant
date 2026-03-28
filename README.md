@@ -114,6 +114,7 @@ Control-plane commands:
 - `make aa-sync`
 - `make recipe-sync`
 - `make beerxml-sync`
+- `make prepare-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make trust-check`
 
 ### Recipe and log paths
