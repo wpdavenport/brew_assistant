@@ -42,6 +42,14 @@ Use `prepare_brew.py` to activate a real brew date and update live trust scope:
 - `python3 tools/prepare_brew.py --recipe old_crown_lazy_lager --date 2026-04-15 --run-trust-check`
 - `make prepare-brew RECIPE=old_crown_lazy_lager DATE=2026-04-15`
 
+Use `batch_lifecycle.py` when you want the repo to choose the next lifecycle action automatically:
+
+- `python3 tools/batch_lifecycle.py --recipe old_crown_lazy_lager --dry-run`
+- `python3 tools/batch_lifecycle.py --recipe old_crown_lazy_lager --date 2026-04-15 --run-trust-check`
+- `python3 tools/batch_lifecycle.py --recipe davenport_esb --date 2026-03-28 --dry-run`
+- `python3 tools/batch_lifecycle.py --recipe davenport_esb --date 2026-03-28 --fg 1.013 --packaged-volume 4.55 --package-date 2026-04-10 --harvest-yeast 1968 --dry-run`
+- `make batch-lifecycle RECIPE=old_crown_lazy_lager DATE=2026-04-15 RUN_TRUST_CHECK=1`
+
 Use `register_brew.py` after the batch is actually brewed to decrement inventory and append the brew event:
 
 - `python3 tools/register_brew.py --recipe davenport_esb --date 2026-03-28 --dry-run`

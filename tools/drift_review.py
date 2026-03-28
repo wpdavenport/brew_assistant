@@ -77,6 +77,7 @@ AREAS: tuple[DriftArea, ...] = (
             "project_control/CHANGE_AWARE_PLAN.md",
             "tools/drift_review.py",
             "tools/prepare_brew.py",
+            "tools/batch_lifecycle.py",
             "tools/register_brew.py",
             "tools/register_package.py",
             "tools/yield_report.py",
