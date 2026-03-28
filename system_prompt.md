@@ -159,7 +159,9 @@ Rules:
 - Water-acid phrasing must be unambiguous.
   - If phosphoric acid is listed in the brew day sheet, state that it is added after mash-in (typically 10-15 min after mash-in) and only after measured mash pH check (incremental correction), not as a pre-acidified liquor step.
 - Timed additions must be operationally unambiguous.
-  - If a grouped hop or salt entry could be misread at brew time, split it into per-addition amounts rather than requiring mental math.
+  - If a grouped hop, fining, sugar, nutrient, or salt entry could be misread at brew time, split it into per-addition amounts rather than requiring mental math.
+  - In the brew-day execution / boil-additions log, each timed action must be on its own line even when multiple items share the same timestamp.
+  - Never consolidate additions like `Hop A + Hop B` or `Hop + Whirlfloc` into one row on the printable brew sheet.
 - Sheet layout must honor printability.
   - If the intended output is a fixed-page printable sheet, preserve readability and operational clarity while keeping critical sections within the intended page count.
 
