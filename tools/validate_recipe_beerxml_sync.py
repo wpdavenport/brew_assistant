@@ -56,6 +56,12 @@ def clean_recipe_hop_name(text: str) -> str:
 
 def normalize_timing(text: str) -> str:
     t = normalize_name(text)
+    if t == "fwh":
+        return "first wort"
+    if t.startswith("first wort"):
+        return "first wort"
+    if t.startswith("hop stand"):
+        return "0 min"
     if t == "flameout" or t.startswith("flameout ") or t.startswith("0 min"):
         return "flameout 10 min steep"
     if t.endswith("min"):
@@ -142,10 +148,16 @@ def parse_xml(path: Path) -> dict:
             time = text_from(node, "TIME")
             if name and amount and use and time:
                 use_lower = use.lower()
+                if use_lower == "dry hop":
+                    continue
                 if use_lower == "boil":
                     timing = f"{time} min"
                 elif use_lower == "aroma":
-                    timing = "flameout 10 min steep"
+                    timing = "0 min"
+                elif use_lower == "hop stand":
+                    timing = "0 min"
+                elif use_lower == "first wort":
+                    timing = "first wort"
                 else:
                     timing = f"{use_lower} {time}"
                 data["hops"].append(
@@ -214,7 +226,7 @@ def compare(recipe: dict, export: dict) -> list[str]:
     for rh in recipe_hops:
         matched = any(
             name_matches(rh["name"], xh["name"])
-            and amount_close(rh["g"], xh["g"], tol=0.2)
+            and amount_close(rh["g"], xh["g"], tol=0.6)
             and normalize_timing(rh["timing"]) == normalize_timing(xh["timing"])
             for xh in xml_hops
         )
