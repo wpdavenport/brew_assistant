@@ -77,6 +77,20 @@ Use `batch_state_summary.py` to see what is prepared, brewed but not packaged, a
 - `python3 tools/batch_state_summary.py --target-gal 5.0`
 - `make batch-state`
 
+Use `render_recipe_html.py` to create a printable recipe handout from the canonical recipe markdown:
+
+- `python3 tools/render_recipe_html.py --recipe davenport_esb`
+- `python3 tools/render_recipe_html.py --all`
+- `python3 tools/render_recipe_html.py --recipe old_crown_lazy_lager`
+- `make recipe-html RECIPE=davenport_esb`
+- `make recipe-html-all`
+
+Use `validate_recipe_html_sync.py` to ensure generated recipe HTML is up to date with recipe markdown:
+
+- `python3 tools/validate_recipe_html_sync.py --all`
+- `python3 tools/validate_recipe_html_sync.py --recipe davenport_esb`
+- `make recipe-html-sync`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:

@@ -123,12 +123,15 @@ Control-plane commands:
 - `make aa-sync`
 - `make recipe-sync`
 - `make beerxml-sync`
+- `make recipe-html-sync`
 - `make prepare-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make batch-lifecycle RECIPE=<recipe_slug> [DATE=<YYYY-MM-DD>]`
 - `make register-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make register-package RECIPE=<recipe_slug> BREW_DATE=<YYYY-MM-DD> PACKAGE_DATE=<YYYY-MM-DD> FG=<1.013> PACKAGED_VOLUME=<5.00>`
 - `make yield-report`
 - `make batch-state`
+- `make recipe-html RECIPE=<recipe_slug>`
+- `make recipe-html-all`
 - `make trust-check`
 
 ### Recipe and log paths
@@ -139,10 +142,14 @@ Control-plane commands:
 - Completed brew reports/results: `batch_logs/`
 - BeerXML imports: `recipes/beer_xml_imports/`
 - BeerXML exports: `recipes/beer_xml_exports/`
+- Recipe HTML exports: `recipes/html_exports/`
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
 - Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
 - Guardrail: do not create a separate batch log for a new brew when a dated brew-day sheet exists. Put actual brew data into the dated brew-day sheet and use `brew_history.json` only for minimal event/index metadata.
 - Lifecycle convenience: `batch-lifecycle` decides whether a recipe should be prepared, brew-registered, or package-registered based on repo state and the arguments you provide.
+- Printable recipe handouts should be generated from recipe markdown into `recipes/html_exports/`, not hand-maintained alongside the `.md` source.
+- If a recipe markdown file changes, regenerate its print HTML with `make recipe-html RECIPE=<recipe_slug>` or refresh all of them with `make recipe-html-all`.
+- `make recipe-html-sync` checks that generated recipe HTML still matches recipe markdown.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
 
