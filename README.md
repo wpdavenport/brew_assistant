@@ -21,6 +21,15 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 
 **💡 Pro Tip:** The easiest way to use this is inside **VS Code** with your preferred AI chat client. The important part is not the model vendor; it is starting the session with the repo contract loaded in the right order.
 
+### Requirements
+
+- `python3` is required for the repo tooling and automation commands
+- `make` is recommended for the shortcut workflow commands
+- a repo-aware AI chat client is required if you want the assistant to operate inside the repo contract
+
+Practical expectation:
+- if you want to use `prepare-brew`, `batch-lifecycle`, `register-brew`, `register-package`, `yield-report`, `batch-state`, or `trust-check`, you need a working `python3` on your machine
+
 ### Recommended onboarding for every new chat
 
 Use this exact startup instruction:
