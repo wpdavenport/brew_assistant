@@ -1,7 +1,23 @@
-# Patient Number 9 (90 Minute Clone - Competition Lock)
+# Patient Number 9 (90 Minute Clone)
+
+## VERSION STATUS
+- Active version: V2 (2026-03-29)
+- Previous active version archived in: `recipes/historical/patient_number_9_clone_34A_v1_2026-03-29.md`
+- Change reason: V1 side-by-side against fresh Dogfish Head 90 Minute IPA showed darker color and a harsher lingering bitterness than the commercial target.
 
 ## INTENT
-Refined 90 Minute clone tuned for competition execution. This is a clone-first recipe targeting smooth but firm bitterness, layered kettle-hop character, and clean process with zero oxidation.
+Competition-calibrated Dogfish Head 90 Minute IPA clone tuned toward a smoother bitterness profile, lighter color, and closer commercial alignment without rewriting the whole beer at once.
+
+This version keeps:
+- the clean WLP007 fermentation path
+- the core Simcoe / Amarillo identity
+- the sugar-assisted dry finish
+- the firm but not modern-overblown hop structure
+
+This version changes:
+- less amber malt for a more golden result
+- less Warrior in the mid-boil and late-boil structure
+- no water rewrite yet, because tasting notes pointed first to darker-malt plus hop-composition harshness
 
 ## COMPETITION ENTRY
 - BJCP Category: 34A Clone Beer
@@ -9,38 +25,42 @@ Refined 90 Minute clone tuned for competition execution. This is a clone-first r
 - Declared Base Style: 22A Double IPA
 
 ## TARGET PARAMETERS
-- OG: 1.088-1.092
-- FG: 1.014-1.018
-- ABV: 8.8-9.5%
+- OG: 1.090
+- FG: 1.016
+- ABV: 9.5%
 - IBU: ~90 (firm, smooth)
-- Color: 8-11 SRM
+- Color: 8 SRM
 - Mash pH (room temp): 5.25-5.35
 
 ## FERMENTABLES
-- 15.5 lb Pale Malt
-- 1.0 lb Thomas Fawcett Amber Malt
-- 1.25 lb Corn Sugar (add late boil)
-- 0.5 lb Rice Hulls (optional)
+- 16.0 lb (7.26 kg) Pale Malt
+- 0.5 lb (0.23 kg) Thomas Fawcett Amber Malt
+- 1.25 lb (0.57 kg) Corn Sugar
+- 0.5 lb (0.23 kg) Rice Hulls
 
-## HOPS (TARGET: ~90 IBU)
+Notes:
+- Add corn sugar at 10 minutes left in the boil.
+- Rice hulls remain optional lauter insurance.
+
+## HOPS
+
+Target: ~90 IBU, firm but smooth.
 
 ### Boil / Whirlpool
-- 0.75 oz Simcoe (12.9%) - First Wort
-- 0.25 oz Warrior (14.2%) - First Wort
-- 0.25 oz Warrior (14.2%) - 60 min
-- 0.50 oz Amarillo (7.1%) - 45 min
-- 0.50 oz Amarillo (7.1%) - 40 min
-- 0.50 oz Simcoe (12.9%) - 40 min
-- 0.25 oz Warrior (14.2%) - 40 min
-- 0.75 oz Amarillo (7.1%) - 20 min
-- 0.75 oz Simcoe (12.9%) - 20 min
-- 0.25 oz Warrior (14.2%) - 20 min
-- 1.50 oz Amarillo (7.1%) - 0 min at 180 F for 20 min
-- 1.50 oz Simcoe (12.9%) - 0 min at 180 F for 20 min
+- 0.75 oz (21 g) Simcoe (12.9%) - First Wort
+- 0.25 oz (7 g) Warrior (14.2%) - First Wort
+- 0.25 oz (7 g) Warrior (14.2%) - 60 min
+- 0.50 oz (14 g) Amarillo (7.1%) - 45 min
+- 0.50 oz (14 g) Amarillo (7.1%) - 40 min
+- 0.50 oz (14 g) Simcoe (12.9%) - 40 min
+- 0.75 oz (21 g) Amarillo (7.1%) - 20 min
+- 0.75 oz (21 g) Simcoe (12.9%) - 20 min
+- 1.50 oz (43 g) Amarillo (7.1%) - 0 min at 180 F for 20 min
+- 1.50 oz (43 g) Simcoe (12.9%) - 0 min at 180 F for 20 min
 
 ### Dry Hop (Clone-safe, not modern overkill)
-- 1.0 oz Amarillo
-- 1.0 oz Simcoe
+- 1.0 oz (28 g) Amarillo
+- 1.0 oz (28 g) Simcoe
 - Timing: add when gravity is within 2-4 points of terminal (typically day 5-6), contact 48-72 hours, then crash.
 
 ## YEAST
@@ -88,59 +108,23 @@ Salt additions for 10.4 gal total liquor:
 4. Add dry hops near terminal gravity, hold 48-72 hours at 67-68 F.
 5. Cold crash to 42 F immediately after dry hop contact window (aligned to validated GF30 floor).
 
+## CLONE CALIBRATION PRIORITIES
+- Color should read more golden than amber.
+- Bitterness should stay firm but lose the lingering Warrior edge seen in V1.
+- Body and carbonation should remain unchanged; those were already close to target.
+- Water remains unchanged for V2 because the side-by-side suggested the first miss was darker malt plus hop-composition harshness, not a fundamentally wrong sulfate/chloride balance.
+
+## BOOK + DOCTRINE ALIGNMENT CHECK
+- `22A Double IPA` doctrine supports a very pale base with only restrained specialty-malt use, which argues against the previous 1.0 lb amber load for this clone path.
+- `34A Clone Beer` overlay warns specifically against sulfate-sharp or rough bitterness; removing the 40 min and 20 min Warrior additions is the cleanest first correction toward smoother clone fidelity.
+- Current sulfate remains inside the repo's Dogfish 90 working guardrail, so water should not be rewritten before this narrower hop/malt test is evaluated.
+
 ## PACKAGING + CLONE SCORING CHECKPOINTS
 - Closed transfer only to fully purged keg.
 - Keep oxygen exposure minimal during dry hop and transfer.
 - Carbonation target: medium (about 2.3-2.5 vols CO2).
 - Validate against fresh commercial sample side-by-side before entry submission.
 - Entry form must include exact commercial target + brewery + base style.
-
-## POST-PACKAGING CLONE CALIBRATION
-- Side-by-side with fresh Dogfish Head 90 Minute IPA is mandatory before any next recipe change.
-- Compare bitterness quality first: smooth-firm vs sharp/angular.
-- Compare finish second: clone should not read too dry, too lean, or too sweet.
-- Compare hop impression third: layered resin/citrus/floral kettle-hop profile, not modern dry-hop saturation.
-- Compare fermentation profile last: keep ester/alcohol expression below the threshold where it reads more English than the commercial target.
-
-## FINAL SIDE-BY-SIDE NOTES
-- Appearance:
-  - PN9 is noticeably darker than fresh Dogfish Head 90 Minute IPA
-  - PN9 reads more amber while the commercial beer reads more golden
-- Aroma:
-  - Dogfish Head 90 Minute is brighter
-  - PN9 reads darker and deeper in aroma
-- Flavor:
-  - PN9 shows more upfront hop bitterness
-  - mid-palate through finish shows a harsher hop bitterness and lingering bitterness that is not present in the commercial beer
-  - water profile appears broadly close; primary miss reads more like darker-malt plus hop-composition harshness than a fully wrong water profile
-- Mouthfeel:
-  - spot on
-- Carbonation:
-  - perfect
-
-## PN9 V2 ADJUSTMENT PLAN (NOT YET LOCKED)
-- Keep unchanged:
-  - overall body and carbonation target
-  - yeast direction
-  - core Simcoe / Amarillo hop direction
-- Reduce color and darker flavor impression:
-  - cut Thomas Fawcett Amber Malt from 1.0 lb to 0.5-0.75 lb
-  - aim for a more golden result while keeping a light clone-appropriate malt depth
-- Reduce Warrior harshness:
-  - keep 0.25 oz Warrior at First Wort
-  - keep 0.25 oz Warrior at 60 min only if needed after retest
-  - remove Warrior at 40 min
-  - remove Warrior at 20 min
-  - replace lost mid-boil shaping with Simcoe and/or Amarillo rather than more Warrior
-- Water:
-  - keep current profile broadly intact for the next pass
-  - optional second-step test only if bitterness still reads hard after hop changes: reduce gypsum by 1-2 g across total liquor
-
-## RANKED NEXT-BATCH CHANGES
-1. Reduce Thomas Fawcett Amber Malt to lighten color and dark-malt expression
-2. Remove 40 min and 20 min Warrior additions
-3. Rebalance mid-boil hop shaping with Simcoe / Amarillo
-4. Only then consider a small gypsum reduction if bitterness still reads too hard
 
 ## CRITICAL RISKS TO AVOID
 - Harshness from excess sulfate or high mash pH.

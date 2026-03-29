@@ -7,13 +7,13 @@
       "style_key": "clone_34A_dfh90",
       "aliases": ["patient number 9", "patient 9", "pn9"],
       "consumption": [
-        {"item_id": "pale_malt_us", "amount": 7030.681735, "unit": "g"},
-        {"item_id": "amber_malt_tf", "amount": 453.59237, "unit": "g"},
+        {"item_id": "pale_malt_us", "amount": 7257.47892, "unit": "g"},
+        {"item_id": "amber_malt_tf", "amount": 226.796185, "unit": "g"},
         {"item_id": "corn_sugar_dextrose", "amount": 566.9904625, "unit": "g"},
         {"item_id": "rice_hulls", "amount": 226.796185, "unit": "g", "optional": true},
         {"item_id": "simcoe", "amount": 127.5728540625, "unit": "g"},
         {"item_id": "amarillo", "amount": 120.48547328125, "unit": "g"},
-        {"item_id": "warrior", "amount": 28.349523125, "unit": "g"},
+        {"item_id": "warrior", "amount": 14.1747615625, "unit": "g"},
         {"item_id": "wlp007_gen1_slurry", "amount": 1.0, "unit": "count"},
         {"item_id": "gypsum", "amount": 13.89126633125, "unit": "g"},
         {"item_id": "epsom_salt", "amount": 3.11844754375, "unit": "g"},
@@ -22,7 +22,7 @@
         {"item_id": "zinc_buddy", "amount": 2.0, "unit": "g"},
         {"item_id": "phosphoric_85", "amount": 6.0, "unit": "ml", "optional": true}
       ],
-      "notes": "Synced to recipes/patient_number_9_clone_34A.md. Uses 1x WLP007 G1 slurry. Zinc Buddy tracked as 2.0 g for inventory compatibility (~2 mL)."
+      "notes": "Synced to recipes/patient_number_9_clone_34A.md V2. Uses 1x WLP007 G1 slurry. Zinc Buddy tracked as 2.0 g for inventory compatibility (~2 mL)."
     },
     {
       "id": "manhattan_belgian_dark_strong_ale",
