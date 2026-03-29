@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tempest - BJCP 34B Mixed-Style Beer</title>
+  <style>
+    :root {
+      --ink: #1f1a17;
+      --muted: #6b625c;
+      --paper: #fffdf8;
+      --rule: #d9cdbc;
+      --accent: #8c4c24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #efe7db;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.38in 0.42in 0.42in;
+      background: var(--paper);
+    }
+    .header {
+      border-bottom: 2px solid var(--rule);
+      margin-bottom: 0.14in;
+      padding-bottom: 0.08in;
+    }
+    h1 {
+      margin: 0;
+      font-size: 23pt;
+      line-height: 1.05;
+      color: var(--accent);
+    }
+    .targets {
+      margin-top: 0.08in;
+      font-size: 10pt;
+      line-height: 1.25;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.05in 0.16in;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.16in 0.24in;
+      align-items: start;
+    }
+    .section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    h2 {
+      margin: 0 0 0.06in;
+      padding-bottom: 0.03in;
+      border-bottom: 1px solid var(--rule);
+      font-size: 11pt;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .section p {
+      margin: 0.04in 0 0.02in;
+      font-size: 10pt;
+      line-height: 1.3;
+    }
+    ul, ol {
+      margin: 0.04in 0 0.02in 0.18in;
+      padding: 0;
+      font-size: 10pt;
+      line-height: 1.28;
+    }
+    li {
+      margin: 0.03in 0;
+    }
+    .full {
+      grid-column: 1 / -1;
+    }
+    .ferment-note {
+      margin: 0 0 0.05in;
+      font-size: 9.4pt;
+      color: var(--muted);
+    }
+    @media print {
+      body { background: white; }
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0.3in 0.34in 0.34in;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <h1>Tempest - BJCP 34B Mixed-Style Beer</h1>
+      <div class="targets"></div>
+    </header>
+
+    <section class="grid">
+      <div class="section">
+        <h2>Grains</h2>
+        <ul>
+
+</ul>
+      </div>
+      <div class="section">
+        <h2>Yeast</h2>
+        <ul>
+
+</ul>
+      </div>
+      <div class="section full">
+        <h2>Hops</h2>
+        <ul>
+
+</ul>
+      </div>
+      <div class="section">
+        <h2>Mash Schedule</h2>
+        <ol>
+
+</ol>
+      </div>
+      <div class="section">
+        <h2>Fermentation Schedule</h2>
+        <p class="ferment-note">Fermentation Equipment: Grainfather GF30 Pro Conical + Grainfather Glycol Chiller</p>
+        <ol>
+
+</ol>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

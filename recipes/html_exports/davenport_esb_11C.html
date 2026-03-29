@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Davenport ESB - BJCP 11C Strong Bitter</title>
+  <style>
+    :root {
+      --ink: #1f1a17;
+      --muted: #6b625c;
+      --paper: #fffdf8;
+      --rule: #d9cdbc;
+      --accent: #8c4c24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #efe7db;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.38in 0.42in 0.42in;
+      background: var(--paper);
+    }
+    .header {
+      border-bottom: 2px solid var(--rule);
+      margin-bottom: 0.14in;
+      padding-bottom: 0.08in;
+    }
+    h1 {
+      margin: 0;
+      font-size: 23pt;
+      line-height: 1.05;
+      color: var(--accent);
+    }
+    .targets {
+      margin-top: 0.08in;
+      font-size: 10pt;
+      line-height: 1.25;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.05in 0.16in;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.16in 0.24in;
+      align-items: start;
+    }
+    .section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    h2 {
+      margin: 0 0 0.06in;
+      padding-bottom: 0.03in;
+      border-bottom: 1px solid var(--rule);
+      font-size: 11pt;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .section p {
+      margin: 0.04in 0 0.02in;
+      font-size: 10pt;
+      line-height: 1.3;
+    }
+    ul, ol {
+      margin: 0.04in 0 0.02in 0.18in;
+      padding: 0;
+      font-size: 10pt;
+      line-height: 1.28;
+    }
+    li {
+      margin: 0.03in 0;
+    }
+    .full {
+      grid-column: 1 / -1;
+    }
+    .ferment-note {
+      margin: 0 0 0.05in;
+      font-size: 9.4pt;
+      color: var(--muted);
+    }
+    @media print {
+      body { background: white; }
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0.3in 0.34in 0.34in;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <h1>Davenport ESB - BJCP 11C Strong Bitter</h1>
+      <div class="targets"><span><strong>OG:</strong> 1.057</span>
+<span><strong>FG:</strong> 1.013</span>
+<span><strong>ABV:</strong> 5.8%</span>
+<span><strong>IBU:</strong> ~37</span>
+<span><strong>Color:</strong> 11 SRM</span>
+<span><strong>Mash pH (room temp):</strong> 5.30</span></div>
+    </header>
+
+    <section class="grid">
+      <div class="section">
+        <h2>Grains</h2>
+        <ul>
+<li>9.72 lb (4.41 kg) Simpsons Pale Malt</li>
+<li>0.76 lb (0.34 kg) Simpsons Crystal Malt</li>
+<li>0.02 lb (0.01 kg) Chocolate Malt</li>
+</ul>
+      </div>
+      <div class="section">
+        <h2>Yeast</h2>
+        <ul>
+<li>Wyeast 1968 London ESB Ale (G1 repitch from fridge slurry) or WLP002 equivalent</li>
+</ul>
+      </div>
+      <div class="section full">
+        <h2>Hops</h2>
+        <ul>
+<li>0.70 oz (20 g) Target (9.6% AA) - 60 min</li>
+<li>0.30 oz (9 g) Northdown (7.3% AA) - 20 min</li>
+<li>0.30 oz (9 g) Challenger (7.75% AA assumed midpoint from 6.5-9.0% bag range) - 20 min</li>
+<li>0.35 oz (10 g) East Kent Goldings (6.1% AA) - 10 min</li>
+<li>0.35 oz (10 g) East Kent Goldings (6.1% AA) - flameout, 10 min steep</li>
+<li>Whirlfloc: 1 tablet at 10 min</li>
+</ul>
+      </div>
+      <div class="section">
+        <h2>Mash Schedule</h2>
+        <ol>
+<li>Mash 60 minutes at 151.0 F (66.1 C).</li>
+<li>Mash out 10 minutes at 168.0 F (75.6 C).</li>
+</ol>
+      </div>
+      <div class="section">
+        <h2>Fermentation Schedule</h2>
+        <p class="ferment-note">Fermentation Equipment: Grainfather GF30 Pro Conical + Grainfather Glycol Chiller</p>
+        <ol>
+<li>Day 0-2: hold 65.0 F (18.3 C).</li>
+<li>Day 3: raise to 67.0 F (19.4 C).</li>
+<li>Day 4-9: hold 68.0 F (20.0 C) through terminal gravity, VDK check, and crash decision.</li>
+<li>Crash to 42.0 F (5.6 C) for 48-72 hr only after stable terminal gravity and clean VDK.</li>
+</ol>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
