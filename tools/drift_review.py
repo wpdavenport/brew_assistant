@@ -82,6 +82,8 @@ AREAS: tuple[DriftArea, ...] = (
             "tools/register_package.py",
             "tools/yield_report.py",
             "tools/batch_state_summary.py",
+            "tools/render_recipe_html.py",
+            "tools/validate_recipe_html_sync.py",
             "tools/prompt_harness.py",
             "tools/validate_hop_aa_sync.py",
             "Makefile",

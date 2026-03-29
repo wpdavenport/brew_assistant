@@ -16,6 +16,9 @@ recipe-sync:
 beerxml-sync:
 	python3 tools/validate_recipe_beerxml_sync.py --all
 
+recipe-html-sync:
+	python3 tools/validate_recipe_html_sync.py --all
+
 aa-sync:
 	python3 tools/validate_hop_aa_sync.py
 
@@ -37,9 +40,16 @@ yield-report:
 batch-state:
 	python3 tools/batch_state_summary.py
 
+recipe-html:
+	python3 tools/render_recipe_html.py --recipe "$(RECIPE)"
+
+recipe-html-all:
+	python3 tools/render_recipe_html.py --all
+
 trust-check:
 	python3 tools/drift_review.py --passed-check "python3 tools/drift_review.py"
 	python3 tools/prompt_harness.py eval-all
 	python3 tools/validate_hop_aa_sync.py
 	python3 tools/validate_recipe_brewsheet_sync.py --all
 	python3 tools/validate_recipe_beerxml_sync.py --all
+	python3 tools/validate_recipe_html_sync.py --all
