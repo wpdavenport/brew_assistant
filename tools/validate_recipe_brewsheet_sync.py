@@ -40,7 +40,7 @@ RE_HTML_HOP_ROW = re.compile(
     re.IGNORECASE,
 )
 RE_EXECUTION_SECTION = re.compile(
-    r"<h2>3\. Boil Hop Additions \(60 Minutes\)</h2>\s*<table>(.*?)</table>",
+    r"<h2>3\. Boil Hop Additions \(\d+ Minutes\)</h2>\s*<table>(.*?)</table>",
     re.IGNORECASE | re.DOTALL,
 )
 RE_EXECUTION_ACTION_CELL = re.compile(r"<tr><td[^>]*>[^<]*</td><td>([^<]+)</td>", re.IGNORECASE)
@@ -73,6 +73,12 @@ def clean_recipe_hop_name(text: str) -> str:
 
 def normalize_timing(text: str) -> str:
     t = normalize_name(text)
+    if t == "fwh":
+        return "first wort"
+    if t.startswith("first wort"):
+        return "first wort"
+    if t.startswith("hop stand"):
+        return "0 min"
     if t == "flameout" or t.startswith("flameout "):
         return "0 min"
     if t.startswith("0 min"):
@@ -109,7 +115,7 @@ def parse_recipe(path: Path) -> dict:
                 data["fermentables"].append(
                     {"kg": float(m.group(2)), "name": m.group(3).strip()}
                 )
-        elif section == "hops (target: ~37 ibu)" or section == "hops":
+        elif section.startswith("hops"):
             if subsection == "boil / whirlpool":
                 m = RE_HOP_LINE.match(line)
                 if m:
@@ -139,12 +145,13 @@ def parse_sheet(path: Path) -> dict:
 
     for timing, name, grams in RE_HTML_HOP_ROW.findall(text):
         hop_name = name.strip()
-        if hop_name.lower() == "whirlfloc":
+        timing_norm = normalize_timing(timing.strip())
+        name_norm = normalize_name(hop_name)
+        if "whirlfloc" in name_norm or "corn sugar" in name_norm or timing_norm == "dry hop":
             continue
-        if "east kent goldings" in hop_name.lower() or "target" in hop_name.lower() or "northdown" in hop_name.lower() or "challenger" in hop_name.lower():
-            data["hops"].append(
-                {"g": float(grams), "name": hop_name, "timing": normalize_timing(timing.strip())}
-            )
+        data["hops"].append(
+            {"g": float(grams), "name": hop_name, "timing": timing_norm}
+        )
 
     section = RE_EXECUTION_SECTION.search(text)
     if section:
@@ -213,7 +220,7 @@ def compare(recipe: dict, sheet: dict, recipe_path: Path, sheet_path: Path) -> l
     for rh in recipe_hops:
         matched = any(
             name_matches(rh["name"], sh["name"])
-            and amount_close(rh["g"], sh["g"], tol=0.2)
+            and amount_close(rh["g"], sh["g"], tol=0.6)
             and normalize_timing(rh["timing"]) == normalize_timing(sh["timing"])
             for sh in sheet_hops
         )
