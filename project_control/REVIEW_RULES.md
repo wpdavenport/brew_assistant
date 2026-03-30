@@ -13,6 +13,7 @@ Do:
 - flag missing required checks
 - propose status and note updates
 - prefer running `python3 tools/drift_review.py` instead of doing this from memory
+- if a new durable rule or lesson was introduced, confirm it was captured with `python3 tools/intake_insight.py --text "..." --record` or explicitly explain why not
 
 ## 1) sync review
 

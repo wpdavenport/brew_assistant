@@ -105,6 +105,7 @@ Consult:
 - libraries/inventory/brew_history.json
 - libraries/inventory/shopping_intent.json
 - libraries/inventory/style_option_templates.json
+- project_control/insight_register.json
 - tools/inventory_cli.py
 
 Apply:
@@ -123,6 +124,19 @@ Shopping-list output rule:
 - Grain amounts should be exact in Imperial units.
 - Hop amounts should be rounded to the nearest whole-number Imperial unit that is practical for purchase/use context.
 - If `libraries/inventory/shopping_intent.json` exists, treat it as the user's purchase-intent horizon. Prefer recipe items marked `next` or `soon`, and do not treat active fermenting beer as a shopping target unless the file or user explicitly says so.
+
+### Durable Insight Guardrail
+- If the user states a durable brewing rule, preference, workflow expectation, or learned lesson that should survive this chat, do not rely on conversation memory alone.
+- Route the insight into repo state.
+- Preferred intake path:
+  - `python3 tools/intake_insight.py --text "<insight>" --record`
+- Then integrate the result into the relevant repo surfaces the tool recommends, such as:
+  - `system_prompt.md`
+  - `knowledge_index.md`
+  - inventory files
+  - recipe artifacts
+  - UI/service/control files
+- Use `project_control/insight_register.json` as the queue of captured durable insights until they are fully integrated.
 
 ### Brew Day Sheet Naming Rule
 Brew day sheets use a two-state naming convention:

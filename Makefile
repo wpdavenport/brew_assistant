@@ -55,6 +55,12 @@ recipe-html-refresh:
 brew-op:
 	python3 tools/brew_op.py $(if $(TEXT),--text "$(TEXT)",) $(if $(ACTION),--action "$(ACTION)",) $(if $(RECIPE),--recipe "$(RECIPE)",) $(if $(DATE),--date "$(DATE)",) $(if $(BREW_DATE),--brew-date "$(BREW_DATE)",) $(if $(PACKAGE_DATE),--package-date "$(PACKAGE_DATE)",) $(if $(FG),--fg "$(FG)",) $(if $(PACKAGED_VOLUME),--packaged-volume "$(PACKAGED_VOLUME)",) $(if $(PACKAGED_VOLUME_UNIT),--packaged-volume-unit "$(PACKAGED_VOLUME_UNIT)",) $(if $(CO2_VOLS),--co2-vols "$(CO2_VOLS)",) $(if $(HARVEST_YEAST),--harvest-yeast "$(HARVEST_YEAST)",) $(if $(HARVEST_GENERATION),--harvest-generation "$(HARVEST_GENERATION)",) $(if $(NOTE),--note "$(NOTE)",) $(if $(RUN_TRUST_CHECK),--run-trust-check,) $(if $(INCLUDE_OPTIONAL),--include-optional,) $(if $(RECORD_HISTORY),--record-history,) $(if $(NO_REFRESH_HTML),--no-refresh-html,)
 
+insight:
+	python3 tools/intake_insight.py --text "$(TEXT)" --record
+
+insight-report:
+	python3 tools/insight_report.py
+
 web-ui:
 	python3 tools/web_ui_bootstrap.py $(if $(HOST),--host "$(HOST)",) $(if $(PORT),--port "$(PORT)",)
 
