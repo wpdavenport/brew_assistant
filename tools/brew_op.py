@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import re
 import subprocess
 import sys
@@ -17,23 +18,42 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text.strip().lower())
 
 
+def normalize_date_token(text: str) -> str:
+    token = text.strip().lower()
+    if token == "today":
+        return dt.date.today().isoformat()
+    return token
+
+
+def normalize_recipe_phrase(text: str) -> str:
+    return re.sub(r"\s+(today|\d{4}-\d{2}-\d{2})\s*$", "", text.strip(), flags=re.IGNORECASE).strip()
+
+
 def parse_phrase(text: str) -> dict[str, str]:
     raw = text.strip()
     normalized = normalize(raw)
 
-    if normalized in {"status", "batch status", "what next", "next action", "next actions"}:
+    if normalized in {"status", "batch status", "what next", "next action", "next actions", "what should i do next"}:
         return {"action": "status"}
 
-    m = re.fullmatch(r"(?:prepare|prep)\s+(.+?)(?:\s+on\s+(\d{4}-\d{2}-\d{2}))?", raw, flags=re.IGNORECASE)
+    m = re.fullmatch(r"(?:prepare|prep)\s+(.+?)\s+(today|\d{4}-\d{2}-\d{2})", raw, flags=re.IGNORECASE)
     if m:
-        return {"action": "prepare", "recipe": m.group(1).strip(), "date": m.group(2) or ""}
+        return {"action": "prepare", "recipe": normalize_recipe_phrase(m.group(1)), "date": normalize_date_token(m.group(2))}
 
-    m = re.fullmatch(r"(?:i brewed|brew)\s+(.+?)(?:\s+on\s+(\d{4}-\d{2}-\d{2}))?", raw, flags=re.IGNORECASE)
+    m = re.fullmatch(r"(?:prepare|prep)\s+(.+?)(?:\s+on\s+(today|\d{4}-\d{2}-\d{2}))?", raw, flags=re.IGNORECASE)
     if m:
-        return {"action": "brew", "recipe": m.group(1).strip(), "date": m.group(2) or ""}
+        return {"action": "prepare", "recipe": normalize_recipe_phrase(m.group(1)), "date": normalize_date_token(m.group(2) or "")}
+
+    m = re.fullmatch(r"(?:i brewed|brew)\s+(.+?)\s+(today|\d{4}-\d{2}-\d{2})", raw, flags=re.IGNORECASE)
+    if m:
+        return {"action": "brew", "recipe": normalize_recipe_phrase(m.group(1)), "date": normalize_date_token(m.group(2))}
+
+    m = re.fullmatch(r"(?:i brewed|brew)\s+(.+?)(?:\s+on\s+(today|\d{4}-\d{2}-\d{2}))?", raw, flags=re.IGNORECASE)
+    if m:
+        return {"action": "brew", "recipe": normalize_recipe_phrase(m.group(1)), "date": normalize_date_token(m.group(2) or "")}
 
     m = re.fullmatch(
-        r"(?:i packaged|package)\s+(.+?)\s+brewed\s+(\d{4}-\d{2}-\d{2})\s+on\s+(\d{4}-\d{2}-\d{2})\s+at\s+([0-9.]+)\s+(gal|l)\s+fg\s+([0-9.]+)(?:\s+harvested\s+(.+?)(?:\s+gen\s+(\d+))?)?",
+        r"(?:i packaged|package)\s+(.+?)\s+on\s+(today|\d{4}-\d{2}-\d{2})\s+at\s+([0-9.]+)\s+(gal|l)\s+fg\s+([0-9.]+)(?:\s+harvested\s+(.+?)(?:\s+gen\s+(\d+))?)?",
         raw,
         flags=re.IGNORECASE,
     )
@@ -41,8 +61,25 @@ def parse_phrase(text: str) -> dict[str, str]:
         return {
             "action": "package",
             "recipe": m.group(1).strip(),
-            "brew_date": m.group(2),
-            "package_date": m.group(3),
+            "package_date": normalize_date_token(m.group(2)),
+            "packaged_volume": m.group(3),
+            "packaged_volume_unit": m.group(4).lower(),
+            "fg": m.group(5),
+            "harvest_yeast": (m.group(6) or "").strip(),
+            "harvest_generation": m.group(7) or "",
+        }
+
+    m = re.fullmatch(
+        r"(?:i packaged|package)\s+(.+?)\s+brewed\s+(today|\d{4}-\d{2}-\d{2})\s+on\s+(today|\d{4}-\d{2}-\d{2})\s+at\s+([0-9.]+)\s+(gal|l)\s+fg\s+([0-9.]+)(?:\s+harvested\s+(.+?)(?:\s+gen\s+(\d+))?)?",
+        raw,
+        flags=re.IGNORECASE,
+    )
+    if m:
+        return {
+            "action": "package",
+            "recipe": m.group(1).strip(),
+            "brew_date": normalize_date_token(m.group(2)),
+            "package_date": normalize_date_token(m.group(3)),
             "packaged_volume": m.group(4),
             "packaged_volume_unit": m.group(5).lower(),
             "fg": m.group(6),
@@ -57,16 +94,31 @@ def parse_phrase(text: str) -> dict[str, str]:
     )
 
 
-def run(cmd: list[str], dry_run: bool) -> int:
-    print("command:", " ".join(cmd))
+def run(cmd: list[str], dry_run: bool, label: str = "") -> int:
+    if label:
+        print(f"ACTION: {label}")
+    print("COMMAND:", " ".join(cmd))
     if dry_run:
+        print("STATUS: DRY_RUN")
         return 0
-    return subprocess.run(cmd, cwd=ROOT).returncode
+    rc = subprocess.run(cmd, cwd=ROOT).returncode
+    print(f"STATUS: {'OK' if rc == 0 else f'FAILED ({rc})'}")
+    return rc
 
 
 def refresh_recipe_html(recipe: str, dry_run: bool) -> int:
     cmd = [sys.executable, "tools/refresh_recipe_html.py", "--recipe", recipe]
-    return run(cmd, dry_run)
+    return run(cmd, dry_run, label="refresh recipe html")
+
+
+def infer_brew_date(recipe: str) -> str:
+    try:
+        from batch_lifecycle import choose_brew_date, resolve_recipe
+
+        recipe_path = resolve_recipe(recipe)
+        return choose_brew_date(recipe_path, "")
+    except Exception:
+        return ""
 
 
 def action_command(args: argparse.Namespace, phrase_data: dict[str, str] | None) -> list[str]:
@@ -101,7 +153,7 @@ def action_command(args: argparse.Namespace, phrase_data: dict[str, str] | None)
         return cmd
 
     if action == "package":
-        brew_date = (phrase_data or {}).get("brew_date") or args.brew_date or args.date
+        brew_date = (phrase_data or {}).get("brew_date") or args.brew_date or args.date or infer_brew_date(recipe)
         package_date = (phrase_data or {}).get("package_date") or args.package_date
         packaged_volume = (phrase_data or {}).get("packaged_volume") or args.packaged_volume
         packaged_unit = (phrase_data or {}).get("packaged_volume_unit") or args.packaged_volume_unit
@@ -201,12 +253,19 @@ def main() -> int:
     args = build_parser().parse_args()
     phrase_data = parse_phrase(args.text) if args.text else None
     recipe = (phrase_data or {}).get("recipe") or args.recipe
+    action = (phrase_data or {}).get("action") or args.action
+    if action == "auto" and not recipe:
+        action = "status"
+        if phrase_data is None:
+            phrase_data = {"action": "status"}
+        else:
+            phrase_data["action"] = "status"
     if args.refresh_html and recipe:
         rc = refresh_recipe_html(recipe, args.dry_run)
         if rc != 0:
             return rc
     cmd = action_command(args, phrase_data)
-    return run(cmd, args.dry_run)
+    return run(cmd, args.dry_run, label=action)
 
 
 if __name__ == "__main__":
