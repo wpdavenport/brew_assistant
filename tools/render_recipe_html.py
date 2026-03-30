@@ -77,7 +77,11 @@ def parse_markdown_sections(markdown_text: str) -> tuple[str, dict[str, list[str
 
 def print_title(source_title: str, sections: dict[str, list[str]]) -> str:
     short_title = re.sub(r"\s*\(.*\)\s*$", "", source_title).strip()
-    competition = find_section(sections, "COMPETITION ENTRY")
+    competition = (
+        find_section(sections, "COMPETITION ENTRY")
+        or find_section(sections, "COMPETITION TRACKING")
+        or find_section(sections, "INTENT")
+    )
     category = ""
     for raw in competition:
         stripped = raw.strip()
@@ -125,6 +129,60 @@ def subsection_bullets(lines: list[str], allowed_titles: set[str]) -> list[str]:
         if stripped.startswith("- ") and current in allowed_titles:
             bullets.append(stripped[2:].strip())
     return bullets
+
+
+def subsection_items(lines: list[str], target_title: str) -> list[str]:
+    current = ""
+    items: list[str] = []
+    for raw in lines:
+        stripped = raw.strip()
+        if stripped.startswith("### "):
+            current = stripped[4:].strip()
+            continue
+        if stripped.startswith("- ") and current.lower() == target_title.lower():
+            items.append(stripped[2:].strip())
+    return items
+
+
+def section_items(lines: list[str]) -> list[str]:
+    items: list[str] = []
+    for raw in lines:
+        stripped = raw.strip()
+        if stripped.startswith("- "):
+            items.append(stripped[2:].strip())
+    return items
+
+
+def matching_items(lines: list[str], keywords: tuple[str, ...]) -> list[str]:
+    items: list[str] = []
+    for raw in lines:
+        stripped = raw.strip()
+        if not stripped.startswith("- "):
+            continue
+        item = stripped[2:].strip()
+        lowered = item.lower()
+        if any(keyword in lowered for keyword in keywords):
+            items.append(item)
+    return items
+
+
+def process_schedule_items(lines: list[str]) -> list[str]:
+    items: list[str] = []
+    for raw in lines:
+        stripped = raw.strip()
+        if not stripped.startswith("- "):
+            continue
+        item = stripped[2:].strip()
+        lowered = item.lower()
+        if (
+            lowered.startswith("mash")
+            or lowered.startswith("alpha rest")
+            or lowered.startswith("rest")
+            or lowered.startswith("total mash")
+            or lowered.startswith("boil")
+        ):
+            items.append(item)
+    return items
 
 
 def filter_yeast_lines(lines: list[str]) -> list[str]:
@@ -188,8 +246,17 @@ def fermentation_schedule(lines: list[str]) -> list[str]:
             lowered = item.lower()
             if "rouse" in lowered:
                 continue
-            if any(keyword in lowered for keyword in ["hold", "raise", "crash", "lager", "ramp", "chill"]):
+            if any(keyword in lowered for keyword in ["hold", "raise", "crash", "lager", "ramp", "chill", "pitch", "rise", "condition", "add"]):
                 steps.append(item)
+    return steps
+
+
+def historical_numbered_steps(lines: list[str]) -> list[str]:
+    steps: list[str] = []
+    for raw in lines:
+        stripped = raw.strip()
+        if re.match(r"^\d+\.\s+", stripped):
+            steps.append(re.sub(r"^\d+\.\s+", "", stripped))
     return steps
 
 
@@ -243,12 +310,44 @@ def render_recipe(recipe_path: Path) -> str:
     title, sections = parse_markdown_sections(recipe_path.read_text(encoding="utf-8"))
     display_title = print_title(title, sections)
     title_size = title_font_size(display_title)
-    targets = target_parameters(find_section(sections, "TARGET PARAMETERS"))
-    grains = top_bullets(find_section(sections, "FERMENTABLES"))
-    hop_lines = subsection_bullets(find_section(sections, "HOPS"), {"Boil / Whirlpool", "Kettle Additions"})
+    targets = target_parameters(find_section(sections, "TARGET PARAMETERS")) or target_parameters(find_section(sections, "PROJECTED PARAMETERS")) or target_parameters(find_section(sections, "HISTORICAL BREW SETTINGS"))
+    supplied = find_section(sections, "RECIPE AS SUPPLIED")
+    grains = top_bullets(find_section(sections, "FERMENTABLES")) or subsection_items(supplied, "Fermentables")
+    hop_lines = (
+        subsection_bullets(find_section(sections, "HOPS"), {"Boil / Whirlpool", "Kettle Additions"})
+        or section_items(find_section(sections, "HOPS"))
+        or subsection_items(supplied, "Hops")
+    )
     yeasts = filter_yeast_lines(find_section(sections, "YEAST"))
-    mash = mash_schedule(find_section(sections, "MASH SCHEDULE") or find_section(sections, "MASH PROGRAM"), find_section(sections, "BREW DAY PROCESS"))
+    if not yeasts:
+        historical_yeast = subsection_items(supplied, "Yeast")
+        yeasts = historical_yeast[:3]
+    mash = mash_schedule(
+        find_section(sections, "MASH SCHEDULE") or find_section(sections, "MASH PROGRAM"),
+        find_section(sections, "BREW DAY PROCESS"),
+    )
+    if not mash:
+        mash = (
+            process_schedule_items(find_section(sections, "HISTORICAL MASH AND BOIL"))
+            or process_schedule_items(find_section(sections, "MASH AND BOIL"))
+            or process_schedule_items(find_section(sections, "HISTORICAL BREW SETTINGS"))
+        )
     fermentation = fermentation_schedule(find_section(sections, "FERMENTATION SCHEDULE"))
+    if not fermentation:
+        fermentation = (
+            historical_numbered_steps(find_section(sections, "HISTORICAL FERMENTATION SCHEDULE"))
+            or subsection_items(supplied, "Fermentation")
+        )
+    if not grains:
+        grains = ["No explicit grain bill captured in source."]
+    if not yeasts:
+        yeasts = ["No explicit yeast entry captured in source."]
+    if not hop_lines:
+        hop_lines = ["No explicit hop schedule captured in source."]
+    if not mash:
+        mash = ["No explicit mash schedule captured in source."]
+    if not fermentation:
+        fermentation = ["No explicit fermentation schedule captured in source."]
     ferment_equipment = read_fermentation_equipment()
 
     template = TEMPLATE_FILE.read_text(encoding="utf-8")

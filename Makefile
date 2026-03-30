@@ -46,6 +46,9 @@ recipe-html:
 recipe-html-all:
 	python3 tools/render_recipe_html.py --all
 
+web-ui:
+	python3 tools/web_ui.py $(if $(HOST),--host "$(HOST)",) $(if $(PORT),--port "$(PORT)",)
+
 trust-check:
 	python3 tools/drift_review.py --passed-check "python3 tools/drift_review.py"
 	python3 tools/prompt_harness.py eval-all

@@ -132,6 +132,7 @@ Control-plane commands:
 - `make batch-state`
 - `make recipe-html RECIPE=<recipe_slug>`
 - `make recipe-html-all`
+- `make web-ui [HOST=127.0.0.1] [PORT=8765]`
 - `make trust-check`
 
 ### Recipe and log paths
@@ -143,6 +144,7 @@ Control-plane commands:
 - BeerXML imports: `recipes/beer_xml_imports/`
 - BeerXML exports: `recipes/beer_xml_exports/`
 - Recipe HTML exports: `recipes/html_exports/`
+- Local repo browser / viewer: `python3 tools/web_ui.py` or `make web-ui`
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
 - Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
 - Guardrail: do not create a separate batch log for a new brew when a dated brew-day sheet exists. Put actual brew data into the dated brew-day sheet and use `brew_history.json` only for minimal event/index metadata.
