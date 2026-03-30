@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agentic Brewing Repo-RAG Talk Notes</title>
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --paper: #fffdf8;
+      --ink: #1d1a18;
+      --muted: #6a635d;
+      --rule: #d6cab8;
+      --accent: #8a4b24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #efe6d8 0%, var(--bg) 100%);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.45;
+    }
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+    .hero {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(60, 35, 18, 0.06);
+    }
+    h1 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 34px;
+      line-height: 1.05;
+    }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 10px 30px rgba(60, 35, 18, 0.04);
+    }
+    h2 {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 20px;
+    }
+    h3 {
+      margin: 16px 0 8px;
+      color: var(--accent);
+      font-size: 16px;
+    }
+    p {
+      margin: 0 0 10px;
+    }
+    ul {
+      margin: 0 0 10px 18px;
+      padding: 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    .quote {
+      border-left: 4px solid #ccb18d;
+      padding-left: 12px;
+      color: #4d2a13;
+      font-style: italic;
+      margin: 10px 0;
+    }
+    .full {
+      grid-column: 1 / -1;
+    }
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .pill {
+      padding: 6px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: #faf5ec;
+      font-size: 14px;
+      color: #4d2a13;
+    }
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 28px;
+      }
+    }
+    @media print {
+      body {
+        background: white;
+      }
+      .page {
+        max-width: none;
+        padding: 0;
+      }
+      .hero, .card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Agentic Brewing Repo-RAG</h1>
+      <p class="sub">Talk notes for a brewing + AI presentation</p>
+      <div class="pill-row">
+        <span class="pill">Chat AI is not the same as a brewing system</span>
+        <span class="pill">Repo state beats chat memory</span>
+        <span class="pill">Books + process + feedback changed the output</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Core Framing</h2>
+        <p>AI alone can help. AI plus brewing knowledge helps more. AI plus curated brewing knowledge, repo control, and real batch feedback is where it becomes genuinely powerful.</p>
+        <div class="quote">Chat AI gives ideas. RAG gives context. Agentic repo-RAG gives memory, workflow, validation, and operational follow-through.</div>
+      </article>
+
+      <article class="card">
+        <h2>Without The Books</h2>
+        <p>My recipes would still be better than average homebrew AI output, but materially worse than they are now.</p>
+        <ul>
+          <li>still usable</li>
+          <li>still able to make beer</li>
+          <li>more drift-prone</li>
+          <li>less style-grounded</li>
+          <li>less defensible when making exact choices</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>What The Books Changed</h2>
+        <ul>
+          <li>They gave real style anchors instead of vibe-based guesses.</li>
+          <li>They improved clone fidelity.</li>
+          <li>They tightened process decisions like yeast handling, fermentation structure, and bitterness shaping.</li>
+          <li>They made the system more corrective, not just generative.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>The Real Difference</h2>
+        <p>This is not bad recipes versus good recipes.</p>
+        <ul>
+          <li>Without the books: decent but drift-prone recipes.</li>
+          <li>With the books and the system: grounded, style-aware, defensible recipes.</li>
+        </ul>
+      </article>
+
+      <article class="card full">
+        <h2>What Makes This Different From Normal AI Use</h2>
+        <p>Most people have either not used AI for brewing at all, or they have used it for chat, quick lookups, or brainstorming. That is not what this repo does.</p>
+        <ul>
+          <li>The recipe lives in the repo.</li>
+          <li>The brew-day sheet lives in the repo.</li>
+          <li>The inventory lives in the repo.</li>
+          <li>The batch history lives in the repo.</li>
+          <li>The shopping intent lives in the repo.</li>
+          <li>The guardrails and validations live in the repo.</li>
+        </ul>
+        <p>So the system is not “remembering” by magic. It is writing durable brewing state into a controlled apparatus.</p>
+      </article>
+
+      <article class="card">
+        <h2>Simple Ladder</h2>
+        <ul>
+          <li><strong>Chat AI:</strong> gives ideas</li>
+          <li><strong>RAG:</strong> gives context</li>
+          <li><strong>Repo-RAG:</strong> works against real files</li>
+          <li><strong>Agentic Repo-RAG:</strong> can operate the workflow</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Why Brewing Benefits</h2>
+        <ul>
+          <li>Brewing is iterative.</li>
+          <li>Brewing has drift everywhere.</li>
+          <li>Process notes matter.</li>
+          <li>Ingredient inventory matters.</li>
+          <li>Batch feedback matters.</li>
+          <li>Style references matter.</li>
+        </ul>
+      </article>
+
+      <article class="card full">
+        <h2>What The System Actually Does</h2>
+        <ul>
+          <li>Creates and syncs recipe artifacts.</li>
+          <li>Generates brew-day documents and print views.</li>
+          <li>Tracks inventory and shopping intent.</li>
+          <li>Registers brews and packaging events.</li>
+          <li>Preserves what I did, when I did it, and how I did it.</li>
+          <li>Validates drift so new changes do not quietly break the apparatus.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Good Presentation Line</h2>
+        <div class="quote">Without the books, it can still make beer. With the books and this system, it can make beers that are much more likely to be accurate, repeatable, and competition-capable.</div>
+      </article>
+
+      <article class="card">
+        <h2>Another Good Line</h2>
+        <div class="quote">The win is not that AI writes recipes. The win is that the repo becomes a brewing operating system.</div>
+      </article>
+
+      <article class="card full">
+        <h2>Suggested Talk Flow</h2>
+        <ol>
+          <li>Start with what most people think AI in brewing is: chat, ideas, quick suggestions.</li>
+          <li>Show why that is not enough for serious recipe development.</li>
+          <li>Explain what changed when books, inventory, brew logs, and guardrails became part of the system.</li>
+          <li>Show that the value is not one smart answer, but consistent operational follow-through.</li>
+          <li>End on the idea that brewing is a perfect domain for an agentic repo system because it is iterative, stateful, and detail-sensitive.</li>
+        </ol>
+      </article>
+
+      <article class="card full">
+        <h2>Speaker Notes</h2>
+        <p>You do not need to oversell the AI. The stronger argument is that the system got better because it was grounded.</p>
+        <p>The books matter. The repo state matters. The repeatable workflow matters. The real brew feedback matters.</p>
+        <p class="small">Draft only. Not committed.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

@@ -118,6 +118,16 @@ def shopping_item(label: str, recipe: str = "") -> dict[str, str]:
     }
 
 
+def operator_url(action: str, recipe: str = "", **params: str) -> str:
+    query: dict[str, str] = {"action": action}
+    if recipe:
+        query["recipe"] = recipe
+    for key, value in params.items():
+        if value:
+            query[key] = value
+    return "/operate?" + urllib.parse.urlencode(query)
+
+
 def ensure_allowed(path: Path) -> Path:
     resolved = path.resolve()
     for allowed in ALLOWED_ROOTS:
@@ -595,7 +605,13 @@ def render_index(default_path: str) -> bytes:
 """.encode("utf-8")
 
 
-def render_text_page(path: Path, body: str) -> bytes:
+def render_action_panel(action_html: str) -> str:
+    if not action_html:
+        return ""
+    return f'<div class="action-panel">{action_html}</div>'
+
+
+def render_text_page(path: Path, body: str, action_html: str = "") -> bytes:
     title = html.escape(path.relative_to(ROOT).as_posix())
     content = f"<pre>{html.escape(body)}</pre>"
     if path.suffix == ".md":
@@ -677,6 +693,40 @@ def render_text_page(path: Path, body: str) -> bytes:
     .markdown-body pre {{
       margin-top: 0.5em;
     }}
+    .action-panel {{
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      background: #fcf8f1;
+      font-family: Georgia, "Times New Roman", serif;
+    }}
+    .action-panel h2 {{
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #8a4b24;
+    }}
+    .action-panel p {{
+      margin: 0 0 10px;
+      color: #6a635d;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
+    .action-links {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }}
+    .action-links a {{
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid #d6cab8;
+      background: #fffdf8;
+      color: #4d2a13;
+      font-weight: 700;
+      font-family: Georgia, "Times New Roman", serif;
+    }}
   </style>
 </head>
 <body>
@@ -685,6 +735,7 @@ def render_text_page(path: Path, body: str) -> bytes:
       <h1>{title}</h1>
       <a href="{html.escape(raw_url(path))}">Raw file</a>
     </div>
+    {render_action_panel(action_html)}
     {content}
   </div>
 </body>
@@ -746,7 +797,7 @@ def render_dashboard_page(title: str, body: str) -> bytes:
 """.encode("utf-8")
 
 
-def render_structured_page(title: str, notes: str, body_html: str, raw_href: str) -> bytes:
+def render_structured_page(title: str, notes: str, body_html: str, raw_href: str, action_html: str = "") -> bytes:
     notes_html = f'<p class="notes">{html.escape(notes)}</p>' if notes else ""
     return f"""<!doctype html>
 <html lang="en">
@@ -787,6 +838,39 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       color: #6a635d;
       font-size: 14px;
       line-height: 1.4;
+    }}
+    .action-panel {{
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      background: #fcf8f1;
+    }}
+    .action-panel h2 {{
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #8a4b24;
+    }}
+    .action-panel p {{
+      margin: 0 0 10px;
+      color: #6a635d;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
+    .action-links {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }}
+    .action-links a {{
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid #d6cab8;
+      background: #fffdf8;
+      color: #4d2a13;
+      font-weight: 700;
+      text-decoration: none;
     }}
     a {{
       color: #8a4b24;
@@ -869,6 +953,7 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       <h1>{html.escape(title)}</h1>
       <a href="{html.escape(raw_href)}">Raw file</a>
     </div>
+    {render_action_panel(action_html)}
     {notes_html}
     {body_html}
   </div>
@@ -1401,6 +1486,184 @@ def dashboard_output(mode: str) -> str:
     return proc.stdout
 
 
+def active_pairs_payload() -> list[dict]:
+    if ACTIVE_ARTIFACTS_FILE.exists():
+        return load_json(ACTIVE_ARTIFACTS_FILE).get("active_pairs", [])
+    return []
+
+
+def brew_history_events() -> list[dict]:
+    history_file = ROOT / "libraries" / "inventory" / "brew_history.json"
+    if history_file.exists():
+        return load_json(history_file).get("events", [])
+    return []
+
+
+def resolve_recipe_context_from_path(path: Path) -> tuple[str, Path] | None:
+    if path.suffix == ".md" and "recipes" in path.parts:
+        return path.stem, path
+    if path.suffix == ".html" and path.parent == ROOT / "recipes" / "html_exports":
+        recipe_path = resolve_recipe_markdown(path.stem)
+        if recipe_path:
+            return recipe_path.stem, recipe_path
+    if path.suffix == ".html" and path.parent == ROOT / "brewing" / "brew_day_sheets":
+        stem = re.sub(r"_brew_day_sheet(?:_\d{4}-\d{2}-\d{2})?$", "", path.stem)
+        recipe_path = resolve_recipe_markdown(stem)
+        if recipe_path:
+            return recipe_path.stem, recipe_path
+    return None
+
+
+def next_action_text_for_recipe(recipe_token: str, recipe_path: Path) -> str:
+    brew_sheet_date = ""
+    for pair in active_pairs_payload():
+        pair_recipe = ROOT / pair.get("recipe", "")
+        if pair_recipe.resolve() == recipe_path.resolve():
+            match = re.search(r"_(\d{4}-\d{2}-\d{2})\.html$", pair.get("brew_sheet", ""))
+            brew_sheet_date = match.group(1) if match else ""
+            break
+    events = brew_history_events()
+    brew_events = [event for event in events if event.get("type") == "brew" and normalize_token(event.get("recipe_id", "")) == normalize_token(recipe_token)]
+    package_events = [event for event in events if event.get("type") == "package" and normalize_token(event.get("recipe_id", "")) == normalize_token(recipe_token)]
+    if brew_events:
+        latest_brew = max(brew_events, key=lambda row: row.get("brew_date", ""))
+        latest_brew_date = latest_brew.get("brew_date", "")
+        packaged = any(event.get("brew_date", "") == latest_brew_date for event in package_events)
+        if not packaged:
+            return f"Next likely action: package {recipe_token} brewed {latest_brew_date}."
+    if brew_sheet_date:
+        return f"Next likely action: register brew for dated sheet {brew_sheet_date}."
+    return f"Next likely action: prepare {recipe_token} when ready to brew."
+
+
+def action_panel_html(recipe_token: str, recipe_path: Path) -> str:
+    links = [
+        f'<a href="{html.escape(operator_url("status", recipe=recipe_token))}" target="content">Next Action</a>',
+        f'<a href="{html.escape(operator_url("refresh-html", recipe=recipe_token))}" target="content">Refresh Print</a>',
+        f'<a href="{html.escape(operator_url("trust-check"))}" target="content">Run Trust Check</a>',
+        f'<a href="{html.escape(operator_url("prepare", recipe=recipe_token, date="today", run_trust_check="1"))}" target="content">Prepare Today</a>',
+        f'<a href="{html.escape(operator_url("brew", recipe=recipe_token, date="today"))}" target="content">Register Brew Today</a>',
+        f'<a href="{html.escape('/shopping?recipe=' + urllib.parse.quote(recipe_path.relative_to(ROOT).as_posix()))}" target="content">Shopping</a>',
+    ]
+    return (
+        "<h2>Actions</h2>"
+        f"<p>{html.escape(next_action_text_for_recipe(recipe_token, recipe_path))}</p>"
+        f'<div class="action-links">{"".join(links)}</div>'
+    )
+
+
+def render_html_wrapper(path: Path, action_html: str = "") -> bytes:
+    title = path.relative_to(ROOT).as_posix()
+    src = raw_url(path)
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{html.escape(title)}</title>
+  <style>
+    body {{
+      margin: 0;
+      background: #f5efe5;
+      color: #1d1a18;
+      font-family: Georgia, "Times New Roman", serif;
+    }}
+    .wrap {{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 22px 28px;
+    }}
+    .top {{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }}
+    h1 {{
+      margin: 0;
+      font-size: 24px;
+      color: #8a4b24;
+    }}
+    a {{
+      color: #8a4b24;
+      text-decoration: none;
+      font-weight: 700;
+    }}
+    .action-panel {{
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      background: #fcf8f1;
+    }}
+    .action-panel h2 {{
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #8a4b24;
+    }}
+    .action-panel p {{
+      margin: 0 0 10px;
+      color: #6a635d;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
+    .action-links {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }}
+    .action-links a {{
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid #d6cab8;
+      background: #fffdf8;
+      color: #4d2a13;
+      text-decoration: none;
+      font-weight: 700;
+    }}
+    iframe {{
+      width: 100%;
+      height: 1200px;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      background: white;
+    }}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>{html.escape(title)}</h1>
+      <a href="{html.escape(src)}">Raw file</a>
+    </div>
+    {render_action_panel(action_html)}
+    <iframe src="{html.escape(src)}"></iframe>
+  </div>
+</body>
+</html>
+""".encode("utf-8")
+
+
+def operate_output(action: str, params: dict[str, str]) -> tuple[str, bool]:
+    if action == "trust-check":
+        proc = subprocess.run(["make", "trust-check"], cwd=ROOT, capture_output=True, text=True)
+        return proc.stdout + proc.stderr, proc.returncode == 0
+    if action == "refresh-html":
+        recipe = params.get("recipe", "")
+        proc = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", recipe], cwd=ROOT, capture_output=True, text=True)
+        return proc.stdout + proc.stderr, proc.returncode == 0
+    cmd = ["python3", "tools/brew_op.py", "--action", action]
+    if params.get("recipe"):
+        cmd.extend(["--recipe", params["recipe"]])
+    if params.get("date"):
+        cmd.extend(["--date", params["date"]])
+    if params.get("run_trust_check"):
+        cmd.append("--run-trust-check")
+    proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    return proc.stdout + proc.stderr, proc.returncode == 0
+
+
 class BrewUIHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
@@ -1417,6 +1680,18 @@ class BrewUIHandler(BaseHTTPRequestHandler):
             if params.get("raw", ["0"])[0] == "1":
                 self.respond_bytes(200, "text/plain; charset=utf-8", raw_text.encode("utf-8"))
                 return
+            self.respond_bytes(200, "text/html; charset=utf-8", page)
+            return
+
+        if parsed.path == "/operate":
+            action = params.get("action", [""])[0]
+            if not action:
+                self.respond_text(400, "Missing action.")
+                return
+            flat_params = {key: values[0] for key, values in params.items() if values}
+            payload, ok = operate_output(action, flat_params)
+            title = f"Operation - {action}"
+            page = render_dashboard_page(title, payload or ("OK" if ok else "No output"))
             self.respond_bytes(200, "text/html; charset=utf-8", page)
             return
 
@@ -1464,13 +1739,23 @@ class BrewUIHandler(BaseHTTPRequestHandler):
                 return
 
             if path.suffix == ".html":
-                self.serve_raw(path)
+                context = resolve_recipe_context_from_path(path)
+                action_html = ""
+                if context:
+                    recipe_token, recipe_path = context
+                    action_html = action_panel_html(recipe_token, recipe_path)
+                self.respond_bytes(200, "text/html; charset=utf-8", render_html_wrapper(path, action_html))
                 return
 
             body = path.read_text(encoding="utf-8")
             if path.suffix == ".json":
                 body = json.dumps(json.loads(body), indent=2)
-            self.respond_bytes(200, "text/html; charset=utf-8", render_text_page(path, body))
+            context = resolve_recipe_context_from_path(path)
+            action_html = ""
+            if context:
+                recipe_token, recipe_path = context
+                action_html = action_panel_html(recipe_token, recipe_path)
+            self.respond_bytes(200, "text/html; charset=utf-8", render_text_page(path, body, action_html))
             return
 
         self.respond_text(404, "Not found.")
