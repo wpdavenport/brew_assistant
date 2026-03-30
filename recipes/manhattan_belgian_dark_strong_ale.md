@@ -7,6 +7,7 @@
 - Side-by-side target: Westvleteren 12 clone fidelity, not just generic 26D quality
 
 ## Competition Tracking
+- BJCP Category: 26D Belgian Dark Strong Ale
 - Competition: Spirit Of Free Beer
 - Entry status: entered
 - Results date: by 12:00 PM on April 13, 2026
@@ -37,12 +38,17 @@
 - 4 ml Phosphoric Acid (kettle)
 
 ## Mash and Boil (recorded)
+- Mash temp: 150.0F for 40 min
+- Alpha rest: 158.0F for 15 min
+- Total mash time: 60 min
 - Kettle volume: 8.3 gal
 - Pre-boil volume: 7.1 gal
 - Pre-boil gravity: 1.073
 - Boil time: 60 min
 - Post-boil gravity: 1.088
 - Kettle addition: Whirlfloc at 10 min
+- Added 4.5 oz dark candi sugar at 3 min left in the boil
+- Added 4 mL phosphoric acid, but the probe was unreliable and the dose was not chased further
 
 ## Fermentation Schedule
 1. Pitch at 70F for 3 days
@@ -50,6 +56,17 @@
    - Log note: temp was low on Day 3, manually raised to 75F and held for 7 days
 3. Add remaining 70% candi sugar + 2 g Fermaid-O when ~40% sugar is consumed
 4. Condition with a 6-day slow ramp down to 46F
+
+## Brew-Day Notes
+- FG recorded: 1.088
+- Pitched full 2.0 L starter and forgot to decant
+- No oxygenation at pitch because the starter was fresh
+- Day 3 fermentation gravity: 1.040
+- Cherry-driven flavor note from process guidance:
+  - use a 30/70 dark candi sugar split
+  - 30% in the boil and 70% in the fermentor
+  - add the fermentor sugar when the wort is about 40% fermented
+- Remaining dark candi sugar was boiled with some beer and added with 2 g Fermaid-O
 
 ## Coach Notes (from batch history)
 - Raising to 75F on Day 3 likely prevented a stall and supported ester profile
