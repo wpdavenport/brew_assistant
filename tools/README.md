@@ -75,7 +75,20 @@ Use `batch_state_summary.py` to see what is prepared, brewed but not packaged, a
 - `python3 tools/batch_state_summary.py`
 - `python3 tools/batch_state_summary.py --recipe davenport_esb`
 - `python3 tools/batch_state_summary.py --target-gal 5.0`
+- `python3 tools/batch_state_summary.py --with-next-actions`
 - `make batch-state`
+- `make batch-state-next`
+
+Use `brew_op.py` as the single operator entry point when you want fewer explicit lifecycle commands:
+
+- `python3 tools/brew_op.py --text "status"`
+- `python3 tools/brew_op.py --text "prepare old crown lazy lager on 2026-04-15" --dry-run`
+- `python3 tools/brew_op.py --text "brew davenport esb on 2026-03-28" --dry-run`
+- `python3 tools/brew_op.py --text "package davenport esb brewed 2026-03-28 on 2026-04-10 at 4.55 gal fg 1.013" --dry-run`
+- `python3 tools/brew_op.py --action prepare --recipe old_crown_lazy_lager --date 2026-04-15 --run-trust-check`
+- `make brew-op TEXT="status"`
+- `make brew-op TEXT="prepare old crown lazy lager on 2026-04-15"`
+- `make brew-op ACTION=package RECIPE=davenport_esb BREW_DATE=2026-03-28 PACKAGE_DATE=2026-04-10 FG=1.013 PACKAGED_VOLUME=4.55`
 
 Use `render_recipe_html.py` to create a printable recipe handout from the canonical recipe markdown:
 
@@ -84,6 +97,13 @@ Use `render_recipe_html.py` to create a printable recipe handout from the canoni
 - `python3 tools/render_recipe_html.py --recipe old_crown_lazy_lager`
 - `make recipe-html RECIPE=davenport_esb`
 - `make recipe-html-all`
+
+Use `refresh_recipe_html.py` to refresh only the print exports affected by current repo changes:
+
+- `python3 tools/refresh_recipe_html.py --changed`
+- `python3 tools/refresh_recipe_html.py --recipe davenport_esb`
+- `python3 tools/refresh_recipe_html.py --all`
+- `make recipe-html-refresh`
 
 Use `web_ui.py` to launch a simple local browser for recipe prints, brew-day sheets, inventory, profiles, and research:
 

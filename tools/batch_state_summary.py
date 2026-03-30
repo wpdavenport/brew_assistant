@@ -41,6 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Summarize current batch lifecycle state")
     parser.add_argument("--recipe", default="", help="Optional recipe id/name filter")
     parser.add_argument("--target-gal", type=float, default=5.0, help="Packaged yield target in gallons")
+    parser.add_argument("--with-next-actions", action="store_true", help="Include explicit next-action suggestions")
     return parser
 
 
@@ -75,22 +76,27 @@ def main() -> int:
     prepared_not_brewed: list[str] = []
     brewed_not_packaged: list[str] = []
     brewed_not_packaged_sheets: set[str] = set()
+    next_actions: list[str] = []
 
     for pair in active.get("active_pairs", []):
         recipe_rel = pair.get("recipe", "")
         brew_sheet = pair.get("brew_sheet", "")
         brew_date = extract_date_from_sheet(brew_sheet)
-        recipe_id = Path(recipe_rel).stem
+        recipe_stem = Path(recipe_rel).stem
         recipe_label = Path(recipe_rel).name
-        if not recipe_matches(args.recipe, recipe_id, recipe_label, recipe_rel):
+        if not recipe_matches(args.recipe, recipe_stem, recipe_label, recipe_rel):
             continue
-        brewed = any(event.get("brew_sheet") == brew_sheet for event in brew_events.values())
+        matching_brew_event = next((event for event in brew_events.values() if event.get("brew_sheet") == brew_sheet), None)
+        brewed = matching_brew_event is not None
         packaged = any(event.get("brew_sheet") == brew_sheet for event in package_events.values())
+        command_recipe = matching_brew_event.get("recipe_id", recipe_stem) if matching_brew_event else recipe_stem
         if brew_date and not brewed:
             prepared_not_brewed.append(f"{recipe_label} | brew date {brew_date} | sheet {brew_sheet}")
+            next_actions.append(f"brew-op --action brew --recipe {command_recipe} --date {brew_date}")
         elif brew_date and brewed and not packaged:
             brewed_not_packaged_sheets.add(brew_sheet)
             brewed_not_packaged.append(f"{recipe_label} | brew date {brew_date} | sheet {brew_sheet}")
+            next_actions.append(f"brew-op --action package --recipe {command_recipe} --brew-date {brew_date} --package-date <YYYY-MM-DD> --fg <1.013> --packaged-volume <5.00>")
 
     for (recipe_id, brew_date), event in sorted(brew_events.items()):
         if (recipe_id, brew_date) in package_events:
@@ -101,6 +107,7 @@ def main() -> int:
         line = f"{recipe_name} | brew date {brew_date} | sheet {event.get('brew_sheet', '')}"
         if line not in brewed_not_packaged:
             brewed_not_packaged.append(line)
+            next_actions.append(f"brew-op --action package --recipe {recipe_id} --brew-date {brew_date} --package-date <YYYY-MM-DD> --fg <1.013> --packaged-volume <5.00>")
 
     print("BATCH STATE SUMMARY")
     print("=" * 80)
@@ -125,19 +132,30 @@ def main() -> int:
     print("-" * 80)
     if not package_by_recipe:
         print("(no package events)")
-        return 0
-
-    for recipe_id, events in sorted(package_by_recipe.items()):
-        gallons = [to_gallons(float(event["packaged_volume"]), event.get("packaged_volume_unit", "gal")) for event in events]
-        avg_gal = sum(gallons) / len(gallons)
-        avg_delta = avg_gal - args.target_gal
-        latest = max(events, key=lambda row: row.get("package_date", ""))
-        latest_gal = to_gallons(float(latest["packaged_volume"]), latest.get("packaged_volume_unit", "gal"))
-        latest_delta = latest_gal - args.target_gal
-        print(
-            f"{recipe_id}: n={len(events)} | latest {latest_gal:.2f} gal ({latest_delta:+.2f}) | "
-            f"avg {avg_gal:.2f} gal ({avg_delta:+.2f})"
-        )
+    else:
+        for recipe_id, events in sorted(package_by_recipe.items()):
+            gallons = [to_gallons(float(event["packaged_volume"]), event.get("packaged_volume_unit", "gal")) for event in events]
+            avg_gal = sum(gallons) / len(gallons)
+            avg_delta = avg_gal - args.target_gal
+            latest = max(events, key=lambda row: row.get("package_date", ""))
+            latest_gal = to_gallons(float(latest["packaged_volume"]), latest.get("packaged_volume_unit", "gal"))
+            latest_delta = latest_gal - args.target_gal
+            print(
+                f"{recipe_id}: n={len(events)} | latest {latest_gal:.2f} gal ({latest_delta:+.2f}) | "
+                f"avg {avg_gal:.2f} gal ({avg_delta:+.2f})"
+            )
+    if args.with_next_actions:
+        print("\nSuggested Next Actions")
+        print("-" * 80)
+        if next_actions:
+            seen: set[str] = set()
+            for action in next_actions:
+                if action in seen:
+                    continue
+                seen.add(action)
+                print(action)
+        else:
+            print("(none)")
     return 0
 
 

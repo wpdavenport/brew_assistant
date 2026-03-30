@@ -28,7 +28,7 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 - a repo-aware AI chat client is required if you want the assistant to operate inside the repo contract
 
 Practical expectation:
-- if you want to use `prepare-brew`, `batch-lifecycle`, `register-brew`, `register-package`, `yield-report`, `batch-state`, or `trust-check`, you need a working `python3` on your machine
+- if you want to use `prepare-brew`, `batch-lifecycle`, `register-brew`, `register-package`, `yield-report`, `batch-state`, `brew-op`, or `trust-check`, you need a working `python3` on your machine
 
 ### Recommended onboarding for every new chat
 
@@ -124,12 +124,15 @@ Control-plane commands:
 - `make recipe-sync`
 - `make beerxml-sync`
 - `make recipe-html-sync`
+- `make recipe-html-refresh`
 - `make prepare-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make batch-lifecycle RECIPE=<recipe_slug> [DATE=<YYYY-MM-DD>]`
 - `make register-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make register-package RECIPE=<recipe_slug> BREW_DATE=<YYYY-MM-DD> PACKAGE_DATE=<YYYY-MM-DD> FG=<1.013> PACKAGED_VOLUME=<5.00>`
 - `make yield-report`
 - `make batch-state`
+- `make batch-state-next`
+- `make brew-op TEXT="prepare old crown lazy lager on 2026-04-15"`
 - `make recipe-html RECIPE=<recipe_slug>`
 - `make recipe-html-all`
 - `make web-ui [HOST=127.0.0.1] [PORT=8765]`
@@ -149,8 +152,10 @@ Control-plane commands:
 - Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
 - Guardrail: do not create a separate batch log for a new brew when a dated brew-day sheet exists. Put actual brew data into the dated brew-day sheet and use `brew_history.json` only for minimal event/index metadata.
 - Lifecycle convenience: `batch-lifecycle` decides whether a recipe should be prepared, brew-registered, or package-registered based on repo state and the arguments you provide.
+- Higher-level operator flow: `brew-op` wraps the lifecycle tools, refreshes recipe HTML first by default, and lets you use either explicit flags or short natural-language commands.
 - Printable recipe handouts should be generated from recipe markdown into `recipes/html_exports/`, not hand-maintained alongside the `.md` source.
 - If a recipe markdown file changes, regenerate its print HTML with `make recipe-html RECIPE=<recipe_slug>` or refresh all of them with `make recipe-html-all`.
+- `make recipe-html-refresh` refreshes only changed recipe print exports, and `make trust-check` now runs that refresh before validating HTML sync.
 - `make recipe-html-sync` checks that generated recipe HTML still matches recipe markdown.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
