@@ -7,6 +7,7 @@ import argparse
 import html
 import json
 import mimetypes
+import subprocess
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -52,6 +53,15 @@ CURATED_SECTIONS = {
 DEFAULT_FILE = ROOT / "recipes" / "html_exports" / "davenport_esb_11C.html"
 
 
+def dashboard_item(label: str, mode: str) -> dict[str, str]:
+    return {
+        "label": label,
+        "view": f"/dashboard?mode={urllib.parse.quote(mode)}",
+        "raw": f"/dashboard?mode={urllib.parse.quote(mode)}&raw=1",
+        "current": f"dashboard:{mode}",
+    }
+
+
 def ensure_allowed(path: Path) -> Path:
     resolved = path.resolve()
     for allowed in ALLOWED_ROOTS:
@@ -70,20 +80,43 @@ def file_label(path: Path) -> str:
     return name.title()
 
 
-def collect_section_entries() -> dict[str, list[Path]]:
-    sections: dict[str, list[Path]] = {}
+def collect_section_entries() -> dict[str, list[dict[str, str]]]:
+    sections: dict[str, list[dict[str, str]]] = {
+        "Operations": [
+            dashboard_item("Batch State", "state"),
+            dashboard_item("Next Actions", "next"),
+        ]
+    }
     for label, folder in SECTION_CONFIG.items():
-        entries = []
+        entries: list[dict[str, str]] = []
         for path in sorted(folder.glob("*.html")):
             if path.is_dir():
                 continue
-            if label == "Recipe Prints" and path.name.endswith("_draft.html"):
-                entries.append(path)
-                continue
-            entries.append(path)
+            rel = path.relative_to(ROOT).as_posix()
+            entries.append(
+                {
+                    "label": file_label(path),
+                    "view": viewer_url(path),
+                    "raw": raw_url(path),
+                    "current": rel,
+                }
+            )
         sections[label] = entries
     for label, entries in CURATED_SECTIONS.items():
-        sections[label] = [path for path in entries if path.exists()]
+        section_entries: list[dict[str, str]] = []
+        for path in entries:
+            if not path.exists():
+                continue
+            rel = path.relative_to(ROOT).as_posix()
+            section_entries.append(
+                {
+                    "label": file_label(path),
+                    "view": viewer_url(path),
+                    "raw": raw_url(path),
+                    "current": rel,
+                }
+            )
+        sections[label] = section_entries
     return sections
 
 
@@ -102,11 +135,10 @@ def render_nav(current: str) -> str:
     blocks = []
     for label, entries in sections.items():
         links = []
-        for path in entries:
-            rel = path.relative_to(ROOT).as_posix()
-            active = ' class="active"' if rel == current else ""
+        for entry in entries:
+            active = ' class="active"' if entry["current"] == current else ""
             links.append(
-                f'<a{active} data-rel="{html.escape(rel)}" href="{viewer_url(path)}" target="content">{html.escape(file_label(path))}</a>'
+                f'<a{active} data-current="{html.escape(entry["current"])}" data-raw="{html.escape(entry["raw"])}" href="{html.escape(entry["view"])}" target="content">{html.escape(entry["label"])}</a>'
             )
         if not links:
             links.append('<span class="empty">No files yet</span>')
@@ -258,24 +290,24 @@ def render_index(default_path: str) -> bytes:
     </main>
   </div>
   <script>
-    const links = Array.from(document.querySelectorAll('.nav-group a[data-rel]'));
+    const links = Array.from(document.querySelectorAll('.nav-group a[data-current]'));
     const rawLink = document.getElementById('raw-link');
     const frame = document.getElementById('content-frame');
 
-    function setActive(rel) {{
+    function setActive(current, rawHref) {{
       for (const link of links) {{
-        link.classList.toggle('active', link.dataset.rel === rel);
+        link.classList.toggle('active', link.dataset.current === current);
       }}
-      rawLink.href = '/raw?path=' + encodeURIComponent(rel);
+      rawLink.href = rawHref;
     }}
 
     for (const link of links) {{
       link.addEventListener('click', () => {{
-        setActive(link.dataset.rel);
+        setActive(link.dataset.current, link.dataset.raw);
       }});
     }}
 
-    setActive({json.dumps(default_path)});
+    setActive({json.dumps(default_path)}, {json.dumps('/raw?path=' + urllib.parse.quote(default_path))});
   </script>
 </body>
 </html>
@@ -346,6 +378,68 @@ def render_text_page(path: Path, body: str) -> bytes:
 """.encode("utf-8")
 
 
+def render_dashboard_page(title: str, body: str) -> bytes:
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{html.escape(title)}</title>
+  <style>
+    body {{
+      margin: 0;
+      background: #f5efe5;
+      color: #1d1a18;
+      font-family: Georgia, "Times New Roman", serif;
+    }}
+    .wrap {{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 22px 28px;
+    }}
+    h1 {{
+      margin: 0 0 12px;
+      font-size: 28px;
+      color: #8a4b24;
+      line-height: 1.1;
+    }}
+    .sub {{
+      margin: 0 0 16px;
+      color: #6a635d;
+      font-size: 15px;
+    }}
+    pre {{
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #fffdf8;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      line-height: 1.45;
+    }}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>{html.escape(title)}</h1>
+    <p class="sub">Live operational view generated from current repo state.</p>
+    <pre>{html.escape(body)}</pre>
+  </div>
+</body>
+</html>
+""".encode("utf-8")
+
+
+def dashboard_output(mode: str) -> str:
+    cmd = ["python3", "tools/batch_state_summary.py"]
+    if mode == "next":
+        cmd.append("--with-next-actions")
+    proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, check=True)
+    return proc.stdout
+
+
 class BrewUIHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
@@ -354,6 +448,19 @@ class BrewUIHandler(BaseHTTPRequestHandler):
         if parsed.path == "/":
             default_rel = DEFAULT_FILE.relative_to(ROOT).as_posix()
             self.respond_bytes(200, "text/html; charset=utf-8", render_index(default_rel))
+            return
+
+        if parsed.path == "/dashboard":
+            mode = params.get("mode", ["state"])[0]
+            if mode not in {"state", "next"}:
+                self.respond_text(400, "Unsupported dashboard mode.")
+                return
+            payload = dashboard_output(mode)
+            if params.get("raw", ["0"])[0] == "1":
+                self.respond_bytes(200, "text/plain; charset=utf-8", payload.encode("utf-8"))
+                return
+            title = "Batch State" if mode == "state" else "Next Actions"
+            self.respond_bytes(200, "text/html; charset=utf-8", render_dashboard_page(title, payload))
             return
 
         if parsed.path in {"/view", "/raw"}:
