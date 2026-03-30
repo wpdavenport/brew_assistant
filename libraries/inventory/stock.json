@@ -562,7 +562,7 @@
       "name": "WLP007 Harvested Slurry (Gen 1)",
       "category": "yeast",
       "unit": "count",
-      "on_hand": 0.0,
+      "on_hand": 1.0,
       "generation": 1,
       "storage": "fridge",
       "tags": [

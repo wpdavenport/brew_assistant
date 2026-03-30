@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "notes": "User-stated shopping and planning horizon. Active fermenting beer does not imply purchase intent. Use this file to drive recipe-first shopping views and near-term buy decisions.",
+  "recipe_queue": [
+    {
+      "recipe_id": "patient_number_9",
+      "horizon": "next",
+      "note": "Planned next brew."
+    },
+    {
+      "recipe_id": "old_crown_lazy_lager",
+      "horizon": "soon",
+      "note": "Ingredient sourcing in progress. Need Bohemian Pilsner Malt, Munich II, and Czech lager yeast. Saaz is already on hand."
+    }
+  ],
+  "active_brews": [
+    {
+      "recipe_id": "davenport_esb",
+      "status": "in_fermentor",
+      "shopping": "defer",
+      "note": "No purchase intent right now; will brew again later."
+    }
+  ],
+  "equipment_wishlist": [
+    {
+      "item": "Hydrometers",
+      "priority": "soon",
+      "note": "Buy a new set."
+    },
+    {
+      "item": "pH Meter",
+      "priority": "soon",
+      "note": "Replace the unreliable current meter."
+    }
+  ],
+  "research_queue": [
+    {
+      "topic": "Pressure-canned starter wort as a house replacement for Omega Propper Starter",
+      "priority": "soon",
+      "note": "Investigate homemade canned starter wort workflow."
+    }
+  ]
+}
