@@ -85,6 +85,13 @@ Use `render_recipe_html.py` to create a printable recipe handout from the canoni
 - `make recipe-html RECIPE=davenport_esb`
 - `make recipe-html-all`
 
+Use `web_ui.py` to launch a simple local browser for recipe prints, brew-day sheets, inventory, profiles, and research:
+
+- `python3 tools/web_ui.py`
+- `python3 tools/web_ui.py --port 9000`
+- `make web-ui`
+- `make web-ui PORT=9000`
+
 Use `validate_recipe_html_sync.py` to ensure generated recipe HTML is up to date with recipe markdown:
 
 - `python3 tools/validate_recipe_html_sync.py --all`
