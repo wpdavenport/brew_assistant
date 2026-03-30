@@ -35,6 +35,11 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - libraries/inventory/style_option_templates.json
 - tools/inventory_cli.py
 
+## Rule / insight capture (when relevant)
+- project_control/insight_register.json
+- tools/intake_insight.py
+- tools/insight_report.py
+
 ## BJCP study mode (when explicitly enabled)
 - libraries/bjcp_study/_index.md
 - libraries/bjcp_study/curriculum.md

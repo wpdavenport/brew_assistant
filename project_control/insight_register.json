@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "notes": "Durable brewing rules, preferences, and learned insights captured from real use. New entries should be routed into repo state instead of living only in chat memory.",
+  "entries": []
+}

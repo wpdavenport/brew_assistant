@@ -120,6 +120,8 @@ Use `drift review` before trusting meaningful changes.
 
 Control-plane commands:
 - `make drift-review`
+- `make insight TEXT="Target defaults to UK unless explicitly marked American"`
+- `make insight-report`
 - `make aa-sync`
 - `make recipe-sync`
 - `make beerxml-sync`
@@ -157,6 +159,7 @@ Control-plane commands:
 - If a recipe markdown file changes, regenerate its print HTML with `make recipe-html RECIPE=<recipe_slug>` or refresh all of them with `make recipe-html-all`.
 - `make recipe-html-refresh` refreshes only changed recipe print exports, and `make trust-check` now runs that refresh before validating HTML sync.
 - `make recipe-html-sync` checks that generated recipe HTML still matches recipe markdown.
+- Durable new rules, defaults, and process lessons should be captured with `make insight TEXT="..."` so they route into repo state instead of staying only in chat memory.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
 

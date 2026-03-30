@@ -74,8 +74,11 @@ AREAS: tuple[DriftArea, ...] = (
         patterns=(
             "project_control/DRIFT_MATRIX.md",
             "project_control/REVIEW_RULES.md",
+            "project_control/insight_register.json",
             "project_control/CHANGE_AWARE_PLAN.md",
             "tools/drift_review.py",
+            "tools/intake_insight.py",
+            "tools/insight_report.py",
             "tools/prepare_brew.py",
             "tools/batch_lifecycle.py",
             "tools/register_brew.py",

@@ -90,6 +90,18 @@ Use `brew_op.py` as the single operator entry point when you want fewer explicit
 - `make brew-op TEXT="prepare old crown lazy lager on 2026-04-15"`
 - `make brew-op ACTION=package RECIPE=davenport_esb BREW_DATE=2026-03-28 PACKAGE_DATE=2026-04-10 FG=1.013 PACKAGED_VOLUME=4.55`
 
+Use `intake_insight.py` when a new durable rule, preference, or learned process insight should be captured into repo state instead of staying only in chat memory:
+
+- `python3 tools/intake_insight.py --text "Target defaults to UK unless explicitly marked American"`
+- `python3 tools/intake_insight.py --text "Use dated brew-day sheets as the canonical batch record" --record`
+- `make insight TEXT="My shopping list should follow explicit next/soon intent, not inferred active fermentor state"`
+
+Use `insight_report.py` to review the captured integration queue:
+
+- `python3 tools/insight_report.py`
+- `python3 tools/insight_report.py --status captured`
+- `make insight-report`
+
 Use `render_recipe_html.py` to create a printable recipe handout from the canonical recipe markdown:
 
 - `python3 tools/render_recipe_html.py --recipe davenport_esb`
