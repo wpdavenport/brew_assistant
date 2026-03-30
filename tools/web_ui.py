@@ -8,8 +8,13 @@ import html
 import json
 import math
 import mimetypes
+import os
+import platform
 import re
 import subprocess
+import sys
+import threading
+import time
 import urllib.parse
 from collections import defaultdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -58,6 +63,9 @@ STOCK_FILE = ROOT / "libraries" / "inventory" / "stock.json"
 RECIPE_USAGE_FILE = ROOT / "libraries" / "inventory" / "recipe_usage.json"
 ACTIVE_ARTIFACTS_FILE = ROOT / "project_control" / "ACTIVE_ARTIFACTS.json"
 SHOPPING_INTENT_FILE = ROOT / "libraries" / "inventory" / "shopping_intent.json"
+WEB_UI_SOURCE = Path(__file__).resolve()
+LAUNCH_AGENT_LABEL = "com.serenity.brewassistant.webui"
+LAUNCH_AGENT_PATH = Path.home() / "Library" / "LaunchAgents" / f"{LAUNCH_AGENT_LABEL}.plist"
 
 
 def normalize_token(text: str) -> str:
@@ -408,7 +416,45 @@ def render_nav(current: str) -> str:
     return "\n".join(blocks)
 
 
-def render_index(default_path: str) -> bytes:
+def service_platform_key() -> str:
+    system = platform.system().lower()
+    if system == "darwin":
+        return "macos"
+    if system == "windows":
+        return "windows"
+    if system == "linux":
+        return "linux"
+    return system
+
+
+def background_service_available() -> bool:
+    return service_platform_key() == "macos"
+
+
+def launch_agent_installed() -> bool:
+    if service_platform_key() == "macos":
+        return LAUNCH_AGENT_PATH.exists()
+    return False
+
+
+def render_index(default_path: str, notice_text: str = "") -> bytes:
+    install_banner = ""
+    if background_service_available() and not launch_agent_installed():
+        install_banner = (
+            '<div class="launcher-banner">'
+            '<strong>Background launcher not installed.</strong> '
+            'The viewer can run for this session, but installing the launcher makes it automatic next time. '
+            f'<a href="{html.escape(operator_url("install-launcher"))}" target="content">Install Background Launcher</a>'
+            '</div>'
+        )
+    elif not background_service_available():
+        install_banner = (
+            '<div class="launcher-banner">'
+            f'<strong>Background launcher backend not implemented for {html.escape(service_platform_key())}.</strong> '
+            'The service interface is in place, but this platform still uses session-local startup for now.'
+            '</div>'
+        )
+    notice_html = f'<div class="launcher-success">{html.escape(notice_text)}</div>' if notice_text else ""
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -535,6 +581,30 @@ def render_index(default_path: str) -> bytes:
       color: var(--accent);
       font-weight: 700;
     }}
+    .launcher-banner {{
+      margin: 0 0 14px;
+      padding: 10px 12px;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      background: #fbf6ee;
+      color: #4d2a13;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
+    .launcher-banner a {{
+      color: var(--accent);
+      font-weight: 700;
+    }}
+    .launcher-success {{
+      margin: 0 0 14px;
+      padding: 10px 12px;
+      border: 1px solid #b9d9b9;
+      border-radius: 8px;
+      background: #edf8ed;
+      color: #245224;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
     iframe {{
       width: 100%;
       height: calc(100vh - 49px);
@@ -559,8 +629,10 @@ def render_index(default_path: str) -> bytes:
 <body>
   <div class="app">
     <aside>
-      <h1>Brew Assistant Viewer</h1>
+      <h1><a data-current="{html.escape(default_path)}" data-raw="{html.escape('/raw?path=' + urllib.parse.quote(default_path))}" href="{html.escape('/view?path=' + urllib.parse.quote(default_path))}" target="content">Brew Assistant Viewer</a></h1>
       <p class="sub">Central browser for recipe prints, brew sheets, inventory, profiles, and research.</p>
+      {notice_html}
+      {install_banner}
       {render_nav(default_path)}
     </aside>
     <main>
@@ -572,7 +644,7 @@ def render_index(default_path: str) -> bytes:
     </main>
   </div>
   <script>
-    const links = Array.from(document.querySelectorAll('.nav-group a[data-current]'));
+    const links = Array.from(document.querySelectorAll('aside a[data-current]'));
     const rawLink = document.getElementById('raw-link');
     const frame = document.getElementById('content-frame');
 
@@ -611,7 +683,13 @@ def render_action_panel(action_html: str) -> str:
     return f'<div class="action-panel">{action_html}</div>'
 
 
-def render_text_page(path: Path, body: str, action_html: str = "") -> bytes:
+def render_notice(notice_text: str) -> str:
+    if not notice_text:
+        return ""
+    return f'<div class="notice-banner">{html.escape(notice_text)}</div>'
+
+
+def render_text_page(path: Path, body: str, action_html: str = "", notice_text: str = "") -> bytes:
     title = html.escape(path.relative_to(ROOT).as_posix())
     content = f"<pre>{html.escape(body)}</pre>"
     if path.suffix == ".md":
@@ -700,6 +778,9 @@ def render_text_page(path: Path, body: str, action_html: str = "") -> bytes:
       border-radius: 8px;
       background: #fcf8f1;
       font-family: Georgia, "Times New Roman", serif;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }}
     .action-panel h2 {{
       margin: 0 0 8px;
@@ -727,6 +808,16 @@ def render_text_page(path: Path, body: str, action_html: str = "") -> bytes:
       font-weight: 700;
       font-family: Georgia, "Times New Roman", serif;
     }}
+    .notice-banner {{
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      border: 1px solid #b9d9b9;
+      border-radius: 8px;
+      background: #edf8ed;
+      color: #245224;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+    }}
   </style>
 </head>
 <body>
@@ -735,6 +826,7 @@ def render_text_page(path: Path, body: str, action_html: str = "") -> bytes:
       <h1>{title}</h1>
       <a href="{html.escape(raw_url(path))}">Raw file</a>
     </div>
+    {render_notice(notice_text)}
     {render_action_panel(action_html)}
     {content}
   </div>
@@ -743,7 +835,7 @@ def render_text_page(path: Path, body: str, action_html: str = "") -> bytes:
 """.encode("utf-8")
 
 
-def render_dashboard_page(title: str, body: str) -> bytes:
+def render_dashboard_page(title: str, body: str, action_html: str = "") -> bytes:
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -772,6 +864,42 @@ def render_dashboard_page(title: str, body: str) -> bytes:
       color: #6a635d;
       font-size: 15px;
     }}
+    .action-panel {{
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #d6cab8;
+      border-radius: 8px;
+      background: #fcf8f1;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }}
+    .action-panel h2 {{
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #8a4b24;
+    }}
+    .action-panel p {{
+      margin: 0 0 10px;
+      color: #6a635d;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
+    .action-links {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }}
+    .action-links a {{
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid #d6cab8;
+      background: #fffdf8;
+      color: #4d2a13;
+      font-weight: 700;
+      text-decoration: none;
+    }}
     pre {{
       margin: 0;
       white-space: pre-wrap;
@@ -790,6 +918,7 @@ def render_dashboard_page(title: str, body: str) -> bytes:
   <div class="wrap">
     <h1>{html.escape(title)}</h1>
     <p class="sub">Live operational view generated from current repo state.</p>
+    {render_action_panel(action_html)}
     <pre>{html.escape(body)}</pre>
   </div>
 </body>
@@ -797,7 +926,7 @@ def render_dashboard_page(title: str, body: str) -> bytes:
 """.encode("utf-8")
 
 
-def render_structured_page(title: str, notes: str, body_html: str, raw_href: str, action_html: str = "") -> bytes:
+def render_structured_page(title: str, notes: str, body_html: str, raw_href: str, action_html: str = "", notice_text: str = "") -> bytes:
     notes_html = f'<p class="notes">{html.escape(notes)}</p>' if notes else ""
     return f"""<!doctype html>
 <html lang="en">
@@ -845,6 +974,9 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       border: 1px solid #d6cab8;
       border-radius: 8px;
       background: #fcf8f1;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }}
     .action-panel h2 {{
       margin: 0 0 8px;
@@ -871,6 +1003,15 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       color: #4d2a13;
       font-weight: 700;
       text-decoration: none;
+    }}
+    .notice-banner {{
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      border: 1px solid #b9d9b9;
+      border-radius: 8px;
+      background: #edf8ed;
+      color: #245224;
+      font-size: 15px;
     }}
     a {{
       color: #8a4b24;
@@ -953,6 +1094,7 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       <h1>{html.escape(title)}</h1>
       <a href="{html.escape(raw_href)}">Raw file</a>
     </div>
+    {render_notice(notice_text)}
     {render_action_panel(action_html)}
     {notes_html}
     {body_html}
@@ -1499,28 +1641,37 @@ def brew_history_events() -> list[dict]:
     return []
 
 
+def canonical_recipe_token(recipe_path: Path) -> str:
+    recipe_entry = recipe_usage_for_path(recipe_path)
+    if recipe_entry:
+        return recipe_entry["id"]
+    return recipe_stem_candidates(recipe_path.stem)[-1]
+
+
 def resolve_recipe_context_from_path(path: Path) -> tuple[str, Path] | None:
     if path.suffix == ".md" and "recipes" in path.parts:
-        return path.stem, path
+        return canonical_recipe_token(path), path
     if path.suffix == ".html" and path.parent == ROOT / "recipes" / "html_exports":
         recipe_path = resolve_recipe_markdown(path.stem)
         if recipe_path:
-            return recipe_path.stem, recipe_path
+            return canonical_recipe_token(recipe_path), recipe_path
     if path.suffix == ".html" and path.parent == ROOT / "brewing" / "brew_day_sheets":
         stem = re.sub(r"_brew_day_sheet(?:_\d{4}-\d{2}-\d{2})?$", "", path.stem)
         recipe_path = resolve_recipe_markdown(stem)
         if recipe_path:
-            return recipe_path.stem, recipe_path
+            return canonical_recipe_token(recipe_path), recipe_path
     return None
 
 
-def next_action_text_for_recipe(recipe_token: str, recipe_path: Path) -> str:
+def recipe_state(recipe_token: str, recipe_path: Path) -> dict[str, str]:
     brew_sheet_date = ""
+    brew_sheet_rel = ""
     for pair in active_pairs_payload():
         pair_recipe = ROOT / pair.get("recipe", "")
         if pair_recipe.resolve() == recipe_path.resolve():
             match = re.search(r"_(\d{4}-\d{2}-\d{2})\.html$", pair.get("brew_sheet", ""))
             brew_sheet_date = match.group(1) if match else ""
+            brew_sheet_rel = pair.get("brew_sheet", "")
             break
     events = brew_history_events()
     brew_events = [event for event in events if event.get("type") == "brew" and normalize_token(event.get("recipe_id", "")) == normalize_token(recipe_token)]
@@ -1530,21 +1681,126 @@ def next_action_text_for_recipe(recipe_token: str, recipe_path: Path) -> str:
         latest_brew_date = latest_brew.get("brew_date", "")
         packaged = any(event.get("brew_date", "") == latest_brew_date for event in package_events)
         if not packaged:
-            return f"Next likely action: package {recipe_token} brewed {latest_brew_date}."
+            return {"state": "brewed_not_packaged", "brew_date": latest_brew_date, "brew_sheet": latest_brew.get("brew_sheet", brew_sheet_rel)}
     if brew_sheet_date:
-        return f"Next likely action: register brew for dated sheet {brew_sheet_date}."
+        return {"state": "prepared_not_brewed", "brew_date": brew_sheet_date, "brew_sheet": brew_sheet_rel}
+    return {"state": "recipe_ready", "brew_date": "", "brew_sheet": ""}
+
+
+def next_action_text_for_recipe(recipe_token: str, recipe_path: Path) -> str:
+    state = recipe_state(recipe_token, recipe_path)
+    if state["state"] == "brewed_not_packaged":
+        return f"Ready to package. Last un-packaged batch was brewed {state['brew_date']}."
+    if state["state"] == "prepared_not_brewed":
+        return f"Ready to register brew for the dated sheet {state['brew_date']}."
     return f"Next likely action: prepare {recipe_token} when ready to brew."
 
 
-def action_panel_html(recipe_token: str, recipe_path: Path) -> str:
-    links = [
-        f'<a href="{html.escape(operator_url("status", recipe=recipe_token))}" target="content">Next Action</a>',
-        f'<a href="{html.escape(operator_url("refresh-html", recipe=recipe_token))}" target="content">Refresh Print</a>',
-        f'<a href="{html.escape(operator_url("trust-check"))}" target="content">Run Trust Check</a>',
-        f'<a href="{html.escape(operator_url("prepare", recipe=recipe_token, date="today", run_trust_check="1"))}" target="content">Prepare Today</a>',
-        f'<a href="{html.escape(operator_url("brew", recipe=recipe_token, date="today"))}" target="content">Register Brew Today</a>',
-        f'<a href="{html.escape('/shopping?recipe=' + urllib.parse.quote(recipe_path.relative_to(ROOT).as_posix()))}" target="content">Shopping</a>',
-    ]
+def package_form_url(recipe: str, brew_date: str = "") -> str:
+    query = {"recipe": recipe}
+    if brew_date:
+        query["brew_date"] = brew_date
+    return "/package-form?" + urllib.parse.urlencode(query)
+
+
+def render_package_form(recipe_token: str, brew_date: str) -> bytes:
+    default_date = __import__("datetime").date.today().isoformat()
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Package {html.escape(recipe_token)}</title>
+  <style>
+    body {{ margin: 0; background: #f5efe5; color: #1d1a18; font-family: Georgia, "Times New Roman", serif; }}
+    .wrap {{ max-width: 760px; margin: 0 auto; padding: 18px 22px 28px; }}
+    h1 {{ margin: 0 0 10px; color: #8a4b24; font-size: 28px; }}
+    p {{ color: #6a635d; }}
+    form {{ background: #fffdf8; border: 1px solid #d6cab8; border-radius: 10px; padding: 16px; }}
+    .grid {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }}
+    label {{ display: block; font-size: 14px; color: #4d2a13; font-weight: 700; margin-bottom: 4px; }}
+    input, select {{ width: 100%; padding: 8px 9px; border: 1px solid #d6cab8; border-radius: 6px; background: #fff; }}
+    .hint {{ margin-top: 4px; color: #6a635d; font-size: 13px; }}
+    .full {{ grid-column: 1 / -1; }}
+    .actions {{ margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }}
+    button, a.button {{ display: inline-block; padding: 8px 11px; border-radius: 6px; border: 1px solid #d6cab8; background: #fffdf8; color: #4d2a13; text-decoration: none; font-weight: 700; }}
+    @media (max-width: 700px) {{ .grid {{ grid-template-columns: 1fr; }} }}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Register Package</h1>
+    <p>Complete the packaging details for <strong>{html.escape(recipe_token)}</strong>.</p>
+    <form method="get" action="/operate">
+      <input type="hidden" name="action" value="package">
+      <input type="hidden" name="recipe" value="{html.escape(recipe_token)}">
+      <div class="grid">
+        <div>
+          <label for="brew_date">Brew Date</label>
+          <input id="brew_date" name="brew_date" type="date" value="{html.escape(brew_date)}" required>
+        </div>
+        <div>
+          <label for="package_date">Package Date</label>
+          <input id="package_date" name="package_date" type="date" value="{html.escape(default_date)}" required>
+        </div>
+        <div>
+          <label for="fg">FG</label>
+          <input id="fg" name="fg" placeholder="1.013" required>
+        </div>
+        <div>
+          <label for="packaged_volume">Packaged Volume</label>
+          <input id="packaged_volume" name="packaged_volume" placeholder="5.00" required>
+        </div>
+        <div>
+          <label for="packaged_volume_unit">Volume Unit</label>
+          <select id="packaged_volume_unit" name="packaged_volume_unit" required>
+            <option value="gal" selected>Gallons</option>
+            <option value="l">Liters</option>
+          </select>
+        </div>
+        <div>
+          <label for="harvest_yeast">Harvest Yeast</label>
+          <input id="harvest_yeast" name="harvest_yeast" placeholder="1968 or wlp007">
+        </div>
+        <div>
+          <label for="harvest_generation">Harvest Generation</label>
+          <input id="harvest_generation" name="harvest_generation" placeholder="2">
+        </div>
+        <div>
+          <label for="co2_vols">CO2 Vols</label>
+          <input id="co2_vols" name="co2_vols" placeholder="2.4">
+          <div class="hint">Optional. Leave blank to keep the recipe or brew-sheet target.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="submit">Register Package</button>
+        <a class="button" href="{html.escape(operator_url('status', recipe=recipe_token))}">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+""".encode("utf-8")
+
+
+def action_panel_html(recipe_token: str, recipe_path: Path, current_rel: str = "") -> str:
+    state = recipe_state(recipe_token, recipe_path)
+    refresh_params = {"recipe": recipe_token}
+    if current_rel:
+        refresh_params["return_path"] = current_rel
+    trust_params = {}
+    if current_rel:
+        trust_params["return_path"] = current_rel
+    links = [f'<a href="{html.escape(operator_url("status", recipe=recipe_token))}" target="content">Next Action</a>']
+    if state["state"] == "brewed_not_packaged":
+        links.append(f'<a href="{html.escape(package_form_url(recipe_token, state["brew_date"]))}" target="content">Register Package</a>')
+    elif state["state"] == "prepared_not_brewed":
+        links.append(f'<a href="{html.escape(operator_url("brew", recipe=recipe_token, date=state["brew_date"]))}" target="content">Register Brew</a>')
+    else:
+        links.append(f'<a href="{html.escape(operator_url("prepare", recipe=recipe_token, date="today", run_trust_check="1"))}" target="content">Prepare Today</a>')
+    links.extend([
+        f'<a href="{html.escape(operator_url("refresh-html", **refresh_params))}" target="content">Refresh Print</a>',
+        f'<a href="{html.escape(operator_url("trust-check", **trust_params))}" target="content">Run Trust Check</a>',
+    ])
     return (
         "<h2>Actions</h2>"
         f"<p>{html.escape(next_action_text_for_recipe(recipe_token, recipe_path))}</p>"
@@ -1552,7 +1808,7 @@ def action_panel_html(recipe_token: str, recipe_path: Path) -> str:
     )
 
 
-def render_html_wrapper(path: Path, action_html: str = "") -> bytes:
+def render_html_wrapper(path: Path, action_html: str = "", notice_text: str = "") -> bytes:
     title = path.relative_to(ROOT).as_posix()
     src = raw_url(path)
     return f"""<!doctype html>
@@ -1595,6 +1851,9 @@ def render_html_wrapper(path: Path, action_html: str = "") -> bytes:
       border: 1px solid #d6cab8;
       border-radius: 8px;
       background: #fcf8f1;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }}
     .action-panel h2 {{
       margin: 0 0 8px;
@@ -1622,6 +1881,15 @@ def render_html_wrapper(path: Path, action_html: str = "") -> bytes:
       text-decoration: none;
       font-weight: 700;
     }}
+    .notice-banner {{
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      border: 1px solid #b9d9b9;
+      border-radius: 8px;
+      background: #edf8ed;
+      color: #245224;
+      font-size: 15px;
+    }}
     iframe {{
       width: 100%;
       height: 1200px;
@@ -1637,6 +1905,7 @@ def render_html_wrapper(path: Path, action_html: str = "") -> bytes:
       <h1>{html.escape(title)}</h1>
       <a href="{html.escape(src)}">Raw file</a>
     </div>
+    {render_notice(notice_text)}
     {render_action_panel(action_html)}
     <iframe src="{html.escape(src)}"></iframe>
   </div>
@@ -1646,6 +1915,9 @@ def render_html_wrapper(path: Path, action_html: str = "") -> bytes:
 
 
 def operate_output(action: str, params: dict[str, str]) -> tuple[str, bool]:
+    if action == "install-launcher":
+        proc = subprocess.run(["python3", "tools/web_ui_service.py", "install"], cwd=ROOT, capture_output=True, text=True)
+        return proc.stdout + proc.stderr, proc.returncode == 0
     if action == "trust-check":
         proc = subprocess.run(["make", "trust-check"], cwd=ROOT, capture_output=True, text=True)
         return proc.stdout + proc.stderr, proc.returncode == 0
@@ -1653,6 +1925,33 @@ def operate_output(action: str, params: dict[str, str]) -> tuple[str, bool]:
         recipe = params.get("recipe", "")
         proc = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", recipe], cwd=ROOT, capture_output=True, text=True)
         return proc.stdout + proc.stderr, proc.returncode == 0
+    if action == "package":
+        cmd = [
+            "python3", "tools/register_package.py",
+            "--recipe", params.get("recipe", ""),
+            "--brew-date", params.get("brew_date", ""),
+            "--package-date", params.get("package_date", ""),
+            "--fg", params.get("fg", ""),
+            "--packaged-volume", params.get("packaged_volume", ""),
+            "--packaged-volume-unit", params.get("packaged_volume_unit", "gal"),
+        ]
+        if params.get("co2_vols"):
+            cmd.extend(["--co2-vols", params["co2_vols"]])
+        if params.get("harvest_yeast"):
+            cmd.extend(["--harvest-yeast", params["harvest_yeast"]])
+        if params.get("harvest_generation"):
+            cmd.extend(["--harvest-generation", params["harvest_generation"]])
+        proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        refresh_lines = []
+        if proc.returncode == 0 and params.get("recipe"):
+            refresh = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", params["recipe"]], cwd=ROOT, capture_output=True, text=True)
+            refresh_lines.append(refresh.stdout + refresh.stderr)
+        status = subprocess.run(["python3", "tools/batch_state_summary.py", "--with-next-actions"], cwd=ROOT, capture_output=True, text=True)
+        payload = proc.stdout + proc.stderr
+        if refresh_lines:
+            payload += "\n" + "\n".join(refresh_lines)
+        payload += "\n" + status.stdout + status.stderr
+        return payload, proc.returncode == 0
     cmd = ["python3", "tools/brew_op.py", "--action", action]
     if params.get("recipe"):
         cmd.extend(["--recipe", params["recipe"]])
@@ -1661,7 +1960,36 @@ def operate_output(action: str, params: dict[str, str]) -> tuple[str, bool]:
     if params.get("run_trust_check"):
         cmd.append("--run-trust-check")
     proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    return proc.stdout + proc.stderr, proc.returncode == 0
+    refresh_lines = []
+    if proc.returncode == 0 and params.get("recipe"):
+        refresh = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", params["recipe"]], cwd=ROOT, capture_output=True, text=True)
+        refresh_lines.append(refresh.stdout + refresh.stderr)
+    status = subprocess.run(["python3", "tools/batch_state_summary.py", "--with-next-actions"], cwd=ROOT, capture_output=True, text=True)
+    payload = proc.stdout + proc.stderr
+    if refresh_lines:
+        payload += "\n" + "\n".join(refresh_lines)
+    payload += "\n" + status.stdout + status.stderr
+    return payload, proc.returncode == 0
+
+
+def render_view_response(path: Path, notice_text: str = "") -> bytes:
+    if path == STOCK_FILE.resolve():
+        return render_stock_page(path)
+    if path.suffix == ".json":
+        return render_json_page(path)
+    if path.suffix in {".yaml", ".yml"}:
+        return render_yaml_page(path)
+    context = resolve_recipe_context_from_path(path)
+    action_html = ""
+    if context:
+        recipe_token, recipe_path = context
+        action_html = action_panel_html(recipe_token, recipe_path, path.relative_to(ROOT).as_posix())
+    if path.suffix == ".html":
+        return render_html_wrapper(path, action_html, notice_text)
+    body = path.read_text(encoding="utf-8")
+    if path.suffix == ".json":
+        body = json.dumps(json.loads(body), indent=2)
+    return render_text_page(path, body, action_html, notice_text)
 
 
 class BrewUIHandler(BaseHTTPRequestHandler):
@@ -1683,6 +2011,15 @@ class BrewUIHandler(BaseHTTPRequestHandler):
             self.respond_bytes(200, "text/html; charset=utf-8", page)
             return
 
+        if parsed.path == "/package-form":
+            recipe_token = params.get("recipe", [""])[0]
+            brew_date = params.get("brew_date", [""])[0]
+            if not recipe_token:
+                self.respond_text(400, "Missing recipe.")
+                return
+            self.respond_bytes(200, "text/html; charset=utf-8", render_package_form(recipe_token, brew_date))
+            return
+
         if parsed.path == "/operate":
             action = params.get("action", [""])[0]
             if not action:
@@ -1690,8 +2027,44 @@ class BrewUIHandler(BaseHTTPRequestHandler):
                 return
             flat_params = {key: values[0] for key, values in params.items() if values}
             payload, ok = operate_output(action, flat_params)
+            if action == "install-launcher":
+                default_rel = DEFAULT_FILE.relative_to(ROOT).as_posix()
+                notice = "Background launcher installed." if ok else "Background launcher install failed."
+                self.respond_bytes(200, "text/html; charset=utf-8", render_index(default_rel, notice))
+                return
+            if action == "refresh-html" and ok and flat_params.get("return_path"):
+                try:
+                    path = ensure_allowed(ROOT / flat_params["return_path"])
+                except ValueError:
+                    self.respond_text(403, "Path not allowed.")
+                    return
+                if not path.exists() or not path.is_file():
+                    self.respond_text(404, "File not found.")
+                    return
+                recipe_label = flat_params.get("recipe", "").replace("_", " ").title()
+                notice = f"Recipe Print Refresh Successful for {recipe_label}"
+                self.respond_bytes(200, "text/html; charset=utf-8", render_view_response(path, notice))
+                return
+            if action == "trust-check" and flat_params.get("return_path"):
+                try:
+                    path = ensure_allowed(ROOT / flat_params["return_path"])
+                except ValueError:
+                    self.respond_text(403, "Path not allowed.")
+                    return
+                if not path.exists() or not path.is_file():
+                    self.respond_text(404, "File not found.")
+                    return
+                notice = "Trust Check Passed" if ok else "Trust Check Failed"
+                self.respond_bytes(200, "text/html; charset=utf-8", render_view_response(path, notice))
+                return
             title = f"Operation - {action}"
-            page = render_dashboard_page(title, payload or ("OK" if ok else "No output"))
+            action_html = ""
+            recipe_token = flat_params.get("recipe", "")
+            if recipe_token:
+                recipe_path = resolve_recipe_markdown(recipe_token)
+                if recipe_path:
+                    action_html = action_panel_html(canonical_recipe_token(recipe_path), recipe_path)
+            page = render_dashboard_page(title, payload or ("OK" if ok else "No output"), action_html)
             self.respond_bytes(200, "text/html; charset=utf-8", page)
             return
 
@@ -1738,24 +2111,7 @@ class BrewUIHandler(BaseHTTPRequestHandler):
                 self.respond_bytes(200, "text/html; charset=utf-8", render_yaml_page(path))
                 return
 
-            if path.suffix == ".html":
-                context = resolve_recipe_context_from_path(path)
-                action_html = ""
-                if context:
-                    recipe_token, recipe_path = context
-                    action_html = action_panel_html(recipe_token, recipe_path)
-                self.respond_bytes(200, "text/html; charset=utf-8", render_html_wrapper(path, action_html))
-                return
-
-            body = path.read_text(encoding="utf-8")
-            if path.suffix == ".json":
-                body = json.dumps(json.loads(body), indent=2)
-            context = resolve_recipe_context_from_path(path)
-            action_html = ""
-            if context:
-                recipe_token, recipe_path = context
-                action_html = action_panel_html(recipe_token, recipe_path)
-            self.respond_bytes(200, "text/html; charset=utf-8", render_text_page(path, body, action_html))
+            self.respond_bytes(200, "text/html; charset=utf-8", render_view_response(path))
             return
 
         self.respond_text(404, "Not found.")
@@ -1787,12 +2143,37 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the local Brew Assistant web viewer")
     parser.add_argument("--host", default="127.0.0.1", help="Bind host (default: 127.0.0.1)")
     parser.add_argument("--port", type=int, default=8765, help="Bind port (default: 8765)")
+    parser.add_argument("--reload", action="store_true", help="Auto-restart the server when web_ui.py changes")
     return parser
+
+
+def start_reload_watcher(server: ThreadingHTTPServer, source_path: Path) -> threading.Event:
+    restart_requested = threading.Event()
+    initial_mtime = source_path.stat().st_mtime_ns
+
+    def watch() -> None:
+        last_mtime = initial_mtime
+        while not restart_requested.is_set():
+            time.sleep(1.0)
+            try:
+                current_mtime = source_path.stat().st_mtime_ns
+            except FileNotFoundError:
+                continue
+            if current_mtime != last_mtime:
+                restart_requested.set()
+                server.shutdown()
+                return
+
+    threading.Thread(target=watch, name="brew-ui-reload-watch", daemon=True).start()
+    return restart_requested
 
 
 def main() -> int:
     args = build_parser().parse_args()
     server = ThreadingHTTPServer((args.host, args.port), BrewUIHandler)
+    restart_requested: threading.Event | None = None
+    if args.reload:
+        restart_requested = start_reload_watcher(server, WEB_UI_SOURCE)
     print(f"BREW_UI_OK http://{args.host}:{args.port}")
     try:
         server.serve_forever()
@@ -1800,6 +2181,8 @@ def main() -> int:
         pass
     finally:
         server.server_close()
+    if restart_requested and restart_requested.is_set():
+        os.execv(sys.executable, [sys.executable, str(WEB_UI_SOURCE), *sys.argv[1:]])
     return 0
 
 
