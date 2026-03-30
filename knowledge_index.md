@@ -31,6 +31,7 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - libraries/inventory/stock.json
 - libraries/inventory/recipe_usage.json
 - libraries/inventory/brew_history.json
+- libraries/inventory/shopping_intent.json
 - libraries/inventory/style_option_templates.json
 - tools/inventory_cli.py
 
