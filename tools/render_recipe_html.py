@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import re
 from pathlib import Path
 
@@ -14,6 +15,7 @@ RECIPES_DIR = ROOT / "recipes"
 HTML_EXPORT_DIR = RECIPES_DIR / "html_exports"
 TEMPLATE_FILE = ROOT / "libraries" / "templates" / "recipe_print_template.html"
 EQUIPMENT_FILE = ROOT / "profiles" / "equipment.yaml"
+BREW_HISTORY_FILE = ROOT / "libraries" / "inventory" / "brew_history.json"
 
 
 def normalize_token(text: str) -> str:
@@ -276,6 +278,55 @@ def read_fermentation_equipment() -> str:
     return "Fermentation Equipment: " + " + ".join(parts) if parts else "Fermentation Equipment: repo profile"
 
 
+def brew_history_items(recipe_path: Path) -> list[str]:
+    payload = json.loads(BREW_HISTORY_FILE.read_text(encoding="utf-8"))
+    candidate_ids = {normalize_token(value) for value in recipe_stem_candidates(recipe_path.stem)}
+    brews: dict[str, dict] = {}
+    packages: dict[str, dict] = {}
+    for event in payload.get("events", []):
+        recipe_id = normalize_token(event.get("recipe_id", ""))
+        recipe_name = normalize_token(event.get("recipe_name", ""))
+        if recipe_id not in candidate_ids and recipe_name not in candidate_ids:
+            continue
+        brew_date = event.get("brew_date", "")
+        if event.get("type") == "brew" and brew_date:
+            brews[brew_date] = event
+        elif event.get("type") == "package" and brew_date:
+            packages[brew_date] = event
+    rows: list[str] = []
+    for brew_date in sorted(brews.keys(), reverse=True):
+        package = packages.get(brew_date)
+        if package:
+            packaged_volume = package.get("packaged_volume")
+            packaged_unit = package.get("packaged_volume_unit", "gal")
+            package_date = package.get("package_date", "")
+            fg = package.get("fg")
+            detail = []
+            if package_date:
+                detail.append(f"packaged {package_date}")
+            if packaged_volume not in {None, ""}:
+                detail.append(f"{float(packaged_volume):.2f} {packaged_unit}")
+            if fg not in {None, ""}:
+                detail.append(f"FG {float(fg):.3f}")
+            suffix = " | " + " | ".join(detail) if detail else ""
+            rows.append(f"Brewed {brew_date}{suffix}")
+        else:
+            rows.append(f"Brewed {brew_date} | packaging not recorded")
+    return rows[:5]
+
+
+def brew_history_section(recipe_path: Path) -> str:
+    items = brew_history_items(recipe_path)
+    if not items:
+        return ""
+    return (
+        '<div class="section full">\n'
+        "  <h2>Brew History</h2>\n"
+        f"  {as_list(items)}\n"
+        "</div>"
+    )
+
+
 def as_list(items: list[str], ordered: bool = False) -> str:
     tag = "ol" if ordered else "ul"
     rendered = "\n".join(f"<li>{html.escape(item)}</li>" for item in items)
@@ -361,6 +412,7 @@ def render_recipe(recipe_path: Path) -> str:
         "{{MASH}}": as_list(mash, ordered=True),
         "{{FERMENT_EQUIPMENT}}": html.escape(ferment_equipment),
         "{{FERMENTATION}}": as_list(fermentation, ordered=True),
+        "{{BREW_HISTORY_SECTION}}": brew_history_section(recipe_path),
         "{{SOURCE}}": html.escape(recipe_path.relative_to(ROOT).as_posix()),
     }
     document = template

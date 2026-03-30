@@ -103,6 +103,7 @@ Consult:
 - libraries/inventory/stock.json
 - libraries/inventory/recipe_usage.json
 - libraries/inventory/brew_history.json
+- libraries/inventory/shopping_intent.json
 - libraries/inventory/style_option_templates.json
 - tools/inventory_cli.py
 
@@ -121,6 +122,7 @@ Shopping-list output rule:
 - Default shopping-list units to Imperial for user-facing output.
 - Grain amounts should be exact in Imperial units.
 - Hop amounts should be rounded to the nearest whole-number Imperial unit that is practical for purchase/use context.
+- If `libraries/inventory/shopping_intent.json` exists, treat it as the user's purchase-intent horizon. Prefer recipe items marked `next` or `soon`, and do not treat active fermenting beer as a shopping target unless the file or user explicitly says so.
 
 ### Brew Day Sheet Naming Rule
 Brew day sheets use a two-state naming convention:
