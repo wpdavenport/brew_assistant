@@ -226,9 +226,23 @@ def targets_inline(items: list[str]) -> str:
     return "\n".join(chunks)
 
 
+def title_font_size(title: str) -> str:
+    length = len(title)
+    if length <= 40:
+        return "23pt"
+    if length <= 50:
+        return "21pt"
+    if length <= 60:
+        return "19pt"
+    if length <= 72:
+        return "17pt"
+    return "15pt"
+
+
 def render_recipe(recipe_path: Path) -> str:
     title, sections = parse_markdown_sections(recipe_path.read_text(encoding="utf-8"))
     display_title = print_title(title, sections)
+    title_size = title_font_size(display_title)
     targets = target_parameters(find_section(sections, "TARGET PARAMETERS"))
     grains = top_bullets(find_section(sections, "FERMENTABLES"))
     hop_lines = subsection_bullets(find_section(sections, "HOPS"), {"Boil / Whirlpool", "Kettle Additions"})
@@ -240,6 +254,7 @@ def render_recipe(recipe_path: Path) -> str:
     template = TEMPLATE_FILE.read_text(encoding="utf-8")
     replacements = {
         "{{TITLE}}": html.escape(display_title),
+        "{{TITLE_FONT_SIZE}}": title_size,
         "{{TARGETS}}": targets_inline(targets),
         "{{GRAINS}}": as_list(grains),
         "{{HOPS}}": as_list(hop_lines),
