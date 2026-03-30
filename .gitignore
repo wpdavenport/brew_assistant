@@ -2,3 +2,5 @@
 books/
 .codex/
 .codex-tmp/
+__pycache__/
+*.pyc
