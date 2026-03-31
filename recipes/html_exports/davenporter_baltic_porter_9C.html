@@ -95,6 +95,25 @@
         margin: 0;
         padding: 0.3in 0.34in 0.34in;
       }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .section {
+        width: calc(50% - 0.12in);
+        margin: 0 0.24in 0.14in 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .section:nth-child(2n) {
+        margin-right: 0;
+      }
+      .section.full {
+        width: 100%;
+        margin-right: 0;
+      }
     }
   </style>
 </head>
@@ -122,10 +141,10 @@
         <ul>
 <li>12.00 lb (5.44 kg) Munich Malt</li>
 <li>7.00 lb (3.18 kg) Weyermann Pilsner Malt</li>
-<li>0.50 lb (0.23 kg) Special B</li>
-<li>0.50 lb (0.23 kg) Cara 60</li>
-<li>0.38 lb (0.17 kg) Carafa Special III</li>
-<li>0.25 lb (0.11 kg) Thomas Fawcett Chocolate Malt</li>
+<li>0.50 lb (230 g) Special B</li>
+<li>0.50 lb (230 g) Cara 60</li>
+<li>0.38 lb (170 g) Carafa Special III</li>
+<li>0.25 lb (110 g) Thomas Fawcett Chocolate Malt</li>
 </ul>
       </div>
       <div class="section">

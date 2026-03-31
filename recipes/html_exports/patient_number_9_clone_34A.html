@@ -95,6 +95,25 @@
         margin: 0;
         padding: 0.3in 0.34in 0.34in;
       }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .section {
+        width: calc(50% - 0.12in);
+        margin: 0 0.24in 0.14in 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .section:nth-child(2n) {
+        margin-right: 0;
+      }
+      .section.full {
+        width: 100%;
+        margin-right: 0;
+      }
     }
   </style>
 </head>
@@ -115,9 +134,9 @@
         <h2>Grains</h2>
         <ul>
 <li>16.0 lb (7.26 kg) Pale Malt</li>
-<li>0.5 lb (0.23 kg) Thomas Fawcett Amber Malt</li>
-<li>1.25 lb (0.57 kg) Corn Sugar</li>
-<li>0.5 lb (0.23 kg) Rice Hulls</li>
+<li>0.5 lb (230 g) Thomas Fawcett Amber Malt</li>
+<li>1.25 lb (570 g) Corn Sugar</li>
+<li>0.5 lb (230 g) Rice Hulls</li>
 </ul>
       </div>
       <div class="section">

@@ -97,11 +97,26 @@ Salt additions for 8.45 gal total liquor:
 - Best judging window: 3-6 weeks post-package.
 
 ## BATCH 1 SENSORY CALIBRATION
-- Beer presented as a solid ESB: clean, balanced, and well-structured.
-- Positive notes: bready/toffee finish and good malt-hop balance.
-- Clone miss: lacked the distinct Fuller's-like marmalade/orange profile.
-- Perceived fault/overreach: slight salt/mineral impression in the finish.
-- Next-iteration implication: soften sulfate-driven mineral structure and increase clone-signature late-hop/yeast expression.
+- Overall impression: well-executed ESB with real drinkability and a distinctive old-English mineral character that was enjoyable but near the edge of overstatement.
+- Aroma: light malt aroma, toffee, and slightly earthy hop expression. Pleasant, but not especially distinctive or signature-driven.
+- Appearance: very nice copper-amber color, very clear, and appropriate for style. Head rises easily, small white bubbles remain suspended and gather around the sides of the glass, and light lacing appears when tilted.
+- Flavor: balanced earthy hops and malt character with no off flavors. Hops linger briefly and then clear out. Earthy hop character shows again on the finish. Minerality complements the malt and hops, but over the course of a full drink it can start to get slightly in the way.
+- Mouthfeel: carbonation appropriate, medium body, no astringency, and no obvious flaws. Body supports both malt and hop expression well.
+- Clone miss: lacked a more distinct Fuller's-like marmalade/orange note, especially in aroma.
+- Iteration implication: keep the appealing English mineral identity, but soften it slightly so it stays supportive rather than distracting over a full pint. Increase clone-signature orange/marmalade expression without upsetting balance.
+
+### Self-Scored BJCP Breakdown
+- Aroma: 7 / 12
+- Appearance: 3 / 3
+- Flavor: 17 / 20
+- Mouthfeel: 4 / 5
+- Overall: 8 / 10
+- Total: 38 / 50
+
+### Scoring Interpretation
+- `38` is a fair self-score and reflects a beer that is clearly very good, clean, and enjoyable.
+- The two main score suppressors were restrained aroma and minerality that bordered on slightly intrusive over a full drink.
+- A competition judge may still score it a little higher if the restrained aroma reads as classic rather than lacking, and if the mineral expression reads as English character rather than imbalance.
 
 ## CRITICAL RISKS TO AVOID
 - Premature yeast drop and diacetyl carryover (1968/WLP002 risk).

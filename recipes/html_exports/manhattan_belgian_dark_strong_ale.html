@@ -95,6 +95,25 @@
         margin: 0;
         padding: 0.3in 0.34in 0.34in;
       }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .section {
+        width: calc(50% - 0.12in);
+        margin: 0 0.24in 0.14in 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .section:nth-child(2n) {
+        margin-right: 0;
+      }
+      .section.full {
+        width: 100%;
+        margin-right: 0;
+      }
     }
   </style>
 </head>

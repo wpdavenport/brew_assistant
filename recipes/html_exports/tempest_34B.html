@@ -95,6 +95,25 @@
         margin: 0;
         padding: 0.3in 0.34in 0.34in;
       }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .section {
+        width: calc(50% - 0.12in);
+        margin: 0 0.24in 0.14in 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .section:nth-child(2n) {
+        margin-right: 0;
+      }
+      .section.full {
+        width: 100%;
+        margin-right: 0;
+      }
     }
   </style>
 </head>
@@ -118,11 +137,11 @@
 <li>13.00 lb (5.90 kg) Pale 2-Row</li>
 <li>5.00 lb (2.27 kg) Wheat Malt</li>
 <li>3.00 lb (1.36 kg) Light DME</li>
-<li>1.25 lb (0.57 kg) Crystal 80</li>
-<li>1.25 lb (0.57 kg) Brown Sugar</li>
-<li>0.62 lb (0.28 kg) Chocolate Malt</li>
-<li>0.31 lb (0.14 kg) De-Bittered Black Malt</li>
-<li>0.125 lb (0.06 kg) Pale Chocolate Malt</li>
+<li>1.25 lb (570 g) Crystal 80</li>
+<li>1.25 lb (570 g) Brown Sugar</li>
+<li>0.62 lb (280 g) Chocolate Malt</li>
+<li>0.31 lb (140 g) De-Bittered Black Malt</li>
+<li>0.125 lb (60 g) Pale Chocolate Malt</li>
 </ul>
       </div>
       <div class="section">

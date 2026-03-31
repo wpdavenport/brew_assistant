@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "mode_active": false,
+  "started_utc": "",
+  "last_updated_utc": "2026-03-31T01:20:29Z",
+  "sessions": [
+    {
+      "id": "mini_test_2026-03-31T01:06:03Z",
+      "completed_utc": "2026-03-31T01:06:03Z",
+      "type": "mini_test",
+      "timer_enabled": false,
+      "total": 12,
+      "correct": 12,
+      "score_pct": 100.0,
+      "duration_sec": 179,
+      "question_ids": [
+        "bjcp_q_007",
+        "bjcp_q_067",
+        "bjcp_q_038",
+        "bjcp_q_021",
+        "bjcp_q_063",
+        "bjcp_q_054",
+        "bjcp_q_025",
+        "bjcp_q_002",
+        "bjcp_q_029",
+        "bjcp_q_047",
+        "bjcp_q_006",
+        "bjcp_q_059"
+      ],
+      "results": [
+        {
+          "question_id": "bjcp_q_007",
+          "your_answer": "American IPA-like expression",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_067",
+          "your_answer": "False",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_038",
+          "your_answer": "Reducing contamination risk and limiting continued thermal reactions",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_021",
+          "your_answer": "False",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_063",
+          "your_answer": "Two to six weeks",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_054",
+          "your_answer": "5 per page",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_025",
+          "your_answer": "Sensory evaluation tied to style and improvement advice when warranted",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_002",
+          "your_answer": "Acetaldehyde",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_029",
+          "your_answer": "False",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_047",
+          "your_answer": "Czech Premium Pale Lager",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_006",
+          "your_answer": "Closed transfer to purged package",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_059",
+          "your_answer": "False",
+          "is_correct": true
+        }
+      ],
+      "misses": []
+    },
+    {
+      "id": "mini_test_2026-03-31T01:20:29Z",
+      "completed_utc": "2026-03-31T01:20:29Z",
+      "type": "mini_test",
+      "timer_enabled": false,
+      "total": 12,
+      "correct": 12,
+      "score_pct": 100.0,
+      "duration_sec": 108,
+      "question_ids": [
+        "bjcp_q_071",
+        "bjcp_q_040",
+        "bjcp_q_019",
+        "bjcp_q_060",
+        "bjcp_q_012",
+        "bjcp_q_043",
+        "bjcp_q_075",
+        "bjcp_q_085",
+        "bjcp_q_046",
+        "bjcp_q_001",
+        "bjcp_q_032",
+        "bjcp_q_080"
+      ],
+      "results": [
+        {
+          "question_id": "bjcp_q_071",
+          "your_answer": "The declared style guidelines",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_040",
+          "your_answer": "Closed packaging with minimized oxygen pickup",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_019",
+          "your_answer": "True",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_060",
+          "your_answer": "Acetaldehyde",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_012",
+          "your_answer": "Chlorophenols",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_043",
+          "your_answer": "Hydrogen sulfide",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_075",
+          "your_answer": "Czech Premium Pale Lager",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_085",
+          "your_answer": "A fault or imbalance, not a universal style positive",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_046",
+          "your_answer": "True",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_001",
+          "your_answer": "Diacetyl",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_032",
+          "your_answer": "Study ethics, judging process, styles, beer characteristics, and brewing process",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_080",
+          "your_answer": "Leaving chloramines untreated",
+          "is_correct": true
+        }
+      ],
+      "misses": []
+    }
+  ],
+  "stats": {
+    "questions_answered": 24,
+    "correct": 24,
+    "accuracy_pct": 100.0,
+    "by_topic": {
+      "exam_structure": {
+        "answered": 2,
+        "correct": 2,
+        "accuracy_pct": 100.0
+      },
+      "ingredients": {
+        "answered": 2,
+        "correct": 2,
+        "accuracy_pct": 100.0
+      },
+      "process": {
+        "answered": 3,
+        "correct": 3,
+        "accuracy_pct": 100.0
+      },
+      "off_flavors": {
+        "answered": 7,
+        "correct": 7,
+        "accuracy_pct": 100.0
+      },
+      "styles_core": {
+        "answered": 2,
+        "correct": 2,
+        "accuracy_pct": 100.0
+      },
+      "styles_comparison": {
+        "answered": 3,
+        "correct": 3,
+        "accuracy_pct": 100.0
+      },
+      "judging_process": {
+        "answered": 5,
+        "correct": 5,
+        "accuracy_pct": 100.0
+      }
+    }
+  },
+  "readiness": {
+    "status": "exam_ready",
+    "weak_topics": [],
+    "recommended_next": "Take another mini test and compare weak topics."
+  }
+}
