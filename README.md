@@ -130,6 +130,7 @@ Control-plane commands:
 - `make recipe-sync`
 - `make beerxml-sync`
 - `make recipe-html-sync`
+- `make print-readability`
 - `make recipe-html-refresh`
 - `make prepare-brew RECIPE=<recipe_slug> DATE=<YYYY-MM-DD>`
 - `make batch-lifecycle RECIPE=<recipe_slug> [DATE=<YYYY-MM-DD>]`
@@ -163,6 +164,7 @@ Control-plane commands:
 - If a recipe markdown file changes, regenerate its print HTML with `make recipe-html RECIPE=<recipe_slug>` or refresh all of them with `make recipe-html-all`.
 - `make recipe-html-refresh` refreshes only changed recipe print exports, and `make trust-check` now runs that refresh before validating HTML sync.
 - `make recipe-html-sync` checks that generated recipe HTML still matches recipe markdown.
+- `make print-readability` checks printable recipe and brew-sheet HTML for missing core sections and sub-`1 kg` metric formatting regressions.
 - Durable new rules, defaults, and process lessons should be captured with `make insight TEXT="..."` so they route into repo state instead of staying only in chat memory.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
