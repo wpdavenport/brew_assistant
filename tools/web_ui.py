@@ -10,6 +10,7 @@ import math
 import mimetypes
 import os
 import platform
+import random
 import re
 import subprocess
 import sys
@@ -17,6 +18,7 @@ import threading
 import time
 import urllib.parse
 from collections import defaultdict
+from copy import deepcopy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -54,6 +56,13 @@ CURATED_SECTIONS = {
         ROOT / "libraries" / "beer_research" / "34B_mixed_style_beer.md",
         ROOT / "libraries" / "beer_research" / "9C_baltic_porter.md",
     ],
+    "BJCP Study": [
+        ROOT / "libraries" / "bjcp_study" / "_index.md",
+        ROOT / "libraries" / "bjcp_study" / "curriculum.md",
+        ROOT / "libraries" / "bjcp_study" / "rubrics.md",
+        ROOT / "libraries" / "bjcp_study" / "progress_template.json",
+        ROOT / "libraries" / "bjcp_study" / "question_bank.json",
+    ],
 }
 
 DEFAULT_FILE = ROOT / "README.md"
@@ -63,9 +72,14 @@ STOCK_FILE = ROOT / "libraries" / "inventory" / "stock.json"
 RECIPE_USAGE_FILE = ROOT / "libraries" / "inventory" / "recipe_usage.json"
 ACTIVE_ARTIFACTS_FILE = ROOT / "project_control" / "ACTIVE_ARTIFACTS.json"
 SHOPPING_INTENT_FILE = ROOT / "libraries" / "inventory" / "shopping_intent.json"
+BJCP_STUDY_DIR = ROOT / "libraries" / "bjcp_study"
+BJCP_PROGRESS_TEMPLATE_FILE = BJCP_STUDY_DIR / "progress_template.json"
+BJCP_PROGRESS_FILE = BJCP_STUDY_DIR / "progress.json"
+BJCP_QUESTION_BANK_FILE = BJCP_STUDY_DIR / "question_bank.json"
 WEB_UI_SOURCE = Path(__file__).resolve()
 LAUNCH_AGENT_LABEL = "com.serenity.brewassistant.webui"
 LAUNCH_AGENT_PATH = Path.home() / "Library" / "LaunchAgents" / f"{LAUNCH_AGENT_LABEL}.plist"
+RNG = random.SystemRandom()
 
 
 def normalize_token(text: str) -> str:
@@ -123,6 +137,24 @@ def shopping_item(label: str, recipe: str = "") -> dict[str, str]:
         "view": view,
         "raw": raw,
         "current": current,
+    }
+
+
+def study_item(label: str = "Study Overview") -> dict[str, str]:
+    return {
+        "label": label,
+        "view": "/study",
+        "raw": "/study?raw=1",
+        "current": "study:overview",
+    }
+
+
+def study_test_item(label: str = "Mini Test") -> dict[str, str]:
+    return {
+        "label": label,
+        "view": "/study/test",
+        "raw": "/study/test?raw=1",
+        "current": "study:test",
     }
 
 
@@ -243,6 +275,7 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
             dashboard_item("Batch State", "state"),
             dashboard_item("Next Actions", "next"),
             shopping_item("Shopping"),
+            study_item("BJCP Study"),
         ]
     }
     beer_groups: dict[str, dict[str, object]] = {}
@@ -351,7 +384,7 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
                 "current": str(group["primary"]["current"]),
                 "child_currents": [item["current"] for item in items],
                 "children_html": "".join(
-                    f'<a class="child-link" data-current="{html.escape(item["current"])}" data-raw="{html.escape(item["raw"])}" href="{html.escape(item["view"])}" target="content">{html.escape(item["label"])}</a>'
+                    f'<a class="child-link" data-current="{html.escape(item["current"])}" href="{html.escape(item["view"])}" target="content">{html.escape(item["label"])}</a>'
                     for item in items
                 ),
                 "group_id": group_key,
@@ -361,6 +394,23 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
 
     for label, entries in CURATED_SECTIONS.items():
         section_entries: list[dict[str, str]] = []
+        if label == "BJCP Study":
+            study_children = [study_item("Study Overview"), study_test_item("Mini Test")]
+            for path in entries:
+                if not path.exists():
+                    continue
+                rel = path.relative_to(ROOT).as_posix()
+                study_children.append(
+                    {
+                        "label": file_label(path),
+                        "view": viewer_url(path),
+                        "raw": raw_url(path),
+                        "current": rel,
+                    }
+                )
+            section_entries.extend(study_children)
+            sections[label] = section_entries
+            continue
         for path in entries:
             if not path.exists():
                 continue
@@ -393,25 +443,29 @@ def render_nav(current: str) -> str:
     for label, entries in sections.items():
         links = []
         for entry in entries:
-            if label == "Beers":
+            if label in {"Beers", "BJCP Study"} and entry.get("children_html"):
                 active = entry["current"] == current
                 active_attr = ' class="active"' if active else ""
                 open_attr = " open" if current in entry.get("child_currents", []) else ""
                 links.append(
                     f'<details class="beer-group"{open_attr}>'
-                    f'<summary><a{active_attr} data-current="{html.escape(entry["current"])}" data-raw="{html.escape(entry["raw"])}" href="{html.escape(entry["view"])}" target="content">{html.escape(entry["label"])}</a></summary>'
+                    f'<summary><a{active_attr} data-current="{html.escape(entry["current"])}" href="{html.escape(entry["view"])}" target="content">{html.escape(entry["label"])}</a></summary>'
                     f'<div class="child-links">{entry.get("children_html", "")}</div>'
                     '</details>'
                 )
             else:
                 active = ' class="active"' if entry["current"] == current else ""
                 links.append(
-                    f'<a{active} data-current="{html.escape(entry["current"])}" data-raw="{html.escape(entry["raw"])}" href="{html.escape(entry["view"])}" target="content">{html.escape(entry["label"])}</a>'
+                    f'<a{active} data-current="{html.escape(entry["current"])}" href="{html.escape(entry["view"])}" target="content">{html.escape(entry["label"])}</a>'
                 )
         if not links:
             links.append('<span class="empty">No files yet</span>')
+        section_open = ' open' if label == "Operations" else ""
         blocks.append(
-            f"<section><h2>{html.escape(label)}</h2><div class=\"nav-group\">{''.join(links)}</div></section>"
+            f'<details class="nav-section"{section_open}>'
+            f'<summary><h2>{html.escape(label)}</h2></summary>'
+            f'<div class="nav-group">{"".join(links)}</div>'
+            f'</details>'
         )
     return "\n".join(blocks)
 
@@ -506,6 +560,16 @@ def render_index(default_path: str, notice_text: str = "") -> bytes:
     section {{
       margin-bottom: 18px;
     }}
+    .nav-section {{
+      margin-bottom: 18px;
+    }}
+    .nav-section summary {{
+      list-style: none;
+      cursor: pointer;
+    }}
+    .nav-section summary::-webkit-details-marker {{
+      display: none;
+    }}
     h2 {{
       margin: 0 0 8px;
       padding-bottom: 4px;
@@ -513,6 +577,9 @@ def render_index(default_path: str, notice_text: str = "") -> bytes:
       font-size: 13px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+    }}
+    .nav-section summary h2 {{
+      margin-bottom: 8px;
     }}
     .nav-group {{
       display: grid;
@@ -577,9 +644,20 @@ def render_index(default_path: str, notice_text: str = "") -> bytes:
     .toolbar .hint {{
       color: var(--muted);
     }}
-    .toolbar a {{
+    .toolbar a, .toolbar button {{
       color: var(--accent);
       font-weight: 700;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }}
+    .toolbar-actions {{
+      display: flex;
+      gap: 12px;
+      align-items: center;
     }}
     .launcher-banner {{
       margin: 0 0 14px;
@@ -624,12 +702,30 @@ def render_index(default_path: str, notice_text: str = "") -> bytes:
         height: 75vh;
       }}
     }}
+    @media print {{
+      body {{
+        background: white;
+      }}
+      aside,
+      .toolbar {{
+        display: none !important;
+      }}
+      .app {{
+        display: block;
+      }}
+      main {{
+        background: white;
+      }}
+      iframe {{
+        height: auto;
+      }}
+    }}
   </style>
 </head>
 <body>
   <div class="app">
     <aside>
-      <h1><a data-current="{html.escape(default_path)}" data-raw="{html.escape('/raw?path=' + urllib.parse.quote(default_path))}" href="{html.escape('/view?path=' + urllib.parse.quote(default_path))}" target="content">Brew Assistant Viewer</a></h1>
+      <h1><a data-current="{html.escape(default_path)}" href="{html.escape('/view?path=' + urllib.parse.quote(default_path))}" target="content">Brew Assistant Viewer</a></h1>
       <p class="sub">Central browser for recipe prints, brew sheets, inventory, profiles, and research.</p>
       {notice_html}
       {install_banner}
@@ -638,21 +734,22 @@ def render_index(default_path: str, notice_text: str = "") -> bytes:
     <main>
       <div class="toolbar">
         <span class="hint">Local viewer. Print from the content pane when needed.</span>
-        <a id="raw-link" href="{html.escape('/raw?path=' + urllib.parse.quote(default_path))}" target="content">Open Raw</a>
+        <div class="toolbar-actions">
+          <button type="button" id="print-current">Print Current Page</button>
+        </div>
       </div>
       <iframe id="content-frame" name="content" src="{html.escape('/view?path=' + urllib.parse.quote(default_path))}"></iframe>
     </main>
   </div>
   <script>
     const links = Array.from(document.querySelectorAll('aside a[data-current]'));
-    const rawLink = document.getElementById('raw-link');
     const frame = document.getElementById('content-frame');
+    const printButton = document.getElementById('print-current');
 
-    function setActive(current, rawHref) {{
+    function setActive(current) {{
       for (const link of links) {{
         link.classList.toggle('active', link.dataset.current === current);
       }}
-      rawLink.href = rawHref;
     }}
 
     for (const link of links) {{
@@ -666,11 +763,19 @@ def render_index(default_path: str, notice_text: str = "") -> bytes:
             group.open = true;
           }}
         }}
-        setActive(link.dataset.current, link.dataset.raw);
+        setActive(link.dataset.current);
       }});
     }}
 
-    setActive({json.dumps(default_path)}, {json.dumps('/raw?path=' + urllib.parse.quote(default_path))});
+    setActive({json.dumps(default_path)});
+
+    printButton.addEventListener('click', () => {{
+      const outerWindow = frame.contentWindow;
+      const nestedFrame = outerWindow.document.querySelector('iframe');
+      const targetWindow = nestedFrame ? nestedFrame.contentWindow : outerWindow;
+      targetWindow.focus();
+      targetWindow.print();
+    }});
   </script>
 </body>
 </html>
@@ -818,13 +923,29 @@ def render_text_page(path: Path, body: str, action_html: str = "", notice_text: 
       font-family: Georgia, "Times New Roman", serif;
       font-size: 15px;
     }}
+    @media print {{
+      .top,
+      .action-panel,
+      .notice-banner {{
+        display: none !important;
+      }}
+      .wrap {{
+        max-width: none;
+        padding: 0;
+      }}
+      pre,
+      .markdown-body {{
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+      }}
+    }}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="top">
       <h1>{title}</h1>
-      <a href="{html.escape(raw_url(path))}">Raw file</a>
     </div>
     {render_notice(notice_text)}
     {render_action_panel(action_html)}
@@ -911,6 +1032,20 @@ def render_dashboard_page(title: str, body: str, action_html: str = "") -> bytes
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 13px;
       line-height: 1.45;
+    }}
+    @media print {{
+      .action-panel {{
+        display: none !important;
+      }}
+      .wrap {{
+        max-width: none;
+        padding: 0;
+      }}
+      pre {{
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+      }}
     }}
   </style>
 </head>
@@ -1086,13 +1221,29 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       color: #8a4b24;
       font-weight: 700;
     }}
+    @media print {{
+      .top,
+      .notes,
+      .action-panel,
+      .notice-banner {{
+        display: none !important;
+      }}
+      .wrap {{
+        max-width: none;
+        padding: 0;
+      }}
+      table,
+      .kv,
+      .yaml-block {{
+        border-radius: 0;
+      }}
+    }}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="top">
       <h1>{html.escape(title)}</h1>
-      <a href="{html.escape(raw_href)}">Raw file</a>
     </div>
     {render_notice(notice_text)}
     {render_action_panel(action_html)}
@@ -1106,6 +1257,10 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
 
 def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_json(path: Path, payload: dict) -> None:
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def parse_markdown_sections(markdown_text: str) -> tuple[str, dict[str, list[str]]]:
@@ -1394,6 +1549,130 @@ def shopping_intent_payload() -> dict:
     return {}
 
 
+def bjcp_progress_payload() -> dict:
+    if BJCP_PROGRESS_FILE.exists():
+        return load_json(BJCP_PROGRESS_FILE)
+    if BJCP_PROGRESS_TEMPLATE_FILE.exists():
+        return deepcopy(load_json(BJCP_PROGRESS_TEMPLATE_FILE))
+    return {}
+
+
+def bjcp_question_bank_payload() -> dict:
+    if BJCP_QUESTION_BANK_FILE.exists():
+        return load_json(BJCP_QUESTION_BANK_FILE)
+    return {}
+
+
+def persist_bjcp_progress(payload: dict) -> None:
+    save_json(BJCP_PROGRESS_FILE, payload)
+
+
+def reset_bjcp_progress() -> None:
+    if BJCP_PROGRESS_TEMPLATE_FILE.exists():
+        save_json(BJCP_PROGRESS_FILE, deepcopy(load_json(BJCP_PROGRESS_TEMPLATE_FILE)))
+    elif BJCP_PROGRESS_FILE.exists():
+        BJCP_PROGRESS_FILE.unlink()
+
+
+def choose_bjcp_test_questions(count: int = 12) -> list[dict]:
+    questions = list(bjcp_question_bank_payload().get("questions", []))
+    if not questions:
+        return []
+    progress = bjcp_progress_payload()
+    sessions = progress.get("sessions", [])
+    last_question_ids: set[str] = set()
+    if sessions:
+        latest = sessions[-1]
+        last_question_ids = set(latest.get("question_ids", []) or [])
+    if last_question_ids and len(questions) > count:
+        non_repeat_questions = [question for question in questions if question.get("id") not in last_question_ids]
+        if len(non_repeat_questions) >= count:
+            questions = non_repeat_questions
+    if len(questions) <= count:
+        RNG.shuffle(questions)
+        return questions
+    selected = RNG.sample(questions, count)
+    RNG.shuffle(selected)
+    return selected
+
+
+def recalc_bjcp_progress_stats(payload: dict) -> dict:
+    sessions = payload.get("sessions", [])
+    bank = {q["id"]: q for q in bjcp_question_bank_payload().get("questions", [])}
+    by_topic: dict[str, dict[str, float]] = deepcopy(
+        bjcp_progress_payload().get("stats", {}).get("by_topic", {})
+        or {
+            "exam_structure": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+            "ingredients": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+            "process": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+            "off_flavors": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+            "styles_core": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+            "styles_comparison": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+            "judging_process": {"answered": 0, "correct": 0, "accuracy_pct": 0.0},
+        }
+    )
+    for topic in by_topic.values():
+        topic["answered"] = 0
+        topic["correct"] = 0
+        topic["accuracy_pct"] = 0.0
+
+    answered = 0
+    correct = 0
+    misses_by_topic: dict[str, int] = defaultdict(int)
+    for session in sessions:
+        for result in session.get("results", []):
+            qid = result.get("question_id", "")
+            question = bank.get(qid, {})
+            topic = question.get("topic", "unknown")
+            by_topic.setdefault(topic, {"answered": 0, "correct": 0, "accuracy_pct": 0.0})
+            by_topic[topic]["answered"] += 1
+            answered += 1
+            if result.get("is_correct"):
+                by_topic[topic]["correct"] += 1
+                correct += 1
+            else:
+                misses_by_topic[topic] += 1
+
+    for topic, row in by_topic.items():
+        topic_answered = int(row.get("answered", 0))
+        topic_correct = int(row.get("correct", 0))
+        row["accuracy_pct"] = round((topic_correct / topic_answered) * 100.0, 1) if topic_answered else 0.0
+
+    accuracy_pct = round((correct / answered) * 100.0, 1) if answered else 0.0
+    weak_topics = [
+        topic for topic, row in sorted(by_topic.items(), key=lambda item: (item[1].get("accuracy_pct", 0.0), item[0]))
+        if int(row.get("answered", 0)) > 0 and float(row.get("accuracy_pct", 0.0)) < 80.0
+    ][:3]
+
+    if accuracy_pct >= 90.0:
+        readiness_status = "exam_ready"
+    elif accuracy_pct >= 80.0:
+        readiness_status = "near_ready"
+    elif accuracy_pct >= 70.0:
+        readiness_status = "foundational_gaps"
+    else:
+        readiness_status = "not_ready"
+
+    recommended_next = "Start with: bjcp teach exam_structure"
+    if weak_topics:
+        recommended_next = f"Review missed in: {', '.join(weak_topics)}"
+    elif answered >= 12:
+        recommended_next = "Take another mini test and compare weak topics."
+
+    payload["stats"] = {
+        "questions_answered": answered,
+        "correct": correct,
+        "accuracy_pct": accuracy_pct,
+        "by_topic": by_topic,
+    }
+    payload["readiness"] = {
+        "status": readiness_status,
+        "weak_topics": weak_topics,
+        "recommended_next": recommended_next,
+    }
+    return payload
+
+
 def planned_recipe_entries() -> list[tuple[dict, str, str]]:
     payload = shopping_intent_payload()
     out: list[tuple[dict, str, str]] = []
@@ -1483,6 +1762,448 @@ def render_shopping_page(recipe_token: str) -> tuple[bytes, str]:
     page = render_structured_page(title, "Shopping intent drives the default view. Shortage-only, imperial-facing recipe lists plus wishlist/research reminders.", body, raw_href)
     raw_text = "\n".join(raw_lines) or "No shopping needs."
     return page, raw_text
+
+
+def render_study_page() -> tuple[bytes, str]:
+    progress = bjcp_progress_payload()
+    bank = bjcp_question_bank_payload()
+    stats = progress.get("stats", {})
+    readiness = progress.get("readiness", {})
+    by_topic = stats.get("by_topic", {})
+    questions = bank.get("questions", [])
+    sessions = list(reversed(progress.get("sessions", [])[-10:]))
+
+    question_count = len(questions)
+    answered = int(stats.get("questions_answered", 0))
+    accuracy = float(stats.get("accuracy_pct", 0.0))
+    weak_topics = readiness.get("weak_topics", [])
+    recommended_next = readiness.get("recommended_next", "")
+
+    summary = (
+        "<div class=\"kv\">"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Question Bank</div><div>{question_count} questions</div></div>"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Questions Answered</div><div>{answered}</div></div>"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Accuracy</div><div>{accuracy:.1f}%</div></div>"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Readiness</div><div>{html.escape(str(readiness.get('status', 'not_ready')))}</div></div>"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Recommended Next</div><div>{html.escape(recommended_next or 'Start with: bjcp teach exam_structure')}</div></div>"
+        "</div>"
+    )
+
+    topic_rows = []
+    raw_lines = [
+        "BJCP STUDY",
+        f"question bank: {question_count}",
+        f"questions answered: {answered}",
+        f"accuracy: {accuracy:.1f}%",
+        f"readiness: {readiness.get('status', 'not_ready')}",
+        f"recommended next: {recommended_next or 'Start with: bjcp teach exam_structure'}",
+        "",
+    ]
+    for topic, row in by_topic.items():
+        topic_rows.append(
+            f"<tr><td>{html.escape(topic)}</td><td>{int(row.get('answered', 0))}</td><td>{int(row.get('correct', 0))}</td><td>{float(row.get('accuracy_pct', 0.0)):.1f}%</td></tr>"
+        )
+        raw_lines.append(
+            f"{topic}: answered {int(row.get('answered', 0))}, correct {int(row.get('correct', 0))}, accuracy {float(row.get('accuracy_pct', 0.0)):.1f}%"
+        )
+
+    weak_html = (
+        "<ul>" + "".join(f"<li>{html.escape(topic)}</li>" for topic in weak_topics) + "</ul>"
+        if weak_topics
+        else '<p class="notes">No weak topics recorded yet.</p>'
+    )
+    if weak_topics:
+        raw_lines.append("")
+        raw_lines.append("weak topics:")
+        raw_lines.extend(f"- {topic}" for topic in weak_topics)
+
+    recent_rows = []
+    for session in sessions:
+        recent_rows.append(
+            f"<tr><td>{html.escape(session.get('completed_utc', ''))}</td><td>{int(session.get('correct', 0))}/{int(session.get('total', 0))}</td><td>{float(session.get('score_pct', 0.0)):.1f}%</td><td>{int(session.get('duration_sec', 0))} sec</td></tr>"
+        )
+    if sessions:
+        raw_lines.append("")
+        raw_lines.append("recent tests:")
+        for session in sessions:
+            raw_lines.append(
+                f"- {session.get('completed_utc', '')}: {int(session.get('correct', 0))}/{int(session.get('total', 0))} ({float(session.get('score_pct', 0.0)):.1f}%)"
+            )
+
+    last_misses = sessions[0].get("misses", []) if sessions else []
+    missed_html = (
+        "".join(
+            "<section>"
+            f"<h3>{html.escape(miss.get('prompt', ''))}</h3>"
+            f"<p class=\"notes\">Your answer: {html.escape(miss.get('your_answer', '(blank)'))}</p>"
+            f"<p><strong>Correct:</strong> {html.escape(miss.get('correct_answer', ''))}</p>"
+            f"<p>{html.escape(miss.get('explanation', ''))}</p>"
+            "</section>"
+            for miss in last_misses
+        )
+        if last_misses
+        else '<p class="notes">No missed questions recorded yet.</p>'
+    )
+
+    body = (
+        summary
+        + "<section><h2>Mini Test</h2><p class=\"notes\">Take a 12-question drill with setup options for difficulty, timer, and immediate answer feedback.</p>"
+        + '<div class="action-links"><a href="/study/test" target="content">Start Mini Test</a>'
+        + '<form method="post" action="/study/reset" target="content" onsubmit="return confirm(\'Reset all saved BJCP test history and progress?\');" style="display:inline;">'
+        + '<button type="submit">Reset Tests</button></form></div></section>'
+        + "<section><h2>Topic Progress</h2><table><thead><tr><th>Topic</th><th>Answered</th><th>Correct</th><th>Accuracy</th></tr></thead><tbody>"
+        + "".join(topic_rows)
+        + "</tbody></table></section>"
+        + "<section><h2>Weak Topics</h2>"
+        + weak_html
+        + "</section>"
+        + "<section><h2>Recent Tests</h2><table><thead><tr><th>Completed</th><th>Score</th><th>Percent</th><th>Time</th></tr></thead><tbody>"
+        + ("".join(recent_rows) if recent_rows else "<tr><td colspan=\"4\">No saved tests yet.</td></tr>")
+        + "</tbody></table></section>"
+        + "<section><h2>Latest Missed Questions</h2>"
+        + missed_html
+        + "</section>"
+        + "<section><h2>Study Assets</h2><table><thead><tr><th>File</th><th>Purpose</th></tr></thead><tbody>"
+        + "<tr><td><a href=\"/view?path=libraries/bjcp_study/_index.md\" target=\"content\">_index.md</a></td><td>Study mode contract</td></tr>"
+        + "<tr><td><a href=\"/view?path=libraries/bjcp_study/curriculum.md\" target=\"content\">curriculum.md</a></td><td>Topic order and readiness standard</td></tr>"
+        + "<tr><td><a href=\"/view?path=libraries/bjcp_study/rubrics.md\" target=\"content\">rubrics.md</a></td><td>Scoring bands and remediation rules</td></tr>"
+        + "<tr><td><a href=\"/view?path=libraries/bjcp_study/question_bank.json\" target=\"content\">question_bank.json</a></td><td>Tagged practice questions</td></tr>"
+        + "<tr><td><a href=\"/view?path=libraries/bjcp_study/progress_template.json\" target=\"content\">progress_template.json</a></td><td>Progress and readiness state</td></tr>"
+        + "</tbody></table></section>"
+    )
+    page = render_structured_page(
+        "BJCP Study",
+        "Light integration for study prep: readiness snapshot, progress by topic, and direct access to the study assets.",
+        body,
+        "/study?raw=1",
+    )
+    return page, "\n".join(raw_lines).rstrip()
+
+
+def render_study_test_setup_page() -> bytes:
+    return b"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BJCP Mini Test Setup</title>
+  <style>
+    body { margin: 0; background: #f5efe5; color: #1d1a18; font-family: Georgia, "Times New Roman", serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 18px 22px 28px; }
+    h1 { margin: 0 0 10px; color: #8a4b24; font-size: 28px; }
+    p { color: #6a635d; }
+    form { background: #fffdf8; border: 1px solid #d6cab8; border-radius: 10px; padding: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
+    label { display: block; font-size: 14px; color: #4d2a13; font-weight: 700; margin-bottom: 4px; }
+    select, input[type="checkbox"] { accent-color: #8a4b24; }
+    select { width: 100%; padding: 8px 9px; border: 1px solid #d6cab8; border-radius: 6px; background: #fff; }
+    .checkbox-row { display: flex; align-items: center; gap: 8px; padding-top: 24px; }
+    .checkbox-row label { margin: 0; font-weight: 700; }
+    .hint { margin-top: 4px; color: #6a635d; font-size: 13px; }
+    .actions { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+    button, a.button { display: inline-block; padding: 8px 11px; border-radius: 6px; border: 1px solid #d6cab8; background: #fffdf8; color: #4d2a13; text-decoration: none; font-weight: 700; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } .checkbox-row { padding-top: 0; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>BJCP Mini Test Setup</h1>
+    <p>Choose whether you want a timer and whether you want immediate answer feedback before starting the 12-question mini test.</p>
+    <form method="get" action="/study/test/run">
+      <div class="grid">
+        <div class="checkbox-row">
+          <input id="timer_enabled" name="timer_enabled" type="checkbox" value="1" checked>
+          <label for="timer_enabled">Use timer</label>
+        </div>
+        <div class="checkbox-row">
+          <input id="show_answers_as_go" name="show_answers_as_go" type="checkbox" value="1">
+          <label for="show_answers_as_go">Show answers as I go</label>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="submit">Start Mini Test</button>
+        <a class="button" href="/study" target="content">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>"""
+
+
+def render_study_test_page(timer_enabled: bool = True, show_answers_as_go: bool = False) -> bytes:
+    questions = choose_bjcp_test_questions(12)
+    allotted_sec = 12 * 60 if timer_enabled else 0
+    question_cards = []
+    for idx, question in enumerate(questions, start=1):
+        choices_list = list(question.get("choices", []))
+        RNG.shuffle(choices_list)
+        choices = "".join(
+            f'<label class="choice"><input type="radio" name="q_{html.escape(question["id"])}" value="{html.escape(choice)}"> {html.escape(choice)}</label>'
+            for choice in choices_list
+        )
+        question_cards.append(
+            "<section class=\"question-card\">"
+            f"<div class=\"question-meta\">Question {idx} | {html.escape(question.get('topic', ''))}</div>"
+            f"<h2>{html.escape(question.get('prompt', ''))}</h2>"
+            f"<input type=\"hidden\" name=\"question_id\" value=\"{html.escape(question['id'])}\">"
+            f"<div class=\"choices\">{choices}</div>"
+            f"<div class=\"feedback\" id=\"feedback_{html.escape(question['id'])}\"></div>"
+            f"<details class=\"explain\" id=\"explain_{html.escape(question['id'])}\"><summary>Why?</summary><div>{html.escape(question.get('explanation', ''))}</div></details>"
+            "</section>"
+        )
+    question_ids = ",".join(question["id"] for question in questions)
+    question_payload = {
+        question["id"]: {
+            "answer": question.get("answer", ""),
+            "explanation": question.get("explanation", ""),
+        }
+        for question in questions
+    }
+    timer_block = (
+        f'<div class="timer">Time Remaining: <span id="timer">{allotted_sec // 60}:00</span></div>'
+        if timer_enabled
+        else '<div class="timer">Timer disabled for this mini test.</div>'
+    )
+    timer_script = (
+        f"""
+    const allotted = {allotted_sec};
+    let remaining = allotted;
+    const timerEl = document.getElementById('timer');
+    const formEl = document.getElementById('study-form');
+    const durationEl = document.getElementById('duration_sec');
+    function renderTime(value) {{
+      const minutes = Math.floor(value / 60);
+      const seconds = value % 60;
+      timerEl.textContent = `${{minutes}}:${{String(seconds).padStart(2, '0')}}`;
+    }}
+    renderTime(remaining);
+    const tick = setInterval(() => {{
+      remaining -= 1;
+      durationEl.value = String(allotted - Math.max(remaining, 0));
+      renderTime(Math.max(remaining, 0));
+      if (remaining <= 0) {{
+        clearInterval(tick);
+        formEl.submit();
+      }}
+    }}, 1000);
+"""
+        if timer_enabled
+        else """
+    const formEl = document.getElementById('study-form');
+    const durationEl = document.getElementById('duration_sec');
+    const startedAt = Date.now();
+    formEl.addEventListener('submit', () => {
+      durationEl.value = String(Math.max(0, Math.round((Date.now() - startedAt) / 1000)));
+    });
+"""
+    )
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BJCP Mini Test</title>
+  <style>
+    body {{ margin: 0; background: #f5efe5; color: #1d1a18; font-family: Georgia, "Times New Roman", serif; }}
+    .wrap {{ max-width: 900px; margin: 0 auto; padding: 18px 22px 28px; }}
+    h1 {{ margin: 0 0 10px; color: #8a4b24; font-size: 28px; }}
+    p {{ color: #6a635d; }}
+    .timer {{ position: sticky; top: 0; z-index: 20; margin: 0 0 16px; padding: 10px 12px; border: 1px solid #d6cab8; border-radius: 8px; background: #fcf8f1; color: #4d2a13; font-weight: 700; }}
+    form {{ display: grid; gap: 14px; }}
+    .question-card {{ background: #fffdf8; border: 1px solid #d6cab8; border-radius: 8px; padding: 14px 16px; }}
+    .question-card h2 {{ margin: 0 0 10px; font-size: 19px; color: #1d1a18; }}
+    .question-meta {{ margin: 0 0 8px; color: #6a635d; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }}
+    .choices {{ display: grid; gap: 8px; }}
+    .choice {{ display: block; padding: 8px 10px; border: 1px solid #e7dccb; border-radius: 6px; background: #fff; }}
+    .feedback {{ min-height: 24px; margin-top: 10px; font-weight: 700; }}
+    .feedback.correct {{ color: #2c5a2c; }}
+    .feedback.wrong {{ color: #9a2d2d; }}
+    .feedback.hidden {{ display: none; }}
+    .explain {{ margin-top: 8px; }}
+    .explain.hidden {{ display: none; }}
+    .explain summary {{ cursor: pointer; color: #8a4b24; font-weight: 700; }}
+    .explain div {{ margin-top: 6px; color: #4d2a13; line-height: 1.4; }}
+    .actions {{ display: flex; gap: 8px; flex-wrap: wrap; }}
+    button, a.button {{ display: inline-block; padding: 8px 11px; border-radius: 6px; border: 1px solid #d6cab8; background: #fffdf8; color: #4d2a13; text-decoration: none; font-weight: 700; }}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>BJCP Mini Test</h1>
+    <p>12 mixed questions. Submit when done.</p>
+    {timer_block}
+    <form id="study-form" method="post" action="/study/submit">
+      <input type="hidden" name="question_ids" value="{html.escape(question_ids)}">
+      <input type="hidden" name="allotted_sec" value="{allotted_sec}">
+      <input type="hidden" name="timer_enabled" value="{"1" if timer_enabled else "0"}">
+      <input type="hidden" name="show_answers_as_go" value="{"1" if show_answers_as_go else "0"}">
+      <input type="hidden" id="duration_sec" name="duration_sec" value="0">
+      {''.join(question_cards)}
+      <div class="actions">
+        <button type="submit">Submit Mini Test</button>
+        <a class="button" href="/study" target="content">Cancel</a>
+      </div>
+    </form>
+  </div>
+  <script>
+    {timer_script}
+    const liveFeedbackEnabled = {"true" if show_answers_as_go else "false"};
+    const questionMeta = {json.dumps(question_payload)};
+    if (liveFeedbackEnabled) {{
+      for (const [qid, meta] of Object.entries(questionMeta)) {{
+        const radios = Array.from(document.querySelectorAll(`input[name="q_${{qid}}"]`));
+        const feedbackEl = document.getElementById(`feedback_${{qid}}`);
+        const explainEl = document.getElementById(`explain_${{qid}}`);
+        if (feedbackEl) feedbackEl.classList.remove('hidden');
+        if (explainEl) explainEl.classList.add('hidden');
+        for (const radio of radios) {{
+          radio.addEventListener('change', () => {{
+            if (radio.value === meta.answer) {{
+              feedbackEl.textContent = '✓ Correct';
+              feedbackEl.className = 'feedback correct';
+              if (explainEl) {{
+                explainEl.open = false;
+                explainEl.className = 'explain hidden';
+              }}
+            }} else {{
+              feedbackEl.textContent = '✗ Not quite';
+              feedbackEl.className = 'feedback wrong';
+              if (explainEl) {{
+                explainEl.className = 'explain';
+              }}
+            }}
+          }});
+        }}
+      }}
+    }} else {{
+      for (const qid of Object.keys(questionMeta)) {{
+        const feedbackEl = document.getElementById(`feedback_${{qid}}`);
+        const explainEl = document.getElementById(`explain_${{qid}}`);
+        if (feedbackEl) feedbackEl.className = 'feedback hidden';
+        if (explainEl) explainEl.className = 'explain hidden';
+      }}
+    }}
+  </script>
+</body>
+</html>
+""".encode("utf-8")
+
+
+def grade_study_test(form: dict[str, str]) -> tuple[bytes, str]:
+    bank = {q["id"]: q for q in bjcp_question_bank_payload().get("questions", [])}
+    question_ids = [qid for qid in form.get("question_ids", "").split(",") if qid]
+    duration_sec = int(form.get("duration_sec", "0") or "0")
+    results = []
+    misses = []
+    by_topic: dict[str, dict[str, int]] = defaultdict(lambda: {"answered": 0, "correct": 0})
+    correct = 0
+
+    for qid in question_ids:
+        question = bank.get(qid)
+        if not question:
+            continue
+        your_answer = form.get(f"q_{qid}", "")
+        is_correct = your_answer == question.get("answer", "")
+        topic = question.get("topic", "unknown")
+        by_topic[topic]["answered"] += 1
+        if is_correct:
+            by_topic[topic]["correct"] += 1
+            correct += 1
+        else:
+            misses.append(
+                {
+                    "question_id": qid,
+                    "topic": topic,
+                    "prompt": question.get("prompt", ""),
+                    "your_answer": your_answer,
+                    "correct_answer": question.get("answer", ""),
+                    "explanation": question.get("explanation", ""),
+                }
+            )
+        results.append({"question_id": qid, "your_answer": your_answer, "is_correct": is_correct})
+
+    total = len(question_ids)
+    score_pct = round((correct / total) * 100.0, 1) if total else 0.0
+    completed_utc = __import__("datetime").datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+
+    progress = bjcp_progress_payload()
+    progress.setdefault("schema_version", 1)
+    progress.setdefault("mode_active", False)
+    progress.setdefault("started_utc", "")
+    progress["last_updated_utc"] = completed_utc
+    progress.setdefault("sessions", [])
+    progress["sessions"].append(
+        {
+            "id": f"mini_test_{completed_utc}",
+            "completed_utc": completed_utc,
+            "type": "mini_test",
+            "timer_enabled": form.get("timer_enabled", "1") == "1",
+            "total": total,
+            "correct": correct,
+            "score_pct": score_pct,
+            "duration_sec": duration_sec,
+            "question_ids": question_ids,
+            "results": results,
+            "misses": misses,
+        }
+    )
+    progress = recalc_bjcp_progress_stats(progress)
+    persist_bjcp_progress(progress)
+
+    topic_rows = []
+    for topic, row in sorted(by_topic.items()):
+        answered = int(row.get("answered", 0))
+        topic_correct = int(row.get("correct", 0))
+        topic_acc = round((topic_correct / answered) * 100.0, 1) if answered else 0.0
+        topic_rows.append(f"<tr><td>{html.escape(topic)}</td><td>{topic_correct}/{answered}</td><td>{topic_acc:.1f}%</td></tr>")
+
+    missed_html = (
+        "".join(
+            "<section>"
+            f"<h3>{html.escape(miss['prompt'])}</h3>"
+            f"<p class=\"notes\">Your answer: {html.escape(miss.get('your_answer') or '(blank)')}</p>"
+            f"<p><strong>Correct:</strong> {html.escape(miss['correct_answer'])}</p>"
+            f"<p>{html.escape(miss['explanation'])}</p>"
+            "</section>"
+            for miss in misses
+        )
+        if misses
+        else '<p class="notes">Perfect run. No misses to review.</p>'
+    )
+
+    page = render_structured_page(
+        "BJCP Mini Test Results",
+        "Results are saved locally and feed the study overview.",
+        "<div class=\"kv\">"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Score</div><div>{correct}/{total}</div></div>"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Percent</div><div>{score_pct:.1f}%</div></div>"
+        f"<div class=\"kv-row\"><div class=\"kv-key\">Time</div><div>{duration_sec} sec</div></div>"
+        "</div>"
+        + "<section><h2>By Topic</h2><table><thead><tr><th>Topic</th><th>Score</th><th>Accuracy</th></tr></thead><tbody>"
+        + "".join(topic_rows)
+        + "</tbody></table></section>"
+        + "<section><h2>Missed Questions</h2>"
+        + missed_html
+        + "</section>"
+        + '<section><h2>Next</h2><div class="action-links"><a href="/study" target="content">Back to BJCP Study</a><a href="/study/test" target="content">Take Another Mini Test</a></div></section>',
+        "/study?raw=1",
+    )
+    raw_lines = [
+        "BJCP MINI TEST RESULTS",
+        f"score: {correct}/{total}",
+        f"percent: {score_pct:.1f}%",
+        f"time: {duration_sec} sec",
+        "",
+    ]
+    for miss in misses:
+        raw_lines.extend(
+            [
+                miss["prompt"],
+                f"your answer: {miss.get('your_answer') or '(blank)'}",
+                f"correct: {miss['correct_answer']}",
+                f"why: {miss['explanation']}",
+                "",
+            ]
+        )
+    return page, "\n".join(raw_lines).rstrip()
 
 
 def render_json_value(value: object) -> str:
@@ -1897,13 +2618,28 @@ def render_html_wrapper(path: Path, action_html: str = "", notice_text: str = ""
       border-radius: 8px;
       background: white;
     }}
+    @media print {{
+      .top,
+      .action-panel,
+      .notice-banner {{
+        display: none !important;
+      }}
+      .wrap {{
+        max-width: none;
+        padding: 0;
+      }}
+      iframe {{
+        border: 0;
+        border-radius: 0;
+        height: auto;
+      }}
+    }}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="top">
       <h1>{html.escape(title)}</h1>
-      <a href="{html.escape(src)}">Raw file</a>
     </div>
     {render_notice(notice_text)}
     {render_action_panel(action_html)}
@@ -1993,6 +2729,22 @@ def render_view_response(path: Path, notice_text: str = "") -> bytes:
 
 
 class BrewUIHandler(BaseHTTPRequestHandler):
+    def do_POST(self) -> None:  # noqa: N802
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/study/submit":
+            content_length = int(self.headers.get("Content-Length", "0") or "0")
+            payload = self.rfile.read(content_length).decode("utf-8")
+            form = {key: values[0] for key, values in urllib.parse.parse_qs(payload).items() if values}
+            page, _raw_text = grade_study_test(form)
+            self.respond_bytes(200, "text/html; charset=utf-8", page)
+            return
+        if parsed.path == "/study/reset":
+            reset_bjcp_progress()
+            page, _raw_text = render_study_page()
+            self.respond_bytes(200, "text/html; charset=utf-8", page)
+            return
+        self.respond_text(404, "Not found.")
+
     def do_GET(self) -> None:  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
         params = urllib.parse.parse_qs(parsed.query)
@@ -2009,6 +2761,30 @@ class BrewUIHandler(BaseHTTPRequestHandler):
                 self.respond_bytes(200, "text/plain; charset=utf-8", raw_text.encode("utf-8"))
                 return
             self.respond_bytes(200, "text/html; charset=utf-8", page)
+            return
+
+        if parsed.path == "/study":
+            page, raw_text = render_study_page()
+            if params.get("raw", ["0"])[0] == "1":
+                self.respond_bytes(200, "text/plain; charset=utf-8", raw_text.encode("utf-8"))
+                return
+            self.respond_bytes(200, "text/html; charset=utf-8", page)
+            return
+
+        if parsed.path == "/study/test":
+            if params.get("raw", ["0"])[0] == "1":
+                self.respond_text(200, "Mini test is interactive only.")
+                return
+            self.respond_bytes(200, "text/html; charset=utf-8", render_study_test_setup_page())
+            return
+
+        if parsed.path == "/study/test/run":
+            if params.get("raw", ["0"])[0] == "1":
+                self.respond_text(200, "Mini test is interactive only.")
+                return
+            timer_enabled = params.get("timer_enabled", ["0"])[0] == "1"
+            show_answers_as_go = params.get("show_answers_as_go", ["0"])[0] == "1"
+            self.respond_bytes(200, "text/html; charset=utf-8", render_study_test_page(timer_enabled, show_answers_as_go))
             return
 
         if parsed.path == "/package-form":

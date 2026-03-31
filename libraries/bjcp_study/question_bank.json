@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "notes": "Starter bank for BJCP study mode. Extend over time.",
+  "schema_version": 2,
+  "notes": "Source-backed starter bank for BJCP study mode. Questions should map to the BJCP Study Guide and related BJCP exam-study materials, not float free of source context.",
   "questions": [
     {
       "id": "bjcp_q_001",
@@ -10,7 +10,13 @@
       "prompt": "Which off-flavor is most commonly described as butter or butterscotch?",
       "choices": ["DMS", "Diacetyl", "Acetaldehyde", "Oxidation"],
       "answer": "Diacetyl",
-      "explanation": "Diacetyl is classically perceived as butter/butterscotch and is tied to fermentation cleanup issues."
+      "explanation": "Diacetyl is classically perceived as butter/butterscotch and is tied to fermentation cleanup issues.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "off-flavor recognition"
+      }
     },
     {
       "id": "bjcp_q_002",
@@ -20,7 +26,13 @@
       "prompt": "Green apple aroma in beer most often points to:",
       "choices": ["Acetaldehyde", "Diacetyl", "Phenolic chlorophenols", "Autolysis"],
       "answer": "Acetaldehyde",
-      "explanation": "Acetaldehyde is associated with green apple and may indicate immature beer or stressed fermentation."
+      "explanation": "Acetaldehyde is associated with green apple and may indicate immature beer or stressed fermentation.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "off-flavor recognition"
+      }
     },
     {
       "id": "bjcp_q_003",
@@ -30,7 +42,13 @@
       "prompt": "In brewing water, sulfate generally accentuates:",
       "choices": ["Malt roundness", "Perceived bitterness and dryness", "Sweetness", "Ester intensity"],
       "answer": "Perceived bitterness and dryness",
-      "explanation": "Sulfate sharpens hop bitterness and can make finish seem drier."
+      "explanation": "Sulfate sharpens hop bitterness and can make finish seem drier.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water and ingredient effects"
+      }
     },
     {
       "id": "bjcp_q_004",
@@ -40,7 +58,13 @@
       "prompt": "In brewing water, chloride generally supports:",
       "choices": ["Malt fullness", "Harsh bitterness", "Phenolic character", "DMS formation"],
       "answer": "Malt fullness",
-      "explanation": "Chloride tends to round palate texture and support malt impression."
+      "explanation": "Chloride tends to round palate texture and support malt impression.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water and ingredient effects"
+      }
     },
     {
       "id": "bjcp_q_005",
@@ -50,7 +74,13 @@
       "prompt": "A long, vigorous boil is a key control for reducing:",
       "choices": ["Diacetyl", "DMS", "Acetaldehyde", "Fusel alcohols"],
       "answer": "DMS",
-      "explanation": "DMS precursor volatilization relies on adequate boil vigor and steam-off."
+      "explanation": "DMS precursor volatilization relies on adequate boil vigor and steam-off.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "wort production and process control"
+      }
     },
     {
       "id": "bjcp_q_006",
@@ -65,7 +95,13 @@
         "Higher mash pH"
       ],
       "answer": "Closed transfer to purged package",
-      "explanation": "Minimizing oxygen pickup after fermentation is the strongest packaging stability control."
+      "explanation": "Minimizing oxygen pickup after fermentation is the strongest packaging stability control.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "packaging and handling process awareness"
+      }
     },
     {
       "id": "bjcp_q_007",
@@ -75,7 +111,13 @@
       "prompt": "If a beer has modern intense tropical dry-hop character, it most risks drifting out of classic 11C Strong Bitter toward:",
       "choices": ["British Brown Ale", "American IPA-like expression", "Schwarzbier", "Vienna Lager"],
       "answer": "American IPA-like expression",
-      "explanation": "Classic 11C expects English balance, not heavy modern dry-hop saturation."
+      "explanation": "Classic 11C expects English balance, not heavy modern dry-hop saturation.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style comparison and style-boundary awareness"
+      }
     },
     {
       "id": "bjcp_q_008",
@@ -85,7 +127,13 @@
       "prompt": "Best judging practice is to evaluate beer in what order first?",
       "choices": ["Flavor first, then aroma", "Aroma, appearance, flavor, mouthfeel, overall", "Mouthfeel only", "Overall first"],
       "answer": "Aroma, appearance, flavor, mouthfeel, overall",
-      "explanation": "That sequence aligns with standard BJCP score sheet flow."
+      "explanation": "That sequence aligns with standard BJCP score sheet flow.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "score-sheet evaluation order"
+      }
     },
     {
       "id": "bjcp_q_009",
@@ -95,7 +143,13 @@
       "prompt": "A puckering, drying finish is most associated with:",
       "choices": ["Astringency", "Ester overproduction", "Sulfur compounds", "Low carbonation"],
       "answer": "Astringency",
-      "explanation": "Astringency is a tactile drying/puckering sensation often tied to tannins or process imbalance."
+      "explanation": "Astringency is a tactile drying/puckering sensation often tied to tannins or process imbalance.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "fault and sensory recognition"
+      }
     },
     {
       "id": "bjcp_q_010",
@@ -110,7 +164,13 @@
         "Certify breweries"
       ],
       "answer": "Qualify candidates for further BJCP judging progression",
-      "explanation": "It is a gateway exam used in BJCP judge development, not a final rank by itself."
+      "explanation": "It is a gateway exam used in BJCP judge development, not a final rank by itself.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.B Three-Tier BJCP Exam Structure",
+        "subsection": "Overview of the BJCP Entrance Exams",
+        "basis": "exam structure and progression"
+      }
     },
     {
       "id": "bjcp_q_011",
@@ -125,7 +185,13 @@
         "Most expensive ingredients"
       ],
       "answer": "Matching style-defining sensory balance",
-      "explanation": "Judges reward beers that clearly express the declared style."
+      "explanation": "Judges reward beers that clearly express the declared style.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-evaluation priorities"
+      }
     },
     {
       "id": "bjcp_q_012",
@@ -135,7 +201,1636 @@
       "prompt": "Medicinal/plastic notes are often linked to:",
       "choices": ["Chlorophenols", "DMS", "Diacetyl", "Ethyl acetate only"],
       "answer": "Chlorophenols",
-      "explanation": "Chlorophenols can present as medicinal, bandage-like, or plastic-like faults."
+      "explanation": "Chlorophenols can present as medicinal, bandage-like, or plastic-like faults.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "off-flavor recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_013",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A judge should bring food other than bread, crackers, or water to the judging table.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide says stray flavors and odors should be minimized; foods and beverages beyond neutral palate cleansers should not be at the judging table.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "table conduct and judging environment"
+      }
+    },
+    {
+      "id": "bjcp_q_014",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "If strong environmental odors are interfering with judging, what should a judge do?",
+      "choices": [
+        "Ignore them and judge through it",
+        "Bring it to the competition organizer's attention",
+        "Use perfume or mouthwash to compensate",
+        "Automatically disqualify the beer"
+      ],
+      "answer": "Bring it to the competition organizer's attention",
+      "explanation": "The study guide treats environmental interference as something that should be raised, not silently tolerated.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "judging environment management"
+      }
+    },
+    {
+      "id": "bjcp_q_015",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "If you are assigned to judge a category you entered, what should you do?",
+      "choices": [
+        "Judge it anyway since entries are anonymous",
+        "Ask to be reassigned",
+        "Only judge appearance",
+        "Judge but do not discuss the beer"
+      ],
+      "answer": "Ask to be reassigned",
+      "explanation": "The study guide treats this as a conflict that should be resolved by reassignment.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "conflict-of-interest handling"
+      }
+    },
+    {
+      "id": "bjcp_q_016",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "How soon should a judge sniff a beer after pouring?",
+      "choices": [
+        "Immediately after pouring",
+        "Only after scoring appearance",
+        "Only after the beer warms",
+        "Only after discussing with the panel"
+      ],
+      "answer": "Immediately after pouring",
+      "explanation": "Volatile aromatics are best evaluated immediately after the pour.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Notes on Smelling the Beer",
+        "basis": "aroma evaluation timing"
+      }
+    },
+    {
+      "id": "bjcp_q_017",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Judges must evaluate beers in the exact printed sequence on the flight sheet.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide allows judges to change judging order when appropriate.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Procedure",
+        "basis": "flight handling flexibility"
+      }
+    },
+    {
+      "id": "bjcp_q_018",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Judges should avoid eating spicy or greasy foods shortly before judging because they can:",
+      "choices": [
+        "Improve aroma sensitivity too much",
+        "Reduce sensory sensitivity",
+        "Raise courtesy scores",
+        "Make beers seem more carbonated"
+      ],
+      "answer": "Reduce sensory sensitivity",
+      "explanation": "The study guide explicitly warns against spicy or greasy foods before judging.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Other Considerations",
+        "basis": "judge sensory preparation"
+      }
+    },
+    {
+      "id": "bjcp_q_019",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Perfumed shampoos, colognes, and strong scents should be avoided before judging.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide treats strong personal scents as interference with sensory evaluation.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Other Considerations",
+        "basis": "judge sensory preparation"
+      }
+    },
+    {
+      "id": "bjcp_q_020",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "When judges initially disagree on scores for a beer, what should happen next?",
+      "choices": [
+        "The lower-ranked judge must yield",
+        "Scores should be discussed and adjusted into consensus range",
+        "Average the scores automatically",
+        "Discard the lower score"
+      ],
+      "answer": "Scores should be discussed and adjusted into consensus range",
+      "explanation": "The study guide emphasizes consensus building and keeping scores within the allowed spread.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "consensus scoring practice"
+      }
+    },
+    {
+      "id": "bjcp_q_021",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "The consensus score for a beer is necessarily the arithmetic average of the judges' initial scores.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide explicitly notes that the consensus score is not necessarily an average.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "consensus scoring mechanics"
+      }
+    },
+    {
+      "id": "bjcp_q_022",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Who can disqualify an entry for bottle or cap issues?",
+      "choices": [
+        "Any judge at the table",
+        "Only the head judge",
+        "Only the judge director or competition organizer",
+        "Only the steward"
+      ],
+      "answer": "Only the judge director or competition organizer",
+      "explanation": "The study guide makes disqualification a competition-management decision, not a normal table-level judging call.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Procedure",
+        "basis": "entry handling and authority boundaries"
+      }
+    },
+    {
+      "id": "bjcp_q_023",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Snide or rude comments on a score sheet are acceptable if the beer is poor.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide requires respectful, constructive judging comments regardless of beer quality.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Notes on Making Comments about Beer",
+        "basis": "constructive feedback expectations"
+      }
+    },
+    {
+      "id": "bjcp_q_024",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A beer that gushes or smells bad on opening should still be tasted and scored.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide says all beers should be evaluated and scored rather than dismissed without tasting.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Procedure",
+        "basis": "problem-beer evaluation discipline"
+      }
+    },
+    {
+      "id": "bjcp_q_025",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Judges' comments should include:",
+      "choices": [
+        "Only prominent flaws",
+        "Only an overall impression",
+        "Sensory evaluation tied to style and improvement advice when warranted",
+        "Only numeric scores"
+      ],
+      "answer": "Sensory evaluation tied to style and improvement advice when warranted",
+      "explanation": "The study guide expects complete sensory comments, style relevance, and constructive improvement guidance.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Notes on Making Comments about Beer",
+        "basis": "score-sheet comment quality"
+      }
+    },
+    {
+      "id": "bjcp_q_026",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "What writing instrument does the study guide prefer for score sheets?",
+      "choices": ["Ink pen", "Wooden pencil", "Mechanical pencil", "Marker"],
+      "answer": "Mechanical pencil",
+      "explanation": "The guide prefers mechanical pencils to avoid wood odors and maintain legibility.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Equipment",
+        "basis": "score-sheet handling detail"
+      }
+    },
+    {
+      "id": "bjcp_q_027",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "The courteous lower limit for a highly problematic beer is:",
+      "choices": ["6", "10", "13", "20"],
+      "answer": "13",
+      "explanation": "The study guide explicitly identifies 13 as the courtesy floor for problematic beers.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Procedure",
+        "basis": "courtesy scoring floor"
+      }
+    },
+    {
+      "id": "bjcp_q_028",
+      "topic": "judging_process",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "The \"Overall Impression\" section should be used mainly to compare the entry against other beers in the flight.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide says Overall Impression is for how the beer worked for the judge and how it could improve, not intra-flight ranking commentary.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Notes on Making Comments about Beer",
+        "basis": "overall-impression usage"
+      }
+    },
+    {
+      "id": "bjcp_q_029",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Calibration beers are selected to be the standard against which entries should be judged.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The guide does not treat calibration beers as the standard beer that entries must mimic; they are a panel-alignment tool.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "calibration beer purpose"
+      }
+    },
+    {
+      "id": "bjcp_q_030",
+      "topic": "exam_structure",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "The BJCP entrance exam is primarily used to:",
+      "choices": [
+        "Replace the tasting exam permanently",
+        "Qualify candidates for the next stage of BJCP judging development",
+        "Score commercial beers in competition",
+        "Assign National rank directly"
+      ],
+      "answer": "Qualify candidates for the next stage of BJCP judging development",
+      "explanation": "The study guide presents the entrance exam as a gateway step in the BJCP progression structure.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.B Three-Tier BJCP Exam Structure",
+        "subsection": "Overview of the BJCP Entrance Exams",
+        "basis": "exam progression purpose"
+      }
+    },
+    {
+      "id": "bjcp_q_031",
+      "topic": "exam_structure",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "After failing the entrance exam, the study guide recommends:",
+      "choices": [
+        "Giving up on BJCP study",
+        "Reviewing weak areas and preparing for a retake",
+        "Skipping directly to the written exam",
+        "Only studying recipes"
+      ],
+      "answer": "Reviewing weak areas and preparing for a retake",
+      "explanation": "The study guide includes explicit next-step guidance after both passing and failing.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Next Steps after Failing the Exam",
+        "basis": "study progression after failure"
+      }
+    },
+    {
+      "id": "bjcp_q_032",
+      "topic": "exam_structure",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which study behavior best matches the guide's entrance-exam preparation model?",
+      "choices": [
+        "Memorize style names only",
+        "Study ethics, judging process, styles, beer characteristics, and brewing process",
+        "Focus exclusively on brewing chemistry",
+        "Ignore the score sheet"
+      ],
+      "answer": "Study ethics, judging process, styles, beer characteristics, and brewing process",
+      "explanation": "The study guide divides entrance-exam preparation across those major categories.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Question Types and Categories",
+        "basis": "scope of entrance-exam study"
+      }
+    },
+    {
+      "id": "bjcp_q_033",
+      "topic": "ingredients",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Alkalinity in brewing water most directly affects:",
+      "choices": ["Mash pH behavior", "Hop alpha acids", "Yeast cell count", "Carbonation level"],
+      "answer": "Mash pH behavior",
+      "explanation": "The study guide's water section ties alkalinity to pH and mash behavior, not hop or packaging mechanics.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_034",
+      "topic": "ingredients",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which ion is most associated with perceived malt roundness and fullness?",
+      "choices": ["Sulfate", "Chloride", "Sodium bicarbonate", "Iron"],
+      "answer": "Chloride",
+      "explanation": "The guide distinguishes chloride as supporting fullness while sulfate sharpens bitterness.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water ion sensory effects"
+      }
+    },
+    {
+      "id": "bjcp_q_035",
+      "topic": "ingredients",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which grain-process step primarily develops malt color and many toast/roast reactions?",
+      "choices": ["Germination", "Kilning", "Mashing", "Lautering"],
+      "answer": "Kilning",
+      "explanation": "The study guide's malt section ties kilning to color and flavor development.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "malt production fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_036",
+      "topic": "ingredients",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A classic English hop profile is more likely to be described as:",
+      "choices": ["Tropical and diesel-like", "Earthy, floral, or herbal", "Candy-like and grape-like", "Mint-only"],
+      "answer": "Earthy, floral, or herbal",
+      "explanation": "The study guide discusses classic hop families and their traditional descriptors.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "classic hop-family recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_037",
+      "topic": "process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "What is the main brewing purpose of wort boiling?",
+      "choices": [
+        "Only adding bitterness",
+        "Sterilization, volatilization, concentration, and hop utilization",
+        "Increasing mash efficiency directly",
+        "Reducing carbonation"
+      ],
+      "answer": "Sterilization, volatilization, concentration, and hop utilization",
+      "explanation": "The study guide frames the boil as a multi-purpose stage, not just a bittering step.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "wort production fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_038",
+      "topic": "process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Rapid wort chilling after the boil helps most directly with:",
+      "choices": [
+        "Maintaining hot-side bitterness only",
+        "Reducing contamination risk and limiting continued thermal reactions",
+        "Increasing mash conversion",
+        "Raising FG"
+      ],
+      "answer": "Reducing contamination risk and limiting continued thermal reactions",
+      "explanation": "The study guide treats chilling as important for wort handling, stability, and contamination control.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "cold-side process control"
+      }
+    },
+    {
+      "id": "bjcp_q_039",
+      "topic": "process",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "What is the most direct reason to oxygenate wort before yeast growth begins?",
+      "choices": [
+        "To raise bitterness perception",
+        "To support healthy yeast growth and sterol synthesis",
+        "To remove sulfur immediately",
+        "To increase color extraction"
+      ],
+      "answer": "To support healthy yeast growth and sterol synthesis",
+      "explanation": "The brewing-process material treats oxygen as a yeast-health input before active fermentation, not a flavor adjustment tool.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "yeast handling and fermentation fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_040",
+      "topic": "process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which packaging practice best protects finished beer freshness?",
+      "choices": [
+        "Warm open transfer with splashing",
+        "Closed packaging with minimized oxygen pickup",
+        "Delaying packaging until beer oxidizes slightly",
+        "Adding extra minerals at packaging"
+      ],
+      "answer": "Closed packaging with minimized oxygen pickup",
+      "explanation": "The study guide's process awareness favors minimizing oxygen exposure after fermentation.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "packaging stability"
+      }
+    },
+    {
+      "id": "bjcp_q_041",
+      "topic": "off_flavors",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Cooked corn or canned-vegetable character is most associated with:",
+      "choices": ["DMS", "Diacetyl", "Lactic acid", "Phenolics"],
+      "answer": "DMS",
+      "explanation": "The study guide groups cooked-corn character under DMS recognition.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "off-flavor recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_042",
+      "topic": "off_flavors",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Wet cardboard or papery stale character is most associated with:",
+      "choices": ["Oxidation", "Acetaldehyde", "DMS", "Sulfur dioxide"],
+      "answer": "Oxidation",
+      "explanation": "Oxidation is classically described with papery, cardboard-like staling notes.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "off-flavor recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_043",
+      "topic": "off_flavors",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A sulfur-like rotten egg aroma is most associated with:",
+      "choices": ["Hydrogen sulfide", "Oxidation", "Diacetyl", "Autolysis"],
+      "answer": "Hydrogen sulfide",
+      "explanation": "The study guide includes sulfur compounds among recognizable beer-characteristic faults or fermentation markers.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "fault and fermentation-aroma recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_044",
+      "topic": "off_flavors",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which fault is most associated with skunky, lightstruck character?",
+      "choices": ["Lightstruck mercaptans", "Diacetyl", "DMS", "Lactic souring"],
+      "answer": "Lightstruck mercaptans",
+      "explanation": "The study guide treats lightstruck/skunky character as its own recognizable fault family tied to light exposure.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "fault and handling recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_045",
+      "topic": "styles_core",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "When judging style, what matters most?",
+      "choices": [
+        "Whether you personally enjoy the beer",
+        "Whether the beer expresses the declared style credibly",
+        "Whether the recipe used expensive ingredients",
+        "Whether the brewer used advanced equipment"
+      ],
+      "answer": "Whether the beer expresses the declared style credibly",
+      "explanation": "The study guide emphasizes judging against declared style expectations rather than personal preference.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-evaluation fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_046",
+      "topic": "styles_core",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "A beer can be technically flawless and still score lower if it misses its declared style.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide's style emphasis means quality alone is not enough if the beer does not match the declared category.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-match priority over generic quality"
+      }
+    },
+    {
+      "id": "bjcp_q_047",
+      "topic": "styles_comparison",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A beer with obvious roast and burnt notes is less likely to fit which pale lager family?",
+      "choices": [
+        "Czech Premium Pale Lager",
+        "Robust Porter",
+        "Schwarzbier",
+        "Foreign Extra Stout"
+      ],
+      "answer": "Czech Premium Pale Lager",
+      "explanation": "The study guide expects judges to reason about style boundaries and obvious mismatches.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-boundary awareness"
+      }
+    },
+    {
+      "id": "bjcp_q_048",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "If judges suspect a beer is in the wrong flight, the correct action is to:",
+      "choices": [
+        "Move it themselves to a different flight",
+        "Ignore the issue completely",
+        "Consult the judge director or competition organizer",
+        "Disqualify the beer"
+      ],
+      "answer": "Consult the judge director or competition organizer",
+      "explanation": "The study guide treats suspected misflighting as a competition-management question, not something the table should unilaterally change.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "flight-assignment handling"
+      }
+    },
+    {
+      "id": "bjcp_q_049",
+      "topic": "styles_core",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "When judging a declared style, which matters more than whether you personally like the beer?",
+      "choices": [
+        "Whether it matches style expectations",
+        "Whether it is stronger than average",
+        "Whether it uses traditional ingredients only",
+        "Whether it has high carbonation"
+      ],
+      "answer": "Whether it matches style expectations",
+      "explanation": "The BJCP study material centers style accuracy over the judge's personal preference.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-evaluation fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_050",
+      "topic": "styles_core",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A beer may score lower even if it is technically clean when:",
+      "choices": [
+        "Its bitterness is moderate",
+        "It misses the declared style",
+        "It is highly carbonated",
+        "It uses noble hops"
+      ],
+      "answer": "It misses the declared style",
+      "explanation": "The study guide's style section expects judges to reward fit to declared style, not generic technical competence alone.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-match priority"
+      }
+    },
+    {
+      "id": "bjcp_q_051",
+      "topic": "styles_comparison",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which hop pairing is most appropriate for a classic Strong Bitter per the study guide example?",
+      "choices": [
+        "Kent Goldings and Fuggles",
+        "Cascade and Citra",
+        "Hallertauer and Tettnanger",
+        "Saaz and Styrian Goldings"
+      ],
+      "answer": "Kent Goldings and Fuggles",
+      "explanation": "The study guide uses English hop logic in its style-question examples for Strong Bitter.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style ingredient appropriateness"
+      }
+    },
+    {
+      "id": "bjcp_q_052",
+      "topic": "styles_comparison",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "Light malt sweetness is part of the flavor profile of a Belgian Blond Ale.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide uses Belgian Blond Ale as an example where restrained malt sweetness remains style-appropriate.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style sensory recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_053",
+      "topic": "styles_comparison",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "Diacetyl in a British Brown Ale is always acceptable because of the yeast strain.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide uses this as a caution against turning limited style tolerance into a blanket excuse.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-fault tolerance nuance"
+      }
+    },
+    {
+      "id": "bjcp_q_054",
+      "topic": "exam_structure",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "The entrance exam presents questions in groups of:",
+      "choices": ["5 per page", "10 per page", "20 per page", "25 per page"],
+      "answer": "5 per page",
+      "explanation": "The study guide's During the Exam section says questions are presented in groups of five per page.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "During the Exam",
+        "basis": "online exam interface behavior"
+      }
+    },
+    {
+      "id": "bjcp_q_055",
+      "topic": "exam_structure",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "During the entrance exam, the Summary button helps you:",
+      "choices": [
+        "See which questions are unanswered",
+        "Read the style guidelines",
+        "View your score in real time",
+        "Pause the timer"
+      ],
+      "answer": "See which questions are unanswered",
+      "explanation": "The study guide notes that the Summary button shows which questions have not yet been answered.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "During the Exam",
+        "basis": "online exam interface behavior"
+      }
+    },
+    {
+      "id": "bjcp_q_056",
+      "topic": "exam_structure",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A good study plan for the entrance exam should include:",
+      "choices": [
+        "Only beer styles",
+        "Only brewing process",
+        "Styles, beer characteristics, ingredients/process, judging, and ethics",
+        "Only off-flavors"
+      ],
+      "answer": "Styles, beer characteristics, ingredients/process, judging, and ethics",
+      "explanation": "The study guide's question categories span all of those areas.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Question Types and Categories",
+        "basis": "exam-scope planning"
+      }
+    },
+    {
+      "id": "bjcp_q_057",
+      "topic": "off_flavors",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Beer that is light in body is thick and chewy.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide uses this as a simple beer-characteristics check; light-bodied beer is not thick and chewy.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "basic sensory vocabulary"
+      }
+    },
+    {
+      "id": "bjcp_q_058",
+      "topic": "off_flavors",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Smoky character is most often associated with which broad flavor family in the study guide examples?",
+      "choices": ["Phenols", "Esters", "Oxidation", "Alcohol warmth"],
+      "answer": "Phenols",
+      "explanation": "The study guide uses smoky as an example of phenolic-related character.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "sensory-family recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_059",
+      "topic": "off_flavors",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "All IPA styles should have a harsh, hop-derived astringency.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide uses this to distinguish firm bitterness from harsh astringency; the latter is not a style requirement.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "astringency vs style bitterness"
+      }
+    },
+    {
+      "id": "bjcp_q_060",
+      "topic": "off_flavors",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which flaw most directly matches the study guide's green-apple example?",
+      "choices": ["DMS", "Acetaldehyde", "Tannins", "Fusel alcohols"],
+      "answer": "Acetaldehyde",
+      "explanation": "The study guide explicitly uses green apple as an acetaldehyde example.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "example-based off-flavor recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_061",
+      "topic": "ingredients",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Chloramines in brewing water can create off-flavors if they are not removed.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide uses chloramine removal as a practical water-treatment point tied to off-flavor prevention.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water-treatment awareness"
+      }
+    },
+    {
+      "id": "bjcp_q_062",
+      "topic": "ingredients",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Weissbier yeast are typically lager strains.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide uses this as a straightforward yeast-knowledge check.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "yeast-style familiarity"
+      }
+    },
+    {
+      "id": "bjcp_q_063",
+      "topic": "ingredients",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "The typical duration of lagering in the study guide example is:",
+      "choices": [
+        "Two to six hours",
+        "Two to six days",
+        "Two to six weeks",
+        "Two to six years"
+      ],
+      "answer": "Two to six weeks",
+      "explanation": "The study guide uses two to six weeks as the illustrative answer for typical lagering duration.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "process timing familiarity"
+      }
+    },
+    {
+      "id": "bjcp_q_064",
+      "topic": "process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "All-grain brewers can decrease body by increasing saccharification temperature.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide uses this as a mash-process check; higher saccharification temperatures generally increase dextrins and body.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "mash-temperature effect"
+      }
+    },
+    {
+      "id": "bjcp_q_065",
+      "topic": "process",
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "Decoction mashing is the preferred brewing method for Dunkles Bock.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide uses this as a style/process familiarity example tied to classic continental practice.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-linked process familiarity"
+      }
+    },
+    {
+      "id": "bjcp_q_066",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "It is common practice to refrain from sharing your thoughts on a beer until other judges have completed their score sheets.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide promotes independent evaluation before panel discussion.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "The Judging Process",
+        "basis": "independent scoring discipline"
+      }
+    },
+    {
+      "id": "bjcp_q_067",
+      "topic": "judging_process",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "If rushed, it is acceptable to leave subsection scores blank as long as you write comments and an overall score.",
+      "choices": ["True", "False"],
+      "answer": "False",
+      "explanation": "The study guide expects complete score-sheet scoring, not partial completion under time pressure.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Notes on Making Comments about Beer",
+        "basis": "score-sheet completeness"
+      }
+    },
+    {
+      "id": "bjcp_q_068",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Judges should write their full name and judging rank on each score sheet.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide explicitly treats this as proper score-sheet completion.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Procedure",
+        "basis": "score-sheet completion detail"
+      }
+    },
+    {
+      "id": "bjcp_q_069",
+      "topic": "judging_process",
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Filling out the style scales on the score sheet is recommended as a check against your scores.",
+      "choices": ["True", "False"],
+      "answer": "True",
+      "explanation": "The study guide treats the style scales as a useful cross-check, not decorative filler.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.A Beer Evaluation and the Judging Process",
+        "subsection": "Procedure",
+        "basis": "score-sheet usage"
+      }
+    },
+    {
+      "id": "bjcp_q_070",
+      "topic": "exam_structure",
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "After passing the entrance exam, the guide directs candidates toward:",
+      "choices": [
+        "No further action",
+        "The next steps in BJCP judging progression",
+        "Immediate Grand Master rank",
+        "Commercial brewery certification"
+      ],
+      "answer": "The next steps in BJCP judging progression",
+      "explanation": "The study guide includes a dedicated next-steps section after passing the exam.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Next Steps after Passing the Exam",
+        "basis": "post-pass progression"
+      }
+    },
+    {
+      "id": "bjcp_q_071",
+      "topic": "styles_core",
+      "type": "mcq",
+      "prompt": "For style judging, a beer should be evaluated primarily against:",
+      "choices": [
+        "The judge's favorite commercial example",
+        "The declared style guidelines",
+        "The most recent trend in craft beer",
+        "The brewer's stated intention alone"
+      ],
+      "answer": "The declared style guidelines",
+      "explanation": "The BJCP study material centers style evaluation on the declared style, not on personal benchmarks or trends.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-guideline priority"
+      }
+    },
+    {
+      "id": "bjcp_q_072",
+      "topic": "styles_core",
+      "type": "mcq",
+      "prompt": "A technically sound beer that fits no declared style particularly well should generally:",
+      "choices": [
+        "Still score as outstanding automatically",
+        "Be judged lower than an equally clean beer that fits style",
+        "Be reclassified by the table without consultation",
+        "Be scored only on aroma and flavor"
+      ],
+      "answer": "Be judged lower than an equally clean beer that fits style",
+      "explanation": "Technical quality matters, but BJCP judging still rewards faithful style expression.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-fit over generic cleanliness"
+      }
+    },
+    {
+      "id": "bjcp_q_073",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "Which pairing is least appropriate as a classic Strong Bitter hop choice?",
+      "choices": [
+        "Kent Goldings and Fuggles",
+        "Cascade and Citra",
+        "Target and East Kent Goldings",
+        "Fuggles and Challenger"
+      ],
+      "answer": "Cascade and Citra",
+      "explanation": "The study guide's style examples for English bitters point toward traditional English varieties, not modern American citrus-forward combinations.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-ingredient mismatch recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_074",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "Which beer is most likely to be pushed out of classic Strong Bitter territory by heavy tropical dry hopping?",
+      "choices": [
+        "British Strong Bitter",
+        "Czech Premium Pale Lager",
+        "Dry Stout",
+        "Munich Helles"
+      ],
+      "answer": "British Strong Bitter",
+      "explanation": "The study guide expects style reasoning that notices when modern hop expression pulls an English bitter away from its classic profile.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-boundary drift recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_075",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "A beer with obvious roast, burnt bitterness, and coffee character would be least stylistically appropriate as a:",
+      "choices": [
+        "Czech Premium Pale Lager",
+        "Robust Porter",
+        "Foreign Extra Stout",
+        "Irish Stout"
+      ],
+      "answer": "Czech Premium Pale Lager",
+      "explanation": "The study guide expects judges to catch obvious sensory mismatches against pale lager styles.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "obvious style mismatch recognition"
+      }
+    },
+    {
+      "id": "bjcp_q_076",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "The entrance exam study guide breaks questions into several categories because candidates are expected to study more than just:",
+      "choices": [
+        "Beer styles",
+        "Ethics",
+        "Beer characteristics",
+        "Ingredients and process"
+      ],
+      "answer": "Beer styles",
+      "explanation": "The guide makes clear that style study alone is not enough; ethics, judging process, sensory characteristics, and brewing process also matter.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Question Types and Categories",
+        "basis": "breadth of exam preparation"
+      }
+    },
+    {
+      "id": "bjcp_q_077",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "If you fail the entrance exam, the study guide suggests the next move is to:",
+      "choices": [
+        "Stop studying BJCP material",
+        "Review weak areas and prepare to retake",
+        "Move directly to the written proficiency exam",
+        "Only study score-sheet etiquette"
+      ],
+      "answer": "Review weak areas and prepare to retake",
+      "explanation": "The guide includes a separate next-steps section for failing the exam and frames it as a study-and-retake path.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Next Steps after Failing the Exam",
+        "basis": "post-fail study path"
+      }
+    },
+    {
+      "id": "bjcp_q_078",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "The entrance exam interface groups questions five at a time, so a candidate may need to:",
+      "choices": [
+        "Scroll to access all questions on the page",
+        "Open a second browser window",
+        "Download a PDF during the test",
+        "Refresh after every answer"
+      ],
+      "answer": "Scroll to access all questions on the page",
+      "explanation": "The During the Exam section notes that the grouped questions may require scrolling to see everything on a page.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "During the Exam",
+        "basis": "test-interface familiarity"
+      }
+    },
+    {
+      "id": "bjcp_q_079",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "One reason to include exam-structure questions in the bank is that the study guide explicitly covers:",
+      "choices": [
+        "During the exam and after the exam behavior",
+        "Only off-flavors and beer styles",
+        "Only brewing water chemistry",
+        "Only essay grading rubrics"
+      ],
+      "answer": "During the exam and after the exam behavior",
+      "explanation": "The study guide explicitly contains sections on During the Exam and After the Exam, so the bank should reflect that.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "During the Exam",
+        "basis": "exam-behavior content is in scope"
+      }
+    },
+    {
+      "id": "bjcp_q_080",
+      "topic": "ingredients",
+      "type": "mcq",
+      "prompt": "Which of these is the clearest study-guide example of a water-treatment issue causing flavor problems?",
+      "choices": [
+        "Leaving chloramines untreated",
+        "Using fresh lager yeast",
+        "Adding Irish moss",
+        "Dry hopping late"
+      ],
+      "answer": "Leaving chloramines untreated",
+      "explanation": "The study guide uses untreated chloramines as a direct example of avoidable off-flavor risk from water treatment.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water-treatment fault prevention"
+      }
+    },
+    {
+      "id": "bjcp_q_081",
+      "topic": "ingredients",
+      "type": "mcq",
+      "prompt": "Which water ion is most associated with sharpening bitterness and drying the finish?",
+      "choices": ["Chloride", "Sulfate", "Bicarbonate", "Iron"],
+      "answer": "Sulfate",
+      "explanation": "The study guide's water material distinguishes sulfate as the ion that accentuates bitterness and dryness.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water ion sensory effects"
+      }
+    },
+    {
+      "id": "bjcp_q_082",
+      "topic": "process",
+      "type": "mcq",
+      "prompt": "Which mash change would generally increase body rather than decrease it?",
+      "choices": [
+        "Raising saccharification temperature",
+        "Lowering saccharification temperature",
+        "Reducing grist size",
+        "Extending lagering time"
+      ],
+      "answer": "Raising saccharification temperature",
+      "explanation": "The study guide uses this principle in its process questions: warmer saccharification tends to favor more dextrinous wort and fuller body.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "mash temperature and body"
+      }
+    },
+    {
+      "id": "bjcp_q_083",
+      "topic": "process",
+      "type": "mcq",
+      "prompt": "Which time range did the study guide use as the typical duration of lagering?",
+      "choices": [
+        "Two to six hours",
+        "Two to six days",
+        "Two to six weeks",
+        "Two to six months"
+      ],
+      "answer": "Two to six weeks",
+      "explanation": "The study guide's example answer for typical lagering duration is two to six weeks.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "process-time familiarity"
+      }
+    },
+    {
+      "id": "bjcp_q_084",
+      "topic": "off_flavors",
+      "type": "mcq",
+      "prompt": "Which descriptor best matches the study guide's chlorophenol-style fault family?",
+      "choices": ["Medicinal or plastic-like", "Fresh bread dough", "Clean sulfur snap", "Honey sweetness"],
+      "answer": "Medicinal or plastic-like",
+      "explanation": "The BJCP fault material ties chlorophenols to medicinal, bandage-like, or plastic-like character.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "fault family descriptors"
+      }
+    },
+    {
+      "id": "bjcp_q_085",
+      "topic": "off_flavors",
+      "type": "mcq",
+      "prompt": "A judge should treat harsh hop-derived astringency as:",
+      "choices": [
+        "An automatic requirement in all IPAs",
+        "A fault or imbalance, not a universal style positive",
+        "The same as firm bitterness",
+        "A sign the beer is undercarbonated"
+      ],
+      "answer": "A fault or imbalance, not a universal style positive",
+      "explanation": "The study guide distinguishes astringency from desired bitterness and uses that distinction in its beer-characteristics examples.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "bitterness vs astringency distinction"
+      }
+    },
+    {
+      "id": "bjcp_q_086",
+      "topic": "styles_core",
+      "type": "mcq",
+      "prompt": "A judge's first style question should be whether the beer:",
+      "choices": [
+        "Uses expensive ingredients",
+        "Conveys the declared style credibly",
+        "Tastes like the judge's favorite version",
+        "Has the highest possible bitterness"
+      ],
+      "answer": "Conveys the declared style credibly",
+      "explanation": "The BJCP study material repeatedly centers style credibility rather than novelty or personal preference.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "core style-evaluation priority"
+      }
+    },
+    {
+      "id": "bjcp_q_087",
+      "topic": "styles_core",
+      "type": "mcq",
+      "prompt": "When a beer is well made but stylistically off-target, the judge should:",
+      "choices": [
+        "Ignore style and reward technique only",
+        "Score it against the declared style",
+        "Automatically disqualify it",
+        "Move it to a new category without permission"
+      ],
+      "answer": "Score it against the declared style",
+      "explanation": "The entrance-exam study material expects judges to evaluate beers as entered, not as they wish they had been entered.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "judging as entered"
+      }
+    },
+    {
+      "id": "bjcp_q_088",
+      "topic": "styles_core",
+      "type": "mcq",
+      "prompt": "A beer can be clean, balanced, and pleasant yet still not deserve a top score if it:",
+      "choices": [
+        "Has moderate carbonation",
+        "Misses key style markers",
+        "Uses a classic yeast strain",
+        "Has a stable head"
+      ],
+      "answer": "Misses key style markers",
+      "explanation": "Style accuracy is part of quality in BJCP judging, not something evaluated after quality is settled.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-marker importance"
+      }
+    },
+    {
+      "id": "bjcp_q_089",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "Which pairing best fits a traditional English bitter impression rather than a modern American hop profile?",
+      "choices": [
+        "Earthy and floral",
+        "Tropical and resinous",
+        "Grape and diesel-like",
+        "Lime candy and coconut"
+      ],
+      "answer": "Earthy and floral",
+      "explanation": "The study-guide style questions lean on traditional English hop descriptors instead of modern New World profiles.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "traditional vs modern hop expression"
+      }
+    },
+    {
+      "id": "bjcp_q_090",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "Which beer is most likely to seem out of place if it shows pronounced banana-clove fermentation character?",
+      "choices": [
+        "Strong Bitter",
+        "Weissbier",
+        "Dunkelweizen",
+        "Weizenbock"
+      ],
+      "answer": "Strong Bitter",
+      "explanation": "The style-comparison logic expects judges to distinguish English ale character from classic weizen phenol/ester character.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style fermentation-character mismatch"
+      }
+    },
+    {
+      "id": "bjcp_q_091",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "If a beer has obvious citrusy American dry-hop character, which declared style is most at risk of seeming inauthentic?",
+      "choices": [
+        "Classic Strong Bitter",
+        "American IPA",
+        "American Pale Ale",
+        "Specialty IPA"
+      ],
+      "answer": "Classic Strong Bitter",
+      "explanation": "The study material expects judges to catch when modern American hop expression pulls a classic English beer out of style.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "English-vs-American hop profile distinction"
+      }
+    },
+    {
+      "id": "bjcp_q_092",
+      "topic": "styles_comparison",
+      "type": "mcq",
+      "prompt": "A beer with clean fermentation, pale color, and spicy Saaz-like hop profile would be less appropriate as a:",
+      "choices": [
+        "Robust Porter",
+        "Czech Premium Pale Lager",
+        "German Pils",
+        "Kellerbier"
+      ],
+      "answer": "Robust Porter",
+      "explanation": "This is basic style-boundary reasoning: pale lager signals do not fit a dark, roasty porter family.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Styles",
+        "basis": "style-family contrast"
+      }
+    },
+    {
+      "id": "bjcp_q_093",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "The entrance exam study guide includes exam-structure material because candidates need familiarity with:",
+      "choices": [
+        "Only recipe formulation",
+        "How the exam is organized and what happens around it",
+        "Only judging rank history",
+        "Only competition entry software"
+      ],
+      "answer": "How the exam is organized and what happens around it",
+      "explanation": "The guide explicitly covers overview, during the exam, after the exam, and next-step sections.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Question Types and Categories",
+        "basis": "exam-context knowledge"
+      }
+    },
+    {
+      "id": "bjcp_q_094",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "Which section would you consult for what happens after you submit the entrance exam?",
+      "choices": [
+        "During the Exam",
+        "After the Exam",
+        "Questions on Beer Characteristics",
+        "Questions on Beer Styles"
+      ],
+      "answer": "After the Exam",
+      "explanation": "The study guide separates in-exam behavior from what follows after completion.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "After the Exam",
+        "basis": "exam workflow sections"
+      }
+    },
+    {
+      "id": "bjcp_q_095",
+      "topic": "exam_structure",
+      "type": "mcq",
+      "prompt": "Which section is the right place to study what to do if you do not pass the entrance exam?",
+      "choices": [
+        "Next Steps after Failing the Exam",
+        "During the Exam",
+        "Beer Evaluation",
+        "References"
+      ],
+      "answer": "Next Steps after Failing the Exam",
+      "explanation": "The guide explicitly includes a post-failure guidance section, so that content is in scope for study.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Next Steps after Failing the Exam",
+        "basis": "retake guidance"
+      }
+    },
+    {
+      "id": "bjcp_q_096",
+      "topic": "ingredients",
+      "type": "mcq",
+      "prompt": "Which water component is most associated with mash pH buffering and alkalinity concerns?",
+      "choices": ["Bicarbonate", "Sulfate", "Chloride", "Zinc"],
+      "answer": "Bicarbonate",
+      "explanation": "The study-guide water material ties alkalinity and buffering concerns to bicarbonate/carbonate chemistry.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "water chemistry fundamentals"
+      }
+    },
+    {
+      "id": "bjcp_q_097",
+      "topic": "ingredients",
+      "type": "mcq",
+      "prompt": "Which ingredient group most directly drives roast, toast, and color when comparing pale and dark beers?",
+      "choices": ["Specialty malts", "Hop oils", "Yeast nutrients", "Water sulfate"],
+      "answer": "Specialty malts",
+      "explanation": "The malt section of the study material makes malt choice central to color and many toasted/roasted flavor outcomes.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "malt impact on beer character"
+      }
+    },
+    {
+      "id": "bjcp_q_098",
+      "topic": "process",
+      "type": "mcq",
+      "prompt": "Which process step is most directly aimed at converting starches into fermentable sugars?",
+      "choices": ["Mashing", "Dry hopping", "Packaging", "Conditioning"],
+      "answer": "Mashing",
+      "explanation": "The brewing-process material treats mashing as the enzymatic conversion stage, not a post-fermentation or aroma step.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "core process-stage purpose"
+      }
+    },
+    {
+      "id": "bjcp_q_099",
+      "topic": "process",
+      "type": "mcq",
+      "prompt": "Which process choice is most directly tied to reducing DMS risk?",
+      "choices": [
+        "A long vigorous boil",
+        "Warm dry hopping",
+        "Late oxygenation after fermentation",
+        "Increasing chloride"
+      ],
+      "answer": "A long vigorous boil",
+      "explanation": "The study guide uses boiling practice as a primary DMS-control example.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Ingredients and the Brewing Process",
+        "basis": "DMS-control process knowledge"
+      }
+    },
+    {
+      "id": "bjcp_q_100",
+      "topic": "off_flavors",
+      "type": "mcq",
+      "prompt": "Which descriptor best matches oxidation in the BJCP fault vocabulary?",
+      "choices": [
+        "Papery or cardboard-like",
+        "Fresh green apple",
+        "Buttery popcorn",
+        "Clove and pepper"
+      ],
+      "answer": "Papery or cardboard-like",
+      "explanation": "The study-guide fault vocabulary treats papery/cardboard notes as classic oxidation markers.",
+      "source": {
+        "pdf": "books/BJCP_Study_Guide.pdf",
+        "section": "II.C BJCP Beer Judge Entrance Exam Study Guide",
+        "subsection": "Questions on Beer Characteristics",
+        "basis": "oxidation recognition"
+      }
     }
   ]
 }

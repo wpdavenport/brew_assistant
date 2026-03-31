@@ -61,6 +61,16 @@ insight:
 insight-report:
 	python3 tools/insight_report.py
 
+bjcp-question-sources:
+	python3 tools/validate_bjcp_question_sources.py
+
+bjcp-question-report:
+	python3 tools/bjcp_question_report.py
+
+bjcp-study-check:
+	python3 tools/validate_bjcp_question_sources.py
+	python3 tools/bjcp_question_report.py
+
 web-ui:
 	python3 tools/web_ui_bootstrap.py $(if $(HOST),--host "$(HOST)",) $(if $(PORT),--port "$(PORT)",)
 

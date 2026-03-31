@@ -333,6 +333,17 @@ def as_list(items: list[str], ordered: bool = False) -> str:
     return f"<{tag}>\n{rendered}\n</{tag}>"
 
 
+def normalize_sub_kilogram_metric(text: str) -> str:
+    def repl(match: re.Match[str]) -> str:
+        value = float(match.group(1))
+        if value >= 1.0:
+            return match.group(0)
+        grams = int(round(value * 1000))
+        return f"({grams} g)"
+
+    return re.sub(r"\(([0-9]+(?:\.[0-9]+)?)\s*kg\)", repl, text)
+
+
 def targets_inline(items: list[str]) -> str:
     chunks = []
     for item in items:
@@ -399,6 +410,11 @@ def render_recipe(recipe_path: Path) -> str:
         mash = ["No explicit mash schedule captured in source."]
     if not fermentation:
         fermentation = ["No explicit fermentation schedule captured in source."]
+    grains = [normalize_sub_kilogram_metric(item) for item in grains]
+    hop_lines = [normalize_sub_kilogram_metric(item) for item in hop_lines]
+    yeasts = [normalize_sub_kilogram_metric(item) for item in yeasts]
+    mash = [normalize_sub_kilogram_metric(item) for item in mash]
+    fermentation = [normalize_sub_kilogram_metric(item) for item in fermentation]
     ferment_equipment = read_fermentation_equipment()
 
     template = TEMPLATE_FILE.read_text(encoding="utf-8")

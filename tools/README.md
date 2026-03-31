@@ -102,6 +102,17 @@ Use `insight_report.py` to review the captured integration queue:
 - `python3 tools/insight_report.py --status captured`
 - `make insight-report`
 
+Use `validate_bjcp_question_sources.py` to ensure BJCP study questions remain tied to explicit source material:
+
+- `python3 tools/validate_bjcp_question_sources.py`
+- `make bjcp-question-sources`
+
+Use `bjcp_question_report.py` to review BJCP question-bank coverage by topic, difficulty, and source section:
+
+- `python3 tools/bjcp_question_report.py`
+- `make bjcp-question-report`
+- `make bjcp-study-check`
+
 Use `render_recipe_html.py` to create a printable recipe handout from the canonical recipe markdown:
 
 - `python3 tools/render_recipe_html.py --recipe davenport_esb`
