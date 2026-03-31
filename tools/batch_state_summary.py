@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ACTIVE_ARTIFACTS_FILE = ROOT / "project_control" / "ACTIVE_ARTIFACTS.json"
 BREW_HISTORY_FILE = ROOT / "libraries" / "inventory" / "brew_history.json"
+SHOPPING_INTENT_FILE = ROOT / "libraries" / "inventory" / "shopping_intent.json"
 
 
 def load_json(path: Path) -> dict:
@@ -56,6 +57,7 @@ def main() -> int:
     args = build_parser().parse_args()
     active = load_json(ACTIVE_ARTIFACTS_FILE)
     history = load_json(BREW_HISTORY_FILE)
+    shopping_intent = load_json(SHOPPING_INTENT_FILE) if SHOPPING_INTENT_FILE.exists() else {}
 
     brew_events: dict[tuple[str, str], dict] = {}
     package_events: dict[tuple[str, str], dict] = {}
@@ -77,6 +79,28 @@ def main() -> int:
     brewed_not_packaged: list[str] = []
     brewed_not_packaged_sheets: set[str] = set()
     next_actions: list[str] = []
+    planned_queue: list[str] = []
+    active_brews: list[str] = []
+
+    for item in shopping_intent.get("recipe_queue", []):
+        recipe_id = item.get("recipe_id", "")
+        if not recipe_matches(args.recipe, recipe_id):
+            continue
+        horizon = item.get("horizon", "")
+        note = item.get("note", "")
+        planned_queue.append(f"{recipe_id} | {horizon}{' | ' + note if note else ''}")
+        if horizon == "next":
+            next_actions.append(f"brew-op --action prepare --recipe {recipe_id} --date <YYYY-MM-DD>")
+        elif horizon == "soon":
+            next_actions.append(f"shopping review for {recipe_id}")
+
+    for item in shopping_intent.get("active_brews", []):
+        recipe_id = item.get("recipe_id", "")
+        if not recipe_matches(args.recipe, recipe_id):
+            continue
+        status = item.get("status", "")
+        note = item.get("note", "")
+        active_brews.append(f"{recipe_id} | {status}{' | ' + note if note else ''}")
 
     for pair in active.get("active_pairs", []):
         recipe_rel = pair.get("recipe", "")
@@ -112,7 +136,23 @@ def main() -> int:
     print("BATCH STATE SUMMARY")
     print("=" * 80)
 
-    print("Prepared, Not Brewed")
+    print("Planned Queue")
+    print("-" * 80)
+    if planned_queue:
+        for line in planned_queue:
+            print(line)
+    else:
+        print("(none)")
+
+    print("\nActive Brews")
+    print("-" * 80)
+    if active_brews:
+        for line in active_brews:
+            print(line)
+    else:
+        print("(none)")
+
+    print("\nPrepared, Not Brewed")
     print("-" * 80)
     if prepared_not_brewed:
         for line in prepared_not_brewed:

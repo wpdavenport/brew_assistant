@@ -2410,6 +2410,22 @@ def recipe_state(recipe_token: str, recipe_path: Path) -> dict[str, str]:
 
 def next_action_text_for_recipe(recipe_token: str, recipe_path: Path) -> str:
     state = recipe_state(recipe_token, recipe_path)
+    if SHOPPING_INTENT_FILE.exists():
+        payload = load_json(SHOPPING_INTENT_FILE)
+        recipe_n = normalize_token(recipe_token)
+        for item in payload.get("recipe_queue", []):
+            if normalize_token(item.get("recipe_id", "")) == recipe_n:
+                horizon = item.get("horizon", "")
+                note = item.get("note", "")
+                if horizon == "next":
+                    return f"Planned next brew. Prepare when you are ready to lock the brew date.{(' ' + note) if note else ''}"
+                if horizon == "soon":
+                    return f"Planned soon, but not immediate.{(' ' + note) if note else ''}"
+        for item in payload.get("active_brews", []):
+            if normalize_token(item.get("recipe_id", "")) == recipe_n:
+                status = item.get("status", "")
+                note = item.get("note", "")
+                return f"Active batch state: {status}.{(' ' + note) if note else ''}"
     if state["state"] == "brewed_not_packaged":
         return f"Ready to package. Last un-packaged batch was brewed {state['brew_date']}."
     if state["state"] == "prepared_not_brewed":

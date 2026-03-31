@@ -141,6 +141,11 @@ Use `validate_recipe_html_sync.py` to ensure generated recipe HTML is up to date
 - `python3 tools/validate_recipe_html_sync.py --recipe davenport_esb`
 - `make recipe-html-sync`
 
+Use `validate_print_readability.py` to catch basic printable-page regressions in recipe and brew-sheet HTML:
+
+- `python3 tools/validate_print_readability.py`
+- `make print-readability`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:

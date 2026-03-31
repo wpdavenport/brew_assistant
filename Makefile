@@ -19,6 +19,9 @@ beerxml-sync:
 recipe-html-sync:
 	python3 tools/validate_recipe_html_sync.py --all
 
+print-readability:
+	python3 tools/validate_print_readability.py
+
 aa-sync:
 	python3 tools/validate_hop_aa_sync.py
 
@@ -91,3 +94,4 @@ trust-check:
 	python3 tools/validate_recipe_beerxml_sync.py --all
 	python3 tools/refresh_recipe_html.py --changed
 	python3 tools/validate_recipe_html_sync.py --all
+	python3 tools/validate_print_readability.py
