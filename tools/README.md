@@ -146,6 +146,11 @@ Use `validate_print_readability.py` to catch basic printable-page regressions in
 - `python3 tools/validate_print_readability.py`
 - `make print-readability`
 
+Use `validate_intent_lifecycle.py` to catch contradictions between shopping intent and actual batch lifecycle:
+
+- `python3 tools/validate_intent_lifecycle.py`
+- `make intent-lifecycle`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:

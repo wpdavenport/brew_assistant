@@ -53,6 +53,68 @@ def recipe_matches(filter_text: str, *values: str) -> bool:
     return any(needle in normalize_recipe(value) for value in values if value)
 
 
+def build_intent_lifecycle_report(
+    recipe_filter: str,
+    active: dict,
+    shopping_intent: dict,
+    brew_events: dict[tuple[str, str], dict],
+    package_events: dict[tuple[str, str], dict],
+) -> tuple[list[str], list[str]]:
+    lines: list[str] = []
+    failures: list[str] = []
+    active_pairs = active.get("active_pairs", [])
+    active_pair_stems = {Path(pair.get("recipe", "")).stem for pair in active_pairs}
+    queued_ids_seen: set[str] = set()
+    active_ids_seen: set[str] = set()
+
+    for item in shopping_intent.get("recipe_queue", []):
+        recipe_id = item.get("recipe_id", "")
+        if not recipe_matches(recipe_filter, recipe_id):
+            continue
+        recipe_n = normalize_recipe(recipe_id)
+        if recipe_n in queued_ids_seen:
+            failures.append(f"{recipe_id}: duplicated in recipe_queue")
+            continue
+        queued_ids_seen.add(recipe_n)
+        if recipe_n in active_ids_seen:
+            failures.append(f"{recipe_id}: appears in both recipe_queue and active_brews")
+        lines.append(f"{recipe_id}: queued for {item.get('horizon', 'unspecified')} horizon")
+
+    for item in shopping_intent.get("active_brews", []):
+        recipe_id = item.get("recipe_id", "")
+        if not recipe_matches(recipe_filter, recipe_id):
+            continue
+        recipe_n = normalize_recipe(recipe_id)
+        if recipe_n in active_ids_seen:
+            failures.append(f"{recipe_id}: duplicated in active_brews")
+            continue
+        active_ids_seen.add(recipe_n)
+        if recipe_n in queued_ids_seen:
+            failures.append(f"{recipe_id}: appears in both recipe_queue and active_brews")
+        matching_brews = [
+            event
+            for (event_recipe_id, _brew_date), event in brew_events.items()
+            if recipe_n in normalize_recipe(event_recipe_id) or recipe_n in normalize_recipe(event.get("recipe_name", ""))
+        ]
+        un_packaged = [
+            event
+            for event in matching_brews
+            if (event.get("recipe_id", ""), event.get("brew_date", "")) not in package_events
+        ]
+        has_active_pair = any(recipe_n in normalize_recipe(stem) for stem in active_pair_stems)
+        if un_packaged:
+            latest = max(un_packaged, key=lambda row: row.get("brew_date", ""))
+            lines.append(f"{recipe_id}: active brew matches un-packaged batch from {latest.get('brew_date', '?')}")
+        elif has_active_pair:
+            lines.append(f"{recipe_id}: active brew tracked by dated brew sheet, waiting on brew/package lifecycle update")
+        else:
+            failures.append(f"{recipe_id}: listed in active_brews but no matching active batch or un-packaged brew found")
+
+    if not lines and not failures and not recipe_filter:
+        lines.append("No intent/lifecycle constraints recorded.")
+    return lines, failures
+
+
 def main() -> int:
     args = build_parser().parse_args()
     active = load_json(ACTIVE_ARTIFACTS_FILE)
@@ -133,6 +195,14 @@ def main() -> int:
             brewed_not_packaged.append(line)
             next_actions.append(f"brew-op --action package --recipe {recipe_id} --brew-date {brew_date} --package-date <YYYY-MM-DD> --fg <1.013> --packaged-volume <5.00>")
 
+    agreement_lines, agreement_failures = build_intent_lifecycle_report(
+        args.recipe,
+        active,
+        shopping_intent,
+        brew_events,
+        package_events,
+    )
+
     print("BATCH STATE SUMMARY")
     print("=" * 80)
 
@@ -184,6 +254,12 @@ def main() -> int:
                 f"{recipe_id}: n={len(events)} | latest {latest_gal:.2f} gal ({latest_delta:+.2f}) | "
                 f"avg {avg_gal:.2f} gal ({avg_delta:+.2f})"
             )
+    print("\nIntent / Lifecycle Agreement")
+    print("-" * 80)
+    for line in agreement_lines:
+        print(line)
+    for line in agreement_failures:
+        print(f"WARNING: {line}")
     if args.with_next_actions:
         print("\nSuggested Next Actions")
         print("-" * 80)
