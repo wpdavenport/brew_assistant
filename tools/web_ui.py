@@ -274,6 +274,7 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
             },
             dashboard_item("Batch State", "state"),
             dashboard_item("Next Actions", "next"),
+            dashboard_item("Fermentation", "fermentation"),
             shopping_item("Shopping"),
             study_item("BJCP Study"),
         ]
@@ -794,6 +795,12 @@ def render_notice(notice_text: str) -> str:
     return f'<div class="notice-banner">{html.escape(notice_text)}</div>'
 
 
+def render_warning(notice_text: str) -> str:
+    if not notice_text:
+        return ""
+    return f'<div class="notice-banner warning">{html.escape(notice_text)}</div>'
+
+
 def render_text_page(path: Path, body: str, action_html: str = "", notice_text: str = "") -> bytes:
     title = html.escape(path.relative_to(ROOT).as_posix())
     content = f"<pre>{html.escape(body)}</pre>"
@@ -1033,6 +1040,20 @@ def render_dashboard_page(title: str, body: str, action_html: str = "") -> bytes
       font-size: 13px;
       line-height: 1.45;
     }}
+    .notice-banner {{
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      border: 1px solid #b9d9b9;
+      border-radius: 8px;
+      background: #edf8ed;
+      color: #245224;
+      font-size: 15px;
+    }}
+    .notice-banner.warning {{
+      border-color: #e0c79f;
+      background: #fff7e8;
+      color: #7a541c;
+    }}
     @media print {{
       .action-panel {{
         display: none !important;
@@ -1147,6 +1168,11 @@ def render_structured_page(title: str, notes: str, body_html: str, raw_href: str
       background: #edf8ed;
       color: #245224;
       font-size: 15px;
+    }}
+    .notice-banner.warning {{
+      border-color: #e0c79f;
+      background: #fff7e8;
+      color: #7a541c;
     }}
     a {{
       color: #8a4b24;
@@ -2349,6 +2375,11 @@ def dashboard_output(mode: str) -> str:
     return proc.stdout
 
 
+def run_text_command(cmd: list[str]) -> tuple[str, int]:
+    proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    return (proc.stdout + proc.stderr).strip(), proc.returncode
+
+
 def active_pairs_payload() -> list[dict]:
     if ACTIVE_ARTIFACTS_FILE.exists():
         return load_json(ACTIVE_ARTIFACTS_FILE).get("active_pairs", [])
@@ -2408,24 +2439,32 @@ def recipe_state(recipe_token: str, recipe_path: Path) -> dict[str, str]:
     return {"state": "recipe_ready", "brew_date": "", "brew_sheet": ""}
 
 
+def shopping_intent_entry(recipe_token: str, bucket: str) -> dict[str, str] | None:
+    if not SHOPPING_INTENT_FILE.exists():
+        return None
+    payload = load_json(SHOPPING_INTENT_FILE)
+    recipe_n = normalize_token(recipe_token)
+    for item in payload.get(bucket, []):
+        if normalize_token(item.get("recipe_id", "")) == recipe_n:
+            return item
+    return None
+
+
 def next_action_text_for_recipe(recipe_token: str, recipe_path: Path) -> str:
     state = recipe_state(recipe_token, recipe_path)
-    if SHOPPING_INTENT_FILE.exists():
-        payload = load_json(SHOPPING_INTENT_FILE)
-        recipe_n = normalize_token(recipe_token)
-        for item in payload.get("recipe_queue", []):
-            if normalize_token(item.get("recipe_id", "")) == recipe_n:
-                horizon = item.get("horizon", "")
-                note = item.get("note", "")
-                if horizon == "next":
-                    return f"Planned next brew. Prepare when you are ready to lock the brew date.{(' ' + note) if note else ''}"
-                if horizon == "soon":
-                    return f"Planned soon, but not immediate.{(' ' + note) if note else ''}"
-        for item in payload.get("active_brews", []):
-            if normalize_token(item.get("recipe_id", "")) == recipe_n:
-                status = item.get("status", "")
-                note = item.get("note", "")
-                return f"Active batch state: {status}.{(' ' + note) if note else ''}"
+    queue_entry = shopping_intent_entry(recipe_token, "recipe_queue")
+    if queue_entry:
+        horizon = queue_entry.get("horizon", "")
+        note = queue_entry.get("note", "")
+        if horizon == "next":
+            return f"Planned next brew. Prepare when you are ready to lock the brew date.{(' ' + note) if note else ''}"
+        if horizon == "soon":
+            return f"Planned soon, but not immediate.{(' ' + note) if note else ''}"
+    active_entry = shopping_intent_entry(recipe_token, "active_brews")
+    if active_entry:
+        status = active_entry.get("status", "")
+        note = active_entry.get("note", "")
+        return f"Active batch state: {status}.{(' ' + note) if note else ''}"
     if state["state"] == "brewed_not_packaged":
         return f"Ready to package. Last un-packaged batch was brewed {state['brew_date']}."
     if state["state"] == "prepared_not_brewed":
@@ -2442,6 +2481,7 @@ def package_form_url(recipe: str, brew_date: str = "") -> str:
 
 def render_package_form(recipe_token: str, brew_date: str) -> bytes:
     default_date = __import__("datetime").date.today().isoformat()
+    default_volume = "5.00"
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -2485,7 +2525,7 @@ def render_package_form(recipe_token: str, brew_date: str) -> bytes:
         </div>
         <div>
           <label for="packaged_volume">Packaged Volume</label>
-          <input id="packaged_volume" name="packaged_volume" placeholder="5.00" required>
+          <input id="packaged_volume" name="packaged_volume" value="{default_volume}" placeholder="5.00" required>
         </div>
         <div>
           <label for="packaged_volume_unit">Volume Unit</label>
@@ -2497,6 +2537,7 @@ def render_package_form(recipe_token: str, brew_date: str) -> bytes:
         <div>
           <label for="harvest_yeast">Harvest Yeast</label>
           <input id="harvest_yeast" name="harvest_yeast" placeholder="1968 or wlp007">
+          <div class="hint">Optional. Leave blank if no slurry or harvested yeast is being recorded.</div>
         </div>
         <div>
           <label for="harvest_generation">Harvest Generation</label>
@@ -2542,6 +2583,207 @@ def action_panel_html(recipe_token: str, recipe_path: Path, current_rel: str = "
         "<h2>Actions</h2>"
         f"<p>{html.escape(next_action_text_for_recipe(recipe_token, recipe_path))}</p>"
         f'<div class="action-links">{"".join(links)}</div>'
+    )
+
+
+def parse_key_sections(text: str) -> dict[str, list[str]]:
+    sections: dict[str, list[str]] = {}
+    current = ""
+    lines = text.splitlines()
+    for idx, raw in enumerate(lines):
+        line = raw.rstrip()
+        if not line:
+            continue
+        if idx + 1 < len(lines):
+            next_line = lines[idx + 1].strip()
+            if next_line and set(next_line) in ({"="}, {"-"}):
+                current = line
+                sections.setdefault(current, [])
+                continue
+        if set(line) == {"="} or set(line) == {"-"}:
+            continue
+        if current:
+            sections[current].append(line)
+    return sections
+
+
+def render_lines_as_list(lines: list[str], empty_text: str = "(none)") -> str:
+    if not lines:
+        return f'<p class="notes">{html.escape(empty_text)}</p>'
+    items = "".join(f"<li>{html.escape(line)}</li>" for line in lines)
+    return f"<ul>{items}</ul>"
+
+
+def render_operation_result_page(action: str, params: dict[str, str], ok: bool, payload: str) -> bytes:
+    recipe_token = params.get("recipe", "")
+    recipe_path = resolve_recipe_markdown(recipe_token) if recipe_token else None
+    action_html = ""
+    if recipe_path:
+        action_html = action_panel_html(canonical_recipe_token(recipe_path), recipe_path)
+
+    notice = ""
+    if ok:
+        if action == "prepare":
+            notice = f"Prepare Successful for {recipe_token.replace('_', ' ').title()}"
+        elif action == "brew":
+            notice = f"Brew Registration Successful for {recipe_token.replace('_', ' ').title()}"
+        elif action == "package":
+            notice = f"Package Registration Successful for {recipe_token.replace('_', ' ').title()}"
+    else:
+        notice = f"{action.replace('-', ' ').title()} Failed"
+
+    sections: list[str] = []
+    if action == "prepare":
+        rows = [
+            ("Recipe", recipe_token.replace("_", " ").title()),
+            ("Planned Brew Date", params.get("date", "(not provided)") or "(not provided)"),
+        ]
+        body = "".join(f"<tr><td>{html.escape(label)}</td><td>{html.escape(value)}</td></tr>" for label, value in rows)
+        sections.append("<section><h2>What Changed</h2><table><tbody>" + body + "</tbody></table></section>")
+    elif action == "brew":
+        rows = [
+            ("Recipe", recipe_token.replace("_", " ").title()),
+            ("Brew Date", params.get("date", "(not provided)") or "(not provided)"),
+        ]
+        body = "".join(f"<tr><td>{html.escape(label)}</td><td>{html.escape(value)}</td></tr>" for label, value in rows)
+        sections.append("<section><h2>What Changed</h2><table><tbody>" + body + "</tbody></table></section>")
+    elif action == "package":
+        volume = params.get("packaged_volume", "")
+        unit = params.get("packaged_volume_unit", "")
+        rows = [
+            ("Recipe", recipe_token.replace("_", " ").title()),
+            ("Brew Date", params.get("brew_date", "")),
+            ("Package Date", params.get("package_date", "")),
+            ("FG", params.get("fg", "")),
+            ("Packaged Volume", f"{volume} {unit}".strip()),
+        ]
+        if params.get("co2_vols"):
+            rows.append(("CO2 Vols", params["co2_vols"]))
+        if params.get("harvest_yeast"):
+            label = params["harvest_yeast"]
+            if params.get("harvest_generation"):
+                label += f" (Gen {params['harvest_generation']})"
+            rows.append(("Harvest", label))
+        body = "".join(f"<tr><td>{html.escape(label)}</td><td>{html.escape(value)}</td></tr>" for label, value in rows if value)
+        sections.append("<section><h2>What Changed</h2><table><tbody>" + body + "</tbody></table></section>")
+
+    if recipe_token:
+        state_output, _ = run_text_command(["python3", "tools/batch_state_summary.py", "--recipe", recipe_token, "--with-next-actions"])
+        state_sections = parse_key_sections(state_output)
+        cards = []
+        for heading in ("Active Brews", "Prepared, Not Brewed", "Brewed, Not Packaged", "Intent / Lifecycle Agreement", "Suggested Next Actions"):
+            cards.append(f"<section><h2>{html.escape(heading)}</h2>{render_lines_as_list(state_sections.get(heading, []))}</section>")
+        sections.append("".join(cards))
+
+        yield_output, _ = run_text_command(["python3", "tools/yield_report.py", "--recipe", recipe_token])
+        if "YIELD_REPORT_EMPTY" in yield_output:
+            sections.append('<section><h2>Yield</h2><p class="notes">No package events recorded yet.</p></section>')
+        else:
+            yield_sections = parse_key_sections(yield_output)
+            sections.append(
+                "<section><h2>Yield</h2>"
+                f"{render_lines_as_list(yield_sections.get('YIELD REPORT', []))}"
+                f"{render_lines_as_list(yield_sections.get('SUMMARY', []), 'No summary yet.')}"
+                "</section>"
+            )
+
+    raw_html = f"<details><summary>Raw operator output</summary><pre>{html.escape(payload or 'No output')}</pre></details>"
+    sections.append(raw_html)
+    body_html = "".join(sections)
+    page = render_structured_page(
+        f"Operation - {action}",
+        "Structured confirmation generated from current repo state.",
+        body_html,
+        "",
+        action_html=action_html,
+        notice_text=notice,
+    )
+    if ok:
+        return page
+    return page.replace(b'class="notice-banner"', b'class="notice-banner warning"', 1)
+
+
+def render_fermentation_dashboard_page() -> bytes:
+    intent = shopping_intent_payload()
+    cards: list[str] = []
+    raw_lines: list[str] = []
+
+    active_rows = intent.get("active_brews", [])
+    if active_rows:
+        section_rows: list[str] = []
+        raw_lines.append("Active Fermentation")
+        for row in active_rows:
+            recipe_id = row.get("recipe_id", "")
+            recipe_path = resolve_recipe_markdown(recipe_id)
+            if not recipe_path:
+                continue
+            recipe_token = canonical_recipe_token(recipe_path)
+            state = recipe_state(recipe_token, recipe_path)
+            next_text = next_action_text_for_recipe(recipe_token, recipe_path)
+            action_links = [
+                f'<a href="{html.escape(viewer_url(recipe_path))}" target="content">Recipe</a>',
+            ]
+            if state.get("brew_sheet"):
+                action_links.append(
+                    f'<a href="{html.escape(viewer_url(ROOT / state["brew_sheet"]))}" target="content">Brew Sheet</a>'
+                )
+            if state["state"] == "brewed_not_packaged":
+                action_links.append(
+                    f'<a href="{html.escape(package_form_url(recipe_token, state["brew_date"]))}" target="content">Register Package</a>'
+                )
+            section_rows.append(
+                "<tr>"
+                f"<td>{html.escape(recipe_title_for_display(recipe_path))}</td>"
+                f"<td>{html.escape(row.get('status', ''))}</td>"
+                f"<td>{html.escape(state.get('brew_date', '') or row.get('note', ''))}</td>"
+                f"<td>{html.escape(next_text)}</td>"
+                f"<td>{''.join(action_links)}</td>"
+                "</tr>"
+            )
+            raw_lines.append(f"  {recipe_id}: {row.get('status', '')} | {next_text}")
+        cards.append(
+            "<section><h2>Active Fermentation</h2><table><thead><tr><th>Beer</th><th>Status</th><th>Batch</th><th>Next</th><th>Actions</th></tr></thead><tbody>"
+            + "".join(section_rows)
+            + "</tbody></table></section>"
+        )
+    else:
+        cards.append('<section><h2>Active Fermentation</h2><p class="notes">No active fermentations recorded.</p></section>')
+
+    queued_rows = intent.get("recipe_queue", [])
+    if queued_rows:
+        rows_html: list[str] = []
+        raw_lines.append("Planned Queue")
+        for row in queued_rows:
+            recipe_id = row.get("recipe_id", "")
+            recipe_path = resolve_recipe_markdown(recipe_id)
+            if not recipe_path:
+                continue
+            recipe_token = canonical_recipe_token(recipe_path)
+            action_links = [
+                f'<a href="{html.escape(viewer_url(recipe_path))}" target="content">Recipe</a>',
+                f'<a href="{html.escape(operator_url("prepare", recipe=recipe_token, date="today", run_trust_check="1"))}" target="content">Prepare</a>',
+            ]
+            rows_html.append(
+                "<tr>"
+                f"<td>{html.escape(recipe_title_for_display(recipe_path))}</td>"
+                f"<td>{html.escape(row.get('horizon', ''))}</td>"
+                f"<td>{html.escape(row.get('note', ''))}</td>"
+                f"<td>{''.join(action_links)}</td>"
+                "</tr>"
+            )
+            raw_lines.append(f"  {recipe_id}: {row.get('horizon', '')} | {row.get('note', '')}")
+        cards.append(
+            "<section><h2>Planned Queue</h2><table><thead><tr><th>Beer</th><th>Horizon</th><th>Note</th><th>Actions</th></tr></thead><tbody>"
+            + "".join(rows_html)
+            + "</tbody></table></section>"
+        )
+
+    body_html = "".join(cards)
+    return render_structured_page(
+        "Fermentation Dashboard",
+        "Live fermentation and near-term brewing view from shopping intent, brew history, and active artifacts.",
+        body_html,
+        "",
     )
 
 
@@ -2829,6 +3071,9 @@ class BrewUIHandler(BaseHTTPRequestHandler):
                 notice = "Trust Check Passed" if ok else "Trust Check Failed"
                 self.respond_bytes(200, "text/html; charset=utf-8", render_view_response(path, notice))
                 return
+            if action in {"prepare", "brew", "package", "status"}:
+                self.respond_bytes(200, "text/html; charset=utf-8", render_operation_result_page(action, flat_params, ok, payload))
+                return
             title = f"Operation - {action}"
             action_html = ""
             recipe_token = flat_params.get("recipe", "")
@@ -2842,8 +3087,11 @@ class BrewUIHandler(BaseHTTPRequestHandler):
 
         if parsed.path == "/dashboard":
             mode = params.get("mode", ["state"])[0]
-            if mode not in {"state", "next"}:
+            if mode not in {"state", "next", "fermentation"}:
                 self.respond_text(400, "Unsupported dashboard mode.")
+                return
+            if mode == "fermentation":
+                self.respond_bytes(200, "text/html; charset=utf-8", render_fermentation_dashboard_page())
                 return
             payload = dashboard_output(mode)
             if params.get("raw", ["0"])[0] == "1":
