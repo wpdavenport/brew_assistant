@@ -106,6 +106,20 @@ def run(cmd: list[str], dry_run: bool, label: str = "") -> int:
     return rc
 
 
+def run_follow_up(cmd: list[str], label: str, dry_run: bool) -> int:
+    print(f"FOLLOW_UP: {label}")
+    print("COMMAND:", " ".join(cmd))
+    if dry_run:
+        print("STATUS: DRY_RUN")
+        return 0
+    proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    print(f"STATUS: {'OK' if proc.returncode == 0 else f'FAILED ({proc.returncode})'}")
+    output = (proc.stdout + proc.stderr).strip()
+    if output:
+        print(output)
+    return proc.returncode
+
+
 def refresh_recipe_html(recipe: str, dry_run: bool) -> int:
     cmd = [sys.executable, "tools/refresh_recipe_html.py", "--recipe", recipe]
     return run(cmd, dry_run, label="refresh recipe html")
@@ -225,6 +239,34 @@ def action_command(args: argparse.Namespace, phrase_data: dict[str, str] | None)
     raise ValueError(f"Unsupported action: {action}")
 
 
+def orchestrate_follow_through(action: str, recipe: str, dry_run: bool) -> int:
+    if not recipe or action == "status":
+        return 0
+    follow_ups: list[tuple[str, list[str]]] = [
+        (
+            "refresh recipe html",
+            [sys.executable, "tools/refresh_recipe_html.py", "--recipe", recipe],
+        ),
+        (
+            "batch state summary",
+            [sys.executable, "tools/batch_state_summary.py", "--recipe", recipe, "--with-next-actions"],
+        ),
+    ]
+    if action == "package":
+        follow_ups.append(
+            (
+                "yield report",
+                [sys.executable, "tools/yield_report.py", "--recipe", recipe],
+            )
+        )
+    rc = 0
+    for label, cmd in follow_ups:
+        step_rc = run_follow_up(cmd, label, dry_run)
+        if step_rc != 0:
+            rc = step_rc
+    return rc
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Single operator entry point for brew lifecycle actions")
     parser.add_argument("--text", default="", help="Natural-language action phrase")
@@ -265,7 +307,11 @@ def main() -> int:
         if rc != 0:
             return rc
     cmd = action_command(args, phrase_data)
-    return run(cmd, args.dry_run, label=action)
+    rc = run(cmd, args.dry_run, label=action)
+    if rc != 0:
+        return rc
+    follow_rc = orchestrate_follow_through(action, recipe, args.dry_run)
+    return follow_rc
 
 
 if __name__ == "__main__":

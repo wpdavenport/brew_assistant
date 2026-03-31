@@ -2661,51 +2661,31 @@ def operate_output(action: str, params: dict[str, str]) -> tuple[str, bool]:
         recipe = params.get("recipe", "")
         proc = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", recipe], cwd=ROOT, capture_output=True, text=True)
         return proc.stdout + proc.stderr, proc.returncode == 0
-    if action == "package":
-        cmd = [
-            "python3", "tools/register_package.py",
-            "--recipe", params.get("recipe", ""),
-            "--brew-date", params.get("brew_date", ""),
-            "--package-date", params.get("package_date", ""),
-            "--fg", params.get("fg", ""),
-            "--packaged-volume", params.get("packaged_volume", ""),
-            "--packaged-volume-unit", params.get("packaged_volume_unit", "gal"),
-        ]
-        if params.get("co2_vols"):
-            cmd.extend(["--co2-vols", params["co2_vols"]])
-        if params.get("harvest_yeast"):
-            cmd.extend(["--harvest-yeast", params["harvest_yeast"]])
-        if params.get("harvest_generation"):
-            cmd.extend(["--harvest-generation", params["harvest_generation"]])
-        proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-        refresh_lines = []
-        if proc.returncode == 0 and params.get("recipe"):
-            refresh = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", params["recipe"]], cwd=ROOT, capture_output=True, text=True)
-            refresh_lines.append(refresh.stdout + refresh.stderr)
-        status = subprocess.run(["python3", "tools/batch_state_summary.py", "--with-next-actions"], cwd=ROOT, capture_output=True, text=True)
-        payload = proc.stdout + proc.stderr
-        if refresh_lines:
-            payload += "\n" + "\n".join(refresh_lines)
-        payload += "\n" + status.stdout + status.stderr
-        return payload, proc.returncode == 0
     cmd = ["python3", "tools/brew_op.py", "--action", action]
     if params.get("recipe"):
         cmd.extend(["--recipe", params["recipe"]])
     if params.get("date"):
         cmd.extend(["--date", params["date"]])
+    if params.get("brew_date"):
+        cmd.extend(["--brew-date", params["brew_date"]])
+    if params.get("package_date"):
+        cmd.extend(["--package-date", params["package_date"]])
+    if params.get("fg"):
+        cmd.extend(["--fg", params["fg"]])
+    if params.get("packaged_volume"):
+        cmd.extend(["--packaged-volume", params["packaged_volume"]])
+    if params.get("packaged_volume_unit"):
+        cmd.extend(["--packaged-volume-unit", params["packaged_volume_unit"]])
+    if params.get("co2_vols"):
+        cmd.extend(["--co2-vols", params["co2_vols"]])
+    if params.get("harvest_yeast"):
+        cmd.extend(["--harvest-yeast", params["harvest_yeast"]])
+    if params.get("harvest_generation"):
+        cmd.extend(["--harvest-generation", params["harvest_generation"]])
     if params.get("run_trust_check"):
         cmd.append("--run-trust-check")
     proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    refresh_lines = []
-    if proc.returncode == 0 and params.get("recipe"):
-        refresh = subprocess.run(["python3", "tools/refresh_recipe_html.py", "--recipe", params["recipe"]], cwd=ROOT, capture_output=True, text=True)
-        refresh_lines.append(refresh.stdout + refresh.stderr)
-    status = subprocess.run(["python3", "tools/batch_state_summary.py", "--with-next-actions"], cwd=ROOT, capture_output=True, text=True)
-    payload = proc.stdout + proc.stderr
-    if refresh_lines:
-        payload += "\n" + "\n".join(refresh_lines)
-    payload += "\n" + status.stdout + status.stderr
-    return payload, proc.returncode == 0
+    return proc.stdout + proc.stderr, proc.returncode == 0
 
 
 def render_view_response(path: Path, notice_text: str = "") -> bytes:
