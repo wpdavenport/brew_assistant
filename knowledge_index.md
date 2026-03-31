@@ -46,6 +46,9 @@ These files are authoritative brewing memory for this repo. Consult them before 
 - libraries/bjcp_study/rubrics.md
 - libraries/bjcp_study/question_bank.json
 - libraries/bjcp_study/progress_template.json
+- project_control/BJCP_STUDY_MATRIX.md
+- books/BJCP_Study_Guide.pdf
+- books/SCP_BeerScoreSheet.pdf
 
 ## Output locations (write new artifacts here)
 - New recipe drafts: recipes/

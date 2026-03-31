@@ -115,6 +115,7 @@ Start with:
 Project control files:
 - `project_control/REVIEW_RULES.md`
 - `project_control/DRIFT_MATRIX.md`
+- `project_control/BJCP_STUDY_MATRIX.md`
 
 Use `drift review` before trusting meaningful changes.
 
@@ -122,6 +123,9 @@ Control-plane commands:
 - `make drift-review`
 - `make insight TEXT="Target defaults to UK unless explicitly marked American"`
 - `make insight-report`
+- `make bjcp-question-sources`
+- `make bjcp-question-report`
+- `make bjcp-study-check`
 - `make aa-sync`
 - `make recipe-sync`
 - `make beerxml-sync`
@@ -216,6 +220,15 @@ It is not enabled by default.
 - `libraries/bjcp_study/rubrics.md`
 - `libraries/bjcp_study/question_bank.json`
 - `libraries/bjcp_study/progress_template.json`
+- `project_control/BJCP_STUDY_MATRIX.md`
+
+### Study Guardrails
+- The BJCP study system is managed separately from brewing drift control.
+- `question_bank.json` should be source-backed to the BJCP study guide, not hand-waved from generic quiz memory.
+- Use:
+  - `make bjcp-question-sources`
+  - `make bjcp-question-report`
+  - `make bjcp-study-check`
 
 ## 🧠 The "Hard Rules"
 

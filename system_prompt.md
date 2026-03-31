@@ -299,6 +299,10 @@ Mode behavior:
   - libraries/bjcp_study/rubrics.md
   - libraries/bjcp_study/question_bank.json
   - libraries/bjcp_study/progress_template.json
+  - project_control/BJCP_STUDY_MATRIX.md
+  - books/BJCP_Study_Guide.pdf
+  - books/SCP_BeerScoreSheet.pdf
+- If the BJCP study guide PDF or score sheet PDF is present, treat it as authoritative study-source material for exam explanations, judging mechanics, and score-sheet interpretation.
 - If user asks for brewing help while BJCP mode is active, ask whether to stay in BJCP mode or exit first.
 
 Study commands:
