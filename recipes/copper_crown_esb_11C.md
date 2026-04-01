@@ -1,11 +1,11 @@
-# Copper Crown ESB (Fuller's Clone - Competition Lock)
+# Copper Crown ESB (Competition Lock)
 
 ## INTENT
-Competition-calibrated Fuller's ESB-style clone targeting classic 11C balance: layered English malt, firm but smooth bitterness, expressive yet clean fermentation, and high repeatability.
+Competition-calibrated 11C strong bitter targeting classic balance: layered English malt, firm but smooth bitterness, expressive yet clean fermentation, and high repeatability.
 
 ## COMPETITION ENTRY
 - BJCP Category: 11C Strong Bitter
-- Declared Commercial Example: Fuller's ESB
+- Declared Commercial Example: none
 - Declared Base Style: 11C Strong Bitter
 
 ## COMPETITION TRACKING

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RECIPES>
   <RECIPE>
-    <NAME>Copper Crown ESB (Fuller's Clone - Competition Lock)</NAME>
+    <NAME>Copper Crown ESB (Competition Lock)</NAME>
     <VERSION>1</VERSION>
     <DATE>20 Feb 26</DATE>
     <TYPE>All Grain</TYPE>
@@ -15,7 +15,7 @@
     <IBU>37.0</IBU>
     <EST_ABV>5.8</EST_ABV>
     <EST_COLOR>11.0</EST_COLOR>
-    <NOTES>BJCP 11C Strong Bitter target, Fuller's ESB-style. Full-volume no-sparge on G40. Track yeast generation per batch (G0 fresh, G1+ repitch) and record source batch for repitches.</NOTES>
+    <NOTES>BJCP 11C Strong Bitter target. Full-volume no-sparge on G40. Track yeast generation per batch (G0 fresh, G1+ repitch) and record source batch for repitches.</NOTES>
     <IBU_METHOD>Tinseth</IBU_METHOD>
     <STYLE>
       <NAME>Strong Bitter</NAME>
