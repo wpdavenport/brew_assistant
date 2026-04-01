@@ -3,7 +3,7 @@
 **Your AI Head Brewer that actually knows *your* system.**
 
 Welcome to **Brew Assistant**, a repository-based Retrieval Augmented Generation (RAG) system designed to turn your coding assistant into a world-class brewing coach.
-You are an expert beer homebrewer and a Master-level BJCP judge.
+The assistant is expected to operate at an advanced homebrewing and BJCP-informed standard.
 
 ## 🚀 Why is this amazing?
 
@@ -29,6 +29,13 @@ It's not just a recipe generator; it's a **process engine** focused on repeatabi
 
 Practical expectation:
 - if you want to use `prepare-brew`, `batch-lifecycle`, `register-brew`, `register-package`, `yield-report`, `batch-state`, `brew-op`, or `trust-check`, you need a working `python3` on your machine
+
+### Platform Notes
+
+- Core repo workflow is cross-platform anywhere `python3`, `git`, and the repo files are available.
+- The local web UI works through the generic service/bootstrap layer.
+- Managed background service support is currently implemented on `macOS`.
+- `Windows` and `Linux` have service-layer plumbing in place, but their persistent launcher backends are not fully built out yet.
 
 ### Recommended onboarding for every new chat
 
@@ -62,6 +69,12 @@ Expected startup behavior:
    - *"Why did my last IPA finish sweet? Check the logs."*
    - *"Create a fermentation schedule for a German Pilsner."*
 
+### Shared vs Personal Branches
+
+- `main` is the shared framework branch.
+- `personal` is where private brewing state, local notes, generated artifacts, and personal working materials can live.
+- Keep personal inventory state, shopping intent, private study progress, and similar user-specific files off `main` unless you explicitly want them shared.
+
 ### Fresh-chat rule
 
 For a new user or a new chat, the system works the same way **only if the startup instruction above is used**.
@@ -89,6 +102,16 @@ The brain of the operation is the **Knowledge Index**. The AI uses `knowledge_in
 2.  **Plan**: It generates a minute-by-minute brew day checklist tailored to your system.
 3.  **Execute**: It calculates strike temps and salt additions using your specific `tools/calculations.md`.
 4.  **Learn**: After the brew, you log the data. The AI uses this to troubleshoot and improve the next batch.
+
+### Local App Surface
+
+The repo is no longer just prompts plus files. It also has a local web UI for day-to-day use:
+- recipe and brew-sheet viewing
+- shopping and planned-brew state
+- fermentation dashboard
+- action panels for prepare / brew / package flows
+- print-friendly recipe and brew-sheet views
+- BJCP study tools
 
 ### Iteration Discipline
 - Locked competition recipes are treated as canonical brewed versions, not scratchpads.
@@ -159,6 +182,7 @@ Control-plane commands:
 - BeerXML exports: `recipes/beer_xml_exports/`
 - Recipe HTML exports: `recipes/html_exports/`
 - Local repo browser / viewer: `python3 tools/web_ui.py` or `make web-ui`
+- The web UI exposes recipe views, brew-day sheets, shopping, fermentation state, operator actions, and BJCP study from one local surface.
 - Grainfather template: `libraries/templates/grainfather_beerxml_template.xml`
 - Yeast generation tracking convention: `G0` = fresh lab pack, `G1+` = repitch generations (always record source batch ID/date)
 - Guardrail: do not create a separate batch log for a new brew when a dated brew-day sheet exists. Put actual brew data into the dated brew-day sheet and use `brew_history.json` only for minimal event/index metadata.
@@ -173,6 +197,7 @@ Control-plane commands:
 - `make hop-lot-guidance RECIPE=<recipe_slug>` gives recipe-level guidance for allocating higher-AA vs lower-AA hop lots across early and late additions when the same hop exists in multiple tracked lots.
 - `make package-readiness RECIPE=<recipe_slug> ...` turns current FG, gravity stability, VDK status, and bubbling into a packaging gate decision.
 - `make sensory-learning RECIPE=<recipe_slug>` summarizes recorded sensory and side-by-side lessons from the recipe and its historical archives.
+- The fermentation dashboard in the web UI gives one place to review fermenting beers, planned queue, shopping blockers, and likely next actions.
 - Durable new rules, defaults, and process lessons should be captured with `make insight TEXT="..."` so they route into repo state instead of staying only in chat memory.
 
 ## 📦 Inventory Workflow (Phase 1/2/3)
