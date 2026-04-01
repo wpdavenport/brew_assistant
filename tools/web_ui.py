@@ -1028,6 +1028,17 @@ def render_dashboard_page(title: str, body: str, action_html: str = "") -> bytes
       font-weight: 700;
       text-decoration: none;
     }}
+    .action-links button {{
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid #d6cab8;
+      background: #fffdf8;
+      color: #4d2a13;
+      font-weight: 700;
+      font-family: Georgia, "Times New Roman", serif;
+      cursor: pointer;
+    }}
     pre {{
       margin: 0;
       white-space: pre-wrap;
@@ -2479,6 +2490,21 @@ def package_form_url(recipe: str, brew_date: str = "") -> str:
     return "/package-form?" + urllib.parse.urlencode(query)
 
 
+def hop_lot_guidance_url(recipe: str) -> str:
+    return "/lot-guidance?" + urllib.parse.urlencode({"recipe": recipe})
+
+
+def package_readiness_url(recipe: str, brew_date: str = "") -> str:
+    query = {"recipe": recipe}
+    if brew_date:
+        query["brew_date"] = brew_date
+    return "/package-readiness?" + urllib.parse.urlencode(query)
+
+
+def sensory_learning_url(recipe: str) -> str:
+    return "/sensory-learning?" + urllib.parse.urlencode({"recipe": recipe})
+
+
 def render_package_form(recipe_token: str, brew_date: str) -> bytes:
     default_date = __import__("datetime").date.today().isoformat()
     default_volume = "5.00"
@@ -2560,6 +2586,117 @@ def render_package_form(recipe_token: str, brew_date: str) -> bytes:
 """.encode("utf-8")
 
 
+def render_package_readiness_page(recipe_token: str, brew_date: str, params: dict[str, str] | None = None) -> bytes:
+    params = params or {}
+    action_html = ""
+    recipe_path = resolve_recipe_markdown(recipe_token)
+    if recipe_path:
+        action_html = action_panel_html(canonical_recipe_token(recipe_path), recipe_path)
+    checked_stable = " checked" if params.get("stable_48h") == "1" else ""
+    checked_vdk = " checked" if params.get("vdk_clean") == "1" else ""
+    checked_bubbling = " checked" if params.get("still_bubbling") == "1" else ""
+    result_html = ""
+    if params.get("submitted") == "1":
+        cmd = ["python3", "tools/package_readiness.py", "--recipe", recipe_token, "--json"]
+        if params.get("current_fg"):
+            cmd.extend(["--current-fg", params["current_fg"]])
+        if params.get("stable_48h") == "1":
+            cmd.append("--stable-48h")
+        if params.get("vdk_clean") == "1":
+            cmd.append("--vdk-clean")
+        if params.get("still_bubbling") == "1":
+            cmd.append("--still-bubbling")
+        proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        if proc.returncode == 0:
+            payload = json.loads(proc.stdout)
+            status = payload.get("status", "unknown")
+            notice_class = "warning" if status != "ready" else ""
+            cards = []
+            for heading, key in (
+                ("Confirmations", "confirmations"),
+                ("Cautions", "cautions"),
+                ("Blockers", "blockers"),
+                ("Recipe Packaging Gates", "packaging_gates"),
+            ):
+                values = payload.get(key, [])
+                items = "".join(f"<li>{html.escape(value)}</li>" for value in values) or "<li>(none)</li>"
+                cards.append(f"<section><h2>{html.escape(heading)}</h2><ul>{items}</ul></section>")
+            result_html = (
+                f'<div class="notice-banner {notice_class}">Packaging Readiness: {html.escape(status.title())}. '
+                f'{html.escape(payload.get("next_step", ""))}</div>'
+                + "".join(cards)
+            )
+        else:
+            result_html = f'<div class="notice-banner warning"><pre>{html.escape(proc.stdout + proc.stderr)}</pre></div>'
+    body_html = f"""
+    <section>
+      <h2>Packaging Readiness</h2>
+      <p class="notes">Use this as a gate check before packaging. It does not replace your own sample, but it should reduce the amount of state you need to hold in your head.</p>
+      <form method="get" action="/package-readiness">
+        <input type="hidden" name="recipe" value="{html.escape(recipe_token)}">
+        <input type="hidden" name="brew_date" value="{html.escape(brew_date)}">
+        <input type="hidden" name="submitted" value="1">
+        <table><tbody>
+          <tr><td>Recipe</td><td>{html.escape(recipe_token)}</td></tr>
+          <tr><td>Brew Date</td><td>{html.escape(brew_date or "(not recorded)")}</td></tr>
+          <tr><td>Current FG</td><td><input name="current_fg" value="{html.escape(params.get('current_fg', ''))}" placeholder="1.013"></td></tr>
+          <tr><td>Stable 48h</td><td><label><input type="checkbox" name="stable_48h" value="1"{checked_stable}> Gravity stable for 48 hours</label></td></tr>
+          <tr><td>VDK Clean</td><td><label><input type="checkbox" name="vdk_clean" value="1"{checked_vdk}> Warm sample / VDK check is clean</label></td></tr>
+          <tr><td>Still Bubbling</td><td><label><input type="checkbox" name="still_bubbling" value="1"{checked_bubbling}> Still visibly bubbling / venting</label></td></tr>
+        </tbody></table>
+        <div class="action-links"><button type="submit">Assess Packaging Readiness</button></div>
+      </form>
+    </section>
+    {result_html}
+    """
+    return render_structured_page(
+        f"Package Readiness - {recipe_token.replace('_', ' ').title()}",
+        "",
+        body_html,
+        "",
+        action_html=action_html,
+    )
+
+
+def render_sensory_learning_page(recipe_token: str) -> bytes:
+    proc = subprocess.run(
+        ["python3", "tools/sensory_learning.py", "--recipe", recipe_token, "--json"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if proc.returncode != 0:
+        return render_dashboard_page("Sensory Learning", proc.stdout + proc.stderr)
+    payload = json.loads(proc.stdout)
+    recipe_path = resolve_recipe_markdown(recipe_token)
+    action_html = ""
+    if recipe_path:
+        action_html = action_panel_html(canonical_recipe_token(recipe_path), recipe_path)
+    sections: list[str] = []
+    for heading, key in (
+        ("Strengths", "strengths"),
+        ("Misses", "misses"),
+        ("Iteration Implications", "implications"),
+        ("Scoring Notes", "scoring"),
+    ):
+        values = payload.get(key, [])
+        items = "".join(f"<li>{html.escape(value)}</li>" for value in values) or "<li>(none)</li>"
+        sections.append(f"<section><h2>{html.escape(heading)}</h2><ul>{items}</ul></section>")
+    if payload.get("sources"):
+        rows = "".join(
+            f"<tr><td>{html.escape(row.get('title', ''))}</td><td>{html.escape(row.get('path', ''))}</td></tr>"
+            for row in payload["sources"]
+        )
+        sections.append("<section><h2>Sources</h2><table><thead><tr><th>Document</th><th>Path</th></tr></thead><tbody>" + rows + "</tbody></table></section>")
+    return render_structured_page(
+        f"Sensory Learning - {payload.get('title', recipe_token)}",
+        "Derived from sensory, side-by-side, and scoring sections already recorded in the recipe set.",
+        "".join(sections),
+        "",
+        action_html=action_html,
+    )
+
+
 def action_panel_html(recipe_token: str, recipe_path: Path, current_rel: str = "") -> str:
     state = recipe_state(recipe_token, recipe_path)
     refresh_params = {"recipe": recipe_token}
@@ -2571,11 +2708,14 @@ def action_panel_html(recipe_token: str, recipe_path: Path, current_rel: str = "
     links = [f'<a href="{html.escape(operator_url("status", recipe=recipe_token))}" target="content">Next Action</a>']
     if state["state"] == "brewed_not_packaged":
         links.append(f'<a href="{html.escape(package_form_url(recipe_token, state["brew_date"]))}" target="content">Register Package</a>')
+        links.append(f'<a href="{html.escape(package_readiness_url(recipe_token, state["brew_date"]))}" target="content">Packaging Readiness</a>')
     elif state["state"] == "prepared_not_brewed":
         links.append(f'<a href="{html.escape(operator_url("brew", recipe=recipe_token, date=state["brew_date"]))}" target="content">Register Brew</a>')
     else:
         links.append(f'<a href="{html.escape(operator_url("prepare", recipe=recipe_token, date="today", run_trust_check="1"))}" target="content">Prepare Today</a>')
     links.extend([
+        f'<a href="{html.escape(sensory_learning_url(recipe_token))}" target="content">Sensory Learning</a>',
+        f'<a href="{html.escape(hop_lot_guidance_url(recipe_token))}" target="content">Hop Lot Guidance</a>',
         f'<a href="{html.escape(operator_url("refresh-html", **refresh_params))}" target="content">Refresh Print</a>',
         f'<a href="{html.escape(operator_url("trust-check", **trust_params))}" target="content">Run Trust Check</a>',
     ])
@@ -2701,6 +2841,60 @@ def render_operation_result_page(action: str, params: dict[str, str], ok: bool, 
     if ok:
         return page
     return page.replace(b'class="notice-banner"', b'class="notice-banner warning"', 1)
+
+
+def render_hop_lot_guidance_page(recipe_token: str) -> bytes:
+    proc = subprocess.run(
+        ["python3", "tools/hop_lot_guidance.py", "--recipe", recipe_token, "--json"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if proc.returncode != 0:
+        return render_dashboard_page("Hop Lot Guidance", proc.stdout + proc.stderr)
+    payload = json.loads(proc.stdout)
+    recipe_path = resolve_recipe_markdown(recipe_token)
+    action_html = ""
+    if recipe_path:
+        action_html = action_panel_html(canonical_recipe_token(recipe_path), recipe_path)
+    sections: list[str] = []
+    for hop in payload.get("hops", []):
+        additions = "".join(
+            f"<tr><td>{html.escape(row['timing'])}</td><td>{html.escape(row['bucket'])}</td><td>{row['grams']:.1f} g</td></tr>"
+            for row in hop.get("additions", [])
+        )
+        guidance = "".join(f"<li>{html.escape(line)}</li>" for line in hop.get("guidance", []))
+        warnings = "".join(f"<li>{html.escape(line)}</li>" for line in hop.get("warnings", []))
+        meta_rows = [
+            ("Tracked AA", f"{float(hop['base_alpha_pct']):.1f}%" if hop.get("base_alpha_pct") is not None else "(none)"),
+            ("Tracked lots", ", ".join(f"{float(v):.1f}%" for v in hop.get("lot_alpha_pct", [])) or "(none)"),
+            ("On hand", f"{float(hop.get('on_hand_g', 0.0)):.1f} g"),
+            ("Recipe need", f"{float(hop.get('total_grams', 0.0)):.1f} g"),
+        ]
+        meta_html = "".join(f"<tr><td>{html.escape(label)}</td><td>{html.escape(value)}</td></tr>" for label, value in meta_rows)
+        body = [
+            "<table><tbody>",
+            meta_html,
+            "</tbody></table>",
+            "<h3>Additions</h3>",
+            "<table><thead><tr><th>Timing</th><th>Bucket</th><th>Amount</th></tr></thead><tbody>",
+            additions or '<tr><td colspan="3">(none)</td></tr>',
+            "</tbody></table>",
+            "<h3>Guidance</h3>",
+            f"<ul>{guidance}</ul>" if guidance else '<p class="notes">No guidance needed.</p>',
+        ]
+        if warnings:
+            body.extend(["<h3>Warnings</h3>", f"<ul>{warnings}</ul>"])
+        sections.append(f"<section><h2>{html.escape(hop['hop_name'])}</h2>{''.join(body)}</section>")
+    if not sections:
+        sections.append('<p class="notes">No hop additions parsed for this recipe.</p>')
+    return render_structured_page(
+        f"Hop Lot Guidance - {payload.get('title', recipe_token)}",
+        "Guidance layer for allocating higher-AA vs lower-AA lots across bittering and late additions. This does not yet track per-lot weights separately in stock.",
+        "".join(sections),
+        "",
+        action_html=action_html,
+    )
 
 
 def render_fermentation_dashboard_page() -> bytes:
@@ -3032,6 +3226,32 @@ class BrewUIHandler(BaseHTTPRequestHandler):
                 self.respond_text(400, "Missing recipe.")
                 return
             self.respond_bytes(200, "text/html; charset=utf-8", render_package_form(recipe_token, brew_date))
+            return
+
+        if parsed.path == "/package-readiness":
+            recipe_token = params.get("recipe", [""])[0]
+            brew_date = params.get("brew_date", [""])[0]
+            if not recipe_token:
+                self.respond_text(400, "Missing recipe.")
+                return
+            flat_params = {key: values[0] for key, values in params.items() if values}
+            self.respond_bytes(200, "text/html; charset=utf-8", render_package_readiness_page(recipe_token, brew_date, flat_params))
+            return
+
+        if parsed.path == "/sensory-learning":
+            recipe_token = params.get("recipe", [""])[0]
+            if not recipe_token:
+                self.respond_text(400, "Missing recipe.")
+                return
+            self.respond_bytes(200, "text/html; charset=utf-8", render_sensory_learning_page(recipe_token))
+            return
+
+        if parsed.path == "/lot-guidance":
+            recipe_token = params.get("recipe", [""])[0]
+            if not recipe_token:
+                self.respond_text(400, "Missing recipe.")
+                return
+            self.respond_bytes(200, "text/html; charset=utf-8", render_hop_lot_guidance_page(recipe_token))
             return
 
         if parsed.path == "/operate":
