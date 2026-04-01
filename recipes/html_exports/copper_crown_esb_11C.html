@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Copper Crown ESB - BJCP 11C Strong Bitter</title>
+  <style>
+    :root {
+      --ink: #1f1a17;
+      --muted: #6b625c;
+      --paper: #fffdf8;
+      --rule: #d9cdbc;
+      --accent: #8c4c24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #efe7db;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.38in 0.42in 0.42in;
+      background: var(--paper);
+    }
+    .header {
+      border-bottom: 2px solid var(--rule);
+      margin-bottom: 0.14in;
+      padding-bottom: 0.08in;
+    }
+    h1 {
+      margin: 0;
+      font-size: 21pt;
+      line-height: 1.05;
+      color: var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .targets {
+      margin-top: 0.08in;
+      font-size: 10pt;
+      line-height: 1.25;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.05in 0.16in;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.16in 0.24in;
+      align-items: start;
+    }
+    .section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    h2 {
+      margin: 0 0 0.06in;
+      padding-bottom: 0.03in;
+      border-bottom: 1px solid var(--rule);
+      font-size: 11pt;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .section p {
+      margin: 0.04in 0 0.02in;
+      font-size: 10pt;
+      line-height: 1.3;
+    }
+    ul, ol {
+      margin: 0.04in 0 0.02in 0.18in;
+      padding: 0;
+      font-size: 10pt;
+      line-height: 1.28;
+    }
+    li {
+      margin: 0.03in 0;
+    }
+    .full {
+      grid-column: 1 / -1;
+    }
+    .ferment-note {
+      margin: 0 0 0.05in;
+      font-size: 9.4pt;
+      color: var(--muted);
+    }
+    @media print {
+      body { background: white; }
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0.3in 0.34in 0.34in;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .section {
+        width: calc(50% - 0.12in);
+        margin: 0 0.24in 0.14in 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .section:nth-child(2n) {
+        margin-right: 0;
+      }
+      .section.full {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <h1>Copper Crown ESB - BJCP 11C Strong Bitter</h1>
+      <div class="targets"><span><strong>OG:</strong> 1.057</span>
+<span><strong>FG:</strong> 1.013</span>
+<span><strong>ABV:</strong> 5.8%</span>
+<span><strong>IBU:</strong> 37</span>
+<span><strong>Color:</strong> 11 SRM</span>
+<span><strong>Mash pH (room temp):</strong> 5.30</span></div>
+    </header>
+
+    <section class="grid">
+      <div class="section">
+        <h2>Grains</h2>
+        <ul>
+<li>9.04 lb (4.10 kg) Maris Otter Pale Malt</li>
+<li>0.62 lb (280 g) English Medium Crystal Malt (Thomas Fawcett)</li>
+<li>0.35 lb (160 g) UK Amber Malt</li>
+<li>0.18 lb (80 g) Torrified Wheat</li>
+<li>0.35 lb (160 g) Invert Sugar No.2 (add at 10 min left in boil)</li>
+</ul>
+      </div>
+      <div class="section">
+        <h2>Yeast</h2>
+        <ul>
+<li>Wyeast 1968 London ESB Ale (or WLP002)</li>
+</ul>
+      </div>
+      <div class="section full">
+        <h2>Hops</h2>
+        <ul>
+<li>0.88 oz (25 g) Target (9.6% AA) - 60 min</li>
+<li>0.63 oz (18 g) Northdown (7.3% AA) - 20 min</li>
+<li>0.53 oz (15 g) UK Challenger (7.0% AA) - 10 min</li>
+<li>0.42 oz (12 g) Northdown (7.3% AA) - flameout, 10 min steep</li>
+<li>Whirlfloc: 1 tablet at 10 min</li>
+</ul>
+      </div>
+      <div class="section">
+        <h2>Mash Schedule</h2>
+        <ol>
+<li>Mash 60 minutes at 151.0 F (66.1 C).</li>
+<li>Mash out 10 minutes at 168.0 F (75.6 C).</li>
+</ol>
+      </div>
+      <div class="section">
+        <h2>Fermentation Schedule</h2>
+        <p class="ferment-note">Fermentation Equipment: Grainfather GF30 Pro Conical + Grainfather Glycol Chiller</p>
+        <ol>
+<li>Day 0-3: hold 64.4 F (18.0 C).</li>
+<li>Day 7-9: hold 68.0 F (20.0 C) for cleanup.</li>
+<li>Day 8-9: forced VDK check required before crash decision.</li>
+<li>Crash to 35-37 F (2-3 C) for 48-72 hr only after stable terminal gravity and clean VDK.</li>
+</ol>
+      </div>
+      
+    </section>
+  </main>
+</body>
+</html>
