@@ -28,6 +28,15 @@ intent-lifecycle:
 aa-sync:
 	python3 tools/validate_hop_aa_sync.py
 
+hop-lot-guidance:
+	python3 tools/hop_lot_guidance.py --recipe "$(RECIPE)"
+
+package-readiness:
+	python3 tools/package_readiness.py --recipe "$(RECIPE)" $(ARGS)
+
+sensory-learning:
+	python3 tools/sensory_learning.py --recipe "$(RECIPE)"
+
 prepare-brew:
 	python3 tools/prepare_brew.py --recipe "$(RECIPE)" --date "$(DATE)" --run-trust-check
 

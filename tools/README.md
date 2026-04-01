@@ -151,6 +151,21 @@ Use `validate_intent_lifecycle.py` to catch contradictions between shopping inte
 - `python3 tools/validate_intent_lifecycle.py`
 - `make intent-lifecycle`
 
+Use `hop_lot_guidance.py` to get recipe-level guidance when a hop has multiple tracked AA lots:
+
+- `python3 tools/hop_lot_guidance.py --recipe patient_number_9`
+- `make hop-lot-guidance RECIPE=patient_number_9`
+
+Use `package_readiness.py` to turn current fermentation facts into a packaging gate decision:
+
+- `python3 tools/package_readiness.py --recipe davenport_esb --current-fg 1.014 --stable-48h --vdk-clean`
+- `make package-readiness RECIPE=davenport_esb ARGS="--current-fg 1.014 --stable-48h --vdk-clean"`
+
+Use `sensory_learning.py` to summarize recorded sensory lessons and next-iteration implications:
+
+- `python3 tools/sensory_learning.py --recipe copper_crown_esb`
+- `make sensory-learning RECIPE=copper_crown_esb`
+
 ## Prompt Harness
 
 Use the prompt harness to regression-test brewing-assistant guardrails after prompt changes:
