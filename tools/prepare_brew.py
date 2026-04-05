@@ -163,6 +163,38 @@ def validate_date(date_text: str) -> str:
     return date_text
 
 
+def refresh_embedded_schedule_dates(sheet_path: Path, brew_date: str) -> None:
+    text = sheet_path.read_text(encoding="utf-8")
+    brew_day = dt.date.fromisoformat(brew_date)
+
+    anchor_pattern = re.compile(
+        r'(<p class="small" style="margin-bottom:4px;"><strong>Schedule anchor:</strong> Brew day assumed <strong>)'
+        r'(\d{4}-\d{2}-\d{2})'
+        r'(</strong>\. Record actual pitch timestamp and adjust if brew day shifts\.</p>)'
+    )
+    text = anchor_pattern.sub(
+        lambda m: f"{m.group(1)}{brew_date}{m.group(3)}",
+        text,
+    )
+
+    row_pattern = re.compile(
+        r'(<tr><td>)'
+        r'(\d{4}-\d{2}-\d{2})'
+        r'(<span class="blank-sm"></span> \([A-Za-z]{3}\)</td><td>)'
+        r'(\d+)'
+        r'(</td><td>)'
+    )
+
+    def replace_row(match: re.Match[str]) -> str:
+        day_index = int(match.group(4))
+        row_date = brew_day + dt.timedelta(days=day_index)
+        weekday = row_date.strftime("%a")
+        return f"{match.group(1)}{row_date.isoformat()} <span class=\"blank-sm\"></span> ({weekday}){match.group(3)}{match.group(4)}{match.group(5)}"
+
+    text = row_pattern.sub(replace_row, text)
+    sheet_path.write_text(text, encoding="utf-8")
+
+
 def run_trust_check() -> int:
     proc = subprocess.run(["make", "trust-check"], cwd=ROOT)
     return proc.returncode
@@ -208,6 +240,8 @@ def main() -> int:
 
     if source_sheet:
         source_sheet.rename(dated_sheet)
+
+    refresh_embedded_schedule_dates(dated_sheet, brew_date)
 
     update_active_artifacts(recipe_rel, dated_rel, beerxml_rel)
     if args.record_history:

@@ -51,14 +51,13 @@ Boil start: ______   Boil end: ______
 [ ] 45 min: Amarillo 0.50 oz
 [ ] 40 min: Amarillo 0.50 oz
 [ ] 40 min: Simcoe 0.50 oz
-[ ] 40 min: Warrior 0.25 oz
 [ ] 20 min: Amarillo 0.75 oz
 [ ] 20 min: Simcoe 0.75 oz
-[ ] 20 min: Warrior 0.25 oz
 [ ] 10 min: Corn sugar 1.25 lb
-[ ] 0 min: cool to 180 F, then hop stand 20 min:
-    [ ] Amarillo 1.50 oz
-    [ ] Simcoe 1.50 oz
+[ ] 0 min: cool to 180 F
+[ ] 0 min: Amarillo 1.50 oz
+[ ] 0 min: Simcoe 1.50 oz
+[ ] 0 min: hop stand 20 min
 
 Hop stand start temp: ______ F
 Hop stand end temp: ______ F
