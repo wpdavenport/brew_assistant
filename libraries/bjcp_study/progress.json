@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode_active": false,
   "started_utc": "",
-  "last_updated_utc": "2026-03-31T01:20:29Z",
+  "last_updated_utc": "2026-04-01T19:49:22Z",
   "sessions": [
     {
       "id": "mini_test_2026-03-31T01:06:03Z",
@@ -177,53 +177,159 @@
         }
       ],
       "misses": []
+    },
+    {
+      "id": "mini_test_2026-04-01T19:49:22Z",
+      "completed_utc": "2026-04-01T19:49:22Z",
+      "type": "mini_test",
+      "timer_enabled": true,
+      "total": 12,
+      "correct": 10,
+      "score_pct": 83.3,
+      "duration_sec": 136,
+      "question_ids": [
+        "bjcp_q_103",
+        "bjcp_q_076",
+        "bjcp_q_066",
+        "bjcp_q_035",
+        "bjcp_q_047",
+        "bjcp_q_023",
+        "bjcp_q_107",
+        "bjcp_q_058",
+        "bjcp_q_025",
+        "bjcp_q_098",
+        "bjcp_q_038",
+        "bjcp_q_099"
+      ],
+      "results": [
+        {
+          "question_id": "bjcp_q_103",
+          "your_answer": "Style categories describe sensory expectations, not exact recipes",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_076",
+          "your_answer": "Ingredients and process",
+          "is_correct": false
+        },
+        {
+          "question_id": "bjcp_q_066",
+          "your_answer": "True",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_035",
+          "your_answer": "Kilning",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_047",
+          "your_answer": "Czech Premium Pale Lager",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_023",
+          "your_answer": "False",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_107",
+          "your_answer": "A style drift toward American interpretation",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_058",
+          "your_answer": "Esters",
+          "is_correct": false
+        },
+        {
+          "question_id": "bjcp_q_025",
+          "your_answer": "Sensory evaluation tied to style and improvement advice when warranted",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_098",
+          "your_answer": "Mashing",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_038",
+          "your_answer": "Reducing contamination risk and limiting continued thermal reactions",
+          "is_correct": true
+        },
+        {
+          "question_id": "bjcp_q_099",
+          "your_answer": "A long vigorous boil",
+          "is_correct": true
+        }
+      ],
+      "misses": [
+        {
+          "question_id": "bjcp_q_076",
+          "topic": "exam_structure",
+          "prompt": "The entrance exam study guide breaks questions into several categories because candidates are expected to study more than just:",
+          "your_answer": "Ingredients and process",
+          "correct_answer": "Beer styles",
+          "explanation": "The guide makes clear that style study alone is not enough; ethics, judging process, sensory characteristics, and brewing process also matter."
+        },
+        {
+          "question_id": "bjcp_q_058",
+          "topic": "off_flavors",
+          "prompt": "Smoky character is most often associated with which broad flavor family in the study guide examples?",
+          "your_answer": "Esters",
+          "correct_answer": "Phenols",
+          "explanation": "The study guide uses smoky as an example of phenolic-related character."
+        }
+      ]
     }
   ],
   "stats": {
-    "questions_answered": 24,
-    "correct": 24,
-    "accuracy_pct": 100.0,
+    "questions_answered": 36,
+    "correct": 34,
+    "accuracy_pct": 94.4,
     "by_topic": {
       "exam_structure": {
-        "answered": 2,
+        "answered": 3,
         "correct": 2,
-        "accuracy_pct": 100.0
+        "accuracy_pct": 66.7
       },
       "ingredients": {
-        "answered": 2,
-        "correct": 2,
+        "answered": 3,
+        "correct": 3,
         "accuracy_pct": 100.0
       },
       "process": {
-        "answered": 3,
-        "correct": 3,
+        "answered": 6,
+        "correct": 6,
         "accuracy_pct": 100.0
       },
       "off_flavors": {
-        "answered": 7,
+        "answered": 8,
         "correct": 7,
-        "accuracy_pct": 100.0
+        "accuracy_pct": 87.5
       },
       "styles_core": {
-        "answered": 2,
-        "correct": 2,
-        "accuracy_pct": 100.0
-      },
-      "styles_comparison": {
         "answered": 3,
         "correct": 3,
         "accuracy_pct": 100.0
       },
-      "judging_process": {
+      "styles_comparison": {
         "answered": 5,
         "correct": 5,
+        "accuracy_pct": 100.0
+      },
+      "judging_process": {
+        "answered": 8,
+        "correct": 8,
         "accuracy_pct": 100.0
       }
     }
   },
   "readiness": {
     "status": "exam_ready",
-    "weak_topics": [],
-    "recommended_next": "Take another mini test and compare weak topics."
+    "weak_topics": [
+      "exam_structure"
+    ],
+    "recommended_next": "Review missed in: exam_structure"
   }
 }

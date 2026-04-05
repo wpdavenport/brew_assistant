@@ -121,3 +121,24 @@ Salt additions for 8.45 gal total liquor:
 - Over-squeezing grain bed and creating harsh bitterness/mineral bite.
 - Late hop drift that reads floral-herbal only, without the orange-marmalade clone cue.
 - Oxygen pickup post-pitch or during transfer/packaging.
+
+## CURRENT BATCH LEARNING NOTES (2026-04-03)
+- Live-batch Tilt readings drifted from roughly `1.014` to `1.010`, then to `1.008`.
+- If the true terminal gravity is near `1.008`, this batch will finish drier than the `1.013` target and likely show less plush toffee depth than intended.
+- The likely style impact is a leaner, firmer version of Davenport rather than a ruined beer.
+
+### Adjustment Order For The Next Batch
+- Do not rewrite the recipe from Tilt alone; confirm the true FG with the cleanest packaged/sample reading available.
+- If the low finish is real, review mash fermentability first.
+- First likely correction: a small upward mash-temperature adjustment to preserve more fullness.
+- Review fermentation management second; `1968` is still operationally finicky and can either stall early or finish harder than expected depending on handling.
+- Treat grain choice as a possible contributor, but not the first rewrite point.
+
+### Working Cause Ranking
+1. Mash fermentability
+2. Yeast performance / fermentation management
+3. Measurement uncertainty from Tilt-only tracking
+4. Base-malt choice
+
+### Retained Target Reminder
+- The goal remains richer toffee / marmalade Fuller's-like depth, not just a generically good dry strong bitter.

@@ -10,6 +10,10 @@
     {
       "recipe": "recipes/old_crown_lazy_lager_3C.md",
       "brew_sheet": "brewing/brew_day_sheets/old_crown_lazy_lager_brew_day_sheet.html"
+    },
+    {
+      "recipe": "recipes/patient_number_9_clone_34A.md",
+      "brew_sheet": "brewing/brew_day_sheets/patient_number_9_brew_day_sheet_2026-04-05.html"
     }
   ],
   "hop_aa_active_files": [
@@ -17,6 +21,8 @@
     "brewing/brew_day_sheets/davenport_esb_brew_day_sheet_2026-03-28.html",
     "recipes/beer_xml_exports/davenport_esb_11C.xml",
     "recipes/old_crown_lazy_lager_3C.md",
-    "brewing/brew_day_sheets/old_crown_lazy_lager_brew_day_sheet.html"
+    "brewing/brew_day_sheets/old_crown_lazy_lager_brew_day_sheet.html",
+    "recipes/patient_number_9_clone_34A.md",
+    "brewing/brew_day_sheets/patient_number_9_brew_day_sheet_2026-04-05.html"
   ]
 }
