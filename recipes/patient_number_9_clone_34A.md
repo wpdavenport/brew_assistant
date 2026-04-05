@@ -131,3 +131,15 @@ Salt additions for 10.4 gal total liquor:
 - Oxidation during dry hop/packaging.
 - Over-dry finish that drifts away from clone profile.
 - Excess ester/alcohol heat from warm early fermentation.
+
+## CURRENT BATCH BREW NOTES (2026-04-05)
+- Boil start/end: 7:52 AM to 9:22 AM.
+- Pre-boil volume/gravity: 8.1 gal at 1.056.
+- Post-boil volume/gravity: 5.9 gal at 1.077.
+- Fermentor volume: 20 L.
+- Added 5 mL of 85% phosphoric acid during mash correction and still suspect it was too much with the new pH meter workflow.
+
+Next-batch carry-forward:
+- Keep treating phosphoric acid as an on-the-day measured correction, not a locked default.
+- Current high-side caution point for this recipe/system: 5 mL may still be too much.
+- Recalibrate on the next batch with the new pH meter and only lock in a default addition after a confirmed good reading.
