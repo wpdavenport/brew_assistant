@@ -4,6 +4,8 @@
   "started_utc": "",
   "last_updated_utc": "",
   "sessions": [],
+  "mastered_question_ids": [],
+  "completed_mastery_cycles": [],
   "stats": {
     "questions_answered": 0,
     "correct": 0,

@@ -1611,24 +1611,54 @@ def reset_bjcp_progress() -> None:
         BJCP_PROGRESS_FILE.unlink()
 
 
+def bjcp_mastery_state(payload: dict | None = None) -> tuple[set[str], list[str]]:
+    progress = payload or bjcp_progress_payload()
+    bank = {q["id"] for q in bjcp_question_bank_payload().get("questions", [])}
+    mastered = set(progress.get("mastered_question_ids", []) or [])
+    cycle_completed = list(progress.get("completed_mastery_cycles", []) or [])
+
+    # Keep only currently valid question ids.
+    mastered &= bank
+    seen_correct: set[str] = set()
+    seen_wrong_after_correct: set[str] = set()
+
+    for session in progress.get("sessions", []):
+        for result in session.get("results", []):
+            qid = result.get("question_id", "")
+            if qid not in bank:
+                continue
+            if result.get("is_correct"):
+                seen_correct.add(qid)
+            elif qid in seen_correct:
+                seen_wrong_after_correct.add(qid)
+
+    mastered |= seen_correct
+    mastered -= seen_wrong_after_correct
+    return mastered, cycle_completed
+
+
 def choose_bjcp_test_questions(count: int = 12) -> list[dict]:
     questions = list(bjcp_question_bank_payload().get("questions", []))
     if not questions:
         return []
     progress = bjcp_progress_payload()
     sessions = progress.get("sessions", [])
-    last_question_ids: set[str] = set()
-    if sessions:
-        latest = sessions[-1]
-        last_question_ids = set(latest.get("question_ids", []) or [])
-    if last_question_ids and len(questions) > count:
-        non_repeat_questions = [question for question in questions if question.get("id") not in last_question_ids]
+    last_question_ids: set[str] = set(sessions[-1].get("question_ids", []) or []) if sessions else set()
+    mastered, _ = bjcp_mastery_state(progress)
+    pool = [question for question in questions if question.get("id") not in mastered]
+
+    # If the mastery pool is exhausted, automatically reset the cycle.
+    if not pool:
+        pool = list(questions)
+
+    if last_question_ids and len(pool) > count:
+        non_repeat_questions = [question for question in pool if question.get("id") not in last_question_ids]
         if len(non_repeat_questions) >= count:
-            questions = non_repeat_questions
-    if len(questions) <= count:
-        RNG.shuffle(questions)
-        return questions
-    selected = RNG.sample(questions, count)
+            pool = non_repeat_questions
+    if len(pool) <= count:
+        RNG.shuffle(pool)
+        return pool
+    selected = RNG.sample(pool, count)
     RNG.shuffle(selected)
     return selected
 
@@ -2182,6 +2212,16 @@ def grade_study_test(form: dict[str, str]) -> tuple[bytes, str]:
             "misses": misses,
         }
     )
+    mastered_before, completed_cycles = bjcp_mastery_state(progress)
+    progress["mastered_question_ids"] = sorted(mastered_before)
+    current_bank_ids = {q["id"] for q in bjcp_question_bank_payload().get("questions", [])}
+    if current_bank_ids and mastered_before >= current_bank_ids:
+        completed_cycles = list(completed_cycles)
+        completed_cycles.append(completed_utc)
+        progress["completed_mastery_cycles"] = completed_cycles
+        progress["mastered_question_ids"] = []
+    else:
+        progress["completed_mastery_cycles"] = completed_cycles
     progress = recalc_bjcp_progress_stats(progress)
     persist_bjcp_progress(progress)
 
