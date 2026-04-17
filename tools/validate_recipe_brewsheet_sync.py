@@ -165,7 +165,7 @@ def parse_sheet(path: Path) -> dict:
 def find_sheet_for_recipe(recipe_path: Path) -> Path:
     stem = recipe_path.stem
     slug = re.sub(r"_[0-9]{1,2}[A-Z]?$", "", stem)
-    candidates = sorted(SHEETS_DIR.glob(f"{slug}_brew_day_sheet*.html"))
+    candidates = sorted(SHEETS_DIR.rglob(f"{slug}_brew_day_sheet*.html"))
     if not candidates:
         raise FileNotFoundError(f"No brew-day sheet found for recipe: {recipe_path}")
     dated = [path for path in candidates if re.search(r"_\d{4}-\d{2}-\d{2}\.html$", path.name)]

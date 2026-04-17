@@ -62,16 +62,16 @@ def resolve_recipe(token: str) -> Path:
 def derive_base(recipe_path: Path) -> str:
     stems = recipe_stem_candidates(recipe_path.stem)
     for stem in stems:
-        if sorted(SHEETS_DIR.glob(f"{stem}_brew_day_sheet_*.html")):
+        if sorted(SHEETS_DIR.rglob(f"{stem}_brew_day_sheet_*.html")):
             return stem
     return stems[-1]
 
 
 def resolve_dated_sheet(base: str, brew_date: str) -> Path:
-    candidate = SHEETS_DIR / f"{base}_brew_day_sheet_{brew_date}.html"
-    if not candidate.exists():
-        raise FileNotFoundError(f"Expected dated brew-day sheet not found: {candidate.relative_to(ROOT)}")
-    return candidate.resolve()
+    candidates = sorted(SHEETS_DIR.rglob(f"{base}_brew_day_sheet_{brew_date}.html"))
+    if not candidates:
+        raise FileNotFoundError(f"Expected dated brew-day sheet not found for {base} on {brew_date}")
+    return candidates[-1].resolve()
 
 
 def recipe_usage_entry(recipe_path: Path) -> dict:

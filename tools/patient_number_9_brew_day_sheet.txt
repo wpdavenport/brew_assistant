@@ -1,5 +1,5 @@
 PATIENT NUMBER 9 - BREW DAY SHEET (34A CLONE EXECUTION)
-Date: __________   Brewer: __________   Batch #: __________
+Date: YYYY-MM-DD   Brewer: __________   Batch #: __________
 
 ENTRY DECLARATION
 - Category: BJCP 34A Clone Beer
@@ -27,7 +27,7 @@ PRE-BREW QC
 [ ] Fermenter + transfer gear sanitized
 [ ] CO2 available for purge/closed transfer
 
-MASH LOG (FULL-VOLUME NO-SPARGE)
+2. MASH LOG (FULL-VOLUME NO-SPARGE)
 [ ] Mash in 9.5 gal total liquor
 Mash rest target: 150 F (65.6 C) for 75 min
 Mash-out target: 168 F (75.6 C) for 10 min
@@ -42,7 +42,7 @@ Mash average temp: ______ F
 Pre-boil volume: ______ gal
 Pre-boil gravity: ______
 
-BOIL LOG (90 MIN)
+3. BOIL ADDITIONS CHECKLIST (90 MIN)
 Boil start: ______   Boil end: ______
 
 [ ] FWH: Simcoe 0.75 oz
@@ -64,11 +64,13 @@ Hop stand end temp: ______ F
 Post-boil volume: ______ gal
 OG into fermenter: ______
 
-KNOCKOUT + PITCH
-KO temp target: 65 F   Actual: ______ F
-Oxygenation method/time: ______________________________
-Yeast: WLP007 Dry English Ale
-Pitch time: ______
+4. FERMENTATION READINESS CHECKLIST
+[ ] Sanitized fermentor ready
+[ ] Yeast prepped and ready to pitch
+[ ] Oxygen setup ready
+[ ] Blowoff / airlock assembled
+[ ] Temp control set to 65 F
+[ ] Purge / transfer path ready if needed
 
 FERMENTATION CHECKPOINTS
 - Day 0-3: Hold 65 F

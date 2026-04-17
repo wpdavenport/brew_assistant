@@ -25,6 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RECIPES_DIR = ROOT / "recipes"
 SHEETS_DIR = ROOT / "brewing" / "brew_day_sheets"
+ARCHIVE_SHEETS_DIR = SHEETS_DIR / "archive"
 BEERXML_DIR = RECIPES_DIR / "beer_xml_exports"
 ACTIVE_ARTIFACTS_FILE = ROOT / "project_control" / "ACTIVE_ARTIFACTS.json"
 BREW_HISTORY_FILE = ROOT / "libraries" / "inventory" / "brew_history.json"
@@ -89,7 +90,7 @@ def derive_sheet_base(recipe_path: Path) -> str:
         undated = SHEETS_DIR / f"{stem}_brew_day_sheet.html"
         if undated.exists():
             return stem
-        dated_matches = sorted(SHEETS_DIR.glob(f"{stem}_brew_day_sheet_*.html"))
+        dated_matches = sorted(SHEETS_DIR.rglob(f"{stem}_brew_day_sheet_*.html"))
         if dated_matches:
             return stem
     return stems[-1]
@@ -97,9 +98,12 @@ def derive_sheet_base(recipe_path: Path) -> str:
 
 def resolve_brew_sheet(base: str, brew_date: str) -> tuple[Path | None, Path]:
     undated = SHEETS_DIR / f"{base}_brew_day_sheet.html"
-    dated = SHEETS_DIR / f"{base}_brew_day_sheet_{brew_date}.html"
+    dated = ARCHIVE_SHEETS_DIR / f"{base}_brew_day_sheet_{brew_date}.html"
+    legacy_dated = SHEETS_DIR / f"{base}_brew_day_sheet_{brew_date}.html"
     if dated.exists():
         return None, dated
+    if legacy_dated.exists():
+        return None, legacy_dated
     if undated.exists():
         return undated, dated
     raise FileNotFoundError(
@@ -167,6 +171,15 @@ def refresh_embedded_schedule_dates(sheet_path: Path, brew_date: str) -> None:
     text = sheet_path.read_text(encoding="utf-8")
     brew_day = dt.date.fromisoformat(brew_date)
 
+    date_field_pattern = re.compile(
+        r'(<div class="field"><span class="label">Date:</span>\s*<span class="blank">)(.*?)(</span></div>)'
+    )
+    text = date_field_pattern.sub(
+        lambda m: f"{m.group(1)}{brew_date}{m.group(3)}",
+        text,
+        count=1,
+    )
+
     anchor_pattern = re.compile(
         r'(<p class="small" style="margin-bottom:4px;"><strong>Schedule anchor:</strong> Brew day assumed <strong>)'
         r'(\d{4}-\d{2}-\d{2})'
@@ -192,6 +205,49 @@ def refresh_embedded_schedule_dates(sheet_path: Path, brew_date: str) -> None:
         return f"{match.group(1)}{row_date.isoformat()} <span class=\"blank-sm\"></span> ({weekday}){match.group(3)}{match.group(4)}{match.group(5)}"
 
     text = row_pattern.sub(replace_row, text)
+    sheet_path.write_text(text, encoding="utf-8")
+
+
+def reset_runtime_capture_fields(sheet_path: Path) -> None:
+    text = sheet_path.read_text(encoding="utf-8")
+
+    # Reset measured phosphoric-acid entry back to an empty capture field.
+    text = re.sub(
+        r'(<li>Added )(?:<strong>[^<]+</strong>|<span class="blank-sm"></span>)( of phosphoric acid <strong>after mash-in</strong>, only after measured mash pH check \(10-15 min\), in 1 mL correction steps\.</li>)',
+        r'\1<span class="blank-sm"></span>\2',
+        text,
+    )
+
+    # Blank actual-value cells for common brew-day runtime checkpoints.
+    runtime_labels = [
+        "Boil start time",
+        "Pre-boil Volume",
+        "Pre-boil Gravity",
+        "Post-boil Volume",
+        "Post-boil Gravity",
+        "Actual Boil-off Rate",
+        "Fermentor Volume",
+        "Package Date",
+        "FG at Packaging",
+        "VDK Check Before Pack",
+        "Yeast Generation Pitched",
+        "Harvested for Next Batch",
+        "CO2 Setting",
+    ]
+    for label in runtime_labels:
+        pattern = re.compile(
+            rf'(<tr><td class="bold">{re.escape(label)}</td><td>.*?</td><td>)(.*?)(</td><td>.*?</td></tr>)'
+        )
+        text = pattern.sub(r"\1\3", text)
+
+    # Reset archived current-batch notes to an empty notes area on fresh prep.
+    text = re.sub(
+        r'<h2>Current Batch Learning Notes</h2>\s*<ul class="step-list">.*?</ul>',
+        '<h2>Brew Notes</h2>\n  <div class="notes-area" style="min-height: 110px;"></div>',
+        text,
+        flags=re.S,
+    )
+
     sheet_path.write_text(text, encoding="utf-8")
 
 
@@ -239,9 +295,12 @@ def main() -> int:
         return 0
 
     if source_sheet:
+        ARCHIVE_SHEETS_DIR.mkdir(parents=True, exist_ok=True)
         source_sheet.rename(dated_sheet)
 
     refresh_embedded_schedule_dates(dated_sheet, brew_date)
+    if source_sheet:
+        reset_runtime_capture_fields(dated_sheet)
 
     update_active_artifacts(recipe_rel, dated_rel, beerxml_rel)
     if args.record_history:
