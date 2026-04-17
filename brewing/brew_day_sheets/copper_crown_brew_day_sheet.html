@@ -44,7 +44,7 @@
   .highlight-row { background: #f5f5dc; }
   .critical { font-weight: 700; color: #b00; }
   .check-col { width: 24px; text-align: center; }
-  .actual-col { width: 60px; }
+  .actual-col { width: 90px; }
   .checkbox { display: inline-block; width: 10px; height: 10px; border: 1.5px solid #333; vertical-align: middle; }
   .blank-sm { border-bottom: 1px solid #999; display: inline-block; min-width: 45px; }
   .blank-md { border-bottom: 1px solid #999; display: inline-block; min-width: 80px; }
@@ -63,6 +63,10 @@
   .mash-check-table th:nth-child(4), .mash-check-table td:nth-child(4) { width: 10%; }
   .mash-check-table th:nth-child(5), .mash-check-table td:nth-child(5) { width: 35%; }
   .mash-check-table th:nth-child(6), .mash-check-table td:nth-child(6) { width: 4%; }
+  .boil-check-table th:nth-child(1), .boil-check-table td:nth-child(1) { width: 55px; }
+  .boil-check-table th:nth-child(2), .boil-check-table td:nth-child(2) { width: 44%; }
+  .boil-check-table th:nth-child(3), .boil-check-table td:nth-child(3) { width: 44%; }
+  .boil-check-table th:nth-child(4), .boil-check-table td:nth-child(4) { width: 24px; text-align: center; }
   ul { padding-left: 14px; margin-bottom: 3px; }
   li { margin-bottom: 0; font-size: 8.5pt; }
   .step-list { list-style: none; padding-left: 0; }
@@ -71,8 +75,19 @@
     content: ''; position: absolute; left: 0; top: 4px;
     width: 10px; height: 10px; border: 1.5px solid #333;
   }
-  .page { page-break-after: always; }
+  .page { page-break-after: always; position: relative; min-height: 10.1in; padding-bottom: 0.28in; }
   .page:last-child { page-break-after: auto; }
+  .page-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 4px;
+    border-top: 1px solid #bbb;
+    font-size: 7.5pt;
+    color: #555;
+    text-align: right;
+  }
   @page { margin: 0.4in 0.5in; size: letter; }
   @media print {
     body { padding: 0; font-size: 8.5pt; }
@@ -91,6 +106,8 @@
     .notes-area { min-height: 40px; }
     .helper-link { font-size: 7pt; }
     .helper-link a { color: #222; }
+    .page { min-height: auto; padding-bottom: 0.22in; }
+    .page-footer { font-size: 7pt; padding-top: 3px; }
   }
 </style>
 </head>
@@ -205,6 +222,8 @@
       </div>
     </div>
   </div>
+
+  <div class="page-footer">CCR-PLANNING | Page 1 of 3</div>
 </section>
 
 <section class="page">
@@ -264,15 +283,15 @@
     <tr><td class="bold">Actual Boil-off Rate</td><td>~1.7-1.8 gal/hr</td><td></td><td>(Pre-boil vol - Post-boil vol) / boil hours</td></tr>
   </table>
   <h2>3. Boil Hop Additions (60 Minutes)</h2>
-  <table>
-    <tr><th style="width:55px;">Left</th><th>Action</th><th class="check-col">&check;</th><th>Notes</th></tr>
-    <tr><td class="bold">60</td><td>Target 0.88 oz (25 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>20</td><td>Northdown 0.63 oz (18 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td class="bold">10</td><td>Challenger 0.53 oz (15 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>10</td><td>Whirlfloc 1 tablet</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>10</td><td>Invert Sugar No.2 0.35 lb (160 g)</td><td class="center"><span class="checkbox"></span></td><td class="small">Dissolve sugar in hot wort first</td></tr>
-    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Flameout</td><td class="center"><span class="checkbox"></span></td><td class="small">Cool to ~170.0F (76.7C) before the steep</td></tr>
-    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Northdown 0.42 oz (12 g)</td><td class="center"><span class="checkbox"></span></td><td class="small">10 min steep; no aggressive late hopping</td></tr>
+  <table class="boil-check-table">
+    <tr><th>Left</th><th>Action</th><th>Notes</th><th class="check-col">&check;</th></tr>
+    <tr><td class="bold">60</td><td>Target 0.88 oz (25 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20</td><td>Northdown 0.63 oz (18 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td class="bold">10</td><td>Challenger 0.53 oz (15 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>10</td><td>Whirlfloc 1 tablet</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>10</td><td>Invert Sugar No.2 0.35 lb (160 g)</td><td class="small">Dissolve sugar in hot wort first</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Flameout</td><td class="small">Cool to ~170.0F (76.7C) before the steep</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Northdown 0.42 oz (12 g)</td><td class="small">10 min steep; no aggressive late hopping</td><td class="center"><span class="checkbox"></span></td></tr>
   </table>
 
   <h2>4. Chill, Transfer, and Pitch</h2>
@@ -285,6 +304,7 @@
     <tr><td>Oxygen at pitch</td><td>60-90 sec</td><td><span class="blank-md"></span> sec</td><td></td></tr>
     <tr><td>Yeast generation pitched</td><td>G0 fresh or G1+ repitch</td><td><span class="blank-md"></span></td><td>Source batch ID/date</td></tr>
   </table>
+  <div class="page-footer">CCR-PLANNING | Page 2 of 3</div>
 </section>
 
 <section class="page">
@@ -327,6 +347,7 @@
 
   <h2>Brew Notes</h2>
   <div class="notes-area" style="min-height: 110px;"></div>
+  <div class="page-footer">CCR-PLANNING | Page 3 of 3</div>
 </section>
 
 </body>

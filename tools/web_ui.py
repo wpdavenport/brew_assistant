@@ -342,7 +342,7 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
                         )
                 break
 
-    for path in sorted((ROOT / "brewing" / "brew_day_sheets").glob("*.html"), key=lambda p: p.name, reverse=True):
+    for path in sorted((ROOT / "brewing" / "brew_day_sheets").rglob("*.html"), key=lambda p: p.name, reverse=True):
         norm_name = normalize_token(path.stem)
         for group in beer_groups.values():
             if any(candidate in norm_name for candidate in group["candidates"]):

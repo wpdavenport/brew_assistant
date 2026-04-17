@@ -73,7 +73,7 @@ def derive_base(recipe_path: Path) -> str:
     for stem in stems:
         if (SHEETS_DIR / f"{stem}_brew_day_sheet.html").exists():
             return stem
-        if sorted(SHEETS_DIR.glob(f"{stem}_brew_day_sheet_*.html")):
+        if sorted(SHEETS_DIR.rglob(f"{stem}_brew_day_sheet_*.html")):
             return stem
     return stems[-1]
 
@@ -113,7 +113,7 @@ def active_brew_date(recipe_path: Path) -> str | None:
 
 def dated_sheet_dates(base: str) -> list[str]:
     dates: list[str] = []
-    for path in sorted(SHEETS_DIR.glob(f"{base}_brew_day_sheet_*.html")):
+    for path in sorted(SHEETS_DIR.rglob(f"{base}_brew_day_sheet_*.html")):
         dates.append(extract_date_from_sheet(path.name))
     return dates
 
@@ -149,7 +149,7 @@ def package_exists(recipe_id: str, brew_date: str) -> bool:
 
 
 def dated_sheet_exists(base: str, brew_date: str) -> bool:
-    return (SHEETS_DIR / f"{base}_brew_day_sheet_{brew_date}.html").exists()
+    return any(SHEETS_DIR.rglob(f"{base}_brew_day_sheet_{brew_date}.html"))
 
 
 def undated_sheet_exists(base: str) -> bool:

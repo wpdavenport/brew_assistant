@@ -68,19 +68,21 @@ def derive_base(recipe_path: Path) -> str:
     for stem in stems:
         if (SHEETS_DIR / f"{stem}_brew_day_sheet.html").exists():
             return stem
-        if sorted(SHEETS_DIR.glob(f"{stem}_brew_day_sheet_*.html")):
+        if sorted(SHEETS_DIR.rglob(f"{stem}_brew_day_sheet_*.html")):
             return stem
     return stems[-1]
 
 
 def resolve_dated_sheet(base: str, brew_date: str | None) -> tuple[Path, str]:
     if brew_date:
-        candidate = SHEETS_DIR / f"{base}_brew_day_sheet_{brew_date}.html"
-        if not candidate.exists():
-            raise FileNotFoundError(f"Expected dated brew-day sheet not found: {candidate.relative_to(ROOT)}")
-        return candidate.resolve(), brew_date
+        candidates = sorted(SHEETS_DIR.rglob(f"{base}_brew_day_sheet_{brew_date}.html"))
+        if not candidates:
+            raise FileNotFoundError(
+                f"Expected dated brew-day sheet not found for {base} on {brew_date}"
+            )
+        return candidates[-1].resolve(), brew_date
 
-    matches = sorted(SHEETS_DIR.glob(f"{base}_brew_day_sheet_*.html"))
+    matches = sorted(SHEETS_DIR.rglob(f"{base}_brew_day_sheet_*.html"))
     if len(matches) == 1:
         match = matches[0]
         m = re.search(r"_(\d{4}-\d{2}-\d{2})\.html$", match.name)

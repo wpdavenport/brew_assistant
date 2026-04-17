@@ -73,7 +73,7 @@ def main() -> int:
         for problem in check_recipe_html(path):
             failures.append(f"{path.relative_to(ROOT)}: {problem}")
 
-    for path in sorted(BREW_SHEETS_DIR.glob("*.html")):
+    for path in sorted(BREW_SHEETS_DIR.rglob("*.html")):
         for problem in check_brew_sheet(path):
             failures.append(f"{path.relative_to(ROOT)}: {problem}")
 
@@ -85,7 +85,7 @@ def main() -> int:
 
     print("PRINT_READABILITY_OK")
     print(f"recipe_html: {len(list(RECIPE_HTML_DIR.glob('*.html')))}")
-    print(f"brew_sheets: {len(list(BREW_SHEETS_DIR.glob('*.html')))}")
+    print(f"brew_sheets: {len(list(BREW_SHEETS_DIR.rglob('*.html')))}")
     return 0
 
 
