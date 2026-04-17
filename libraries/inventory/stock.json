@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients. User-stated inventory correction applied 2026-03-24: Maris Otter = 10 lb on hand, English medium crystal = 3 lb on hand, and Wyeast 1968 Gen 1 slurry saved from Copper Crown is on hand. Non-consumable starter equipment added 2026-03-28: stir plate and 2 L flask. Target inventory normalized 2026-03-28: treat current 9.6% Target stock as UK Target in origin, even when packaging omits origin. Davenport inventory foundation corrected 2026-03-28: Simpsons English Chocolate Malt tracked explicitly at 0.32 oz on hand; Omega Propper Starter corrected to 1 can pre-registration.",
+  "notes": "Loaded from user inventory report on 2026-02-13. Weights are normalized to grams for compatibility. Items with unspecified quantity are kept with on_hand=0 and tagged quantity_unknown. Water salts updated 2026-02-15. Baking soda is marked as effectively unlimited using a large sentinel quantity. ESB ingredient restock added 2026-02-19. Copper Crown ESB brew allocation applied 2026-02-20. Zinc Buddy usage logged 2026-02-20: 2 ml (tracked as 2 g). Shopping-list restock applied 2026-03-20 for Davenport ESB ingredients. User-stated inventory correction applied 2026-03-24: Maris Otter = 10 lb on hand, English medium crystal = 3 lb on hand, and Wyeast 1968 Gen 1 slurry saved from Copper Crown is on hand. Non-consumable starter equipment added 2026-03-28: stir plate and 2 L flask. Target inventory normalized 2026-03-28: treat current 9.6% Target stock as UK Target in origin, even when packaging omits origin. Davenport inventory foundation corrected 2026-03-28: Simpsons English Chocolate Malt tracked explicitly at 0.32 oz on hand; Omega Propper Starter corrected to 1 can pre-registration. Professional hydrometer added to equipment inventory 2026-04-17.",
   "items": [
     {
       "id": "pale_malt_us",
@@ -660,6 +660,18 @@
       "tags": [
         "starter",
         "yeast_health",
+        "non_consumable"
+      ]
+    },
+    {
+      "id": "professional_hydrometer",
+      "name": "Professional Hydrometer",
+      "category": "equipment",
+      "unit": "count",
+      "on_hand": 1,
+      "tags": [
+        "measurement",
+        "gravity",
         "non_consumable"
       ]
     },

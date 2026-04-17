@@ -9,6 +9,9 @@
       "style_key": "clone_34A_dfh90",
       "batches": 1.0,
       "include_optional": false,
+      "brew_date": "2026-02-27",
+      "brew_sheet": "brewing/brew_day_sheets/archive/patient_number_9_brew_day_sheet_2026-02-27.html",
+      "note": "Historical batch archive backfill. Mash pH recorded 4.98 after 6 mL phosphoric acid, which was too much; use less next time.",
       "deltas": [
         {
           "item_id": "pale_malt_us",
@@ -89,9 +92,9 @@
       "type": "restock",
       "item_id": "phosphoric_85",
       "item_name": "Phosphoric Acid 85%",
-      "delta": -5.0,
+      "delta": -6.0,
       "unit": "ml",
-      "note": "PN9 actual usage: 5 ml phosphoric_85; no rice_hulls used"
+      "note": "PN9 actual usage: 6 ml phosphoric_85; no rice_hulls used. Measured mash pH still fell too low at 4.98."
     },
     {
       "timestamp_utc": "2026-03-28T22:23:50.062038+00:00",
@@ -105,7 +108,7 @@
       "harvest_amount": 0.0,
       "harvest_unit": "",
       "brew_date": "2026-03-28",
-      "brew_sheet": "brewing/brew_day_sheets/davenport_esb_brew_day_sheet_2026-03-28.html",
+      "brew_sheet": "brewing/brew_day_sheets/archive/davenport_esb_brew_day_sheet_2026-03-28.html",
       "note": "Actual brew on 2026-03-28. Used 1 Propper Starter can, 2 mL Zinc Buddy in vitality starter, and 5 mL phosphoric by prior batch calibration.",
       "deltas": [
         {

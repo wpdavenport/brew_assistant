@@ -38,8 +38,19 @@
   .highlight-row { background: #f5f5dc; }
   .critical { font-weight: 700; color: #b00; }
   .check-col { width: 24px; text-align: center; }
-  .actual-col { width: 60px; }
-  .checkbox { display: inline-block; width: 10px; height: 10px; border: 1.5px solid #333; vertical-align: middle; }
+  .actual-col { width: 90px; }
+  .checkbox {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid #333;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 8px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+  .checkbox::after { content: '✓'; }
   .blank-sm { border-bottom: 1px solid #999; display: inline-block; min-width: 45px; }
   .blank-md { border-bottom: 1px solid #999; display: inline-block; min-width: 80px; }
   .blank-lg { border-bottom: 1px solid #999; display: inline-block; min-width: 120px; }
@@ -63,6 +74,10 @@
   .fermentation-log-table th:nth-child(4), .fermentation-log-table td:nth-child(4) { width: 12%; }
   .fermentation-log-table th:nth-child(5), .fermentation-log-table td:nth-child(5) { width: 20%; }
   .fermentation-log-table th:nth-child(6), .fermentation-log-table td:nth-child(6) { width: 20%; }
+  .boil-check-table th:nth-child(1), .boil-check-table td:nth-child(1) { width: 55px; }
+  .boil-check-table th:nth-child(2), .boil-check-table td:nth-child(2) { width: 44%; }
+  .boil-check-table th:nth-child(3), .boil-check-table td:nth-child(3) { width: 44%; }
+  .boil-check-table th:nth-child(4), .boil-check-table td:nth-child(4) { width: 24px; text-align: center; }
   ul { padding-left: 14px; margin-bottom: 3px; }
   li { margin-bottom: 0; font-size: 8.5pt; }
   .step-list { list-style: none; padding-left: 0; }
@@ -71,8 +86,19 @@
     content: ''; position: absolute; left: 0; top: 4px;
     width: 10px; height: 10px; border: 1.5px solid #333;
   }
-  .page { page-break-after: always; }
+  .page { page-break-after: always; position: relative; min-height: 10.1in; padding-bottom: 0.28in; }
   .page:last-child { page-break-after: auto; }
+  .page-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 4px;
+    border-top: 1px solid #bbb;
+    font-size: 7.5pt;
+    color: #555;
+    text-align: right;
+  }
   @page { margin: 0.4in 0.5in; size: letter; }
   @media print {
     body { padding: 0; font-size: 8.5pt; }
@@ -99,6 +125,8 @@
     .execution-page .step-list li { font-size: 7pt; padding: 0.5px 0 0.5px 14px; }
     .execution-page .step-list li::before { width: 8px; height: 8px; top: 2px; }
     .execution-page .mash-check-table td { height: auto; }
+    .page { min-height: auto; padding-bottom: 0.22in; }
+    .page-footer { font-size: 7pt; padding-top: 3px; }
   }
 </style>
 </head>
@@ -111,7 +139,7 @@
   </div>
 
   <div class="info-grid" style="margin-top:4px;">
-    <div class="field"><span class="label">Date:</span> <span class="blank"></span></div>
+    <div class="field"><span class="label">Date:</span> <span class="blank">2026-02-27</span></div>
     <div class="field"><span class="label">System:</span> <span>Grainfather G40</span></div>
     <div class="field"><span class="label">Fermenter:</span> <span>GF30 Pro Conical</span></div>
   </div>
@@ -123,7 +151,7 @@
       <th>Parameter</th><th>Target</th>
     </tr>
     <tr>
-      <td class="bold">OG</td><td>1.090</td><td></td>
+      <td class="bold">OG</td><td>1.090</td><td>1.086</td>
       <td class="bold">IBU</td><td>~90</td>
     </tr>
     <tr>
@@ -135,7 +163,7 @@
       <td class="bold">CO2 Vols</td><td>2.3-2.5</td>
     </tr>
     <tr>
-      <td class="bold">Mash pH</td><td>5.25-5.35</td><td></td>
+      <td class="bold">Mash pH</td><td>5.25-5.35</td><td>4.98</td>
       <td class="bold">Batch</td><td>5.5 gal (20.8 L)</td>
     </tr>
     <tr>
@@ -198,6 +226,8 @@
     <tr><td class="bold">Target Cells</td><td>~330B for ~5.5 gal at ~1.090</td></tr>
     <tr><td class="bold">Oxygen</td><td class="critical">One oxygen dose at pitch (60-90 sec)</td></tr>
   </table>
+
+  <div class="page-footer">PN9-2026-02-27 | Page 1 of 3</div>
 </section>
 
 <section class="page execution-page">
@@ -216,7 +246,7 @@
     <div><span class="checkbox"></span> Yeast prep complete (slurry decanted or vitality starter ready)</div>
   </div>
 
-  <h2>0. Yeast Prep (D-1 to D0)</h2>
+  <h2>0. Yeast Prep Checklist (D-1 to D0)</h2>
   <ul class="step-list">
     <li>Primary plan: decant storage beer and prepare <span class="blank-sm"></span> mL creamy WLP007 G1 slurry for direct pitch.</li>
     <li>If slurry is old/uncertain, build <span class="blank-sm"></span> L vitality starter instead, then cold crash and decant.</li>
@@ -228,11 +258,11 @@
     <div><strong>Pitch volume (mL):</strong> <span class="blank-md"></span></div>
   </div>
 
-  <h2>1. Water Prep</h2>
+  <h2>1. Water Prep Checklist</h2>
   <ul class="step-list">
     <li>Measure 9.5 gal (36.0 L) RO into kettle; hold 0.9 gal (3.4 L) hot RO for pre-boil reserve.</li>
     <li>Add salts (scaled for 10.4 gal total liquor).</li>
-    <li>Added <strong>5 mL</strong> of phosphoric acid <strong>after mash-in</strong>, only after measured mash pH check (10-15 min), in 1 mL correction steps.</li>
+    <li>Added <strong>6 mL</strong> of phosphoric acid <strong>after mash-in</strong>; measured mash pH still ended up too low at 4.98, so use less next time.</li>
   </ul>
 
   <h2>2. Mash Program Checklist</h2>
@@ -247,43 +277,44 @@
   <h3>Volume and Gravity Control</h3>
   <table>
     <tr><th>Checkpoint</th><th>Target</th><th class="actual-col">Actual</th><th>Notes</th></tr>
-    <tr><td class="bold">Boil start time</td><td>Record timestamp</td><td>7:52 AM-9:22 AM</td><td>Use local time</td></tr>
-    <tr><td class="bold">Pre-boil Volume</td><td>8.5-8.7 gal (32.2-32.9 L)</td><td>8.1 gal</td><td>Top up with reserve RO if needed</td></tr>
-    <tr><td class="bold">Pre-boil Gravity</td><td>1.056-1.059</td><td>1.056</td><td>Temp-corrected sample</td></tr>
-    <tr><td class="bold">Post-boil Volume</td><td>5.9-6.1 gal (22.3-23.1 L)</td><td>5.9 gal</td><td>Record at flameout</td></tr>
-    <tr><td class="bold">Post-boil Gravity</td><td>1.081-1.084</td><td>1.077</td><td>Temp-corrected sample</td></tr>
-    <tr><td class="bold">Actual Boil-off Rate</td><td>~2.5-2.8 gal per 90 min</td><td>2.2 gal / 90 min</td><td>(Pre-boil vol - Post-boil vol) / 1.5 hr</td></tr>
+    <tr><td class="bold">Boil start time</td><td>Record timestamp</td><td>3:29 PM-4:59 PM</td><td>90 minute boil</td></tr>
+    <tr><td class="bold">Pre-boil Volume</td><td>8.5-8.7 gal (32.2-32.9 L)</td><td>7.5 gal</td><td>Below target before boil concentration</td></tr>
+    <tr><td class="bold">Pre-boil Gravity</td><td>1.056-1.059</td><td>1.053 before +1.7 L top-up; ~1.050 after</td><td>User note reads "1.50" after dilution; treated as ~1.050</td></tr>
+    <tr><td class="bold">Post-boil Volume</td><td>5.9-6.1 gal (22.3-23.1 L)</td><td>5.6 gal</td><td>Record at flameout</td></tr>
+    <tr><td class="bold">Post-boil Gravity</td><td>1.081-1.084</td><td>1.086</td><td>Temp-corrected sample</td></tr>
+    <tr><td class="bold">Actual Boil-off Rate</td><td>~2.5-2.8 gal per 90 min</td><td>1.9 gal / 90 min</td><td>(7.5 gal - 5.6 gal) / 1.5 hr = ~1.27 gal/hr</td></tr>
+    <tr><td class="bold">Fermentor Volume</td><td>Record in liters</td><td></td><td>Not recorded on paper sheet</td></tr>
   </table>
 
-  <h2>3. Boil Hop Additions (90 Minutes)</h2>
-  <table>
-    <tr><th style="width:55px;">Left</th><th>Action</th><th class="check-col">&check;</th><th>Notes</th></tr>
-    <tr class="highlight-row"><td class="bold">FWH</td><td class="bold">Simcoe 0.75 oz (21 g)</td><td class="center"><span class="checkbox"></span></td><td>First wort addition</td></tr>
-    <tr class="highlight-row"><td class="bold">FWH</td><td class="bold">Warrior 0.25 oz (7 g)</td><td class="center"><span class="checkbox"></span></td><td>First wort addition</td></tr>
-    <tr><td class="bold">60</td><td>Warrior 0.25 oz (7 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>45</td><td>Amarillo 0.50 oz (14 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>40</td><td>Amarillo 0.50 oz (14 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>40</td><td>Simcoe 0.50 oz (14 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>20</td><td>Amarillo 0.75 oz (21 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>20</td><td>Simcoe 0.75 oz (21 g)</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td class="bold">15</td><td>Whirlfloc 1 tab</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td class="bold">10</td><td>Corn Sugar 1.25 lb (570 g)</td><td class="center"><span class="checkbox"></span></td><td class="small">Dissolve sugar in hot wort first</td></tr>
-    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Whirlpool at 180.0F (82.2C)</td><td class="center"><span class="checkbox"></span></td><td>20 min steep</td></tr>
-    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Amarillo 1.50 oz (43 g)</td><td class="center"><span class="checkbox"></span></td><td>20 min steep</td></tr>
-    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Simcoe 1.50 oz (43 g)</td><td class="center"><span class="checkbox"></span></td><td>20 min steep</td></tr>
+  <h2>3. Boil Hop Additions Checklist (90 Minutes)</h2>
+  <table class="boil-check-table">
+    <tr><th>Left</th><th>Action</th><th>Notes</th><th class="check-col">&check;</th></tr>
+    <tr class="highlight-row"><td class="bold">FWH</td><td class="bold">Simcoe 0.75 oz (21 g)</td><td>First wort addition</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">FWH</td><td class="bold">Warrior 0.25 oz (7 g)</td><td>First wort addition</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td class="bold">60</td><td>Warrior 0.25 oz (7 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>45</td><td>Amarillo 0.50 oz (14 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>40</td><td>Amarillo 0.50 oz (14 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>40</td><td>Simcoe 0.50 oz (14 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20</td><td>Amarillo 0.75 oz (21 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20</td><td>Simcoe 0.75 oz (21 g)</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td class="bold">15</td><td>Whirlfloc 1 tab</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td class="bold">10</td><td>Corn Sugar 1.25 lb (570 g)</td><td class="small">Dissolve sugar in hot wort first</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Whirlpool at 180.0F (82.2C)</td><td>20 min steep</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Amarillo 1.50 oz (43 g)</td><td>20 min steep</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td class="bold">0</td><td class="bold">Simcoe 1.50 oz (43 g)</td><td>20 min steep</td><td class="center"><span class="checkbox"></span></td></tr>
   </table>
 
-  <h2>4. Chill, Transfer, and Pitch</h2>
-  <h3>Pitch Log</h3>
-  <table>
-    <tr><th>Pitch item</th><th>Checklist / Target</th><th>Actual</th><th>Notes</th></tr>
-    <tr><td>Yeast decant complete (slurry or starter)</td><td>Required before pitch</td><td class="center"><span class="checkbox"></span></td><td></td></tr>
-    <tr><td>Wort temp at pitch</td><td>65.0F (18.3C)</td><td><span class="blank-md"></span>F</td><td></td></tr>
-    <tr><td>Pitch date/time</td><td>Track exact timestamp</td><td><span class="blank-md"></span></td><td></td></tr>
-    <tr><td>Oxygen at pitch</td><td>60-90 sec</td><td><span class="blank-md"></span> sec</td><td></td></tr>
-    <tr><td>Yeast generation pitched</td><td>G1 repitch planned</td><td><span class="blank-md"></span></td><td>Source batch ID/date</td></tr>
-    <tr><td>Zinc Buddy</td><td>2.0 mL at pitch</td><td><span class="blank-md"></span> mL</td><td></td></tr>
-  </table>
+  <h2>4. Fermentation Readiness Checklist</h2>
+  <div class="three-col" style="font-size:8pt;">
+    <div><span class="checkbox"></span> Sanitized fermentor ready</div>
+    <div><span class="checkbox"></span> Yeast prepped and ready to pitch</div>
+    <div><span class="checkbox"></span> Oxygen setup ready</div>
+    <div><span class="checkbox"></span> Blowoff / airlock assembled</div>
+    <div><span class="checkbox"></span> Temp control set to 65.0 F</div>
+    <div><span class="checkbox"></span> Purge / transfer path ready if needed</div>
+  </div>
+
+  <div class="page-footer">PN9-2026-02-27 | Page 2 of 3</div>
 </section>
 
 <section class="page">
@@ -293,19 +324,19 @@
   </div>
   <h2>5. Fermentation Log</h2>
   <p class="small" style="margin-bottom:4px;">Days 0-3: hold 65.0F. Days 4-7: hold 67-68F. Dry hop near terminal for 48-72 hr. Crash to 38.0F after dry hop window and stable FG.</p>
-  <p class="small" style="margin-bottom:4px;"><strong>Schedule anchor:</strong> Brew day assumed <strong>2026-04-05</strong>. Record actual pitch timestamp and adjust if brew day shifts.</p>
+  <p class="small" style="margin-bottom:4px;"><strong>Schedule anchor:</strong> Brew day assumed <strong>2026-02-27</strong>. Actual pitch/start notes began on 2026-02-28.</p>
   <table class="fermentation-log-table">
     <tr><th>Date/Time</th><th>Day</th><th>Temp</th><th>Gravity</th><th>Action</th><th>Notes</th></tr>
-    <tr><td>2026-04-05 <span class="blank-sm"></span> (Sun)</td><td>0</td><td>65.0 F</td><td></td><td>Pitch + hold</td><td></td></tr>
-    <tr><td>2026-04-06 <span class="blank-sm"></span> (Mon)</td><td>1</td><td>65.0 F</td><td></td><td>Hold</td><td></td></tr>
-    <tr><td>2026-04-07 <span class="blank-sm"></span> (Tue)</td><td>2</td><td>65.0 F</td><td></td><td>Hold</td><td></td></tr>
-    <tr><td>2026-04-08 <span class="blank-sm"></span> (Wed)</td><td>3</td><td>65.0 F</td><td></td><td>Hold</td><td></td></tr>
-    <tr><td>2026-04-09 <span class="blank-sm"></span> (Thu)</td><td>4</td><td>67.0-68.0 F</td><td></td><td>Ramp + hold</td><td></td></tr>
-    <tr><td>2026-04-10 <span class="blank-sm"></span> (Fri)</td><td>5</td><td>67.0-68.0 F</td><td></td><td>Dry hop in?</td><td></td></tr>
-    <tr><td>2026-04-11 <span class="blank-sm"></span> (Sat)</td><td>6</td><td>67.0-68.0 F</td><td></td><td>Hold</td><td></td></tr>
-    <tr><td>2026-04-12 <span class="blank-sm"></span> (Sun)</td><td>7</td><td>67.0-68.0 F</td><td></td><td>Terminal check</td><td></td></tr>
-    <tr><td>2026-04-13 <span class="blank-sm"></span> (Mon)</td><td>8</td><td>67.0-68.0 F</td><td></td><td>Dry hop out / crash gate</td><td></td></tr>
-    <tr><td>2026-04-14 <span class="blank-sm"></span> (Tue)</td><td>9</td><td>38.0 F</td><td></td><td>Crash hold</td><td></td></tr>
+    <tr><td>2026-02-28 <span class="blank-sm"></span> (Sat)</td><td>0</td><td>65.0 F</td><td>1.086</td><td>Pitch + hold</td><td>Gen 0 yeast; oxygen not recorded</td></tr>
+    <tr><td>2026-03-01 <span class="blank-sm"></span> (Sun)</td><td>1</td><td>65.0 F</td><td></td><td>Hold</td><td></td></tr>
+    <tr><td>2026-03-02 <span class="blank-sm"></span> (Mon)</td><td>2</td><td>65.0 F</td><td></td><td>Hold</td><td></td></tr>
+    <tr><td>2026-03-03 <span class="blank-sm"></span> (Tue)</td><td>3</td><td>65.0 F</td><td></td><td>Hold</td><td></td></tr>
+    <tr><td>2026-03-04 <span class="blank-sm"></span> (Wed)</td><td>4</td><td>67.0-68.0 F</td><td></td><td>Ramp + hold</td><td></td></tr>
+    <tr><td>2026-03-05 <span class="blank-sm"></span> (Thu)</td><td>5</td><td>67.0-68.0 F</td><td>1.021</td><td>Dry hop in</td><td></td></tr>
+    <tr><td>2026-03-06 <span class="blank-sm"></span> (Fri)</td><td>6</td><td>67.0-68.0 F</td><td></td><td>Hold</td><td></td></tr>
+    <tr><td>2026-03-07 <span class="blank-sm"></span> (Sat)</td><td>7</td><td>67.0-68.0 F</td><td></td><td>Terminal check</td><td></td></tr>
+    <tr><td>2026-03-08 <span class="blank-sm"></span> (Sun)</td><td>8</td><td>42.0 F</td><td>1.017</td><td>Dry hop out + cold crash</td><td>Removed hops, then crashed to 42F</td></tr>
+    <tr><td>2026-03-09 <span class="blank-sm"></span> (Mon)</td><td>9</td><td>42.0 F</td><td></td><td>Crash hold</td><td></td></tr>
     <tr><td colspan="2"><strong>Final gravity (FG) checkpoint</strong></td><td>Target FG</td><td>1.014-1.018</td><td>Record stable FG before crash/package</td><td></td></tr>
   </table>
 
@@ -317,24 +348,25 @@
   </ul>
   <table>
     <tr><th>Packaging Record</th><th>Target</th><th class="actual-col">Actual</th><th>Notes</th></tr>
-    <tr><td class="bold">Package Date</td><td>When beer is fully clean and stable</td><td></td><td></td></tr>
-    <tr><td class="bold">FG at Packaging</td><td>1.014-1.018 target (or stable terminal)</td><td></td><td></td></tr>
+    <tr><td class="bold">Package Date</td><td>When beer is fully clean and stable</td><td>2026-03-12</td><td>Packaged to keg</td></tr>
+    <tr><td class="bold">FG at Packaging</td><td>1.014-1.018 target (or stable terminal)</td><td>1.017</td><td></td></tr>
     <tr><td class="bold">VDK Check Before Pack</td><td>PASS</td><td>Pass / Fail</td><td>Date + initials: <span class="blank-sm"></span></td></tr>
-    <tr><td class="bold">Yeast Generation Pitched</td><td>G0 fresh or G1+ repitch</td><td></td><td>Source batch: <span class="blank-sm"></span></td></tr>
+    <tr><td class="bold">Yeast Generation Pitched</td><td>G0 fresh or G1+ repitch</td><td>G0</td><td>Source batch: fresh pitch</td></tr>
     <tr><td class="bold">Harvested for Next Batch</td><td>Yes / No</td><td></td><td>Label next slurry as G<span class="blank-sm"></span></td></tr>
     <tr><td class="bold">CO2 Setting</td><td>2.3-2.5 vols</td><td></td><td>Record PSI and beer temp</td></tr>
-    <tr><td class="bold">Fermentor Volume</td><td>Target packaged yield context</td><td>20 L</td><td>Record actual into fermentor</td></tr>
+    <tr><td class="bold">Fermentor Volume</td><td>Target packaged yield context</td><td></td><td>Not recorded on paper sheet</td></tr>
   </table>
 
   <h2>Current Batch Learning Notes</h2>
   <ul class="step-list">
-    <li>Boil ran 7:52 AM to 9:22 AM.</li>
-    <li>Actual pre-boil volume came in low at 8.1 gal while gravity still landed on target at 1.056.</li>
-    <li>Actual post-boil volume hit target at 5.9 gal, but post-boil gravity finished low at 1.077.</li>
-    <li>Fermentor volume was 20 L.</li>
-    <li>Used 5 mL phosphoric acid and still suspect that was too much; keep this as a high-side caution point, not a locked default.</li>
-    <li>Next batch: verify mash pH carefully with the new meter and only lock in a default phosphoric amount after a confirmed good reading.</li>
+    <li>Historical V1 batch from 2026-02-27 before the current competition-lock correction set.</li>
+    <li>Mash pH measured 4.98 after using 6 mL phosphoric acid, which was too much; use less next time.</li>
+    <li>Pre-boil note recorded 1.053 before a 1.7 L top-up; post-top-up gravity was written as "1.50" on paper and is interpreted here as about 1.050.</li>
+    <li>Post-boil landed at 5.6 gal and 1.086, yielding a stronger and slightly more concentrated batch than the later V2 target window.</li>
+    <li>Dry hop went in on day 5 at 1.021, came out on day 8, and beer packaged on 2026-03-12 at 1.017.</li>
   </ul>
+
+  <div class="page-footer">PN9-2026-02-27 | Page 3 of 3</div>
 </section>
 
 </body>

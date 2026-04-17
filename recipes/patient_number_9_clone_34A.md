@@ -138,8 +138,18 @@ Salt additions for 10.4 gal total liquor:
 - Post-boil volume/gravity: 5.9 gal at 1.077.
 - Fermentor volume: 20 L.
 - Added 5 mL of 85% phosphoric acid during mash correction and still suspect it was too much with the new pH meter workflow.
+- Dry hop timing clue: target window remains about 1.020-1.025, with upper 20s acceptable if gravity is still moving.
+- Dry hop sensory note: beer tasted bright/fruity after roughly 24 hours of contact, then shifted darker and almost grassy by the next sample. Hops were pulled immediately.
+- Pre-carb evaluation:
+  - Color is now too light and no longer amber enough for the target.
+  - Warrior bitterness is almost gone; the beer drinks more like a non-hazy juicy beer than a firm 90 Minute clone.
+  - Overall beer is still very drinkable and enjoyable in its own lane.
 
 Next-batch carry-forward:
 - Keep treating phosphoric acid as an on-the-day measured correction, not a locked default.
 - Current high-side caution point for this recipe/system: 5 mL may still be too much.
+- Trust your gut on dry-hop extraction. If the beer stops getting brighter and starts turning darker/grassier, pull the hops instead of following the clock blindly.
+- This system may want the PN9 dry-hop contact window on the shorter side; validate after full tasting whether this pull was early, right on time, or slightly late.
+- V3 direction now looks clearer: raise Thomas Fawcett Amber Malt from 0.50 lb to about 0.75 lb and add back a small Warrior bittering/refinement charge to restore firmer structure without reviving V1 harshness.
+- Grainfather process lesson: do not run the mash recirculation pump wide open. Gentler recirculation should reduce grain-bed compaction/channeling and may improve extraction consistency on future batches.
 - Recalibrate on the next batch with the new pH meter and only lock in a default addition after a confirmed good reading.
