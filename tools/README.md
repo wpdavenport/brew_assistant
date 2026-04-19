@@ -146,6 +146,12 @@ Use `validate_print_readability.py` to catch basic printable-page regressions in
 - `python3 tools/validate_print_readability.py`
 - `make print-readability`
 
+Use `validate_branch_shared_artifacts.py` to ensure shared planning brew sheets and brew-sheet templates stay in sync across `main` and `personal`:
+
+- `python3 tools/validate_branch_shared_artifacts.py`
+- `python3 tools/validate_branch_shared_artifacts.py --left main --right personal`
+- `make branch-shared-sync`
+
 Use `validate_intent_lifecycle.py` to catch contradictions between shopping intent and actual batch lifecycle:
 
 - `python3 tools/validate_intent_lifecycle.py`

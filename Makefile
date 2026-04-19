@@ -22,6 +22,9 @@ recipe-html-sync:
 print-readability:
 	python3 tools/validate_print_readability.py
 
+branch-shared-sync:
+	python3 tools/validate_branch_shared_artifacts.py
+
 intent-lifecycle:
 	python3 tools/validate_intent_lifecycle.py
 
@@ -107,4 +110,5 @@ trust-check:
 	python3 tools/refresh_recipe_html.py --changed
 	python3 tools/validate_recipe_html_sync.py --all
 	python3 tools/validate_print_readability.py
+	python3 tools/validate_branch_shared_artifacts.py
 	python3 tools/validate_intent_lifecycle.py
