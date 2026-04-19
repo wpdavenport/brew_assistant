@@ -114,6 +114,19 @@ def recipe_stem_candidates(stem: str) -> list[str]:
     return out
 
 
+def brew_sheet_match_tokens(stem: str) -> list[str]:
+    base = re.sub(r"_brew_day_sheet(?:_\d{4}-\d{2}-\d{2})?$", "", stem)
+    tokens = [base]
+    if base.endswith("_esb"):
+        tokens.append(base[: -len("_esb")])
+    out: list[str] = []
+    for value in tokens:
+        norm = normalize_token(value)
+        if norm and norm not in out:
+            out.append(norm)
+    return out
+
+
 def dashboard_item(label: str, mode: str) -> dict[str, str]:
     return {
         "label": label,
@@ -343,9 +356,13 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
                 break
 
     for path in sorted((ROOT / "brewing" / "brew_day_sheets").rglob("*.html"), key=lambda p: p.name, reverse=True):
-        norm_name = normalize_token(path.stem)
+        sheet_tokens = brew_sheet_match_tokens(path.stem)
         for group in beer_groups.values():
-            if any(candidate in norm_name for candidate in group["candidates"]):
+            if any(
+                candidate in sheet_token or sheet_token in candidate
+                for candidate in group["candidates"]
+                for sheet_token in sheet_tokens
+            ):
                 date_match = re.search(r"_(\d{4}-\d{2}-\d{2})\.html$", path.name)
                 label = f"Brew Sheet: {date_match.group(1)}" if date_match else f"Brew Sheet: {file_label(path)}"
                 group["items"].append(
@@ -376,13 +393,20 @@ def collect_section_entries() -> dict[str, list[dict[str, str]]]:
     for group_key, group in sorted(beer_groups.items(), key=lambda row: str(row[1]["label"]).lower()):
         brew_sheets = [item for item in group["items"] if item["label"].startswith("Brew Sheet:")]
         other_items = [item for item in group["items"] if not item["label"].startswith("Brew Sheet:")]
-        items = [group["primary"], *brew_sheets, *sorted(other_items, key=lambda row: row["label"].lower())]
+        primary_item = brew_sheets[0] if brew_sheets else group["primary"]
+        recipe_print = group["primary"]
+        sorted_other_items = sorted(other_items, key=lambda row: row["label"].lower())
+        items = [primary_item]
+        if primary_item is not recipe_print:
+            items.append(recipe_print)
+        items.extend(brew_sheets[1:] if brew_sheets else [])
+        items.extend(sorted_other_items)
         beer_entries.append(
             {
                 "label": str(group["label"]),
-                "view": group["primary"]["view"],
-                "raw": group["primary"]["raw"],
-                "current": str(group["primary"]["current"]),
+                "view": primary_item["view"],
+                "raw": primary_item["raw"],
+                "current": str(primary_item["current"]),
                 "child_currents": [item["current"] for item in items],
                 "children_html": "".join(
                     f'<a class="child-link" data-current="{html.escape(item["current"])}" href="{html.escape(item["view"])}" target="content">{html.escape(item["label"])}</a>'
@@ -3427,6 +3451,12 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+class BrewServer(ThreadingHTTPServer):
+    """Custom server to allow immediate port reuse and handle threading."""
+
+    allow_reuse_address = True
+
+
 def start_reload_watcher(server: ThreadingHTTPServer, source_path: Path) -> threading.Event:
     restart_requested = threading.Event()
     initial_mtime = source_path.stat().st_mtime_ns
@@ -3450,7 +3480,11 @@ def start_reload_watcher(server: ThreadingHTTPServer, source_path: Path) -> thre
 
 def main() -> int:
     args = build_parser().parse_args()
-    server = ThreadingHTTPServer((args.host, args.port), BrewUIHandler)
+    try:
+        server = BrewServer((args.host, args.port), BrewUIHandler)
+    except OSError as e:
+        print(f"WEB_UI_START_FAILED {e}", file=sys.stderr)
+        return 1
     restart_requested: threading.Event | None = None
     if args.reload:
         restart_requested = start_reload_watcher(server, WEB_UI_SOURCE)
