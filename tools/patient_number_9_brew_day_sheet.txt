@@ -1,0 +1,125 @@
+PATIENT NUMBER 9 - BREW DAY SHEET (34A CLONE EXECUTION)
+Date: YYYY-MM-DD   Brewer: __________   Batch #: __________
+
+ENTRY DECLARATION
+- Category: BJCP 34A Clone Beer
+- Commercial Example: Dogfish Head 90 Minute IPA
+- Base Style: 22A Double IPA
+
+BATCH TARGETS
+- Into fermenter: 5.0 gal (19.0 L)
+- Total brewing liquor: 9.5 gal (36.0 L)
+- OG: 1.088-1.092
+- FG: 1.014-1.018
+- Mash pH: 5.25-5.35 (room-temp sample)
+- Carbonation: 2.3-2.5 vol CO2
+
+WATER + SALTS (ALL TO 9.5 GAL RO)
+[ ] Gypsum (CaSO4): 0.45 oz (12.76 g)
+[ ] Epsom Salt (MgSO4): 0.10 oz (2.83 g)
+[ ] Calcium Chloride (CaCl2): 0.13 oz (3.69 g)
+[ ] Baking Soda: 0.00 oz
+
+PRE-BREW QC
+[ ] pH meter calibrated
+[ ] Thermometer validated
+[ ] Hop AA% verified
+[ ] Fermenter + transfer gear sanitized
+[ ] CO2 available for purge/closed transfer
+
+2. MASH LOG (FULL-VOLUME NO-SPARGE)
+[ ] Mash in 9.5 gal total liquor
+Mash rest target: 150 F (65.6 C) for 75 min
+Mash-out target: 168 F (75.6 C) for 10 min
+
+Strike temp target: ______ F   Actual: ______ F
+Mash-in time: ______
+pH @ 10-15 min (cooled): ______
+Acid additions (85% phosphoric, 1 ml steps): ____ + ____ + ____ = ____ ml
+Final mash pH (cooled): ______
+Mash average temp: ______ F
+
+Pre-boil volume: ______ gal
+Pre-boil gravity: ______
+
+3. BOIL ADDITIONS CHECKLIST (90 MIN)
+Boil start: ______   Boil end: ______
+
+[ ] FWH: Simcoe 0.75 oz
+[ ] FWH: Warrior 0.25 oz
+[ ] 60 min: Warrior 0.25 oz
+[ ] 45 min: Amarillo 0.50 oz
+[ ] 40 min: Amarillo 0.50 oz
+[ ] 40 min: Simcoe 0.50 oz
+[ ] 20 min: Amarillo 0.75 oz
+[ ] 20 min: Simcoe 0.75 oz
+[ ] 10 min: Corn sugar 1.25 lb
+[ ] 0 min: cool to 180 F
+[ ] 0 min: Amarillo 1.50 oz
+[ ] 0 min: Simcoe 1.50 oz
+[ ] 0 min: hop stand 20 min
+
+Hop stand start temp: ______ F
+Hop stand end temp: ______ F
+Post-boil volume: ______ gal
+OG into fermenter: ______
+
+4. FERMENTATION READINESS CHECKLIST
+[ ] Sanitized fermentor ready
+[ ] Yeast prepped and ready to pitch
+[ ] Oxygen setup ready
+[ ] Blowoff / airlock assembled
+[ ] Temp control set to 65 F
+[ ] Purge / transfer path ready if needed
+
+FERMENTATION CHECKPOINTS
+- Day 0-3: Hold 65 F
+- Day 4-7: Raise/hold 67-68 F
+- Dry hop near terminal (2-4 points from FG), 48-72h
+- Crash to 38 F after dry hop window
+
+Day 0 gravity: ______
+Day 4 gravity: ______
+Dry hop in gravity: ______
+Terminal gravity check #1: ______
+Terminal gravity check #2 (24h later): ______
+
+DRY HOP
+[ ] Amarillo 1.0 oz
+[ ] Simcoe 1.0 oz
+Dry hop start: ______
+Dry hop end: ______
+Contact time (hours): ______
+
+PACKAGING
+[ ] Receiving keg fully purged
+[ ] Closed transfer completed
+[ ] No splashing
+Carbonation setpoint: ______ vol CO2
+Final gravity: ______
+Package date: ______
+
+CLONE MATCH PRECHECK
+- Commercial sample package date (if known): __________________
+- Side-by-side date: __________________
+
+Aroma match (1-5): ______
+Bitterness quality match (1-5): ______
+Finish match (1-5): ______
+Malt support match (1-5): ______
+Overall clone fidelity (1-5): ______
+
+GO / NO-GO FOR ENTRY
+[ ] No oxidation
+[ ] No harsh bitterness
+[ ] No obvious diacetyl
+[ ] Form declaration exact (beer + brewery + base style)
+Decision: GO / NO-GO
+
+POST-BATCH LESSONS
+What worked:
+- _______________________________________________
+- _______________________________________________
+What to change:
+- _______________________________________________
+- _______________________________________________
