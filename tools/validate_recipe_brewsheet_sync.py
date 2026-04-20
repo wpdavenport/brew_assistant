@@ -22,6 +22,11 @@ RECIPES_DIR = ROOT / "recipes"
 SHEETS_DIR = ROOT / "brewing" / "brew_day_sheets"
 ACTIVE_ARTIFACTS_FILE = ROOT / "project_control" / "ACTIVE_ARTIFACTS.json"
 EXCLUDED_RECIPE_PARTS = {"historical", "beer_xml_exports", "beer_xml_imports"}
+BREWSHEET_OPTIONAL_RECIPES = {
+    "house_starter_wort_concentrate",
+    "manhattan_belgian_dark_strong_ale",
+    "tempest_34B",
+}
 
 RE_OG = re.compile(r"- OG:\s*([0-9.\-]+)")
 RE_FG = re.compile(r"- FG:\s*([0-9.\-]+)")
@@ -53,6 +58,34 @@ def normalize_name(text: str) -> str:
     return " ".join(text.split())
 
 
+def normalize_token(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", text.lower())
+
+
+def recipe_stem_candidates(stem: str) -> list[str]:
+    candidates = [stem]
+    candidates.append(re.sub(r"_clone_\d{1,2}[A-Z]$", "", stem))
+    candidates.append(re.sub(r"_\d{1,2}[A-Z]$", "", stem))
+    out: list[str] = []
+    for value in candidates:
+        if value and value not in out:
+            out.append(value)
+    return out
+
+
+def brew_sheet_match_tokens(stem: str) -> list[str]:
+    base = re.sub(r"_brew_day_sheet(?:_\d{4}-\d{2}-\d{2})?$", "", stem)
+    tokens = [base]
+    if base.endswith("_esb"):
+        tokens.append(base[: -len("_esb")])
+    out: list[str] = []
+    for value in tokens:
+        norm = normalize_token(value)
+        if norm and norm not in out:
+            out.append(norm)
+    return out
+
+
 def amount_close(a: float, b: float, tol: float = 0.02) -> bool:
     return abs(a - b) <= tol
 
@@ -73,6 +106,10 @@ def clean_recipe_hop_name(text: str) -> str:
 
 def normalize_timing(text: str) -> str:
     t = normalize_name(text)
+    if t == "mash hop" or t.startswith("mash hop "):
+        return "mash"
+    if t == "mash":
+        return "mash"
     if t == "fwh":
         return "first wort"
     if t.startswith("first wort"):
@@ -116,7 +153,7 @@ def parse_recipe(path: Path) -> dict:
                     {"kg": float(m.group(2)), "name": m.group(3).strip()}
                 )
         elif section.startswith("hops"):
-            if subsection == "boil / whirlpool":
+            if "boil / whirlpool" in subsection:
                 m = RE_HOP_LINE.match(line)
                 if m:
                     data["hops"].append(
@@ -164,12 +201,20 @@ def parse_sheet(path: Path) -> dict:
 
 def find_sheet_for_recipe(recipe_path: Path) -> Path:
     stem = recipe_path.stem
-    slug = re.sub(r"_[0-9]{1,2}[A-Z]?$", "", stem)
-    candidates = sorted(SHEETS_DIR.rglob(f"{slug}_brew_day_sheet*.html"))
-    if not candidates:
+    candidates = [normalize_token(value) for value in recipe_stem_candidates(stem)]
+    matched: list[Path] = []
+    for path in sorted(SHEETS_DIR.rglob("*.html"), key=lambda p: p.name, reverse=True):
+        sheet_tokens = brew_sheet_match_tokens(path.stem)
+        if any(
+            candidate in sheet_token or sheet_token in candidate
+            for candidate in candidates
+            for sheet_token in sheet_tokens
+        ):
+            matched.append(path)
+    if not matched:
         raise FileNotFoundError(f"No brew-day sheet found for recipe: {recipe_path}")
-    dated = [path for path in candidates if re.search(r"_\d{4}-\d{2}-\d{2}\.html$", path.name)]
-    return dated[-1] if dated else candidates[-1]
+    dated = [path for path in matched if re.search(r"_\d{4}-\d{2}-\d{2}\.html$", path.name)]
+    return dated[-1] if dated else matched[-1]
 
 
 def find_recipe_files() -> list[Path]:
@@ -268,6 +313,13 @@ def main() -> int:
                 try:
                     sheet_path = find_sheet_for_recipe(recipe_path)
                 except FileNotFoundError:
+                    if recipe_path.stem in BREWSHEET_OPTIONAL_RECIPES:
+                        continue
+                    overall_ok = False
+                    print("RECIPE_BREWSHEET_SYNC_FAILED")
+                    print(f"Recipe: {recipe_path.relative_to(ROOT)}")
+                    print("- missing brew-day sheet")
+                    print("")
                     continue
                 pairs.append((recipe_path, sheet_path))
         for recipe_path, sheet_path in pairs:

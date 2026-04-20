@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lodestar - 22A Double IPA Brew Day Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.3;
+    color: #1a1a1a;
+    padding: 0.5in;
+  }
+  h1 { font-size: 16pt; font-weight: 700; border-bottom: 2.5px solid #1a1a1a; padding-bottom: 3px; margin-bottom: 3px; }
+  h2 {
+    font-size: 10.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+    border-bottom: 1.5px solid #555; padding-bottom: 1px; margin-top: 10px; margin-bottom: 4px;
+  }
+  .header-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+  .subtitle { font-size: 9pt; color: #444; font-style: italic; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 16px; margin-bottom: 10px; font-size: 8.5pt; }
+  .info-grid .field { display: flex; gap: 6px; align-items: flex-end; min-height: 22px; }
+  .info-grid .label { font-weight: 600; white-space: nowrap; }
+  .info-grid .blank { border-bottom: 1px solid #777; flex: 1; min-width: 140px; min-height: 16px; display: inline-block; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 5px; font-size: 8.5pt; }
+  th {
+    background: #e8e8e8; font-weight: 700; text-align: left;
+    padding: 2px 4px; border: 1px solid #999; font-size: 7.5pt;
+    text-transform: uppercase; letter-spacing: 0.3px;
+  }
+  td { padding: 2px 4px; border: 1px solid #bbb; vertical-align: top; }
+  .center { text-align: center; }
+  .right { text-align: right; }
+  .bold { font-weight: 700; }
+  .small { font-size: 7.5pt; color: #555; }
+  .highlight-row { background: #f5f5dc; }
+  .critical { font-weight: 700; color: #b00; }
+  .check-col { width: 24px; text-align: center; }
+  .actual-col { width: 90px; }
+  .checkbox { display: inline-block; width: 10px; height: 10px; border: 1.5px solid #333; vertical-align: middle; }
+  .blank-sm { border-bottom: 1px solid #999; display: inline-block; min-width: 45px; }
+  .blank-md { border-bottom: 1px solid #999; display: inline-block; min-width: 80px; }
+  .blank-lg { border-bottom: 1px solid #999; display: inline-block; min-width: 120px; }
+  .alert-box { border: 1.5px solid #b00; padding: 3px 6px; margin: 4px 0; font-size: 8pt; }
+  .alert-box .alert-title { font-weight: 700; text-transform: uppercase; font-size: 7.5pt; color: #b00; }
+  .alert-box.info { border-color: #555; }
+  .alert-box.info .alert-title { color: #555; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px 10px; }
+  .notes-area { border: 1px solid #bbb; min-height: 50px; padding: 3px; margin-bottom: 4px; }
+  .mash-check-table td { height: 24px; }
+  .mash-check-table th:nth-child(1), .mash-check-table td:nth-child(1) { width: 21%; }
+  .mash-check-table th:nth-child(2), .mash-check-table td:nth-child(2) { width: 16%; }
+  .mash-check-table th:nth-child(3), .mash-check-table td:nth-child(3) { width: 14%; }
+  .mash-check-table th:nth-child(4), .mash-check-table td:nth-child(4) { width: 10%; }
+  .mash-check-table th:nth-child(5), .mash-check-table td:nth-child(5) { width: 35%; }
+  .mash-check-table th:nth-child(6), .mash-check-table td:nth-child(6) { width: 4%; }
+  .fermentation-log-table th:nth-child(1), .fermentation-log-table td:nth-child(1) { width: 30%; }
+  .fermentation-log-table th:nth-child(2), .fermentation-log-table td:nth-child(2) { width: 6%; }
+  .fermentation-log-table th:nth-child(3), .fermentation-log-table td:nth-child(3) { width: 12%; }
+  .fermentation-log-table th:nth-child(4), .fermentation-log-table td:nth-child(4) { width: 12%; }
+  .fermentation-log-table th:nth-child(5), .fermentation-log-table td:nth-child(5) { width: 20%; }
+  .fermentation-log-table th:nth-child(6), .fermentation-log-table td:nth-child(6) { width: 20%; }
+  .boil-check-table th:nth-child(1), .boil-check-table td:nth-child(1) { width: 55px; }
+  .boil-check-table th:nth-child(2), .boil-check-table td:nth-child(2) { width: 44%; }
+  .boil-check-table th:nth-child(3), .boil-check-table td:nth-child(3) { width: 44%; }
+  .boil-check-table th:nth-child(4), .boil-check-table td:nth-child(4) { width: 24px; text-align: center; }
+  ul { padding-left: 14px; margin-bottom: 3px; }
+  li { margin-bottom: 0; font-size: 8.5pt; }
+  .step-list { list-style: none; padding-left: 0; }
+  .step-list li { padding: 1.5px 0 1.5px 18px; position: relative; font-size: 8.5pt; }
+  .step-list li::before {
+    content: ''; position: absolute; left: 0; top: 4px;
+    width: 10px; height: 10px; border: 1.5px solid #333;
+  }
+  .page { page-break-after: always; position: relative; min-height: 10.1in; padding-bottom: 0.28in; }
+  .page:last-child { page-break-after: auto; }
+  .page-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 4px;
+    border-top: 1px solid #bbb;
+    font-size: 7.5pt;
+    color: #555;
+    text-align: right;
+  }
+  @page { margin: 0.4in 0.5in; size: letter; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="header-row">
+    <h1>Lodestar</h1>
+    <span class="subtitle">BJCP 22A Double IPA</span>
+  </div>
+
+  <div class="info-grid" style="margin-top:4px;">
+    <div class="field"><span class="label">Date:</span> <span class="blank"></span></div>
+    <div class="field"><span class="label">System:</span> <span>Grainfather G40</span></div>
+    <div class="field"><span class="label">Fermenter:</span> <span>GF30 Pro Conical</span></div>
+  </div>
+
+  <h2>Target Window</h2>
+  <table>
+    <tr>
+      <th>Parameter</th><th>Target</th><th class="actual-col">Actual</th>
+      <th>Parameter</th><th>Target</th>
+    </tr>
+    <tr>
+      <td class="bold">OG</td><td>1.090</td><td></td>
+      <td class="bold">IBU</td><td>~90</td>
+    </tr>
+    <tr>
+      <td class="bold">FG</td><td>1.016</td><td></td>
+      <td class="bold">SRM</td><td>8</td>
+    </tr>
+    <tr>
+      <td class="bold">ABV</td><td>9.5%</td><td></td>
+      <td class="bold">CO2 Vols</td><td>2.3 - 2.5</td>
+    </tr>
+    <tr>
+      <td class="bold">Mash pH</td><td>5.25 - 5.35</td><td></td>
+      <td class="bold">Batch</td><td>5.0 gal (19.0 L)</td>
+    </tr>
+    <tr>
+      <td class="bold">Efficiency</td><td>72%</td><td></td>
+      <td class="bold">Style</td><td>22A Double IPA</td>
+    </tr>
+  </table>
+
+  <div class="alert-box">
+    <span class="alert-title">Intent Gate:</span>
+    This beer should stay orange-forward, non-hazy, and highly drinkable without losing double-IPA strength or becoming grassy.
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h2>Grain Bill</h2>
+      <table>
+        <tr><th>Grain</th><th class="right">Amount</th><th>Notes</th><th class="check-col">&check;</th></tr>
+        <tr><td>Pale Malt</td><td class="right">16.00 lb (7.26 kg)</td><td>Base malt backbone</td><td class="center"><span class="checkbox"></span></td></tr>
+        <tr><td>Thomas Fawcett Amber Malt</td><td class="right">0.50 lb (0.23 kg)</td><td>Restrained toast</td><td class="center"><span class="checkbox"></span></td></tr>
+        <tr><td>Rice Hulls (optional)</td><td class="right">0.50 lb (0.23 kg)</td><td>Lauter insurance</td><td class="center"><span class="checkbox"></span></td></tr>
+        <tr class="highlight-row"><td class="bold">Corn Sugar (10 min)</td><td class="right bold">1.25 lb (0.57 kg)</td><td>Dryness + ABV</td><td class="center"><span class="checkbox"></span></td></tr>
+      </table>
+    </div>
+    <div>
+      <h2>Water Chemistry (RO Build)</h2>
+      <p style="margin-bottom:3px; font-size:8.5pt;"><strong>Total liquor:</strong> 10.4 gal (39.4 L)</p>
+      <p style="margin-bottom:3px; font-size:8.5pt;"><strong>Mash-in + reserve:</strong> 9.5 gal (36.0 L) + 0.9 gal (3.4 L)</p>
+      <table>
+        <tr><th>Salt</th><th class="right">Amount</th><th class="check-col">&check;</th></tr>
+        <tr><td>Gypsum (CaSO4)</td><td class="right">0.49 oz (14.0 g)</td><td class="center"><span class="checkbox"></span></td></tr>
+        <tr><td>Epsom Salt</td><td class="right">0.11 oz (3.1 g)</td><td class="center"><span class="checkbox"></span></td></tr>
+        <tr><td>Calcium Chloride</td><td class="right">0.14 oz (4.0 g)</td><td class="center"><span class="checkbox"></span></td></tr>
+      </table>
+      <p class="small">Keep sulfate-forward structure, but the mash-hop change should soften the beer’s final impression.</p>
+    </div>
+  </div>
+
+  <h2>Hop Schedule</h2>
+  <table>
+    <tr><th>Timing</th><th>Variety</th><th class="right">Amount</th><th>AA%</th><th>Purpose</th><th class="check-col">&check;</th></tr>
+    <tr class="highlight-row"><td>Mash</td><td>Warrior</td><td class="right">0.25 oz (7 g)</td><td>14.2</td><td>Softened orange-forward foundation</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td>FWH</td><td>Simcoe</td><td class="right">0.75 oz (21 g)</td><td>12.9</td><td>First-wort bittering base</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>60 min</td><td>Warrior</td><td class="right">0.25 oz (7 g)</td><td>14.2</td><td>Alpha backbone</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>45 min</td><td>Amarillo</td><td class="right">0.50 oz (14 g)</td><td>7.1</td><td>Mid-boil bridge</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>40 min</td><td>Amarillo</td><td class="right">0.50 oz (14 g)</td><td>7.1</td><td>Mid-boil bridge</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>40 min</td><td>Simcoe</td><td class="right">0.50 oz (14 g)</td><td>12.9</td><td>Resin layer</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20 min</td><td>Amarillo</td><td class="right">0.75 oz (21 g)</td><td>7.1</td><td>Late flavor layer</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20 min</td><td>Simcoe</td><td class="right">0.75 oz (21 g)</td><td>12.9</td><td>Late flavor layer</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>15 min</td><td>Whirlfloc</td><td class="right">1 tablet</td><td>-</td><td>Kettle clarification</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr class="highlight-row"><td>10 min</td><td class="bold">Corn Sugar</td><td class="right bold">1.25 lb (570 g)</td><td>-</td><td>Kettle finishing + attenuation</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>0 min</td><td>Amarillo (whirlpool)</td><td class="right">1.50 oz (43 g)</td><td>7.1</td><td>20 min at 180 F</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>0 min</td><td>Simcoe (whirlpool)</td><td class="right">1.50 oz (43 g)</td><td>12.9</td><td>20 min at 180 F</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>Dry Hop</td><td>Amarillo</td><td class="right">1.00 oz (28 g)</td><td>-</td><td>Near terminal, 48-72 hr</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>Dry Hop</td><td>Simcoe</td><td class="right">1.00 oz (28 g)</td><td>-</td><td>Near terminal, 48-72 hr</td><td class="center"><span class="checkbox"></span></td></tr>
+  </table>
+
+  <h2>Yeast and Pitch Plan</h2>
+  <table>
+    <tr><td class="bold" style="width:110px;">Yeast</td><td>WLP007 Dry English Ale</td></tr>
+    <tr><td class="bold">Pitch Method</td><td>Fresh pack or appropriately sized fresh slurry/starter</td></tr>
+    <tr><td class="bold">Pitch Temp</td><td>65.0 F (18.3 C)</td></tr>
+    <tr><td class="bold">Target Cells</td><td>~330B for 5.0 gal at 1.090</td></tr>
+    <tr><td class="bold">Oxygen</td><td class="critical">One oxygen dose at pitch only</td></tr>
+  </table>
+
+  <div class="page-footer">LSTAR-PLANNING | Page 1 of 2</div>
+</section>
+
+<section class="page">
+  <div class="header-row">
+    <h1 style="font-size:13pt; border-bottom-width:2px;">Lodestar</h1>
+    <span class="subtitle">Brew Day Execution</span>
+  </div>
+
+  <h2>Pre-Brew QC</h2>
+  <div class="three-col" style="font-size:8pt;">
+    <div><span class="checkbox"></span> pH meter calibrated (4.01 and 7.00)</div>
+    <div><span class="checkbox"></span> Thermometer verified</div>
+    <div><span class="checkbox"></span> All ingredient weights staged</div>
+    <div><span class="checkbox"></span> Fermenter and transfer lines sanitized</div>
+    <div><span class="checkbox"></span> Glycol setpoint plan loaded</div>
+    <div><span class="checkbox"></span> Yeast ready to pitch</div>
+  </div>
+
+  <h2>0. Yeast Prep Checklist (D-1 to D0)</h2>
+  <ul class="step-list">
+    <li>Prep healthy WLP007 pitch sized for 1.090 wort.</li>
+    <li>Add 2.0 mL Zinc Buddy directly at pitch.</li>
+  </ul>
+
+  <h2>1. Water Prep Checklist</h2>
+  <ul class="step-list">
+    <li>Measure 9.5 gal (36.0 L) RO for mash-in.</li>
+    <li>Hold 0.9 gal (3.4 L) hot RO as pre-boil reserve if needed.</li>
+    <li>Add full salt bill to total liquor.</li>
+    <li>Heat to strike temperature.</li>
+  </ul>
+
+  <h2>2. Mash Log</h2>
+  <table class="mash-check-table">
+    <tr><th>Checkpoint</th><th>Target</th><th>Actual</th><th>Done</th><th>Notes</th><th></th></tr>
+    <tr><td>Mash in</td><td>150 F for 75 min</td><td></td><td class="center"><span class="checkbox"></span></td><td>Add 0.25 oz Warrior mash hop during mash-in</td><td></td></tr>
+    <tr><td>Mash pH</td><td>5.25 - 5.35</td><td></td><td class="center"><span class="checkbox"></span></td><td>Room-temp reading, acid adjust in 1 mL steps only</td><td></td></tr>
+    <tr><td>Mash out</td><td>168 F for 10 min</td><td></td><td class="center"><span class="checkbox"></span></td><td></td><td></td></tr>
+    <tr><td>Pre-boil volume</td><td>8.5 - 8.7 gal</td><td></td><td class="center"><span class="checkbox"></span></td><td></td><td></td></tr>
+    <tr><td>Pre-boil gravity</td><td>1.056 - 1.059</td><td></td><td class="center"><span class="checkbox"></span></td><td></td><td></td></tr>
+  </table>
+
+  <h2>3. Boil Hop Additions (90 Minutes)</h2>
+  <table class="boil-check-table">
+    <tr><th>Time</th><th>Addition</th><th>Notes</th><th>&check;</th></tr>
+    <tr><td>FWH</td><td>Simcoe 0.75 oz</td><td>Add to kettle as runoff begins</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>60 min</td><td>Warrior 0.25 oz</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>45 min</td><td>Amarillo 0.50 oz</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>40 min</td><td>Amarillo 0.50 oz</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>40 min</td><td>Simcoe 0.50 oz</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20 min</td><td>Amarillo 0.75 oz</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>20 min</td><td>Simcoe 0.75 oz</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>15 min</td><td>Whirlfloc 1 tablet</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>10 min</td><td>Corn Sugar 1.25 lb</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>0 min</td><td>Amarillo 1.50 oz</td><td>Whirlpool 20 min at 180 F</td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>0 min</td><td>Simcoe 1.50 oz</td><td>Whirlpool 20 min at 180 F</td><td class="center"><span class="checkbox"></span></td></tr>
+  </table>
+
+  <h2>4. Fermentation Readiness Checklist</h2>
+  <ul class="step-list">
+    <li>Sanitized fermentor ready.</li>
+    <li>Yeast ready to pitch.</li>
+    <li>Oxygen setup ready.</li>
+    <li>Blowoff / airlock assembled.</li>
+    <li>Temp control set to 65 F.</li>
+    <li>Purge / transfer path ready if needed.</li>
+  </ul>
+
+  <h2>5. Fermentation Log</h2>
+  <table class="fermentation-log-table">
+    <tr><th>Checkpoint</th><th>Day</th><th>Target Temp</th><th>Gravity</th><th>Action</th><th>Notes</th></tr>
+    <tr><td>Pitch</td><td>0</td><td>65 F</td><td></td><td>Pitch and oxygenate once</td><td></td></tr>
+    <tr><td>Primary hold</td><td>1-3</td><td>65 F</td><td></td><td>Steady hold</td><td></td></tr>
+    <tr><td>Ramp</td><td>4-7</td><td>67-68 F</td><td></td><td>Raise and hold</td><td></td></tr>
+    <tr><td>Dry hop in</td><td>Near terminal</td><td>67-68 F</td><td></td><td>Add Amarillo + Simcoe</td><td>Target about 1.020-1.025; upper 20s acceptable</td></tr>
+    <tr><td>Crash</td><td>After dry hop</td><td>42 F</td><td></td><td>Cold crash</td><td></td></tr>
+  </table>
+
+  <h2>6. Packaging</h2>
+  <table>
+    <tr><th>Checkpoint</th><th>Target</th><th>Actual</th><th>&check;</th></tr>
+    <tr><td>Receiving keg purged</td><td>Closed transfer only</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>Final gravity</td><td>1.016</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+    <tr><td>Carbonation</td><td>2.3 - 2.5 vols</td><td></td><td class="center"><span class="checkbox"></span></td></tr>
+  </table>
+
+  <div class="page-footer">LSTAR-PLANNING | Page 2 of 2</div>
+</section>
+
+</body>
+</html>
