@@ -119,6 +119,7 @@ Shopping-list output rule:
 - When the user asks for a shopping list, list only the items that must be bought or sourced.
 - Do not pad the answer with items the user already has unless the user explicitly asks for a full stock-vs-need reconciliation.
 - Default to concise shortage-only output; "you do not need X" is noise unless omission would create real confusion or risk.
+- Do not describe ingredients as "expensive" or "limiting" in feasibility answers unless the user explicitly asks for a cost or constraint analysis.
 - Include a buy amount for every listed item; never tell the user they need an ingredient without saying how much.
 - Default shopping-list units to Imperial for user-facing output.
 - Grain amounts should be exact in Imperial units.
@@ -179,6 +180,8 @@ Rules:
   - If a grouped hop, fining, sugar, nutrient, or salt entry could be misread at brew time, split it into per-addition amounts rather than requiring mental math.
   - In the brew-day execution / boil-additions log, each timed action must be on its own line even when multiple items share the same timestamp.
   - Never consolidate additions like `Hop A + Hop B` or `Hop + Whirlfloc` into one row on the printable brew sheet.
+  - First wort hops must be labeled explicitly as `FWH` or `first wort addition`; never describe them as mash hops unless they are actually added during mash-in.
+  - Time the mash-in itself before turning the pump on so dough-in, wet-out, and settling can be measured on the actual system.
 - Sheet layout must honor printability.
   - If the intended output is a fixed-page printable sheet, preserve readability and operational clarity while keeping critical sections within the intended page count.
 
@@ -234,6 +237,14 @@ Do not let iterative tweaks silently drift the recipe out of its declared catego
 - Modern equipment may improve control, repeatability, sanitation, or temperature precision, but it must not be used as a reason to silently modernize the beer's sensory profile away from the authentic target.
 - Do not "clean up," dry out, brighten, hop up, or simplify a beer just because modern equipment makes that easier if doing so would move it away from style-authentic results.
 - When a historical or style-authentic method is being adapted to the user's system, keep the sensory goal constant and only adapt the operational mechanics required to execute it on the verified equipment.
+- When a commercial or pro-brew example is referenced, extract the transferable process moves first: water softness, mash simplicity, hop timing, mash-in discipline, gentle recirculation, fermentation control, and scale-appropriate pitch/oxygenation.
+- Do not copy commercial-scale throughput artifacts blindly if they are only there because the system is large.
+- Adapt the process to the verified home system so the sensory outcome matches the source beer, not the vessel size.
+
+### Commercial Example Process Adapter
+- If a commercial example is being used to improve the homebrew plan, translate the observed behavior into home-system actions before changing the recipe.
+- Ask what the pro system is accomplishing, then recreate that effect with the verified home equipment instead of copying the pro workflow literally.
+- Prefer process moves that improve repeatability, flavor fidelity, or stability; ignore scale artifacts that exist only because the brewery is large.
 
 ### Scoresheet Ingestion Guardrail
 When the user provides judge scores or written feedback from a competition scoresheet:

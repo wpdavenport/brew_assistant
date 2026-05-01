@@ -1,5 +1,164 @@
 {
   "schema_version": 1,
   "notes": "Durable brewing rules, preferences, and learned insights captured from real use. New entries should be routed into repo state instead of living only in chat memory.",
-  "entries": []
+  "entries": [
+    {
+      "id": "2026-04-26-during-pn9-first-wort-hops-were-accidentally-treated-as-mash",
+      "captured_on": "2026-04-26",
+      "source": "user correction",
+      "status": "integrated",
+      "text": "During PN9, first wort hops were accidentally treated as mash hops; keep first wort hops and mash hop additions explicitly distinct on brew sheets.",
+      "tags": [
+        "brew_sheet"
+      ],
+      "recommended_files": [
+        "brewing/brew_day_sheets/",
+        "system_prompt.md"
+      ],
+      "recommended_checks": [
+        "confirm yeast source, generation, starter method, and dated schedule are explicit"
+      ],
+      "integration_note": "Captured into repo state and folded into system_prompt.md."
+    },
+    {
+      "id": "2026-04-27-when-answering-brew-feasibility-and-inventory-questions-avoi",
+      "captured_on": "2026-04-27",
+      "source": "user preference",
+      "status": "integrated",
+      "text": "When answering brew-feasibility and inventory questions, avoid wording like 'expensive/limiting'; state the actual coverage or shortage plainly without those labels.",
+      "tags": [
+        "inventory"
+      ],
+      "recommended_files": [
+        "libraries/inventory/stock.json",
+        "libraries/inventory/shopping_intent.json",
+        "knowledge_index.md",
+        "system_prompt.md"
+      ],
+      "recommended_checks": [
+        "confirm inventory schema still matches CLI expectations"
+      ],
+      "integration_note": "Captured into repo state and folded into system_prompt.md."
+    },
+    {
+      "id": "2026-04-27-inventory-correction-rice-hulls-are-not-on-hand-treat-rice-h",
+      "captured_on": "2026-04-27",
+      "source": "user correction",
+      "status": "integrated",
+      "text": "Inventory correction: rice hulls are not on hand; treat rice_hulls as zero in inventory.",
+      "tags": [
+        "inventory"
+      ],
+      "recommended_files": [
+        "libraries/inventory/stock.json",
+        "libraries/inventory/shopping_intent.json",
+        "knowledge_index.md",
+        "system_prompt.md"
+      ],
+      "recommended_checks": [
+        "confirm inventory schema still matches CLI expectations"
+      ],
+      "integration_note": "Captured into stock.json and folded into repo inventory state."
+    },
+    {
+      "id": "2026-04-29-time-mash-in-before-turning-the-pump-on-so-the-pump-only-sta",
+      "captured_on": "2026-04-29",
+      "source": "user workflow",
+      "status": "integrated",
+      "text": "Time mash-in before turning the pump on, so the pump only starts after the grist is fully wetted and the mash has settled.",
+      "tags": [
+        "prompt"
+      ],
+      "recommended_files": [
+        "system_prompt.md",
+        "knowledge_index.md",
+        "project_control/DRIFT_MATRIX.md"
+      ],
+      "recommended_checks": [
+        "python3 tools/prompt_harness.py eval-all"
+      ],
+      "integration_note": "Captured into repo state and folded into system_prompt.md."
+    },
+    {
+      "id": "2026-04-29-borrow-transferable-pro-process-moves-from-commercial-brews-but-do-not",
+      "captured_on": "2026-04-29",
+      "source": "user process preference",
+      "status": "integrated",
+      "text": "When learning from a commercial or pro-brew example, keep the transferable process moves such as water softness, mash simplicity, hop timing, mash-in discipline, gentle recirculation, and fermentation control, but do not copy large-system throughput artifacts blindly.",
+      "tags": [
+        "prompt",
+        "process"
+      ],
+      "recommended_files": [
+        "system_prompt.md",
+        "README.md",
+        "recipes/",
+        "brewing/brew_day_sheets/"
+      ],
+      "recommended_checks": [
+        "review clone and competition-lock recipes for commercial-example process adaptation"
+      ],
+      "integration_note": "Captured into repo state and folded into system_prompt.md and README.md."
+    },
+    {
+      "id": "2026-04-29-on-the-g40-stick-with-a-hose-return-and-gentler-lower-recirculation-rather-than",
+      "captured_on": "2026-04-29",
+      "source": "user workflow",
+      "status": "integrated",
+      "text": "On the G40, stick with a hose return and gentler lower recirculation for now rather than adding a spray ball that might create too much backpressure.",
+      "tags": [
+        "process",
+        "equipment"
+      ],
+      "recommended_files": [
+        "recipes/old_crown_lazy_lager_3C.md",
+        "brewing/brew_day_sheets/",
+        "system_prompt.md"
+      ],
+      "recommended_checks": [
+        "keep recirculation notes explicit on brew-day sheets"
+      ],
+      "integration_note": "Captured into recipe notes and repo process memory."
+    },
+    {
+      "id": "2026-04-29-commercial-brewer-stages-calcium-chloride-during-the-mash-side-workflow-rather",
+      "captured_on": "2026-04-29",
+      "source": "user observation",
+      "status": "integrated",
+      "text": "The commercial brewer stages calcium chloride during the mash-side workflow rather than forcing it to be an up-front rule; on the G40, use whichever timing is simplest to execute cleanly.",
+      "tags": [
+        "water",
+        "process"
+      ],
+      "recommended_files": [
+        "recipes/old_crown_lazy_lager_3C.md",
+        "system_prompt.md"
+      ],
+      "recommended_checks": [
+        "keep source-process notes distinct from homebrew execution preferences"
+      ],
+      "integration_note": "Captured into recipe notes and repo process memory."
+    },
+    {
+      "id": "2026-04-29-vorlauf-recirculation-is-not-the-same-as-the-end-of-boil-whirlpool-even",
+      "captured_on": "2026-04-29",
+      "source": "user observation",
+      "status": "integrated",
+      "text": "Mash recirculation/vorlauf is for clarity and homogeneity, while the whirlpool is a later separate step at the end of the boil even if the same pump path is used.",
+      "tags": [
+        "process",
+        "mash",
+        "whirlpool"
+      ],
+      "recommended_files": [
+        "recipes/old_crown_lazy_lager_3C.md",
+        "brewing/brew_day_sheets/",
+        "system_prompt.md"
+      ],
+      "recommended_checks": [
+        "label mash recirculation and whirlpool separately on brew-day sheets"
+      ],
+      "integration_note": "Captured into recipe notes and repo process memory."
+    }
+  ]
 }

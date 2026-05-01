@@ -120,6 +120,8 @@ The repo is no longer just prompts plus files. It also has a local web UI for da
   - the brewed recipe
   - the tasting/calibration notes
   - the next clone iteration
+- When learning from a commercial example, keep only the transferable pro moves: water profile, mash simplicity, hop timing, mash-in discipline, and fermentation control.
+- Do not copy commercial-scale process artifacts just because a larger system used them; adapt them to the verified home system instead.
 
 ### Drift Review
 - If assistant behavior starts drifting from your expectations, ask directly for a `drift review`.
