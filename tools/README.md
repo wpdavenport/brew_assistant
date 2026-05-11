@@ -140,6 +140,21 @@ Expected result:
 - `BREW_PACKET_NEEDS_ATTENTION` means files were created, but the sheet or source recipe needs a fix before brew day
 - generated sheets use `ACTION REQUIRED` rows for missing imported-recipe details instead of dropping sections
 
+Use `brew_packet_watcher.py` when the operator wants event-driven recipe packets:
+
+- Drop recipe files into `recipe_inbox/`
+- Run once over the inbox: `python3 tools/brew_packet_watcher.py --once`
+- Watch continuously: `python3 tools/brew_packet_watcher.py`
+- Packet reports appear under `brew_packets/<recipe-name>/index.html`
+
+Use `brew_packet_watcher_service.py` to manage the background watcher:
+
+- `python3 tools/brew_packet_watcher_service.py install`
+- `python3 tools/brew_packet_watcher_service.py status`
+- `python3 tools/brew_packet_watcher_service.py uninstall`
+
+Current persistent service support is implemented for macOS through LaunchAgent. Windows and Linux currently print the manual watcher command.
+
 Use `web_ui.py` to launch a simple local browser for recipe prints, brew-day sheets, inventory, profiles, and research:
 
 - `python3 tools/web_ui.py`

@@ -4,3 +4,9 @@ books/
 .codex-tmp/
 __pycache__/
 *.pyc
+recipe_inbox/*
+!recipe_inbox/README.md
+!recipe_inbox/.gitkeep
+brew_packets/*
+!brew_packets/README.md
+!brew_packets/.gitkeep

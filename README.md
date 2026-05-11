@@ -90,6 +90,28 @@ The packet command creates or reuses:
 
 The command prints either `BREW_PACKET_READY` or `BREW_PACKET_NEEDS_ATTENTION`. If recipe details are missing, the brew-day sheet keeps the section and marks it `ACTION REQUIRED` instead of silently omitting it.
 
+### Recipe inbox automation
+
+For brewers who do not want to run commands for each recipe, use the recipe inbox:
+
+1. Start or install the watcher once.
+2. Drop recipe files into `recipe_inbox/`.
+3. Open the generated report in `brew_packets/<recipe-name>/index.html`.
+
+Manual watcher:
+
+```bash
+make brew-inbox-watch
+```
+
+macOS background watcher:
+
+```bash
+make brew-inbox-service-install
+```
+
+After the watcher is running, no command is needed for each recipe. Dropping a `.md`, `.markdown`, or `.txt` recipe file into `recipe_inbox/` creates the printable packet automatically. If the recipe file includes `Brew Date: YYYY-MM-DD`, the watcher creates a dated brew-day sheet.
+
 ### Shared vs Personal Branches
 
 - `main` is the shared framework branch.
@@ -193,6 +215,8 @@ Control-plane commands:
 - `make recipe-html RECIPE=<recipe_slug>`
 - `make recipe-html-all`
 - `make brew-packet RECIPE=<recipe_path_or_slug> [DATE=<YYYY-MM-DD>]`
+- `make brew-inbox-watch`
+- `make brew-inbox-service-install`
 - `make web-ui [HOST=127.0.0.1] [PORT=8765]`
 - `make trust-check`
 

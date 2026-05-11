@@ -73,6 +73,21 @@ recipe-html-refresh:
 brew-packet:
 	python3 tools/brew_packet.py --recipe "$(RECIPE)" $(if $(DATE),--date "$(DATE)",) $(if $(FORCE),--force,) $(if $(RECORD_HISTORY),--record-history,)
 
+brew-inbox-once:
+	python3 tools/brew_packet_watcher.py --once
+
+brew-inbox-watch:
+	python3 tools/brew_packet_watcher.py
+
+brew-inbox-service-install:
+	python3 tools/brew_packet_watcher_service.py install
+
+brew-inbox-service-status:
+	python3 tools/brew_packet_watcher_service.py status
+
+brew-inbox-service-uninstall:
+	python3 tools/brew_packet_watcher_service.py uninstall
+
 brew-op:
 	python3 tools/brew_op.py $(if $(TEXT),--text "$(TEXT)",) $(if $(ACTION),--action "$(ACTION)",) $(if $(RECIPE),--recipe "$(RECIPE)",) $(if $(DATE),--date "$(DATE)",) $(if $(BREW_DATE),--brew-date "$(BREW_DATE)",) $(if $(PACKAGE_DATE),--package-date "$(PACKAGE_DATE)",) $(if $(FG),--fg "$(FG)",) $(if $(PACKAGED_VOLUME),--packaged-volume "$(PACKAGED_VOLUME)",) $(if $(PACKAGED_VOLUME_UNIT),--packaged-volume-unit "$(PACKAGED_VOLUME_UNIT)",) $(if $(CO2_VOLS),--co2-vols "$(CO2_VOLS)",) $(if $(HARVEST_YEAST),--harvest-yeast "$(HARVEST_YEAST)",) $(if $(HARVEST_GENERATION),--harvest-generation "$(HARVEST_GENERATION)",) $(if $(NOTE),--note "$(NOTE)",) $(if $(RUN_TRUST_CHECK),--run-trust-check,) $(if $(INCLUDE_OPTIONAL),--include-optional,) $(if $(RECORD_HISTORY),--record-history,) $(if $(NO_REFRESH_HTML),--no-refresh-html,)
 
