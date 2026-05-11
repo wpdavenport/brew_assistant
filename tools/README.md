@@ -153,7 +153,10 @@ Use `brew_packet_watcher_service.py` to manage the background watcher:
 - `python3 tools/brew_packet_watcher_service.py status`
 - `python3 tools/brew_packet_watcher_service.py uninstall`
 
-Current persistent service support is implemented for macOS through LaunchAgent. Windows and Linux currently print the manual watcher command.
+Persistent service support:
+- macOS: LaunchAgent
+- Windows: user Startup-folder command file
+- Linux: `systemd --user` service when systemd is available; otherwise the tool prints the manual watcher command
 
 Use `web_ui.py` to launch a simple local browser for recipe prints, brew-day sheets, inventory, profiles, and research:
 

@@ -33,9 +33,12 @@ Practical expectation:
 ### Platform Notes
 
 - Core repo workflow is cross-platform anywhere `python3`, `git`, and the repo files are available.
+- The recipe inbox watcher is plain Python and works on macOS, Windows, and Linux.
+- Background watcher installation is implemented for:
+  - macOS via LaunchAgent
+  - Windows via the user's Startup folder
+  - Linux via `systemd --user` when systemd is available
 - The local web UI works through the generic service/bootstrap layer.
-- Managed background service support is currently implemented on `macOS`.
-- `Windows` and `Linux` have service-layer plumbing in place, but their persistent launcher backends are not fully built out yet.
 
 ### Recommended onboarding for every new chat
 
@@ -104,11 +107,13 @@ Manual watcher:
 make brew-inbox-watch
 ```
 
-macOS background watcher:
+Background watcher:
 
 ```bash
 make brew-inbox-service-install
 ```
+
+On macOS this installs a LaunchAgent. On Windows it adds a Startup-folder command file. On Linux it installs a `systemd --user` service when available.
 
 After the watcher is running, no command is needed for each recipe. Dropping a `.md`, `.markdown`, or `.txt` recipe file into `recipe_inbox/` creates the printable packet automatically. If the recipe file includes `Brew Date: YYYY-MM-DD`, the watcher creates a dated brew-day sheet.
 

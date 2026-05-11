@@ -70,11 +70,16 @@ Manual watcher:
 make brew-inbox-watch
 ```
 
-macOS background watcher:
+Background watcher:
 
 ```bash
 make brew-inbox-service-install
 ```
+
+Install behavior:
+- macOS: LaunchAgent
+- Windows: Startup-folder command file
+- Linux: `systemd --user` service when systemd is available
 
 Status and uninstall:
 
