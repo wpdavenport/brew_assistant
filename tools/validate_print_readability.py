@@ -39,6 +39,25 @@ BREW_SHEET_FERMENTATION_MARKERS = (
     "Fermentation gates",
 )
 
+LEGACY_COMPACT_BREW_SHEETS = {
+    "davenporter_brew_day_sheet.html",
+    "old_crown_lazy_lager_brew_day_sheet.html",
+}
+
+OPERATIONAL_BREW_SHEET_MARKERS = (
+    ("target window", ("Target Window",)),
+    ("grain bill", ("Grain Bill", "Grains")),
+    ("water prep/chemistry", ("Water Chemistry", "Water And Minerals", "Water Prep", "Water")),
+    ("hop schedule", ("Hop Schedule",)),
+    ("yeast/pitch plan", ("Yeast and Pitch Plan", "Yeast And Pitch Planning", "Yeast Prep Checklist", "Yeast And Fermentation")),
+    ("pre-brew QC", ("Pre-Brew QC",)),
+    ("mash execution", ("Mash Program", "Mash Log", "Historical Mash And Boil")),
+    ("boil additions", ("Boil Hop Additions", "Boil Additions")),
+    ("fermentation log", ("Fermentation Log",)),
+    ("packaging gate", ("Packaging",)),
+    ("page footer", ("page-footer", "Page 1 of")),
+)
+
 
 def check_recipe_html(path: Path) -> list[str]:
     text = path.read_text(encoding="utf-8")
@@ -63,6 +82,14 @@ def check_brew_sheet(path: Path) -> list[str]:
         failures.append("missing fermentation section marker")
     if re.search(r"\(0\.\d+\s*kg\)", text):
         failures.append("contains sub-1kg metric display; expected grams")
+    if is_tips_sheet or path.name in LEGACY_COMPACT_BREW_SHEETS:
+        return failures
+    for label, markers in OPERATIONAL_BREW_SHEET_MARKERS:
+        if not any(marker in text for marker in markers):
+            failures.append(f"partial operational brew sheet: missing {label}")
+    dated_match = re.search(r"_(\d{4}-\d{2}-\d{2})\.html$", path.name)
+    if dated_match and dated_match.group(1) not in text:
+        failures.append("dated brew sheet filename is not anchored in sheet content")
     return failures
 
 

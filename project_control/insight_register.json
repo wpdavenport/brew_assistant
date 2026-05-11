@@ -159,6 +159,53 @@
         "label mash recirculation and whirlpool separately on brew-day sheets"
       ],
       "integration_note": "Captured into recipe notes and repo process memory."
+    },
+    {
+      "id": "2026-05-08-brew-day-sheet-ingredient-rows-must-not-combine-multiple-phy",
+      "captured_on": "2026-05-08",
+      "source": "chat",
+      "status": "integrated",
+      "text": "Brew-day sheet ingredient rows must not combine multiple physical ingredients on one line. Even batch substitutions such as medium crystal and crystal light must be listed as separate checklist rows so no item is missed during weighing.",
+      "tags": [
+        "brew_sheet",
+        "measurement"
+      ],
+      "recommended_files": [
+        "brewing/brew_day_sheets/",
+        "system_prompt.md",
+        "knowledge_index.md"
+      ],
+      "recommended_checks": [
+        "confirm yeast source, generation, starter method, and dated schedule are explicit",
+        "python3 tools/prompt_harness.py eval-all"
+      ],
+      "integration_note": "Captured into system_prompt.md, Copper Crown dated brew sheet, and validate_recipe_brewsheet_sync.py grouped-ingredient checks."
+    },
+    {
+      "id": "2026-05-11-when-an-imported-recipe-is-turned-into-a-brew-day-sheet-the-",
+      "captured_on": "2026-05-11",
+      "source": "chat",
+      "status": "integrated",
+      "text": "When an imported recipe is turned into a brew day sheet, the agentic flow must recreate the full operational brew-day sheet pattern from personal/main examples, not a partial recipe-print sheet. Missing details should be explicit ACTION REQUIRED rows, not omitted sections.",
+      "tags": [
+        "recipe",
+        "brew_sheet",
+        "ui"
+      ],
+      "recommended_files": [
+        "recipes/",
+        "recipes/html_exports/",
+        "system_prompt.md",
+        "brewing/brew_day_sheets/",
+        "tools/web_ui.py",
+        "README.md"
+      ],
+      "recommended_checks": [
+        "confirm the intended canonical recipe is still obvious",
+        "confirm yeast source, generation, starter method, and dated schedule are explicit",
+        "python3 tools/drift_review.py"
+      ],
+      "integration_note": "Captured into system_prompt.md and validate_print_readability.py operational brew-sheet completeness checks."
     }
   ]
 }

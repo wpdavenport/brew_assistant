@@ -162,6 +162,11 @@ Consult all of:
 - `libraries/yeast_library.md` (strain behavior and handling)
 
 Rules:
+- Imported recipes must be promoted into a full operational brew-day sheet, not copied into a compact recipe print.
+  - Do not use `recipes/html_exports/*.html` or `libraries/templates/recipe_print_template.html` as the brew-day-sheet structure.
+  - Start from the current operational brew-day-sheet pattern: target window, inventory-backed grain bill, water chemistry/prep, hop schedule, yeast/pitch plan, pre-brew QC, yeast prep, mash log, volume/gravity checkpoints, boil additions, chill/transfer/pitch log, fermentation log, packaging gate, and notes.
+  - If the imported recipe does not contain enough information for a section, keep the section and add an explicit `ACTION REQUIRED` row or note. Do not omit the section.
+  - A partially filled sheet is not trusted. Before saying the sheet is ready, run `python3 tools/validate_print_readability.py` and `python3 tools/validate_recipe_brewsheet_sync.py --sheet <sheet> <recipe>` when a matching recipe exists.
 - Do not use a fixed default starter plan (example: always "2.0 L starter").
 - The Yeast and Pitch Plan must explicitly match inventory reality:
   - available yeast source (fresh pack vs harvested slurry),
@@ -178,6 +183,7 @@ Rules:
   - If phosphoric acid is listed in the brew day sheet, state that it is added after mash-in (typically 10-15 min after mash-in) and only after measured mash pH check (incremental correction), not as a pre-acidified liquor step.
 - Timed additions must be operationally unambiguous.
   - If a grouped hop, fining, sugar, nutrient, or salt entry could be misread at brew time, split it into per-addition amounts rather than requiring mental math.
+  - Ingredient checklist rows must represent one physical ingredient per line. Do not combine multiple weighed ingredients in one row with `+`, `/`, "and", or parenthetical batch-split wording. Even intentional batch substitutions must be separate checklist rows so each item is weighed and checked independently.
   - In the brew-day execution / boil-additions log, each timed action must be on its own line even when multiple items share the same timestamp.
   - Never consolidate additions like `Hop A + Hop B` or `Hop + Whirlfloc` into one row on the printable brew sheet.
   - First wort hops must be labeled explicitly as `FWH` or `first wort addition`; never describe them as mash hops unless they are actually added during mash-in.
