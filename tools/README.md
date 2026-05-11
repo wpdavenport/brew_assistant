@@ -128,6 +128,18 @@ Use `refresh_recipe_html.py` to refresh only the print exports affected by curre
 - `python3 tools/refresh_recipe_html.py --all`
 - `make recipe-html-refresh`
 
+Use `brew_packet.py` when the operator wants one command that creates the printable recipe and full brew-day sheet:
+
+- `python3 tools/brew_packet.py --recipe recipes/lodestar_double_ipa_22A.md`
+- `python3 tools/brew_packet.py --recipe lodestar_double_ipa --date 2026-06-15`
+- `make brew-packet RECIPE=recipes/lodestar_double_ipa_22A.md`
+- `make brew-packet RECIPE=lodestar_double_ipa DATE=2026-06-15`
+
+Expected result:
+- `BREW_PACKET_READY` means the recipe print, brew sheet, and targeted checks are clean
+- `BREW_PACKET_NEEDS_ATTENTION` means files were created, but the sheet or source recipe needs a fix before brew day
+- generated sheets use `ACTION REQUIRED` rows for missing imported-recipe details instead of dropping sections
+
 Use `web_ui.py` to launch a simple local browser for recipe prints, brew-day sheets, inventory, profiles, and research:
 
 - `python3 tools/web_ui.py`

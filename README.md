@@ -69,6 +69,27 @@ Expected startup behavior:
    - *"Why did my last IPA finish sweet? Check the logs."*
    - *"Create a fermentation schedule for a German Pilsner."*
 
+### One-command brew packet
+
+If you just want a printable packet and do not want to learn the repo internals:
+
+```bash
+make brew-packet RECIPE=recipes/lodestar_double_ipa_22A.md
+```
+
+With a brew date:
+
+```bash
+make brew-packet RECIPE=recipes/lodestar_double_ipa_22A.md DATE=2026-06-15
+```
+
+The packet command creates or reuses:
+- a compact recipe print under `recipes/html_exports/`
+- a full operational brew-day sheet under `brewing/brew_day_sheets/`
+- a dated brew-day sheet under `brewing/brew_day_sheets/archive/` when `DATE` is provided
+
+The command prints either `BREW_PACKET_READY` or `BREW_PACKET_NEEDS_ATTENTION`. If recipe details are missing, the brew-day sheet keeps the section and marks it `ACTION REQUIRED` instead of silently omitting it.
+
 ### Shared vs Personal Branches
 
 - `main` is the shared framework branch.
@@ -171,6 +192,7 @@ Control-plane commands:
 - `make brew-op TEXT="prepare old crown lazy lager on 2026-04-15"`
 - `make recipe-html RECIPE=<recipe_slug>`
 - `make recipe-html-all`
+- `make brew-packet RECIPE=<recipe_path_or_slug> [DATE=<YYYY-MM-DD>]`
 - `make web-ui [HOST=127.0.0.1] [PORT=8765]`
 - `make trust-check`
 

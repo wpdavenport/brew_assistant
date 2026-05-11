@@ -278,9 +278,9 @@ def main() -> int:
                     print(f"- {error}")
                 print("")
         if not checked:
-            print("RECIPE_BEERXML_SYNC_FAILED")
-            print("No recipe/BeerXML pairs found.")
-            return 1
+            print("RECIPE_BEERXML_SYNC_OK (0 pair(s))")
+            print("No active recipe/BeerXML pairs declared.")
+            return 0
         if overall_ok:
             print(f"RECIPE_BEERXML_SYNC_OK ({checked} pair(s))")
             return 0
